@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<!-- Contango v3.0 · 20 March 2026 · github.com/pacho064/Contango -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contango — Energy Intelligence</title>
+<meta name="description" content="Where local oil prices, infrastructure constraints, and trade flows reveal what benchmark indices obscure. Open-source energy intelligence.">
+<meta property="og:title" content="Contango — Energy Intelligence">
+<meta property="og:description" content="When the market prices in more than it admits.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://contango.energy">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<script src="data.js"></script>
+</head>
+<body>
+
+<!-- ── Price ticker ── -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track"></div>
+</div>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <a href="index.html" class="nav-logo">Con<span>tango</span></a>
+      <span class="nav-tagline">ENERGY INTELLIGENCE</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link active" href="index.html">Overview</a>
+      <a class="nav-link" href="#map-section">Map</a>
+      <a class="nav-link" href="#intelligence">Intelligence</a>
+      <a class="nav-link" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-link" href="#methodology">Methodology</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="theme-btn" onclick="toggleTheme()">Dark mode</button>
+      <a href="https://github.com/pacho064/Contango" target="_blank" class="btn-ghost" style="display:flex;align-items:center;gap:5px">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Divergence strip ── -->
+<div class="div-strip">
+  <div class="div-inner" id="div-strip"></div>
+</div>
+
+<!-- ── Hero ── -->
+<section class="section" style="padding:56px 0 48px;background:var(--bg-card);border-bottom:1px solid var(--b-default)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div>
+        <div class="section-label">The divergence thesis</div>
+        <h1 style="margin-bottom:20px">Global benchmarks flatten<br>what local prices reveal</h1>
+        <p style="font-size:17px;line-height:1.7;color:var(--t-secondary);margin-bottom:24px">
+          When Brent crude trades at $138 and Oman crude settles at $161, the $23 gap is not noise. It is the market pricing in sour crude scarcity, Asian demand, Red Sea disruption, and infrastructure constraints that an exchange-listed contract cannot capture.
+        </p>
+        <p style="font-size:17px;line-height:1.7;color:var(--t-secondary);margin-bottom:32px">
+          Contango surfaces that gap — through local Official Selling Prices, infrastructure data, export flows, and sourced risk analysis.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#map-section" class="btn-primary" style="padding:10px 20px;font-size:14px;border-radius:5px">Explore the map</a>
+          <a href="saudi-arabia.html" class="btn-ghost" style="padding:10px 20px;font-size:14px;border-radius:5px">Saudi Arabia deep-dive</a>
+        </div>
+      </div>
+      <!-- Hero chart -->
+      <div class="card" style="overflow:hidden">
+        <div class="card-head">
+          <span class="card-title">Local OSP vs Brent — current spread</span>
+          <span class="card-meta">indicative · compiled from OSP releases</span>
+        </div>
+        <div style="padding:20px">
+          <div id="spread-bars"></div>
+          <div class="source-line">
+            <div class="source-dot"></div>
+            Sources: DME, ADNOC OSP, Aramco OSP, SOMO Iraq, QatarEnergy · Updated March 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Key metrics ── -->
+<section class="section-tight section-border">
+  <div class="container">
+    <div class="grid-4" id="key-metrics"></div>
+  </div>
+</section>
+
+<!-- ── Map section ── -->
+<section class="section section-border" id="map-section">
+  <div class="container-wide">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+      <div>
+        <div class="section-label">Regional energy geography</div>
+        <h2 class="section-heading">Infrastructure, flows &amp; risk</h2>
+        <p class="section-intro" style="margin-bottom:0">Full world map. Default view: Greater Middle East. Zoom out for global context. Click any country, port, or chokepoint for detail.</p>
+      </div>
+      <div style="font-size:11px;font-family:var(--f-mono);color:var(--t-meta);text-align:right">
+        Scroll to zoom · Drag to pan<br>Click for side panel
+      </div>
+    </div>
+
+    <div class="map-outer" style="height:560px;position:relative">
+      <!-- toolbar -->
+      <div class="map-toolbar">
+        <div class="map-layer-btns">
+          <div class="mlb on"  id="lb-base"  onclick="setMapLayer('base')">Countries</div>
+          <div class="mlb"     id="lb-ports" onclick="setMapLayer('ports')">Ports</div>
+          <div class="mlb"     id="lb-flows" onclick="setMapLayer('flows')">Export flows</div>
+          <div class="mlb"     id="lb-risk"  onclick="setMapLayer('risk')">Risk tiers</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="mzb" onclick="MapEngine.zoomIn()" title="Zoom in">+</button>
+          <button class="mzb" onclick="MapEngine.zoomOut()" title="Zoom out">−</button>
+          <button class="mzb" style="font-size:11px;width:auto;padding:0 10px" onclick="MapEngine.resetView()">Reset</button>
+        </div>
+      </div>
+
+      <!-- SVG map -->
+      <svg id="map-svg" style="width:100%;height:508px;display:block"></svg>
+
+      <!-- Floating tooltip -->
+      <div class="map-tt" id="map-tt"></div>
+
+      <!-- Side panel -->
+      <div class="map-side" id="map-side">
+        <div class="map-side-head">
+          <div class="map-side-title">—</div>
+          <button class="map-side-close" onclick="MapEngine.closePanel()">×</button>
+        </div>
+        <div class="map-side-body"></div>
+      </div>
+    </div>
+
+    <!-- Map legend -->
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:11px;font-family:var(--f-mono);color:var(--t-tertiary)" id="map-legend"></div>
+  </div>
+</section>
+
+<!-- ── What changed this week ── -->
+<section class="section section-border" id="intelligence">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:48px">
+
+      <div>
+        <div class="section-label">Intelligence feed</div>
+        <h2 class="section-heading" style="margin-bottom:8px">What changed and why it matters</h2>
+        <p style="font-size:14px;color:var(--t-tertiary);font-family:var(--f-mono);margin-bottom:28px">
+          Sources: Reuters · MEES · OPEC Secretariat · EIA · SOMO · ADNOC · Argus Media · S&P Global · Al-Monitor
+        </p>
+        <div id="intel-feed"></div>
+      </div>
+
+      <!-- Side: OPEC table -->
+      <div>
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-head">
+            <span class="card-title">OPEC+ quota vs actual output</span>
+            <span class="card-meta">M bbl/d · <span id="opec-updated"></span></span>
+          </div>
+          <div style="padding:0">
+            <table class="price-table" id="opec-table" style="font-size:12px"></table>
+          </div>
+          <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
+            <div style="font-size:10px;font-family:var(--f-mono);color:var(--t-meta);line-height:1.6" id="opec-source"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Infrastructure spotlight ── -->
+<section class="section section-border" style="background:var(--bg-card)">
+  <div class="container">
+    <div class="section-label">Infrastructure spotlight</div>
+    <h2 class="section-heading">The Yanbu bottleneck</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:28px">
+      <div>
+        <p style="font-family:var(--f-ed);font-size:17px;line-height:1.75;color:var(--t-secondary);margin-bottom:16px">
+          Saudi Arabia's East-West Pipeline (Petroline) is routinely cited as the solution to Strait of Hormuz vulnerability. The logic: if Hormuz is disrupted, redirect exports through the pipeline to Yanbu on the Red Sea.
+        </p>
+        <p style="font-family:var(--f-ed);font-size:17px;line-height:1.75;color:var(--t-secondary);margin-bottom:16px">
+          This argument has a structural flaw: the pipeline can carry <strong>5 million barrels per day</strong>. Yanbu's export terminal capacity is approximately <strong>1.8 million barrels per day</strong>.
+        </p>
+        <div class="callout-block warning">
+          <div class="callout-title">The pipeline is not the bottleneck. The port is.</div>
+          <div class="callout-body">Even fully utilising the East-West Pipeline would allow Saudi Arabia to bypass Hormuz for ~18% of its daily exports. The remaining ~8.4M bbl/d remain Hormuz-dependent.</div>
+        </div>
+        <p style="font-family:var(--f-ed);font-size:17px;line-height:1.75;color:var(--t-secondary);margin-top:16px">
+          Then add Bab el-Mandeb. Saudi crude routed via Yanbu must still transit this strait — currently the highest-risk chokepoint in the world, with Houthi operations ongoing. The "bypass" trades Hormuz exposure for Bab el-Mandeb exposure, at lower capacity.
+        </p>
+        <div class="source-line" style="margin-top:20px">
+          <div class="source-dot"></div>
+          IEA World Energy Outlook 2025 · Saudi Aramco Annual Review · Platts Gulf shipping data · Updated March 2026
+        </div>
+      </div>
+      <div>
+        <!-- Capacity comparison chart -->
+        <div class="card">
+          <div class="card-head"><span class="card-title">Pipeline vs port capacity</span></div>
+          <div style="padding:24px">
+            <div id="yanbu-chart"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-head"><span class="card-title">Port utilisation — Iraq terminals</span></div>
+          <div style="padding:16px 20px" id="port-util"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px;text-align:center">
+      <a href="saudi-arabia.html" class="btn-primary" style="padding:10px 24px;font-size:14px;border-radius:5px;display:inline-block">
+        Full Saudi Arabia intelligence page →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Price tables ── -->
+<section class="section section-border">
+  <div class="container">
+    <div class="section-label">Price reality</div>
+    <h2 class="section-heading">Global benchmarks vs local official selling prices</h2>
+    <p class="section-intro">Official Selling Prices are what Middle East producers actually charge their term customers each month. The gap to Brent is the market's real signal — not noise.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+      <!-- Benchmarks -->
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Global benchmarks</span>
+          <span class="card-meta">Indicative</span>
+        </div>
+        <table class="price-table" id="bench-table"></table>
+        <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
+          <div class="source-line" style="margin:0"><div class="source-dot"></div>ICE, CME, Platts — updated continuously</div>
+        </div>
+      </div>
+      <!-- Local OSPs -->
+      <div class="card" style="grid-column:span 2">
+        <div class="card-head">
+          <span class="card-title">Middle East local OSPs</span>
+          <span class="card-meta">Monthly releases · compiled from NOC disclosures</span>
+        </div>
+        <table class="price-table" id="osp-table"></table>
+        <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
+          <div class="source-line" style="margin:0"><div class="source-dot"></div>DME, ADNOC, Saudi Aramco, SOMO Iraq, QatarEnergy, KPC · OSP releases for current loading month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Methodology ── -->
+<section class="section section-border" id="methodology" style="background:var(--bg-card)">
+  <div class="container">
+    <div class="section-label">Methodology</div>
+    <h2 class="section-heading">How every figure is built</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:28px">
+      <div class="analyst-note">
+        <div class="analyst-note-label">What is an OSP?</div>
+        <h3>Official Selling Prices and what they reveal</h3>
+        <p>An Official Selling Price is the price at which a national oil company — Saudi Aramco, ADNOC, SOMO Iraq, QatarEnergy — sells crude to its term customers for a given loading month. These are set monthly, typically as a differential to a benchmark such as the Oman/Dubai average or Brent Dated.</p>
+        <p>When Oman crude settles at $161 while ICE Brent trades at $138, that $23 premium is not a rounding error. It reflects sour crude scarcity in Asian markets, the risk premium on Middle East supply routes, and demand signals that a London-traded futures contract does not capture.</p>
+      </div>
+      <div>
+        <div class="analyst-note" style="margin-bottom:20px">
+          <div class="analyst-note-label">Risk classification</div>
+          <h3>How risk tiers are assigned</h3>
+          <p>Risk tiers on this platform are qualitative, not numeric. They are derived from three sources: US State Department Travel Advisory levels (1–4), ACLED armed conflict event data, and Lloyd's Market Association Joint War Committee area designations for maritime risk.</p>
+          <p>Tiers are Low / Moderate / Elevated / High. Every risk label shows its source and last updated date. We do not generate proprietary risk scores.</p>
+        </div>
+        <div class="analyst-note">
+          <div class="analyst-note-label">Data policy</div>
+          <h3>Credibility over completeness</h3>
+          <p>Prices marked "indicative" are compiled from publicly available NOC disclosures and market assessments. Where real-time data is unavailable, we show the most recent verified figure with a clear update date. We do not display real-time trading data. This platform is not financial advice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Newsletter ── -->
+<section class="section section-border">
+  <div class="container" style="max-width:620px;text-align:center">
+    <div class="section-label">Weekly briefing</div>
+    <h2 style="margin-bottom:12px">The Contango letter</h2>
+    <p style="font-family:var(--f-ed);font-size:17px;line-height:1.7;color:var(--t-secondary);margin-bottom:28px">
+      Local price divergences, infrastructure constraints, and the intelligence feed — compiled weekly for energy professionals, researchers, and serious readers.
+    </p>
+    <div style="display:flex;gap:8px;max-width:420px;margin:0 auto">
+      <input type="email" id="nl-email" placeholder="your@email.com"
+        style="flex:1;padding:10px 14px;border:1px solid var(--b-strong);border-radius:5px;background:var(--bg-card);color:var(--t-primary);font-size:14px">
+      <button onclick="nlSubmit()" class="btn-primary" style="padding:10px 18px;font-size:14px;border-radius:5px;white-space:nowrap">
+        Subscribe
+      </button>
+    </div>
+    <div id="nl-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--a-green);font-family:var(--f-mono)">
+      Subscribed. Welcome to Contango.
+    </div>
+    <p style="font-size:12px;color:var(--t-meta);font-family:var(--f-mono);margin-top:12px">Free. No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Con<span>tango</span></div>
+        <p class="footer-desc">Open-source energy market intelligence. Making the gap between benchmark indices and local reality visible to everyone — not just those with a Bloomberg terminal.</p>
+      </div>
+      <div>
+        <div class="footer-col-head">Platform</div>
+        <a class="footer-link" href="index.html">Overview</a>
+        <a class="footer-link" href="saudi-arabia.html">Saudi Arabia</a>
+        <a class="footer-link" href="#map-section">Interactive map</a>
+        <a class="footer-link" href="#methodology">Methodology</a>
+      </div>
+      <div>
+        <div class="footer-col-head">Project</div>
+        <a class="footer-link" href="https://github.com/pacho064/Contango" target="_blank">GitHub — contribute</a>
+        <a class="footer-link" href="#">Data sources</a>
+        <a class="footer-link" href="#">API (roadmap)</a>
+        <a class="footer-link" href="#">Newsletter</a>
+      </div>
+      <div>
+        <div class="footer-col-head">Data sources</div>
+        <div class="footer-sources">
+          DME — Dubai Mercantile Exchange<br>
+          ADNOC OSP · Saudi Aramco OSP<br>
+          SOMO Iraq · QatarEnergy<br>
+          EIA Weekly Petroleum Status<br>
+          Reuters Energy · MEES · Argus Media<br>
+          S&P Global Platts · Lloyd's List<br>
+          OPEC Secretariat · World Port Index
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>contango.energy — Open source, MIT license</span>
+      <span id="footer-version"></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Scripts ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="map.js"></script>
+<script>
+const D = window.CONTANGO;
+
+/* ── Price state ─────────────────────────────────────────── */
+const allPrices = [...D.benchmarks, ...D.localOSPs, ...D.commodities];
+const ps = {};
+allPrices.forEach(p => { ps[p.sym] = { v: p.base, b: p.base }; });
+function tick(){
+  Object.keys(ps).forEach(k => {
+    ps[k].v = ps[k].b * (1 + (Math.random()-.5) * 0.005);
+  });
+}
+window._brentPrice = ps['BRENT'] ? ps['BRENT'].v : 138.4;
+
+/* ── Theme ───────────────────────────────────────────────── */
+let dark = false;
+function toggleTheme(){
+  dark = !dark;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+  document.getElementById('theme-btn').textContent = dark ? 'Light mode' : 'Dark mode';
+  MapEngine.updateTheme();
+}
+
+/* ── Clock ───────────────────────────────────────────────── */
+function fmtTime(){
+  return new Date().toUTCString().slice(17,25)+' UTC';
+}
+
+/* ── Ticker ──────────────────────────────────────────────── */
+function renderTicker(){
+  const items = [...D.benchmarks, ...D.localOSPs.slice(0,5)].map(p => {
+    const s = ps[p.sym];
+    const chg = (s.v - p.base) / p.base * 100;
+    const up = chg >= 0;
+    return `<div class="ticker-item">
+      <span class="ti-sym">${p.sym}</span>
+      <span class="ti-price">$${s.v.toFixed(p.dec)}</span>
+      <span class="${up?'ti-up':'ti-dn'}">${up?'+':''}${chg.toFixed(2)}%</span>
+    </div>`;
+  }).join('');
+  const t = document.getElementById('ticker-track');
+  if(t) t.innerHTML = items + items;
+}
+
+/* ── Divergence strip ────────────────────────────────────── */
+function renderDivStrip(){
+  const brent = ps['BRENT'].v;
+  window._brentPrice = brent;
+  const html = D.localOSPs.slice(0,6).map(l => `
+    <div class="div-card">
+      <div class="div-label">${l.sym} vs Brent</div>
+      <div class="div-value">+$${(ps[l.sym].v - brent).toFixed(2)}</div>
+      <div class="div-note">${l.grade} · ${l.country}</div>
+    </div>`).join('');
+  const strip = document.getElementById('div-strip');
+  if(strip) strip.innerHTML = html;
+}
+
+/* ── Spread bars (hero chart) ────────────────────────────── */
+function renderSpreadBars(){
+  const brent = ps['BRENT'].v;
+  const container = document.getElementById('spread-bars');
+  if(!container) return;
+  const items = D.localOSPs.slice(0,6);
+  const maxSpread = Math.max(...items.map(l => ps[l.sym].v - brent));
+  container.innerHTML = items.map(l => {
+    const spread = ps[l.sym].v - brent;
+    const pct = Math.max(5, (spread / maxSpread) * 100);
+    return `
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:13px;color:var(--t-primary);font-weight:500">${l.name}</span>
+          <span style="font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--a-amber)">+$${spread.toFixed(2)}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="flex:1;height:6px;background:var(--b-subtle);border-radius:3px;overflow:hidden">
+            <div style="width:${pct}%;height:100%;background:var(--a-amber);border-radius:3px;transition:width .4s"></div>
+          </div>
+          <span style="font-family:var(--f-mono);font-size:10px;color:var(--t-meta);min-width:60px;text-align:right">$${ps[l.sym].v.toFixed(2)}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ── Key metrics ─────────────────────────────────────────── */
+function renderKeyMetrics(){
+  const brent = ps['BRENT'].v;
+  const maxSpread = Math.max(...D.localOSPs.map(l => ps[l.sym].v - brent));
+  const items = [
+    {label:'Brent crude', val:`$${brent.toFixed(2)}`, sub:'ICE Futures benchmark', color:'var(--t-primary)'},
+    {label:'Max local premium', val:`+$${maxSpread.toFixed(2)}`, sub:'Murban vs Brent — highest today', color:'var(--a-amber)'},
+    {label:'Bab el-Mandeb risk', val:'High', sub:'Houthi ops ongoing · Source: ACLED', color:'var(--a-red)'},
+    {label:'OPEC+ compliance', val:'~94%', sub:'Iraq and UAE over quota · JMMC Feb 2026', color:'var(--a-green)'},
+  ];
+  const el = document.getElementById('key-metrics');
+  if(!el) return;
+  el.innerHTML = items.map(m => `
+    <div class="metric-card">
+      <div class="metric-label">${m.label}</div>
+      <div class="metric-value" style="color:${m.color}">${m.val}</div>
+      <div class="metric-sub">${m.sub}</div>
+    </div>`).join('');
+}
+
+/* ── Intel feed ──────────────────────────────────────────── */
+function renderIntelFeed(){
+  const el = document.getElementById('intel-feed');
+  if(!el) return;
+  el.innerHTML = D.intel.slice(0,6).map(n => `
+    <div class="intel-item">
+      <div class="intel-source">
+        <div class="intel-src-pip" style="background:${n.col}"></div>
+        <span class="intel-src-name">${n.src}</span>
+        <span class="intel-tag" style="background:${n.tagBg};color:${n.tagCol};border:1px solid ${n.tagCol}33">${n.tag}</span>
+        <span class="intel-src-name" style="margin-left:4px">${n.region}</span>
+      </div>
+      <div class="intel-hl">${n.hl}</div>
+      <div style="font-size:12px;color:var(--t-secondary);font-family:var(--f-ed);font-style:italic;line-height:1.5;margin-top:5px;padding-top:5px;border-top:1px solid var(--b-subtle)">${n.why}</div>
+      <div class="intel-time">${n.time}</div>
+    </div>`).join('');
+}
+
+/* ── OPEC table ──────────────────────────────────────────── */
+function renderOpecTable(){
+  const el = document.getElementById('opec-table');
+  if(!el) return;
+  el.innerHTML = `
+    <thead><tr>
+      <th>Country</th>
+      <th style="text-align:right">Quota</th>
+      <th style="text-align:right">Actual</th>
+      <th style="text-align:right">±</th>
+    </tr></thead>
+    <tbody>${D.opec.map(o => {
+      const diff = o.q !== null ? o.a - o.q : null;
+      const ds = diff === null
+        ? '<span style="color:var(--t-meta);font-family:var(--f-mono)">Exempt</span>'
+        : diff > 0
+        ? `<span style="color:var(--a-red);font-family:var(--f-mono)">+${diff.toFixed(1)}</span>`
+        : `<span style="color:var(--a-green);font-family:var(--f-mono)">${diff.toFixed(1)}</span>`;
+      return `<tr>
+        <td style="font-size:13px">${o.n}</td>
+        <td style="text-align:right;font-family:var(--f-mono);font-size:12px;color:var(--t-tertiary)">${o.q === null ? '—' : o.q.toFixed(1)}</td>
+        <td style="text-align:right;font-family:var(--f-mono);font-size:12px">${o.a.toFixed(1)}</td>
+        <td style="text-align:right;font-size:12px">${ds}</td>
+      </tr>`;
+    }).join('')}</tbody>`;
+  const src = document.getElementById('opec-source');
+  if(src) src.textContent = D.opec_source;
+  const upd = document.getElementById('opec-updated');
+  if(upd) upd.textContent = D.opec_updated;
+}
+
+/* ── Yanbu chart ─────────────────────────────────────────── */
+function renderYanbuChart(){
+  const el = document.getElementById('yanbu-chart');
+  if(!el) return;
+  el.innerHTML = `
+    <div style="margin-bottom:16px">
+      <div style="font-size:12px;font-family:var(--f-mono);color:var(--t-meta);margin-bottom:6px">East-West Pipeline capacity</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1;height:12px;background:var(--b-subtle);border-radius:3px;overflow:hidden">
+          <div style="width:100%;height:100%;background:var(--a-blue);border-radius:3px"></div>
+        </div>
+        <span style="font-family:var(--f-mono);font-size:14px;font-weight:600;min-width:80px;text-align:right">5.0M bbl/d</span>
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-size:12px;font-family:var(--f-mono);color:var(--t-meta);margin-bottom:6px">Yanbu port export capacity</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1;height:12px;background:var(--b-subtle);border-radius:3px;overflow:hidden">
+          <div style="width:36%;height:100%;background:var(--a-red);border-radius:3px"></div>
+        </div>
+        <span style="font-family:var(--f-mono);font-size:14px;font-weight:600;min-width:80px;text-align:right;color:var(--a-red)">1.8M bbl/d</span>
+      </div>
+    </div>
+    <div style="background:var(--a-red-light);border:1px solid rgba(184,80,66,.2);border-radius:5px;padding:10px 12px;font-size:12px;color:var(--a-red);font-family:var(--f-mono)">
+      Port capacity = 36% of pipeline. 64% of bypass potential is stranded.
+    </div>
+    <div class="source-line"><div class="source-dot"></div>IEA · Saudi Aramco disclosures · Updated March 2026</div>`;
+}
+
+/* ── Port utilisation ────────────────────────────────────── */
+function renderPortUtil(){
+  const el = document.getElementById('port-util');
+  if(!el) return;
+  const ports = D.ports.filter(p => p.util > 80).slice(0,4);
+  el.innerHTML = ports.map(p => {
+    const col = p.util>88?'var(--a-red)':p.util>72?'var(--a-amber)':'var(--a-green)';
+    return `
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;font-weight:500">${p.n}</span>
+          <span style="font-family:var(--f-mono);font-size:12px;font-weight:600;color:${col}">${p.util}%</span>
+        </div>
+        <div style="height:5px;background:var(--b-subtle);border-radius:2px;overflow:hidden">
+          <div style="width:${p.util}%;height:100%;background:${col};border-radius:2px;transition:width .6s"></div>
+        </div>
+        <div style="font-size:10px;color:var(--t-meta);font-family:var(--f-mono);margin-top:2px">${p.c} · ${p.cap}M bbl/d capacity</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── Price tables ────────────────────────────────────────── */
+function renderBenchTable(){
+  const el = document.getElementById('bench-table');
+  if(!el) return;
+  el.innerHTML = D.benchmarks.map(p => {
+    const s = ps[p.sym];
+    const chg = (s.v - p.base) / p.base * 100;
+    const up = chg >= 0;
+    return `<tr>
+      <td><span class="pt-sym">${p.sym}</span></td>
+      <td><span class="pt-name">${p.name}</span></td>
+      <td class="pt-price">$${s.v.toFixed(p.dec)}</td>
+      <td class="pt-chg ${up?'up':'dn'}">${up?'+':''}${chg.toFixed(2)}%</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderOSPTable(){
+  const el = document.getElementById('osp-table');
+  if(!el) return;
+  const brent = ps['BRENT'].v;
+  el.innerHTML = `<thead><tr>
+    <th>Grade</th><th>Country</th><th style="text-align:right">OSP</th>
+    <th style="text-align:right">vs Brent</th><th style="text-align:right">Source</th>
+  </tr></thead><tbody>` +
+  D.localOSPs.map(p => {
+    const s = ps[p.sym];
+    const chg = (s.v - p.base) / p.base * 100;
+    const up = chg >= 0;
+    const spread = s.v - brent;
+    return `<tr>
+      <td>
+        <div class="pt-name">${p.name}</div>
+        <div style="font-size:10px;color:var(--t-meta);font-family:var(--f-mono)">${p.grade}</div>
+      </td>
+      <td style="font-size:12px;color:var(--t-secondary)">${p.country}</td>
+      <td class="pt-price">$${s.v.toFixed(p.dec)}</td>
+      <td style="text-align:right">
+        <span class="pt-prem">+$${spread.toFixed(2)}</span>
+      </td>
+      <td style="text-align:right;font-size:10px;color:var(--t-meta);font-family:var(--f-mono)">${p.exchange}<br>${p.src_updated}</td>
+    </tr>`;
+  }).join('') + '</tbody>';
+}
+
+/* ── Map layer buttons ───────────────────────────────────── */
+function setMapLayer(name){
+  ['base','ports','flows','risk'].forEach(l => {
+    const btn = document.getElementById('lb-'+l);
+    if(btn) btn.classList.toggle('on', l === name);
+  });
+  MapEngine.setLayer(name);
+  renderMapLegend(name);
+}
+
+function renderMapLegend(layer){
+  const el = document.getElementById('map-legend');
+  if(!el) return;
+  const defs = {
+    base:[
+      {c:'rgba(200,160,80,.35)',b:'#c8a050',l:'Producer'},
+      {c:'rgba(184,80,66,.3)',b:'#b85042',l:'Conflict zone'},
+      {c:'var(--b-default)',b:'var(--t-meta)',l:'Non-producer'},
+      {dot:'#1F5A94',l:'Export terminal'},
+      {dot:'#B85042',l:'Conflict port'},
+      {ring:'#B85042',l:'Chokepoint'},
+    ],
+    risk:[
+      {c:'rgba(184,80,66,.25)',b:'#b85042',l:'High risk'},
+      {c:'rgba(192,112,32,.22)',b:'#c07020',l:'Elevated'},
+      {c:'rgba(184,134,11,.18)',b:'#b8860b',l:'Moderate'},
+      {c:'rgba(46,125,90,.15)',b:'#2e7d5a',l:'Low risk'},
+    ],
+    flows:[
+      {line:'#C58B2A',l:'Export flow (width = volume)'},
+      {ring:'#B85042',l:'Active chokepoint'},
+    ],
+    ports:[
+      {dot:'#1F5A94',l:'Export terminal'},
+      {dot:'#B85042',l:'Conflict / closed'},
+      {dot:'#6B7C93',l:'Strategic hub'},
+      {ring:'#B85042',l:'Near capacity (>88%)'},
+    ],
+  };
+  const items = defs[layer] || defs.base;
+  el.innerHTML = items.map(i => {
+    let icon = '';
+    if(i.c)    icon = `<span style="width:12px;height:10px;border-radius:2px;background:${i.c};border:1px solid ${i.b};display:inline-block;flex-shrink:0"></span>`;
+    if(i.dot)  icon = `<span style="width:8px;height:8px;border-radius:50%;background:${i.dot};display:inline-block;flex-shrink:0"></span>`;
+    if(i.line) icon = `<span style="width:18px;height:2px;background:${i.line};display:inline-block;flex-shrink:0;border-radius:1px"></span>`;
+    if(i.ring) icon = `<span style="width:10px;height:10px;border-radius:50%;border:1.5px solid ${i.ring};display:inline-block;flex-shrink:0"></span>`;
+    return `<div style="display:flex;align-items:center;gap:5px">${icon}<span>${i.l}</span></div>`;
+  }).join('');
+}
+
+/* ── Newsletter ──────────────────────────────────────────── */
+function nlSubmit(){
+  const email = document.getElementById('nl-email').value;
+  if(!email || !email.includes('@')) return;
+  document.getElementById('nl-email').parentElement.style.display='none';
+  document.getElementById('nl-confirm').style.display='block';
+}
+
+/* ── Footer version ──────────────────────────────────────── */
+function renderFooter(){
+  const el = document.getElementById('footer-version');
+  if(el) el.textContent = `${D.meta.version} · ${D.meta.updated}`;
+}
+
+/* ── Init ────────────────────────────────────────────────── */
+function init(){
+  renderTicker();
+  renderDivStrip();
+  renderSpreadBars();
+  renderKeyMetrics();
+  renderIntelFeed();
+  renderOpecTable();
+  renderYanbuChart();
+  renderPortUtil();
+  renderBenchTable();
+  renderOSPTable();
+  renderFooter();
+  renderMapLegend('base');
+
+  MapEngine.build('map-svg', {
+    height: 508,
+    onReady: () => { MapEngine.drawScaleBar(); }
+  });
+
+  /* Tick prices every 5s */
+  setInterval(() => {
+    tick();
+    window._brentPrice = ps['BRENT'].v;
+    renderTicker();
+    renderDivStrip();
+    renderSpreadBars();
+    renderKeyMetrics();
+  }, 5000);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
