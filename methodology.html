@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contango Energy — Methodology</title>
+  <meta name="description" content="Contango Energy methodology: source hierarchy, formulas, update cadence, and data quality policy.">
+  <meta name="theme-color" content="#111110">
+  <link rel="canonical" href="https://pacho064.github.io/Contango/methodology.html">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f7f7f5;--card:#ffffff;--border:#e8e5e0;--ink:#11110f;--ink2:#4a463f;--ink3:#8f8a83;--navy:#1d4480;--red:#b33000;
+      --cg:'Georgia',serif;--ss:'ui-serif,Georgia,Times New Roman,serif';--mono:'Menlo,Monaco,Consolas,monospace';
+    }
+    body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.6}
+    a{color:var(--navy);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .nav{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0}
+    .nav-inner{max-width:1100px;margin:0 auto;min-height:52px;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-family:var(--cg);font-size:20px;font-weight:600}
+    .nav-links{display:flex;gap:14px;font-size:13px;color:var(--ink3);flex-wrap:wrap;justify-content:flex-end}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 40px}
+    .hero{margin-bottom:20px}
+    h1{font-family:var(--cg);font-size:34px;line-height:1.1;margin-bottom:8px}
+    .sub{color:var(--ink3);font-size:14px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:4px}
+    .head{padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--cg);font-size:18px}
+    .body{padding:12px 14px}
+    .row{padding:8px 0;border-bottom:1px solid var(--border)}
+    .row:last-child{border-bottom:none}
+    .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+    .v{font-size:14px;color:var(--ink2)}
+    .note{margin-top:14px;padding:10px 12px;border:1px solid #efdfd7;background:#fff8f5;color:#5f463c;font-size:13px}
+    .table{width:100%;border-collapse:collapse;font-size:13px}
+    .table th,.table td{padding:8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+    .table th{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+    .footer{margin-top:18px;color:var(--ink3);font-size:12px}
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .nav-inner{align-items:flex-start}
+      .brand{font-size:18px}
+      .nav-links{font-size:12px;gap:10px}
+      .wrap{padding:18px 14px 32px}
+      h1{font-size:28px}
+      .table{display:block;overflow-x:auto;white-space:nowrap}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Contango Energy</div>
+      <div class="nav-links">
+        <a href="index.html">Overview</a>
+        <a href="saudi-arabia2.html">Saudi Arabia</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="sources.html">Sources</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Methodology</h1>
+      <p class="sub">How numbers are sourced, calculated, and labeled for trust, reproducibility, and future paid analytics.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="head">Source hierarchy</div>
+        <div class="body">
+          <div class="row"><div class="k">Tier 1</div><div class="v">Official issuer / regulator publication (NOC statement, official report, exchange bulletin).</div></div>
+          <div class="row"><div class="k">Tier 2</div><div class="v">Official statistical body / intergovernmental publication (OPEC, EIA, JODI, port authority reports).</div></div>
+          <div class="row"><div class="k">Tier 3</div><div class="v">Professional market reporting used as a fallback (for context, not preferred for benchmark construction).</div></div>
+          <div class="note">Numbers on public pages are indicative and tied to the publication cadence of the upstream source.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="head">Core 5 formulas</div>
+        <div class="body">
+          <div class="row"><div class="k">Lead series</div><div class="v"><b>Arab Light OSP vs Brent spread</b> = Arab Light reference value - Brent reference value.</div></div>
+          <div class="row"><div class="k">Event baseline</div><div class="v">For each series, baseline is stored at event date (currently 2026-02-01). Change = current - baseline.</div></div>
+          <div class="row"><div class="k">Display logic</div><div class="v">If no new official release is available, last confirmed value is retained with latest ingestion timestamp.</div></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <div class="head">Coverage and cadence (current model)</div>
+      <div class="body">
+        <table class="table">
+          <thead>
+            <tr><th>Series</th><th>Primary source type</th><th>Typical cadence</th><th>Status label</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Arab Light OSP vs Brent</td><td>NOC + benchmark reference</td><td>Monthly / release-driven</td><td>Official cadence</td></tr>
+            <tr><td>Murban</td><td>Exchange/NOC disclosure</td><td>Daily to monthly (stream dependent)</td><td>Official cadence</td></tr>
+            <tr><td>Oman/Dubai average</td><td>Benchmark methodology stream</td><td>Daily / settlement cadence</td><td>Methodology-derived</td></tr>
+            <tr><td>Basra Medium</td><td>SOMO release</td><td>Monthly / release-driven</td><td>Official cadence</td></tr>
+            <tr><td>Kuwait Export Crude</td><td>KPC release</td><td>Monthly / release-driven</td><td>Official cadence</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <div class="head">Quality policy</div>
+      <div class="body">
+        <div class="row"><div class="k">Provenance</div><div class="v">Every displayed figure should map to a source name and source URL.</div></div>
+        <div class="row"><div class="k">No synthetic prices</div><div class="v">Public values are not randomly generated; they should represent latest stored observations.</div></div>
+        <div class="row"><div class="k">Transparency</div><div class="v">Formula definitions remain public for all free-tier headline metrics.</div></div>
+        <div class="row"><div class="k">Paid tier direction</div><div class="v">Future paid features should add depth (scenario dashboards, route stress, disaggregated flows), not hide core methodology.</div></div>
+      </div>
+    </section>
+
+    <p class="footer">Contango Energy · Not financial advice · Methodology page v1</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "contango-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "core5:update": "node scripts/update-core5.mjs"
+  }
+}

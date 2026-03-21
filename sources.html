@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contango Energy — Sources</title>
+  <meta name="description" content="Contango Energy source registry: source links, status, cadence, and coverage gaps.">
+  <meta name="theme-color" content="#111110">
+  <link rel="canonical" href="https://pacho064.github.io/Contango/sources.html">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f7f7f5;--card:#fff;--border:#e8e5e0;--ink:#11110f;--ink2:#4a463f;--ink3:#8f8a83;--navy:#1d4480;--ok:#2e7d5a;--warn:#8a6020;--risk:#b33000;
+      --cg:'Georgia',serif;--ss:'ui-serif,Georgia,Times New Roman,serif';--mono:'Menlo,Monaco,Consolas,monospace';
+    }
+    body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.6}
+    a{color:var(--navy);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .nav{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0}
+    .nav-inner{max-width:1200px;margin:0 auto;min-height:52px;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-family:var(--cg);font-size:20px;font-weight:600}
+    .nav-links{display:flex;gap:14px;font-size:13px;color:var(--ink3);flex-wrap:wrap;justify-content:flex-end}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px 20px 44px}
+    h1{font-family:var(--cg);font-size:34px;line-height:1.1;margin-bottom:8px}
+    .sub{font-size:14px;color:var(--ink3);max-width:900px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:4px;margin-top:14px;overflow:hidden}
+    .head{padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--cg);font-size:18px}
+    .body{padding:12px 14px}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{padding:9px 7px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;font-size:13px}
+    .table th{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+    .status{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:2px;display:inline-block}
+    .st-ok{background:#e8f4ef;color:var(--ok)}
+    .st-partial{background:#fff3e7;color:var(--warn)}
+    .st-gap{background:#fceeee;color:var(--risk)}
+    .note{margin-top:10px;font-size:12px;color:var(--ink3)}
+    .k{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+    .item{padding:8px 0;border-bottom:1px solid var(--border)}
+    .item:last-child{border-bottom:none}
+    .foot{margin-top:18px;font-size:12px;color:var(--ink3)}
+    @media(max-width:960px){
+      .table th:nth-child(3),.table td:nth-child(3){display:none}
+      .nav-inner{align-items:flex-start}
+      .brand{font-size:18px}
+      .nav-links{font-size:12px;gap:10px}
+      .wrap{padding:18px 14px 32px}
+      h1{font-size:28px}
+      .table{display:block;overflow-x:auto;white-space:nowrap}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Contango Energy</div>
+      <div class="nav-links">
+        <a href="index.html">Overview</a>
+        <a href="saudi-arabia2.html">Saudi Arabia</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="sources.html">Sources</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <h1>Source Registry</h1>
+    <p class="sub">Operational source map for Contango Energy. This page tracks source links, ingestion readiness, cadence, and current coverage gaps.</p>
+
+    <section class="card">
+      <div class="head">Core pricing sources</div>
+      <div class="body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Series</th>
+              <th>Primary source</th>
+              <th>Cadence</th>
+              <th>Status</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Arab Light OSP vs Brent</td>
+              <td>Aramco + benchmark reference</td>
+              <td>Release-driven</td>
+              <td><span class="status st-partial">Partial</span></td>
+              <td><a href="https://www.opec.org/opec_web/en/publications/3407.htm" target="_blank" rel="noopener noreferrer">OPEC publications index</a></td>
+            </tr>
+            <tr>
+              <td>Murban</td>
+              <td>ADNOC Murban docs</td>
+              <td>Release-driven</td>
+              <td><span class="status st-ok">Ready</span></td>
+              <td><a href="https://adnoc.ae/en/adnoc-murban/documents-and-downloads" target="_blank" rel="noopener noreferrer">ADNOC documents</a></td>
+            </tr>
+            <tr>
+              <td>Oman/Dubai average</td>
+              <td>DME / benchmark methodology</td>
+              <td>Daily/settlement</td>
+              <td><span class="status st-partial">Partial</span></td>
+              <td><a href="https://www.dme.ae/" target="_blank" rel="noopener noreferrer">DME</a></td>
+            </tr>
+            <tr>
+              <td>Basra Medium</td>
+              <td>SOMO release stream</td>
+              <td>Release-driven</td>
+              <td><span class="status st-gap">Gap</span></td>
+              <td>No stable public endpoint yet</td>
+            </tr>
+            <tr>
+              <td>Kuwait Export Crude</td>
+              <td>KPC release stream</td>
+              <td>Release-driven</td>
+              <td><span class="status st-gap">Gap</span></td>
+              <td>No stable public endpoint yet</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">Status meaning: Ready = stable source page exists; Partial = source exists but parser/routine not fully automated; Gap = no reliable direct public endpoint linked yet.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head">Official macro/statistical sources</div>
+      <div class="body">
+        <div class="item">
+          <div class="k">OPEC MOMR</div>
+          <div><a href="https://momr.opec.org/pdf-download/" target="_blank" rel="noopener noreferrer">https://momr.opec.org/pdf-download/</a></div>
+        </div>
+        <div class="item">
+          <div class="k">OPEC ASB</div>
+          <div><a href="https://asb.opec.org/ASB_KeyMessages.html" target="_blank" rel="noopener noreferrer">https://asb.opec.org/ASB_KeyMessages.html</a></div>
+        </div>
+        <div class="item">
+          <div class="k">JODI Oil data downloads</div>
+          <div><a href="http://www.jodidata.org/database/data-downloads.aspx" target="_blank" rel="noopener noreferrer">http://www.jodidata.org/database/data-downloads.aspx</a></div>
+        </div>
+        <div class="item">
+          <div class="k">EIA refinery capacity</div>
+          <div><a href="http://www.eia.gov/petroleum/refinerycapacity" target="_blank" rel="noopener noreferrer">http://www.eia.gov/petroleum/refinerycapacity</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head">Coverage gaps to close next</div>
+      <div class="body">
+        <div class="item"><div class="k">Gap 1</div><div>Stable public-source mapping for Basra Medium and Kuwait Export Crude direct release artifacts.</div></div>
+        <div class="item"><div class="k">Gap 2</div><div>Port-level monthly throughput links from official authority publication pages (not only press reprints).</div></div>
+        <div class="item"><div class="k">Gap 3</div><div>Automated ingestion cadence controls by source class: daily, weekly, monthly, release-driven.</div></div>
+      </div>
+    </section>
+
+    <p class="foot">Contango Energy · Source registry v1</p>
+  </main>
+</body>
+</html>

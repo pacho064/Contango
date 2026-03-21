@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<!-- Contango v5.0 · 21 March 2026 -->
+<!-- Contango Energy · Launch baseline -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Contango — Energy Intelligence</title>
+<title>Contango Energy — Intelligence</title>
 <meta name="description" content="Middle East crude prices, OSP differentials, infrastructure constraints, and trade flows.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/index.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -85,6 +87,30 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
 .sp-value{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--ink);line-height:1}
 .sp-note{font-family:var(--ss);font-size:11px;color:var(--ink-4);margin-top:2px}
 .sp-ref .sp-value{color:var(--ink-3);font-size:18px}
+
+/* ── Core 5 section ── */
+.core-wrap{border-bottom:1px solid var(--border);background:var(--card)}
+.core-inner{max-width:1400px;margin:0 auto;padding:18px 28px 20px}
+.core-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px}
+.core-title{font-family:var(--cg);font-size:22px;font-weight:600;color:var(--ink)}
+.core-sub{font-family:var(--ss);font-size:12px;color:var(--ink-3)}
+.core-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+.core-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.core-card .head{padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--cg);font-size:15px}
+.core-card .body{padding:10px 14px}
+.core-row{display:grid;grid-template-columns:1.2fr .8fr .8fr .8fr;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);align-items:center}
+.core-row:last-child{border-bottom:none}
+.core-row.head{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-4);padding-top:0}
+.core-n{font-family:var(--ss);font-size:13px}
+.core-v,.core-c{font-family:var(--mono);font-size:12px;text-align:right}
+.core-c.up{color:var(--teal)}
+.core-c.down{color:var(--red)}
+.baseline-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);margin-top:10px}
+.core-link{font-family:var(--mono);font-size:10px;color:var(--navy);text-decoration:underline;text-underline-offset:2px}
+.core-link:hover{opacity:.82}
+.health{margin-top:12px;padding:9px 10px;border:1px solid var(--border);border-radius:3px;background:var(--card-alt);display:flex;gap:12px;flex-wrap:wrap}
+.health-item{font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.health-item b{color:var(--ink);font-weight:500}
 
 /* ── Layout ── */
 .page-max{max-width:1400px;margin:0 auto}
@@ -239,7 +265,14 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
   .main-col{border-right:none}
   .bottom-inner{grid-template-columns:1fr}
   .bp{border-right:none;border-bottom:1px solid var(--border)}
-  .nav-links{display:none}
+  .nav{height:auto}
+  .nav-inner{padding-top:8px;padding-bottom:8px;align-items:flex-start;flex-wrap:wrap;gap:8px}
+  .nav-links{display:flex;height:auto;overflow:visible;gap:8px;flex-wrap:wrap}
+  .nav-a{padding:4px 8px;border:1px solid var(--border);border-radius:3px;border-bottom:1px solid var(--border);font-size:11px}
+  .nav-a.on{border-color:var(--navy)}
+  .nav-right{width:100%;justify-content:flex-end}
+  .core-grid{grid-template-columns:1fr}
+  .core-row{grid-template-columns:1fr .8fr .8fr .8fr}
   .footer-inner{grid-template-columns:1fr 1fr;gap:20px}
   .nav-inner,.ss-inner,.footer-inner,.footer-bottom{padding-left:16px;padding-right:16px}
 }
@@ -253,13 +286,16 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
 <!-- Nav -->
 <nav class="nav">
   <div class="nav-inner">
-    <div class="brand">Contango</div>
+    <div class="brand">Contango Energy</div>
     <div class="nav-links">
       <a class="nav-a on" href="index.html">Overview</a>
-      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="saudi-arabia2.html">Saudi Arabia</a>
       <a class="nav-a" href="#map-section">Map</a>
       <a class="nav-a" href="#developments">Intelligence</a>
-      <a class="nav-a" href="#methodology">Methodology</a>
+      <a class="nav-a" href="methodology.html">Methodology</a>
+      <a class="nav-a" href="sources.html">Sources</a>
+      <a class="nav-a" href="roadmap.html">Roadmap</a>
+      <a class="nav-a" href="about.html">About</a>
     </div>
     <div class="nav-right">
       <span id="clk"></span>
@@ -276,6 +312,28 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
 <div class="spread-strip">
   <div class="ss-inner" id="ss-inner"></div>
 </div>
+
+<!-- Core 5 -->
+<section class="core-wrap">
+  <div class="core-inner">
+    <div class="core-head">
+      <div>
+        <div class="core-title">Core 5 regional pricing tracker</div>
+        <div class="core-sub">Priority set: Arab Light spread lead, plus Murban, Oman/Dubai benchmark, Basra Medium, and Kuwait Export Crude.</div>
+      </div>
+    </div>
+    <div class="core-grid">
+      <div class="core-card">
+        <div class="head">Live board (official release cadence)</div>
+        <div class="body" id="core5-live"></div>
+      </div>
+      <div class="core-card">
+        <div class="head">Event baseline: 1 Feb 2026</div>
+        <div class="body" id="core5-event"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Map + Prices -->
 <div id="map-section" style="border-bottom:1px solid var(--border)">
@@ -374,14 +432,17 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
 <footer class="footer">
   <div class="footer-inner">
     <div>
-      <div class="f-brand">Contango</div>
+      <div class="f-brand">Contango Energy</div>
       <p class="f-desc">Open-source energy market intelligence. Middle East crude prices, OSP differentials, infrastructure, and trade flows.</p>
     </div>
     <div>
       <div class="f-head">Pages</div>
       <a class="f-link" href="index.html">Overview</a>
-      <a class="f-link" href="saudi-arabia.html">Saudi Arabia</a>
-      <a class="f-link" href="#methodology">Methodology</a>
+      <a class="f-link" href="saudi-arabia2.html">Saudi Arabia</a>
+      <a class="f-link" href="methodology.html">Methodology</a>
+      <a class="f-link" href="sources.html">Sources</a>
+      <a class="f-link" href="roadmap.html">Roadmap</a>
+      <a class="f-link" href="about.html">About</a>
       <a class="f-link" href="https://github.com/pacho064/Contango" target="_blank">GitHub</a>
     </div>
     <div>
@@ -398,7 +459,7 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Contango · Open source · MIT license</span>
+    <span>Contango Energy · Open source · MIT license</span>
     <span id="footer-v"></span>
   </div>
 </footer>
@@ -412,23 +473,29 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
 const D = {
 benchmarks:[
   {sym:'BRENT', name:'Brent',        base:138.40,dec:2},
+  {sym:'OMD',   name:'Oman/Dubai Avg',base:160.10,dec:2},
   {sym:'WTI',   name:'WTI',          base:134.20,dec:2},
-  {sym:'JKM',   name:'LNG JKM',      base:24.70, dec:2},
-  {sym:'TTF',   name:'TTF Gas',      base:48.30, dec:2},
   {sym:'URALS', name:'Urals',        base:108.50,dec:2},
 ],
 osps:[
-  {sym:'OMAN',   name:'Oman',        base:161.40,dec:2,country:'Oman',         src:'DME',    updated:'1 Mar 2026',context:'Widest since Aug 2024'},
-  {sym:'MURBAN', name:'Murban',      base:163.20,dec:2,country:'UAE',          src:'ADNOC',  updated:'1 Mar 2026',context:'23-month high'},
-  {sym:'ARAB L', name:'Arab Light',  base:162.10,dec:2,country:'Saudi Arabia', src:'Aramco', updated:'1 Mar 2026',context:null},
-  {sym:'ARAB H', name:'Arab Heavy',  base:155.40,dec:2,country:'Saudi Arabia', src:'Aramco', updated:'1 Mar 2026',context:null},
-  {sym:'BASRA',  name:'Basra Light', base:158.20,dec:2,country:'Iraq',         src:'SOMO',   updated:'1 Mar 2026',context:null},
-  {sym:'QATAR',  name:'Qatar Marine',base:158.60,dec:2,country:'Qatar',        src:'QE',     updated:'1 Mar 2026',context:null},
+  {sym:'ARAB L', name:'Arab Light',   base:162.10,dec:2,country:'Saudi Arabia', src:'Aramco', updated:'1 Mar 2026',context:'Lead spread reference'},
+  {sym:'MURBAN', name:'Murban',       base:163.20,dec:2,country:'UAE',          src:'ADNOC',  updated:'1 Mar 2026',context:'Flagship UAE signal'},
+  {sym:'BASRA M',name:'Basra Medium', base:157.10,dec:2,country:'Iraq',         src:'SOMO',   updated:'1 Mar 2026',context:'Quota-sensitive Iraqi grade'},
+  {sym:'KEC',    name:'Kuwait Export Crude',base:157.80,dec:2,country:'Kuwait', src:'KPC',    updated:'1 Mar 2026',context:'Undertracked regional stream'},
 ],
 commodities:[
   {sym:'GOLD', name:'Gold',          base:2618,  dec:0},
   {sym:'BDI',  name:'Baltic Dry',    base:1842,  dec:0},
 ],
+core5:[
+  {key:'lead', name:'Arab Light OSP vs Brent spread', valueSym:'ARAB L', refSym:'BRENT', feb1Value:18.6, unit:'$/bbl', source:'Aramco OSP + Brent', sourceUrl:'https://www.opec.org/opec_web/en/publications/3407.htm'},
+  {key:'murban', name:'Murban (ADNOC)', valueSym:'MURBAN', feb1Value:159.2, unit:'$/bbl', source:'ADNOC', sourceUrl:'https://adnoc.ae/en/adnoc-murban/documents-and-downloads'},
+  {key:'omd', name:'Oman/Dubai average', valueSym:'OMD', feb1Value:154.9, unit:'$/bbl', source:'DME/Platts methodology', sourceUrl:'https://www.dme.ae/'},
+  {key:'basra', name:'Basra Medium (SOMO)', valueSym:'BASRA M', feb1Value:152.7, unit:'$/bbl', source:'SOMO', sourceUrl:''},
+  {key:'kec', name:'Kuwait Export Crude (KPC)', valueSym:'KEC', feb1Value:153.1, unit:'$/bbl', source:'KPC', sourceUrl:''}
+],
+eventBaseline:{name:'US-Iran war volatility baseline', date:'2026-02-01'},
+dataHealth:{lastUpdated:'—',coverage:'core-5',confidence:'indicative'},
 developments:[
   {src:'Reuters',   alert:true,  region:'Red Sea',      hl:'Houthi forces claim drone strike on commercial tanker south of Aden. Cape rerouting in effect. Additional transit: 14 days, ~$1.2M/voyage.',            time:'8 min ago'},
   {src:'MEES',      alert:false, region:'Saudi Arabia', hl:'East-West pipeline at 38% of 5M bbl/d capacity. Yanbu terminal export capacity: 1.8M bbl/d.',                                                           time:'26 min ago'},
@@ -481,7 +548,7 @@ flows:[
   {from:[37.6,55.8],to:[78,20],  lbl:'Russia→India',vol:1.6},
 ],
 countries:{
-  682:{n:'Saudi Arabia', osp:'$162.10',risk:'moderate',prod:'10.2M bbl/d',type:'Arab Light/Heavy',   dest:'China, Japan, India', crude:162.1,producer:1,url:'saudi-arabia.html'},
+  682:{n:'Saudi Arabia', osp:'$162.10',risk:'moderate',prod:'10.2M bbl/d',type:'Arab Light/Heavy',   dest:'China, Japan, India', crude:162.1,producer:1,url:'saudi-arabia2.html'},
   784:{n:'UAE',          osp:'$163.20',risk:'low',     prod:'3.7M bbl/d', type:'Murban, Upper Zakum',dest:'Japan, India, China', crude:163.2,producer:1},
   414:{n:'Kuwait',       osp:'$157.80',risk:'low',     prod:'2.9M bbl/d', type:'Kuwait Export Crude',dest:'Japan, Korea, India', crude:157.8,producer:1},
   368:{n:'Iraq',         osp:'$158.20',risk:'moderate',prod:'4.5M bbl/d', type:'Basra Light/Heavy',  dest:'China, India, US, EU',crude:158.2,producer:1},
@@ -517,13 +584,12 @@ countries:{
   540:{n:'Niger',        osp:'—',      risk:'high',    prod:'Minor',      type:'Agadem field',       dest:'—',                  crude:null},
   148:{n:'Chad',         osp:'—',      risk:'high',    prod:'Minor',      type:'Doba basin',         dest:'—',                  crude:null},
 },
-meta:{version:'v5.0',updated:'21 March 2026'}
+meta:{version:'v6.0',updated:'21 March 2026'}
 };
 
 /* ══ State ══ */
 const ps={};
 [...D.benchmarks,...D.osps,...D.commodities].forEach(p=>{ps[p.sym]={v:p.base,b:p.base}});
-function tick(){Object.keys(ps).forEach(k=>{ps[k].v=ps[k].b*(1+(Math.random()-.5)*.005)})}
 let dark=false, activeLayer='base', msvg, mg, mproj, mzoom, mworld;
 
 /* ══ Theme ══ */
@@ -571,6 +637,80 @@ function renderSpreads(){
     </div>`).join('');
   const el=document.getElementById('ss-inner');
   if(el) el.innerHTML=ref+spreads;
+}
+
+function getSeriesValue(series){
+  if(series.refSym){
+    return ps[series.valueSym].v-ps[series.refSym].v;
+  }
+  return ps[series.valueSym].v;
+}
+
+function renderCore5(){
+  const liveEl=document.getElementById('core5-live');
+  const eventEl=document.getElementById('core5-event');
+  if(!liveEl||!eventEl) return;
+
+  let live=`<div class="core-row head"><div>Series</div><div>Value</div><div>As of</div><div>Source</div></div>`;
+  D.core5.forEach(s=>{
+    const v=getSeriesValue(s);
+    live+=`<div class="core-row">
+      <div class="core-n">${s.name}</div>
+      <div class="core-v">${v.toFixed(2)} ${s.unit}</div>
+      <div class="core-c">${new Date().toISOString().slice(0,10)}</div>
+      <div class="core-c">${s.sourceUrl?`<a class="core-link" href="${s.sourceUrl}" target="_blank" rel="noopener noreferrer">source</a>`:s.source}</div>
+    </div>`;
+  });
+  live+=`<div class="baseline-note">Updates follow official publication cadence (not synthetic ticks). Timestamp refreshes every minute.</div>`;
+  liveEl.innerHTML=live;
+
+  let ev=`<div class="core-row head"><div>Series</div><div>1 Feb</div><div>Now</div><div>Change</div></div>`;
+  D.core5.forEach(s=>{
+    const now=getSeriesValue(s);
+    const ch=now-s.feb1Value;
+    ev+=`<div class="core-row">
+      <div class="core-n">${s.name}</div>
+      <div class="core-v">${s.feb1Value.toFixed(2)}</div>
+      <div class="core-v">${now.toFixed(2)}</div>
+      <div class="core-c ${ch>=0?'up':'down'}">${ch>=0?'+':''}${ch.toFixed(2)}</div>
+    </div>`;
+  });
+  ev+=`<div class="baseline-note">Baseline date: ${D.eventBaseline.date}. Use this as your volatility anchor for conflict/event analysis.</div>`;
+  ev+=`<div class="health">
+    <div class="health-item">Last official update: <b>${D.dataHealth.lastUpdated}</b></div>
+    <div class="health-item">Coverage: <b>${D.dataHealth.coverage}</b></div>
+    <div class="health-item">Confidence: <b>${D.dataHealth.confidence}</b></div>
+  </div>`;
+  eventEl.innerHTML=ev;
+}
+
+async function loadExternalCore5(){
+  try{
+    const res=await fetch('./data/core5.json',{cache:'no-store'});
+    if(!res.ok) return;
+    const payload=await res.json();
+    if(!payload||!Array.isArray(payload.core5)) return;
+
+    D.eventBaseline=payload.eventBaseline||D.eventBaseline;
+    D.core5=payload.core5;
+    if(payload.lastUpdated){
+      D.dataHealth.lastUpdated=payload.lastUpdated;
+    }
+
+    // Merge values into existing symbol state if present.
+    payload.core5.forEach(s=>{
+      if(s.valueSym&&ps[s.valueSym]&&typeof s.currentValue==='number'){
+        ps[s.valueSym].v=s.currentValue;
+        ps[s.valueSym].b=s.currentValue;
+      }
+      if(s.refSym&&ps[s.refSym]&&typeof s.refValue==='number'){
+        ps[s.refSym].v=s.refValue;
+        ps[s.refSym].b=s.refValue;
+      }
+    });
+  }catch(_err){
+    // Keep in-file defaults as a safe fallback.
+  }
 }
 
 /* ══ Prices ══ */
@@ -1039,9 +1179,11 @@ const M={
 };
 
 /* ══ Init ══ */
-function init(){
+async function init(){
+  await loadExternalCore5();
   renderTicker();
   renderSpreads();
+  renderCore5();
   renderPrices();
   renderDev();
   renderOpec();
@@ -1049,7 +1191,7 @@ function init(){
   renderPorts();
   buildMap();
   document.getElementById('footer-v').textContent=`${D.meta.version} · ${D.meta.updated}`;
-  setInterval(()=>{tick();renderTicker();renderSpreads();renderPrices()},5000);
+  setInterval(()=>{renderTicker();renderSpreads();renderCore5();renderPrices()},60000);
 }
 document.addEventListener('DOMContentLoaded',init);
 </script>
