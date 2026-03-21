@@ -1,705 +1,1057 @@
 <!DOCTYPE html>
-<!-- Contango v3.0 · 20 March 2026 · github.com/pacho064/Contango -->
+<!-- Contango v5.0 · 21 March 2026 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Contango — Energy Intelligence</title>
-<meta name="description" content="Where local oil prices, infrastructure constraints, and trade flows reveal what benchmark indices obscure. Open-source energy intelligence.">
-<meta property="og:title" content="Contango — Energy Intelligence">
-<meta property="og:description" content="When the market prices in more than it admits.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://contango.energy">
+<meta name="description" content="Middle East crude prices, OSP differentials, infrastructure constraints, and trade flows.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
-<script src="data.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* ── Design tokens ── */
+:root{
+  --cg:'Cormorant Garamond',serif;
+  --ss:'Source Serif 4',serif;
+  --mono:'IBM Plex Mono',monospace;
+
+  /* Light */
+  --bg:#f7f7f5;
+  --card:#f7f7f5;
+  --card-alt:#f3f0eb;
+  --border:#e8e5e0;
+  --ink:#0f0f0e;
+  --ink-2:#3a3830;
+  --ink-3:#9a9590;
+  --ink-4:#b0b0a8;
+  --navy:#1d4480;
+  --red:#b33000;
+  --red-dark:#c84000;
+  --teal:#4a7c6f;
+  --teal-dark:#4a9c8a;
+}
+[data-theme=dark]{
+  --bg:#111110;
+  --card:#1a1a19;
+  --card-alt:#1a1a19;
+  --border:#272726;
+  --ink:#ddd6c8;
+  --ink-2:#cec8bc;
+  --ink-3:#909090;
+  --ink-4:#787878;
+  --red:#c84000;
+  --teal:#4a9c8a;
+}
+
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:inherit}
+
+/* ── Ticker ── */
+.ticker{background:#111110;height:28px;overflow:hidden;white-space:nowrap;position:relative}
+.ticker::after{content:'';position:absolute;right:0;top:0;width:60px;height:100%;background:linear-gradient(to right,transparent,#111110);pointer-events:none}
+.tk-track{display:inline-flex;animation:tk 90s linear infinite}
+.tk-track:hover{animation-play-state:paused}
+@keyframes tk{to{transform:translateX(-50%)}}
+.tk-item{display:inline-flex;align-items:center;gap:7px;padding:0 18px;border-right:1px solid rgba(255,255,255,.07);font-family:var(--mono);font-size:10.5px;height:28px}
+.tk-sym{color:rgba(255,255,255,.35);font-size:9px;letter-spacing:.07em}
+.tk-price{color:rgba(255,255,255,.82);font-weight:500}
+.tk-chg{font-size:9.5px;color:rgba(255,255,255,.38)}
+
+/* ── Nav ── */
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-family:var(--cg);font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.01em;flex-shrink:0}
+.nav-links{display:flex;height:50px;overflow:hidden}
+.nav-a{display:flex;align-items:center;padding:0 13px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-btn{font-family:var(--mono);font-size:11px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;transition:all .12s;display:flex;align-items:center;gap:5px;cursor:pointer}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+#clk{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+
+/* ── Spread strip ── */
+.spread-strip{border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.spread-strip::-webkit-scrollbar{display:none}
+.ss-inner{max-width:1400px;margin:0 auto;padding:0 28px;display:flex;align-items:stretch}
+.sp{padding:11px 20px 11px 0;margin-right:20px;border-right:1px solid var(--border);flex-shrink:0}
+.sp:last-child{border-right:none}
+.sp-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px}
+.sp-value{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--ink);line-height:1}
+.sp-note{font-family:var(--ss);font-size:11px;color:var(--ink-4);margin-top:2px}
+.sp-ref .sp-value{color:var(--ink-3);font-size:18px}
+
+/* ── Layout ── */
+.page-max{max-width:1400px;margin:0 auto}
+.two-col{display:grid;grid-template-columns:1fr 320px}
+.main-col{border-right:1px solid var(--border);min-width:0}
+.side-col{min-width:0;background:var(--card)}
+
+/* ── Card base ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.card-navy{border-top:3px solid var(--navy)}
+.card-red{border-top:3px solid var(--red)}
+.c-head{padding:11px 16px;border-bottom:1px solid var(--border)}
+.c-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.c-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.c-body{padding:14px 16px}
+.c-src{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:8px;padding-top:7px;border-top:1px solid var(--border)}
+
+/* ── Map ── */
+.map-wrap{position:relative;border-bottom:1px solid var(--border)}
+.map-bar{height:40px;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:10px}
+.map-layers{display:flex;gap:3px}
+.ml{font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:3px 9px;border:1px solid var(--border);color:var(--ink-3);border-radius:2px;cursor:pointer;transition:all .12s}
+.ml:hover{color:var(--ink);border-color:var(--ink-3)}
+.ml.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.map-zoom{display:flex;gap:3px}
+.mz{width:26px;height:26px;border:1px solid var(--border);border-radius:2px;color:var(--ink-3);font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .12s}
+.mz:hover{color:var(--ink);border-color:var(--ink-3)}
+.mz-txt{font-family:var(--mono);font-size:10px;width:auto;padding:0 9px}
+#map-svg{width:100%;height:480px;display:block;cursor:grab}
+#map-svg:active{cursor:grabbing}
+.map-panel{position:absolute;top:40px;right:0;width:272px;height:calc(100% - 40px);background:var(--card);border-left:1px solid var(--border);transform:translateX(100%);transition:transform .22s ease;overflow-y:auto;z-index:50}
+.map-panel.open{transform:translateX(0)}
+.mp-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.mp-title{font-family:var(--cg);font-size:16px;font-weight:500;color:var(--ink)}
+.mp-close{color:var(--ink-3);font-size:18px;padding:2px 5px;cursor:pointer;border-radius:2px}
+.mp-close:hover{color:var(--ink)}
+.mp-body{padding:14px 16px}
+.mp-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
+.mp-row:last-child{border-bottom:none}
+.mp-l{font-family:var(--ss);font-size:12px;color:var(--ink-3)}
+.mp-v{font-family:var(--mono);font-weight:500;font-size:12px}
+.map-legend{padding:7px 14px;border-top:1px solid var(--border);background:var(--card);display:flex;gap:14px;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--ink-4)}
+.leg-d{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.leg-sq{width:10px;height:8px;border-radius:1px;flex-shrink:0}
+.leg-r{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;flex-shrink:0;background:none}
+.leg-l{width:14px;height:2px;border-radius:1px;flex-shrink:0}
+
+/* Map tooltip */
+.mtt{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);border-radius:3px;padding:10px 13px;font-size:11.5px;z-index:9999;opacity:0;transition:opacity .08s;max-width:230px;line-height:1.45;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+.mtt-name{font-family:var(--cg);font-size:15px;font-weight:500;margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.12)}
+.mtt-row{display:flex;justify-content:space-between;gap:10px;margin-top:3px;font-size:10.5px}
+.mtt-l{opacity:.45}
+.mtt-v{font-family:var(--mono);font-weight:500}
+
+/* ── Prices sidebar ── */
+.prices-head{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.prices-label{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.prices-ts{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4)}
+.p-sec{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);padding:9px 16px 3px;border-top:1px solid var(--border)}
+.p-sec:first-child{border-top:none}
+.p-row{display:grid;grid-template-columns:1fr 64px;gap:8px;align-items:center;padding:7px 16px;border-bottom:1px solid var(--border);transition:background .08s}
+.p-row:last-child{border-bottom:none}
+.p-row:hover{background:var(--card-alt)}
+.p-left{display:flex;flex-direction:column;gap:2px}
+.p-name{font-family:var(--ss);font-size:11px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.p-spread{font-family:var(--mono);font-size:9px;color:var(--red);margin-top:1px}
+.p-right{text-align:right}
+.p-price{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);display:block}
+.p-chg{font-family:var(--mono);font-size:10px;color:var(--ink-4);display:block;margin-top:1px}
+
+/* ── Developments feed ── */
+.dev-head{padding:11px 16px;border-bottom:1px solid var(--border);border-top:1px solid var(--border);background:var(--card-alt)}
+.dev-label{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.dev-item{padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .08s}
+.dev-item:hover{background:var(--card-alt)}
+.dev-item:last-child{border-bottom:none}
+.dev-meta{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.dev-pip{width:4px;height:4px;border-radius:50%;flex-shrink:0;background:var(--ink-3)}
+.dev-pip.alert{background:var(--red)}
+.dev-src{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4)}
+.dev-hl{font-family:var(--ss);font-size:14px;line-height:1.55;color:var(--ink-2)}
+.dev-item:hover .dev-hl{color:var(--ink)}
+.dev-time{font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-top:4px}
+
+/* ── OPEC sidebar ── */
+.opec-wrap{border-top:1px solid var(--border)}
+.opec-head{padding:11px 16px;border-bottom:1px solid var(--border)}
+.opec-hd{display:grid;grid-template-columns:1fr 44px 44px 36px;gap:2px;padding:6px 16px;border-bottom:1px solid var(--border)}
+.opec-hd span{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-4)}
+.opec-hd span:not(:first-child){text-align:right}
+.opec-row{display:grid;grid-template-columns:1fr 44px 44px 36px;gap:2px;padding:6px 16px;border-bottom:1px solid var(--border);transition:background .08s}
+.opec-row:last-child{border-bottom:none}
+.opec-row:hover{background:var(--card-alt)}
+.opec-n{font-family:var(--ss);font-size:12.5px;color:var(--ink)}
+.opec-v{font-family:var(--mono);font-size:11px;text-align:right;color:var(--ink-3)}
+.opec-over{color:var(--red)}
+.opec-src{padding:8px 16px;border-top:1px solid var(--border)}
+
+/* ── Bottom panels ── */
+.bottom{border-top:1px solid var(--border)}
+.bottom-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr}
+.bp{padding:20px 24px;border-right:1px solid var(--border)}
+.bp:last-child{border-right:none}
+.bp-title{font-family:var(--cg);font-size:16px;font-weight:500;color:var(--ink);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+
+/* Risk rows */
+.rr{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.rr:last-child{border-bottom:none}
+.rr-left{flex:1}
+.rr-name{font-family:var(--ss);font-size:13px;color:var(--ink);line-height:1.3}
+.rr-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:2px}
+.badge{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.04em;padding:3px 7px;border-radius:2px;white-space:nowrap;flex-shrink:0}
+/* light badges */
+.b-high    {background:rgba(179,48,0,.08);  color:#b33000;border:1px solid rgba(179,48,0,.20)}
+.b-mod     {background:rgba(74,124,111,.08);color:#4a7c6f;border:1px solid rgba(74,124,111,.20)}
+.b-low     {background:rgba(0,0,0,.04);     color:#9a9590;border:1px solid #e8e5e0}
+/* dark badges — toggled via js class on body */
+[data-theme=dark] .b-high{background:rgba(179,48,0,.15);  color:#c84000;border:1px solid rgba(179,48,0,.25)}
+[data-theme=dark] .b-mod {background:rgba(74,124,111,.15);color:#4a9c8a;border:1px solid rgba(74,124,111,.25)}
+[data-theme=dark] .b-low {background:rgba(221,214,200,.07);color:#8a8070;border:1px solid rgba(221,214,200,.12)}
+
+/* Port bars */
+.port-row{padding:9px 0;border-bottom:1px solid var(--border)}
+.port-row:last-child{border-bottom:none}
+.port-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.port-name{font-family:var(--ss);font-size:13px;color:var(--ink)}
+.port-util{font-family:var(--mono);font-size:13px;font-weight:500}
+.port-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-bottom:5px}
+.port-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.port-fill{height:100%;border-radius:2px;transition:width .8s}
+
+/* Methodology */
+.method-body p{font-family:var(--ss);font-size:13px;line-height:1.65;color:var(--ink-2);margin-bottom:10px}
+.method-body p:last-child{margin-bottom:0}
+.method-body a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
+
+/* ── Footer ── */
+.footer{border-top:1px solid var(--border);background:var(--card);padding:28px 0 24px}
+.footer-inner{max-width:1400px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:32px;margin-bottom:24px}
+.f-brand{font-family:var(--cg);font-size:19px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.f-desc{font-family:var(--ss);font-size:12.5px;color:var(--ink-3);line-height:1.6}
+.f-head{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:9px}
+.f-link{display:block;font-family:var(--ss);font-size:13px;color:var(--ink-3);margin-bottom:5px;transition:color .12s}
+.f-link:hover{color:var(--navy)}
+.f-src{font-family:var(--ss);font-style:italic;font-size:12px;color:var(--ink-4);line-height:1.9}
+.footer-bottom{max-width:1400px;margin:0 auto;padding:16px 28px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-4)}
+
+/* ── Responsive ── */
+@media(max-width:960px){
+  .two-col{grid-template-columns:1fr}
+  .main-col{border-right:none}
+  .bottom-inner{grid-template-columns:1fr}
+  .bp{border-right:none;border-bottom:1px solid var(--border)}
+  .nav-links{display:none}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:20px}
+  .nav-inner,.ss-inner,.footer-inner,.footer-bottom{padding-left:16px;padding-right:16px}
+}
+</style>
 </head>
 <body>
 
-<!-- ── Price ticker ── -->
-<div class="ticker">
-  <div class="ticker-track" id="ticker-track"></div>
-</div>
+<!-- Ticker -->
+<div class="ticker"><div class="tk-track" id="tk-track"></div></div>
 
-<!-- ── Navbar ── -->
-<nav class="navbar">
-  <div class="container">
-    <div class="nav-brand">
-      <a href="index.html" class="nav-logo">Con<span>tango</span></a>
-      <span class="nav-tagline">ENERGY INTELLIGENCE</span>
-    </div>
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">Contango</div>
     <div class="nav-links">
-      <a class="nav-link active" href="index.html">Overview</a>
-      <a class="nav-link" href="#map-section">Map</a>
-      <a class="nav-link" href="#intelligence">Intelligence</a>
-      <a class="nav-link" href="saudi-arabia.html">Saudi Arabia</a>
-      <a class="nav-link" href="#methodology">Methodology</a>
+      <a class="nav-a on" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="#map-section">Map</a>
+      <a class="nav-a" href="#developments">Intelligence</a>
+      <a class="nav-a" href="#methodology">Methodology</a>
     </div>
-    <div class="nav-actions">
-      <button class="btn-ghost" id="theme-btn" onclick="toggleTheme()">Dark mode</button>
-      <a href="https://github.com/pacho064/Contango" target="_blank" class="btn-ghost" style="display:flex;align-items:center;gap:5px">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    <div class="nav-right">
+      <span id="clk"></span>
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+      <a class="nav-btn" href="https://github.com/pacho064/Contango" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
       </a>
     </div>
   </div>
 </nav>
 
-<!-- ── Divergence strip ── -->
-<div class="div-strip">
-  <div class="div-inner" id="div-strip"></div>
+<!-- Spread strip -->
+<div class="spread-strip">
+  <div class="ss-inner" id="ss-inner"></div>
 </div>
 
-<!-- ── Hero ── -->
-<section class="section" style="padding:56px 0 48px;background:var(--bg-card);border-bottom:1px solid var(--b-default)">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-      <div>
-        <div class="section-label">The divergence thesis</div>
-        <h1 style="margin-bottom:20px">Global benchmarks flatten<br>what local prices reveal</h1>
-        <p style="font-size:17px;line-height:1.7;color:var(--t-secondary);margin-bottom:24px">
-          When Brent crude trades at $138 and Oman crude settles at $161, the $23 gap is not noise. It is the market pricing in sour crude scarcity, Asian demand, Red Sea disruption, and infrastructure constraints that an exchange-listed contract cannot capture.
-        </p>
-        <p style="font-size:17px;line-height:1.7;color:var(--t-secondary);margin-bottom:32px">
-          Contango surfaces that gap — through local Official Selling Prices, infrastructure data, export flows, and sourced risk analysis.
-        </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a href="#map-section" class="btn-primary" style="padding:10px 20px;font-size:14px;border-radius:5px">Explore the map</a>
-          <a href="saudi-arabia.html" class="btn-ghost" style="padding:10px 20px;font-size:14px;border-radius:5px">Saudi Arabia deep-dive</a>
+<!-- Map + Prices -->
+<div id="map-section" style="border-bottom:1px solid var(--border)">
+  <div class="page-max">
+    <div class="two-col">
+      <div class="main-col">
+        <div class="map-wrap">
+          <div class="map-bar">
+            <div class="map-layers">
+              <div class="ml on" id="ml-base"  onclick="setLayer('base')">Countries</div>
+              <div class="ml"    id="ml-ports" onclick="setLayer('ports')">Ports</div>
+              <div class="ml"    id="ml-flows" onclick="setLayer('flows')">Flows</div>
+              <div class="ml"    id="ml-risk"  onclick="setLayer('risk')">Risk</div>
+            </div>
+            <div class="map-zoom">
+              <button class="mz" onclick="M.zoomIn()">+</button>
+              <button class="mz" onclick="M.zoomOut()">−</button>
+              <button class="mz mz-txt" onclick="M.reset()">Reset</button>
+            </div>
+          </div>
+          <svg id="map-svg"></svg>
+          <div class="mtt" id="mtt"></div>
+          <div class="map-panel" id="map-panel">
+            <div class="mp-head">
+              <div class="mp-title" id="mp-title">—</div>
+              <button class="mp-close" onclick="closePanel()">×</button>
+            </div>
+            <div class="mp-body" id="mp-body"></div>
+          </div>
+          <div class="map-legend" id="map-legend"></div>
         </div>
       </div>
-      <!-- Hero chart -->
-      <div class="card" style="overflow:hidden">
-        <div class="card-head">
-          <span class="card-title">Local OSP vs Brent — current spread</span>
-          <span class="card-meta">indicative · compiled from OSP releases</span>
+      <div class="side-col">
+        <div class="prices-head">
+          <span class="prices-label">Prices</span>
+          <span class="prices-ts" id="prices-ts">—</span>
         </div>
-        <div style="padding:20px">
-          <div id="spread-bars"></div>
-          <div class="source-line">
-            <div class="source-dot"></div>
-            Sources: DME, ADNOC OSP, Aramco OSP, SOMO Iraq, QatarEnergy · Updated March 2026
+        <div id="prices-area"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Developments + OPEC -->
+<div id="developments" style="border-bottom:1px solid var(--border)">
+  <div class="page-max">
+    <div class="two-col">
+      <div class="main-col">
+        <div class="dev-head">
+          <span class="dev-label">Today's developments</span>
+        </div>
+        <div id="dev-feed"></div>
+      </div>
+      <div class="side-col" style="border-left:1px solid var(--border)">
+        <div class="opec-wrap">
+          <div class="opec-head">
+            <div class="c-title">OPEC+ quota vs actual</div>
+            <div class="c-meta" id="opec-date"></div>
+          </div>
+          <div class="opec-hd">
+            <span>Country</span><span>Quota</span><span>Actual</span><span>±</span>
+          </div>
+          <div id="opec-rows"></div>
+          <div class="opec-src">
+            <div class="c-src" style="margin:0;padding:0;border:none" id="opec-src"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ── Key metrics ── -->
-<section class="section-tight section-border">
-  <div class="container">
-    <div class="grid-4" id="key-metrics"></div>
-  </div>
-</section>
-
-<!-- ── Map section ── -->
-<section class="section section-border" id="map-section">
-  <div class="container-wide">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
-      <div>
-        <div class="section-label">Regional energy geography</div>
-        <h2 class="section-heading">Infrastructure, flows &amp; risk</h2>
-        <p class="section-intro" style="margin-bottom:0">Full world map. Default view: Greater Middle East. Zoom out for global context. Click any country, port, or chokepoint for detail.</p>
-      </div>
-      <div style="font-size:11px;font-family:var(--f-mono);color:var(--t-meta);text-align:right">
-        Scroll to zoom · Drag to pan<br>Click for side panel
-      </div>
+<!-- Bottom panels -->
+<div class="bottom">
+  <div class="bottom-inner">
+    <div class="bp">
+      <div class="bp-title">Chokepoint status</div>
+      <div id="choke-list"></div>
     </div>
-
-    <div class="map-outer" style="height:560px;position:relative">
-      <!-- toolbar -->
-      <div class="map-toolbar">
-        <div class="map-layer-btns">
-          <div class="mlb on"  id="lb-base"  onclick="setMapLayer('base')">Countries</div>
-          <div class="mlb"     id="lb-ports" onclick="setMapLayer('ports')">Ports</div>
-          <div class="mlb"     id="lb-flows" onclick="setMapLayer('flows')">Export flows</div>
-          <div class="mlb"     id="lb-risk"  onclick="setMapLayer('risk')">Risk tiers</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button class="mzb" onclick="MapEngine.zoomIn()" title="Zoom in">+</button>
-          <button class="mzb" onclick="MapEngine.zoomOut()" title="Zoom out">−</button>
-          <button class="mzb" style="font-size:11px;width:auto;padding:0 10px" onclick="MapEngine.resetView()">Reset</button>
-        </div>
-      </div>
-
-      <!-- SVG map -->
-      <svg id="map-svg" style="width:100%;height:508px;display:block"></svg>
-
-      <!-- Floating tooltip -->
-      <div class="map-tt" id="map-tt"></div>
-
-      <!-- Side panel -->
-      <div class="map-side" id="map-side">
-        <div class="map-side-head">
-          <div class="map-side-title">—</div>
-          <button class="map-side-close" onclick="MapEngine.closePanel()">×</button>
-        </div>
-        <div class="map-side-body"></div>
-      </div>
+    <div class="bp">
+      <div class="bp-title">Port utilisation</div>
+      <div id="port-list"></div>
     </div>
-
-    <!-- Map legend -->
-    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:11px;font-family:var(--f-mono);color:var(--t-tertiary)" id="map-legend"></div>
-  </div>
-</section>
-
-<!-- ── What changed this week ── -->
-<section class="section section-border" id="intelligence">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 380px;gap:48px">
-
-      <div>
-        <div class="section-label">Intelligence feed</div>
-        <h2 class="section-heading" style="margin-bottom:8px">What changed and why it matters</h2>
-        <p style="font-size:14px;color:var(--t-tertiary);font-family:var(--f-mono);margin-bottom:28px">
-          Sources: Reuters · MEES · OPEC Secretariat · EIA · SOMO · ADNOC · Argus Media · S&P Global · Al-Monitor
-        </p>
-        <div id="intel-feed"></div>
-      </div>
-
-      <!-- Side: OPEC table -->
-      <div>
-        <div class="card" style="margin-bottom:20px">
-          <div class="card-head">
-            <span class="card-title">OPEC+ quota vs actual output</span>
-            <span class="card-meta">M bbl/d · <span id="opec-updated"></span></span>
-          </div>
-          <div style="padding:0">
-            <table class="price-table" id="opec-table" style="font-size:12px"></table>
-          </div>
-          <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
-            <div style="font-size:10px;font-family:var(--f-mono);color:var(--t-meta);line-height:1.6" id="opec-source"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Infrastructure spotlight ── -->
-<section class="section section-border" style="background:var(--bg-card)">
-  <div class="container">
-    <div class="section-label">Infrastructure spotlight</div>
-    <h2 class="section-heading">The Yanbu bottleneck</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:28px">
-      <div>
-        <p style="font-family:var(--f-ed);font-size:17px;line-height:1.75;color:var(--t-secondary);margin-bottom:16px">
-          Saudi Arabia's East-West Pipeline (Petroline) is routinely cited as the solution to Strait of Hormuz vulnerability. The logic: if Hormuz is disrupted, redirect exports through the pipeline to Yanbu on the Red Sea.
-        </p>
-        <p style="font-family:var(--f-ed);font-size:17px;line-height:1.75;color:var(--t-secondary);margin-bottom:16px">
-          This argument has a structural flaw: the pipeline can carry <strong>5 million barrels per day</strong>. Yanbu's export terminal capacity is approximately <strong>1.8 million barrels per day</strong>.
-        </p>
-        <div class="callout-block warning">
-          <div class="callout-title">The pipeline is not the bottleneck. The port is.</div>
-          <div class="callout-body">Even fully utilising the East-West Pipeline would allow Saudi Arabia to bypass Hormuz for ~18% of its daily exports. The remaining ~8.4M bbl/d remain Hormuz-dependent.</div>
-        </div>
-        <p style="font-family:var(--f-ed);font-size:17px;line-height:1.75;color:var(--t-secondary);margin-top:16px">
-          Then add Bab el-Mandeb. Saudi crude routed via Yanbu must still transit this strait — currently the highest-risk chokepoint in the world, with Houthi operations ongoing. The "bypass" trades Hormuz exposure for Bab el-Mandeb exposure, at lower capacity.
-        </p>
-        <div class="source-line" style="margin-top:20px">
-          <div class="source-dot"></div>
-          IEA World Energy Outlook 2025 · Saudi Aramco Annual Review · Platts Gulf shipping data · Updated March 2026
-        </div>
-      </div>
-      <div>
-        <!-- Capacity comparison chart -->
-        <div class="card">
-          <div class="card-head"><span class="card-title">Pipeline vs port capacity</span></div>
-          <div style="padding:24px">
-            <div id="yanbu-chart"></div>
-          </div>
-        </div>
-        <div class="card" style="margin-top:16px">
-          <div class="card-head"><span class="card-title">Port utilisation — Iraq terminals</span></div>
-          <div style="padding:16px 20px" id="port-util"></div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:24px;text-align:center">
-      <a href="saudi-arabia.html" class="btn-primary" style="padding:10px 24px;font-size:14px;border-radius:5px;display:inline-block">
-        Full Saudi Arabia intelligence page →
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── Price tables ── -->
-<section class="section section-border">
-  <div class="container">
-    <div class="section-label">Price reality</div>
-    <h2 class="section-heading">Global benchmarks vs local official selling prices</h2>
-    <p class="section-intro">Official Selling Prices are what Middle East producers actually charge their term customers each month. The gap to Brent is the market's real signal — not noise.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
-      <!-- Benchmarks -->
-      <div class="card">
-        <div class="card-head">
-          <span class="card-title">Global benchmarks</span>
-          <span class="card-meta">Indicative</span>
-        </div>
-        <table class="price-table" id="bench-table"></table>
-        <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
-          <div class="source-line" style="margin:0"><div class="source-dot"></div>ICE, CME, Platts — updated continuously</div>
-        </div>
-      </div>
-      <!-- Local OSPs -->
-      <div class="card" style="grid-column:span 2">
-        <div class="card-head">
-          <span class="card-title">Middle East local OSPs</span>
-          <span class="card-meta">Monthly releases · compiled from NOC disclosures</span>
-        </div>
-        <table class="price-table" id="osp-table"></table>
-        <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
-          <div class="source-line" style="margin:0"><div class="source-dot"></div>DME, ADNOC, Saudi Aramco, SOMO Iraq, QatarEnergy, KPC · OSP releases for current loading month</div>
-        </div>
+    <div class="bp" id="methodology">
+      <div class="bp-title">Methodology</div>
+      <div class="method-body">
+        <p>Prices are compiled from publicly available NOC disclosures — Saudi Aramco, ADNOC, SOMO, QatarEnergy OSP releases. Spreads are calculated against the ICE Brent front-month contract. All figures are indicative and updated when official releases are published.</p>
+        <p>Risk classifications use US State Department Travel Advisory levels and ACLED armed conflict data. Tiers: Low / Moderate / High. No proprietary scoring methodology is used.</p>
+        <p>This platform is not financial advice. Source code: <a href="https://github.com/pacho064/Contango" target="_blank">github.com/pacho064/Contango</a>.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ── Methodology ── -->
-<section class="section section-border" id="methodology" style="background:var(--bg-card)">
-  <div class="container">
-    <div class="section-label">Methodology</div>
-    <h2 class="section-heading">How every figure is built</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:28px">
-      <div class="analyst-note">
-        <div class="analyst-note-label">What is an OSP?</div>
-        <h3>Official Selling Prices and what they reveal</h3>
-        <p>An Official Selling Price is the price at which a national oil company — Saudi Aramco, ADNOC, SOMO Iraq, QatarEnergy — sells crude to its term customers for a given loading month. These are set monthly, typically as a differential to a benchmark such as the Oman/Dubai average or Brent Dated.</p>
-        <p>When Oman crude settles at $161 while ICE Brent trades at $138, that $23 premium is not a rounding error. It reflects sour crude scarcity in Asian markets, the risk premium on Middle East supply routes, and demand signals that a London-traded futures contract does not capture.</p>
-      </div>
-      <div>
-        <div class="analyst-note" style="margin-bottom:20px">
-          <div class="analyst-note-label">Risk classification</div>
-          <h3>How risk tiers are assigned</h3>
-          <p>Risk tiers on this platform are qualitative, not numeric. They are derived from three sources: US State Department Travel Advisory levels (1–4), ACLED armed conflict event data, and Lloyd's Market Association Joint War Committee area designations for maritime risk.</p>
-          <p>Tiers are Low / Moderate / Elevated / High. Every risk label shows its source and last updated date. We do not generate proprietary risk scores.</p>
-        </div>
-        <div class="analyst-note">
-          <div class="analyst-note-label">Data policy</div>
-          <h3>Credibility over completeness</h3>
-          <p>Prices marked "indicative" are compiled from publicly available NOC disclosures and market assessments. Where real-time data is unavailable, we show the most recent verified figure with a clear update date. We do not display real-time trading data. This platform is not financial advice.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Newsletter ── -->
-<section class="section section-border">
-  <div class="container" style="max-width:620px;text-align:center">
-    <div class="section-label">Weekly briefing</div>
-    <h2 style="margin-bottom:12px">The Contango letter</h2>
-    <p style="font-family:var(--f-ed);font-size:17px;line-height:1.7;color:var(--t-secondary);margin-bottom:28px">
-      Local price divergences, infrastructure constraints, and the intelligence feed — compiled weekly for energy professionals, researchers, and serious readers.
-    </p>
-    <div style="display:flex;gap:8px;max-width:420px;margin:0 auto">
-      <input type="email" id="nl-email" placeholder="your@email.com"
-        style="flex:1;padding:10px 14px;border:1px solid var(--b-strong);border-radius:5px;background:var(--bg-card);color:var(--t-primary);font-size:14px">
-      <button onclick="nlSubmit()" class="btn-primary" style="padding:10px 18px;font-size:14px;border-radius:5px;white-space:nowrap">
-        Subscribe
-      </button>
-    </div>
-    <div id="nl-confirm" style="display:none;margin-top:12px;font-size:13px;color:var(--a-green);font-family:var(--f-mono)">
-      Subscribed. Welcome to Contango.
-    </div>
-    <p style="font-size:12px;color:var(--t-meta);font-family:var(--f-mono);margin-top:12px">Free. No spam. Unsubscribe anytime.</p>
-  </div>
-</section>
-
-<!-- ── Footer ── -->
+<!-- Footer -->
 <footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand-name">Con<span>tango</span></div>
-        <p class="footer-desc">Open-source energy market intelligence. Making the gap between benchmark indices and local reality visible to everyone — not just those with a Bloomberg terminal.</p>
-      </div>
-      <div>
-        <div class="footer-col-head">Platform</div>
-        <a class="footer-link" href="index.html">Overview</a>
-        <a class="footer-link" href="saudi-arabia.html">Saudi Arabia</a>
-        <a class="footer-link" href="#map-section">Interactive map</a>
-        <a class="footer-link" href="#methodology">Methodology</a>
-      </div>
-      <div>
-        <div class="footer-col-head">Project</div>
-        <a class="footer-link" href="https://github.com/pacho064/Contango" target="_blank">GitHub — contribute</a>
-        <a class="footer-link" href="#">Data sources</a>
-        <a class="footer-link" href="#">API (roadmap)</a>
-        <a class="footer-link" href="#">Newsletter</a>
-      </div>
-      <div>
-        <div class="footer-col-head">Data sources</div>
-        <div class="footer-sources">
-          DME — Dubai Mercantile Exchange<br>
-          ADNOC OSP · Saudi Aramco OSP<br>
-          SOMO Iraq · QatarEnergy<br>
-          EIA Weekly Petroleum Status<br>
-          Reuters Energy · MEES · Argus Media<br>
-          S&P Global Platts · Lloyd's List<br>
-          OPEC Secretariat · World Port Index
-        </div>
-      </div>
+  <div class="footer-inner">
+    <div>
+      <div class="f-brand">Contango</div>
+      <p class="f-desc">Open-source energy market intelligence. Middle East crude prices, OSP differentials, infrastructure, and trade flows.</p>
     </div>
-    <div class="footer-bottom">
-      <span>contango.energy — Open source, MIT license</span>
-      <span id="footer-version"></span>
+    <div>
+      <div class="f-head">Pages</div>
+      <a class="f-link" href="index.html">Overview</a>
+      <a class="f-link" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="f-link" href="#methodology">Methodology</a>
+      <a class="f-link" href="https://github.com/pacho064/Contango" target="_blank">GitHub</a>
     </div>
+    <div>
+      <div class="f-head">Data sources</div>
+      <div class="f-src">DME — Dubai Mercantile Exchange<br>ADNOC · Saudi Aramco · SOMO Iraq<br>QatarEnergy · EIA · OPEC Secretariat<br>Reuters · MEES · S&P Global Platts<br>Argus Media · Lloyd's List</div>
+    </div>
+    <div>
+      <div class="f-head">Reference</div>
+      <a class="f-link" href="https://www.iea.org" target="_blank">IEA</a>
+      <a class="f-link" href="https://www.eia.gov" target="_blank">EIA</a>
+      <a class="f-link" href="https://www.opec.org" target="_blank">OPEC</a>
+      <a class="f-link" href="https://www.mees.com" target="_blank">MEES</a>
+      <a class="f-link" href="https://www.argusmedia.com" target="_blank">Argus Media</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Contango · Open source · MIT license</span>
+    <span id="footer-v"></span>
   </div>
 </footer>
 
-<!-- ── Scripts ── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="map.js"></script>
 <script>
-const D = window.CONTANGO;
+/* ══════════════════════════════════════
+   DATA — edit to update content
+══════════════════════════════════════ */
+const D = {
+benchmarks:[
+  {sym:'BRENT', name:'Brent',        base:138.40,dec:2},
+  {sym:'WTI',   name:'WTI',          base:134.20,dec:2},
+  {sym:'JKM',   name:'LNG JKM',      base:24.70, dec:2},
+  {sym:'TTF',   name:'TTF Gas',      base:48.30, dec:2},
+  {sym:'URALS', name:'Urals',        base:108.50,dec:2},
+],
+osps:[
+  {sym:'OMAN',   name:'Oman',        base:161.40,dec:2,country:'Oman',         src:'DME',    updated:'1 Mar 2026',context:'Widest since Aug 2024'},
+  {sym:'MURBAN', name:'Murban',      base:163.20,dec:2,country:'UAE',          src:'ADNOC',  updated:'1 Mar 2026',context:'23-month high'},
+  {sym:'ARAB L', name:'Arab Light',  base:162.10,dec:2,country:'Saudi Arabia', src:'Aramco', updated:'1 Mar 2026',context:null},
+  {sym:'ARAB H', name:'Arab Heavy',  base:155.40,dec:2,country:'Saudi Arabia', src:'Aramco', updated:'1 Mar 2026',context:null},
+  {sym:'BASRA',  name:'Basra Light', base:158.20,dec:2,country:'Iraq',         src:'SOMO',   updated:'1 Mar 2026',context:null},
+  {sym:'QATAR',  name:'Qatar Marine',base:158.60,dec:2,country:'Qatar',        src:'QE',     updated:'1 Mar 2026',context:null},
+],
+commodities:[
+  {sym:'GOLD', name:'Gold',          base:2618,  dec:0},
+  {sym:'BDI',  name:'Baltic Dry',    base:1842,  dec:0},
+],
+developments:[
+  {src:'Reuters',   alert:true,  region:'Red Sea',      hl:'Houthi forces claim drone strike on commercial tanker south of Aden. Cape rerouting in effect. Additional transit: 14 days, ~$1.2M/voyage.',            time:'8 min ago'},
+  {src:'MEES',      alert:false, region:'Saudi Arabia', hl:'East-West pipeline at 38% of 5M bbl/d capacity. Yanbu terminal export capacity: 1.8M bbl/d.',                                                           time:'26 min ago'},
+  {src:'ADNOC',     alert:false, region:'UAE',          hl:'Murban OSP for April loading confirmed at $163.20/bbl. Differential to Brent: +$24.80.',                                                                time:'52 min ago'},
+  {src:'SOMO Iraq', alert:false, region:'Iraq',         hl:'Basra terminal loading delays: 3 days. 14 vessels at anchor outside Khor al-Amaya. Basra SPM at 94% utilisation.',                                     time:'1h 19m ago'},
+  {src:'EIA',       alert:false, region:'United States',hl:'Commercial crude stocks draw 3.2M bbl. Cushing at 5-year seasonal low. WTI–Brent spread: −$4.20/bbl.',                                                 time:'2h 04m ago'},
+],
+chokepoints:[
+  {n:'Bab el-Mandeb',    lon:43.4,lat:12.6, risk:'high',     vol:'9M bbl/d',  src:'ACLED · Lloyd\'s JWC · US State Dept L4',updated:'Mar 2026'},
+  {n:'Strait of Hormuz', lon:56.6,lat:26.5, risk:'moderate', vol:'21M bbl/d', src:'Lloyd\'s JWC · US State Dept L3',         updated:'Jan 2026'},
+  {n:'Suez Canal',       lon:32.3,lat:30.7, risk:'low',      vol:'2.5M bbl/d',src:'US State Dept L2 (Egypt)',                updated:'Jan 2026'},
+],
+opec:[
+  {n:'Saudi Arabia',q:10.0,a:10.2},{n:'Russia',   q:9.0, a:9.2},
+  {n:'Iraq',        q:4.0, a:4.5}, {n:'UAE',      q:3.2, a:3.7},
+  {n:'Kuwait',      q:2.7, a:2.9}, {n:'Iran',     q:null,a:3.0},
+  {n:'Nigeria',     q:1.5, a:1.3}, {n:'Venezuela',q:0.9, a:0.8},
+  {n:'Kazakhstan',  q:1.7, a:2.0},
+],
+opec_src:'OPEC JMMC communiqué + Reuters output survey. Actuals are estimates.',
+opec_updated:'March 2026',
+ports:[
+  {n:'Ras Tanura',   c:'Saudi Arabia',lon:50.17,lat:26.65,t:'export',  cap:6.5,util:88},
+  {n:'Basra SPM',    c:'Iraq',        lon:48.83,lat:29.72,t:'export',  cap:2.0,util:94},
+  {n:'Khor al-Amaya',c:'Iraq',        lon:48.78,lat:29.98,t:'export',  cap:1.8,util:91},
+  {n:'Fujairah',     c:'UAE',         lon:56.35,lat:25.13,t:'export',  cap:1.4,util:85},
+  {n:'Yanbu',        c:'Saudi Arabia',lon:38.05,lat:24.08,t:'export',  cap:1.8,util:61},
+  {n:'Jebel Ali',    c:'UAE',         lon:55.07,lat:24.98,t:'export',  cap:3.5,util:79},
+  {n:'Aden',         c:'Yemen',       lon:44.99,lat:12.78,t:'conflict',cap:0.4,util:11},
+  {n:'Hodeidah',     c:'Yemen',       lon:42.95,lat:14.80,t:'conflict',cap:0.6,util:8 },
+  {n:'Djibouti',     c:'Djibouti',    lon:43.15,lat:11.60,t:'strategic',cap:0.8,util:62},
+  {n:'Salalah',      c:'Oman',        lon:54.00,lat:16.94,t:'export',  cap:1.0,util:55},
+  {n:'Ceyhan',       c:'Turkey',      lon:35.90,lat:36.65,t:'export',  cap:1.6,util:58},
+],
+pipelines:[
+  {n:'East-West',    from:[50.2,26.7],to:[38.1,24.1],status:'active',   cap:'5M bbl/d'},
+  {n:'ADCO Bypass',  from:[53.5,23.5],to:[56.4,25.1],status:'active',   cap:'1.5M bbl/d'},
+  {n:'BTC',          from:[49.8,40.4],to:[35.9,36.6],status:'active',   cap:'1.2M bbl/d'},
+  {n:'Kirkuk-Ceyhan',from:[44.4,35.5],to:[35.9,36.6],status:'disrupted',cap:'1.6M bbl/d'},
+  {n:'IPSA (closed)',from:[46.3,30.5],to:[37.0,22.5],status:'inactive', cap:'1.65M bbl/d'},
+],
+flows:[
+  {from:[50.2,26.7],to:[104,35], lbl:'SA→China',    vol:2.1},
+  {from:[50.2,26.7],to:[78,20],  lbl:'SA→India',    vol:1.4},
+  {from:[50.2,26.7],to:[135,36], lbl:'SA→Japan',    vol:1.2},
+  {from:[48.8,30.0],to:[104,35], lbl:'Iraq→China',  vol:1.8},
+  {from:[48.8,30.0],to:[78,20],  lbl:'Iraq→India',  vol:0.8},
+  {from:[55.0,24.5],to:[135,36], lbl:'UAE→Japan',   vol:0.7},
+  {from:[37.6,55.8],to:[104,35], lbl:'Russia→China',vol:2.2},
+  {from:[37.6,55.8],to:[78,20],  lbl:'Russia→India',vol:1.6},
+],
+countries:{
+  682:{n:'Saudi Arabia', osp:'$162.10',risk:'moderate',prod:'10.2M bbl/d',type:'Arab Light/Heavy',   dest:'China, Japan, India', crude:162.1,producer:1,url:'saudi-arabia.html'},
+  784:{n:'UAE',          osp:'$163.20',risk:'low',     prod:'3.7M bbl/d', type:'Murban, Upper Zakum',dest:'Japan, India, China', crude:163.2,producer:1},
+  414:{n:'Kuwait',       osp:'$157.80',risk:'low',     prod:'2.9M bbl/d', type:'Kuwait Export Crude',dest:'Japan, Korea, India', crude:157.8,producer:1},
+  368:{n:'Iraq',         osp:'$158.20',risk:'moderate',prod:'4.5M bbl/d', type:'Basra Light/Heavy',  dest:'China, India, US, EU',crude:158.2,producer:1},
+  364:{n:'Iran',         osp:'Sanctioned',risk:'high', prod:'~3.0M bbl/d',type:'Shadow fleet',       dest:'China (est.)',        crude:null, conflict:1},
+  887:{n:'Yemen',        osp:'Conflict',risk:'high',   prod:'Negligible', type:'Houthi-controlled',  dest:'—',                  crude:null, conflict:1},
+  512:{n:'Oman',         osp:'$161.40',risk:'low',     prod:'1.1M bbl/d', type:'Oman sour crude',    dest:'China, India',       crude:161.4,producer:1},
+  634:{n:'Qatar',        osp:'$158.60',risk:'low',     prod:'1.8M bbl/d', type:'Marine crude + LNG', dest:'Japan, Korea, UK',   crude:158.6,producer:1},
+  818:{n:'Egypt',        osp:'—',      risk:'moderate',prod:'Declining',  type:'Transit/Suez',       dest:'—',                  crude:null},
+  792:{n:'Turkey',       osp:'—',      risk:'moderate',prod:'Minimal',    type:'Transit/Ceyhan',     dest:'—',                  crude:null},
+  400:{n:'Jordan',       osp:'—',      risk:'moderate',prod:'None',       type:'Net importer',       dest:'—',                  crude:null},
+  376:{n:'Israel',       osp:'—',      risk:'moderate',prod:'Gas only',   type:'Offshore gas',       dest:'Egypt, Jordan',      crude:null},
+  760:{n:'Syria',        osp:'—',      risk:'high',    prod:'Minimal',    type:'Conflict zone',      dest:'—',                  crude:null,conflict:1},
+  422:{n:'Lebanon',      osp:'—',      risk:'moderate',prod:'None',       type:'Exploration stage',  dest:'—',                  crude:null},
+  643:{n:'Russia',       osp:'$108.50',risk:'high',    prod:'9.2M bbl/d', type:'Urals, ESPO Blend',  dest:'China, India',       crude:108.5,producer:1,sanctioned:1},
+  398:{n:'Kazakhstan',   osp:'$138.20',risk:'low',     prod:'1.9M bbl/d', type:'Tengiz, Kashagan',   dest:'China, EU',          crude:138.2,producer:1},
+  156:{n:'China',        osp:'—',      risk:'low',     prod:'4.3M bbl/d', type:'Major importer',     dest:'—',                  crude:null},
+  356:{n:'India',        osp:'—',      risk:'low',     prod:'0.8M bbl/d', type:'Major importer',     dest:'—',                  crude:null},
+  840:{n:'United States',osp:'$134.20',risk:'low',     prod:'13.3M bbl/d',type:'WTI crude',          dest:'—',                  crude:134.2,producer:1},
+  434:{n:'Libya',        osp:'—',      risk:'high',    prod:'1.2M bbl/d', type:'Light sweet crude',  dest:'Europe',             crude:null, producer:1},
+  12: {n:'Algeria',      osp:'—',      risk:'moderate',prod:'1.3M bbl/d', type:'Saharan Blend',      dest:'Europe',             crude:null, producer:1},
+  566:{n:'Nigeria',      osp:'—',      risk:'moderate',prod:'1.3M bbl/d', type:'Bonny Light',        dest:'Europe, India',      crude:null, producer:1},
+  729:{n:'Sudan',        osp:'—',      risk:'high',    prod:'Minimal',    type:'Post-conflict',      dest:'—',                  crude:null, conflict:1},
+  706:{n:'Somalia',      osp:'—',      risk:'high',    prod:'None',       type:'Piracy corridor',    dest:'—',                  crude:null},
+  231:{n:'Ethiopia',     osp:'—',      risk:'moderate',prod:'None',       type:'Landlocked',         dest:'—',                  crude:null},
+  4:  {n:'Afghanistan',  osp:'—',      risk:'high',    prod:'None',       type:'Landlocked',         dest:'—',                  crude:null,conflict:1},
+  586:{n:'Pakistan',     osp:'—',      risk:'moderate',prod:'Minimal',    type:'LNG importer',       dest:'—',                  crude:null},
+  795:{n:'Turkmenistan', osp:'—',      risk:'low',     prod:'0.3M bbl/d', type:'Gas producer',       dest:'China',              crude:null},
+  860:{n:'Uzbekistan',   osp:'—',      risk:'low',     prod:'Minimal',    type:'Landlocked',         dest:'—',                  crude:null},
+  31: {n:'Azerbaijan',   osp:'$130.40',risk:'moderate',prod:'0.7M bbl/d', type:'ACG crude via BTC',  dest:'Europe',             crude:130.4,producer:1},
+  788:{n:'Tunisia',      osp:'—',      risk:'moderate',prod:'Minor',      type:'Minor producer',     dest:'—',                  crude:null},
+  48: {n:'Bahrain',      osp:'—',      risk:'low',     prod:'0.2M bbl/d', type:'BAPCO crude',        dest:'Japan, India',       crude:null, producer:1},
+  504:{n:'Morocco',      osp:'—',      risk:'low',     prod:'Minor',      type:'Refining hub',       dest:'—',                  crude:null},
+  540:{n:'Niger',        osp:'—',      risk:'high',    prod:'Minor',      type:'Agadem field',       dest:'—',                  crude:null},
+  148:{n:'Chad',         osp:'—',      risk:'high',    prod:'Minor',      type:'Doba basin',         dest:'—',                  crude:null},
+},
+meta:{version:'v5.0',updated:'21 March 2026'}
+};
 
-/* ── Price state ─────────────────────────────────────────── */
-const allPrices = [...D.benchmarks, ...D.localOSPs, ...D.commodities];
-const ps = {};
-allPrices.forEach(p => { ps[p.sym] = { v: p.base, b: p.base }; });
-function tick(){
-  Object.keys(ps).forEach(k => {
-    ps[k].v = ps[k].b * (1 + (Math.random()-.5) * 0.005);
-  });
-}
-window._brentPrice = ps['BRENT'] ? ps['BRENT'].v : 138.4;
+/* ══ State ══ */
+const ps={};
+[...D.benchmarks,...D.osps,...D.commodities].forEach(p=>{ps[p.sym]={v:p.base,b:p.base}});
+function tick(){Object.keys(ps).forEach(k=>{ps[k].v=ps[k].b*(1+(Math.random()-.5)*.005)})}
+let dark=false, activeLayer='base', msvg, mg, mproj, mzoom, mworld;
 
-/* ── Theme ───────────────────────────────────────────────── */
-let dark = false;
+/* ══ Theme ══ */
 function toggleTheme(){
-  dark = !dark;
-  document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-  document.getElementById('theme-btn').textContent = dark ? 'Light mode' : 'Dark mode';
-  MapEngine.updateTheme();
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+  if(msvg&&mworld) redrawMap();
 }
 
-/* ── Clock ───────────────────────────────────────────────── */
-function fmtTime(){
-  return new Date().toUTCString().slice(17,25)+' UTC';
+/* ══ Clock ══ */
+function updateClock(){
+  const el=document.getElementById('clk');
+  if(el) el.textContent=new Date().toUTCString().slice(17,25)+' UTC';
 }
+setInterval(updateClock,1000); updateClock();
 
-/* ── Ticker ──────────────────────────────────────────────── */
+/* ══ Ticker ══ */
 function renderTicker(){
-  const items = [...D.benchmarks, ...D.localOSPs.slice(0,5)].map(p => {
-    const s = ps[p.sym];
-    const chg = (s.v - p.base) / p.base * 100;
-    const up = chg >= 0;
-    return `<div class="ticker-item">
-      <span class="ti-sym">${p.sym}</span>
-      <span class="ti-price">$${s.v.toFixed(p.dec)}</span>
-      <span class="${up?'ti-up':'ti-dn'}">${up?'+':''}${chg.toFixed(2)}%</span>
+  const items=[...D.benchmarks,...D.osps.slice(0,4)].map(p=>{
+    const chg=(ps[p.sym].v-p.base)/p.base*100;
+    return `<div class="tk-item">
+      <span class="tk-sym">${p.sym}</span>
+      <span class="tk-price">$${ps[p.sym].v.toFixed(p.dec)}</span>
+      <span class="tk-chg">${chg>=0?'+':''}${chg.toFixed(2)}%</span>
     </div>`;
   }).join('');
-  const t = document.getElementById('ticker-track');
-  if(t) t.innerHTML = items + items;
+  const el=document.getElementById('tk-track');
+  if(el) el.innerHTML=items+items;
 }
 
-/* ── Divergence strip ────────────────────────────────────── */
-function renderDivStrip(){
-  const brent = ps['BRENT'].v;
-  window._brentPrice = brent;
-  const html = D.localOSPs.slice(0,6).map(l => `
-    <div class="div-card">
-      <div class="div-label">${l.sym} vs Brent</div>
-      <div class="div-value">+$${(ps[l.sym].v - brent).toFixed(2)}</div>
-      <div class="div-note">${l.grade} · ${l.country}</div>
+/* ══ Spread strip ══ */
+function renderSpreads(){
+  const brent=ps['BRENT'].v;
+  const ref=`<div class="sp sp-ref">
+    <div class="sp-label">Brent (ICE)</div>
+    <div class="sp-value">$${brent.toFixed(2)}</div>
+    <div class="sp-note">Reference benchmark</div>
+  </div>`;
+  const spreads=D.osps.map(o=>`
+    <div class="sp">
+      <div class="sp-label">${o.sym} vs Brent</div>
+      <div class="sp-value" style="color:var(--red)">+$${(ps[o.sym].v-brent).toFixed(2)}</div>
+      <div class="sp-note">${o.country} · ${o.src} · ${o.updated}</div>
     </div>`).join('');
-  const strip = document.getElementById('div-strip');
-  if(strip) strip.innerHTML = html;
+  const el=document.getElementById('ss-inner');
+  if(el) el.innerHTML=ref+spreads;
 }
 
-/* ── Spread bars (hero chart) ────────────────────────────── */
-function renderSpreadBars(){
-  const brent = ps['BRENT'].v;
-  const container = document.getElementById('spread-bars');
-  if(!container) return;
-  const items = D.localOSPs.slice(0,6);
-  const maxSpread = Math.max(...items.map(l => ps[l.sym].v - brent));
-  container.innerHTML = items.map(l => {
-    const spread = ps[l.sym].v - brent;
-    const pct = Math.max(5, (spread / maxSpread) * 100);
-    return `
-      <div style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-          <span style="font-size:13px;color:var(--t-primary);font-weight:500">${l.name}</span>
-          <span style="font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--a-amber)">+$${spread.toFixed(2)}</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="flex:1;height:6px;background:var(--b-subtle);border-radius:3px;overflow:hidden">
-            <div style="width:${pct}%;height:100%;background:var(--a-amber);border-radius:3px;transition:width .4s"></div>
-          </div>
-          <span style="font-family:var(--f-mono);font-size:10px;color:var(--t-meta);min-width:60px;text-align:right">$${ps[l.sym].v.toFixed(2)}</span>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-/* ── Key metrics ─────────────────────────────────────────── */
-function renderKeyMetrics(){
-  const brent = ps['BRENT'].v;
-  const maxSpread = Math.max(...D.localOSPs.map(l => ps[l.sym].v - brent));
-  const items = [
-    {label:'Brent crude', val:`$${brent.toFixed(2)}`, sub:'ICE Futures benchmark', color:'var(--t-primary)'},
-    {label:'Max local premium', val:`+$${maxSpread.toFixed(2)}`, sub:'Murban vs Brent — highest today', color:'var(--a-amber)'},
-    {label:'Bab el-Mandeb risk', val:'High', sub:'Houthi ops ongoing · Source: ACLED', color:'var(--a-red)'},
-    {label:'OPEC+ compliance', val:'~94%', sub:'Iraq and UAE over quota · JMMC Feb 2026', color:'var(--a-green)'},
-  ];
-  const el = document.getElementById('key-metrics');
-  if(!el) return;
-  el.innerHTML = items.map(m => `
-    <div class="metric-card">
-      <div class="metric-label">${m.label}</div>
-      <div class="metric-value" style="color:${m.color}">${m.val}</div>
-      <div class="metric-sub">${m.sub}</div>
-    </div>`).join('');
-}
-
-/* ── Intel feed ──────────────────────────────────────────── */
-function renderIntelFeed(){
-  const el = document.getElementById('intel-feed');
-  if(!el) return;
-  el.innerHTML = D.intel.slice(0,6).map(n => `
-    <div class="intel-item">
-      <div class="intel-source">
-        <div class="intel-src-pip" style="background:${n.col}"></div>
-        <span class="intel-src-name">${n.src}</span>
-        <span class="intel-tag" style="background:${n.tagBg};color:${n.tagCol};border:1px solid ${n.tagCol}33">${n.tag}</span>
-        <span class="intel-src-name" style="margin-left:4px">${n.region}</span>
+/* ══ Prices ══ */
+function renderPrices(){
+  const brent=ps['BRENT'].v;
+  let h=`<div class="p-sec">Benchmarks</div>`;
+  D.benchmarks.forEach(p=>{
+    const chg=(ps[p.sym].v-p.base)/p.base*100;
+    h+=`<div class="p-row">
+      <div class="p-left"><span class="p-name">${p.name}</span></div>
+      <div class="p-right">
+        <span class="p-price">$${ps[p.sym].v.toFixed(p.dec)}</span>
+        <span class="p-chg">${chg>=0?'+':''}${chg.toFixed(2)}%</span>
       </div>
-      <div class="intel-hl">${n.hl}</div>
-      <div style="font-size:12px;color:var(--t-secondary);font-family:var(--f-ed);font-style:italic;line-height:1.5;margin-top:5px;padding-top:5px;border-top:1px solid var(--b-subtle)">${n.why}</div>
-      <div class="intel-time">${n.time}</div>
-    </div>`).join('');
-}
-
-/* ── OPEC table ──────────────────────────────────────────── */
-function renderOpecTable(){
-  const el = document.getElementById('opec-table');
-  if(!el) return;
-  el.innerHTML = `
-    <thead><tr>
-      <th>Country</th>
-      <th style="text-align:right">Quota</th>
-      <th style="text-align:right">Actual</th>
-      <th style="text-align:right">±</th>
-    </tr></thead>
-    <tbody>${D.opec.map(o => {
-      const diff = o.q !== null ? o.a - o.q : null;
-      const ds = diff === null
-        ? '<span style="color:var(--t-meta);font-family:var(--f-mono)">Exempt</span>'
-        : diff > 0
-        ? `<span style="color:var(--a-red);font-family:var(--f-mono)">+${diff.toFixed(1)}</span>`
-        : `<span style="color:var(--a-green);font-family:var(--f-mono)">${diff.toFixed(1)}</span>`;
-      return `<tr>
-        <td style="font-size:13px">${o.n}</td>
-        <td style="text-align:right;font-family:var(--f-mono);font-size:12px;color:var(--t-tertiary)">${o.q === null ? '—' : o.q.toFixed(1)}</td>
-        <td style="text-align:right;font-family:var(--f-mono);font-size:12px">${o.a.toFixed(1)}</td>
-        <td style="text-align:right;font-size:12px">${ds}</td>
-      </tr>`;
-    }).join('')}</tbody>`;
-  const src = document.getElementById('opec-source');
-  if(src) src.textContent = D.opec_source;
-  const upd = document.getElementById('opec-updated');
-  if(upd) upd.textContent = D.opec_updated;
-}
-
-/* ── Yanbu chart ─────────────────────────────────────────── */
-function renderYanbuChart(){
-  const el = document.getElementById('yanbu-chart');
-  if(!el) return;
-  el.innerHTML = `
-    <div style="margin-bottom:16px">
-      <div style="font-size:12px;font-family:var(--f-mono);color:var(--t-meta);margin-bottom:6px">East-West Pipeline capacity</div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1;height:12px;background:var(--b-subtle);border-radius:3px;overflow:hidden">
-          <div style="width:100%;height:100%;background:var(--a-blue);border-radius:3px"></div>
-        </div>
-        <span style="font-family:var(--f-mono);font-size:14px;font-weight:600;min-width:80px;text-align:right">5.0M bbl/d</span>
-      </div>
-    </div>
-    <div style="margin-bottom:16px">
-      <div style="font-size:12px;font-family:var(--f-mono);color:var(--t-meta);margin-bottom:6px">Yanbu port export capacity</div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1;height:12px;background:var(--b-subtle);border-radius:3px;overflow:hidden">
-          <div style="width:36%;height:100%;background:var(--a-red);border-radius:3px"></div>
-        </div>
-        <span style="font-family:var(--f-mono);font-size:14px;font-weight:600;min-width:80px;text-align:right;color:var(--a-red)">1.8M bbl/d</span>
-      </div>
-    </div>
-    <div style="background:var(--a-red-light);border:1px solid rgba(184,80,66,.2);border-radius:5px;padding:10px 12px;font-size:12px;color:var(--a-red);font-family:var(--f-mono)">
-      Port capacity = 36% of pipeline. 64% of bypass potential is stranded.
-    </div>
-    <div class="source-line"><div class="source-dot"></div>IEA · Saudi Aramco disclosures · Updated March 2026</div>`;
-}
-
-/* ── Port utilisation ────────────────────────────────────── */
-function renderPortUtil(){
-  const el = document.getElementById('port-util');
-  if(!el) return;
-  const ports = D.ports.filter(p => p.util > 80).slice(0,4);
-  el.innerHTML = ports.map(p => {
-    const col = p.util>88?'var(--a-red)':p.util>72?'var(--a-amber)':'var(--a-green)';
-    return `
-      <div style="margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-          <span style="font-size:12px;font-weight:500">${p.n}</span>
-          <span style="font-family:var(--f-mono);font-size:12px;font-weight:600;color:${col}">${p.util}%</span>
-        </div>
-        <div style="height:5px;background:var(--b-subtle);border-radius:2px;overflow:hidden">
-          <div style="width:${p.util}%;height:100%;background:${col};border-radius:2px;transition:width .6s"></div>
-        </div>
-        <div style="font-size:10px;color:var(--t-meta);font-family:var(--f-mono);margin-top:2px">${p.c} · ${p.cap}M bbl/d capacity</div>
-      </div>`;
-  }).join('');
-}
-
-/* ── Price tables ────────────────────────────────────────── */
-function renderBenchTable(){
-  const el = document.getElementById('bench-table');
-  if(!el) return;
-  el.innerHTML = D.benchmarks.map(p => {
-    const s = ps[p.sym];
-    const chg = (s.v - p.base) / p.base * 100;
-    const up = chg >= 0;
-    return `<tr>
-      <td><span class="pt-sym">${p.sym}</span></td>
-      <td><span class="pt-name">${p.name}</span></td>
-      <td class="pt-price">$${s.v.toFixed(p.dec)}</td>
-      <td class="pt-chg ${up?'up':'dn'}">${up?'+':''}${chg.toFixed(2)}%</td>
-    </tr>`;
-  }).join('');
-}
-
-function renderOSPTable(){
-  const el = document.getElementById('osp-table');
-  if(!el) return;
-  const brent = ps['BRENT'].v;
-  el.innerHTML = `<thead><tr>
-    <th>Grade</th><th>Country</th><th style="text-align:right">OSP</th>
-    <th style="text-align:right">vs Brent</th><th style="text-align:right">Source</th>
-  </tr></thead><tbody>` +
-  D.localOSPs.map(p => {
-    const s = ps[p.sym];
-    const chg = (s.v - p.base) / p.base * 100;
-    const up = chg >= 0;
-    const spread = s.v - brent;
-    return `<tr>
-      <td>
-        <div class="pt-name">${p.name}</div>
-        <div style="font-size:10px;color:var(--t-meta);font-family:var(--f-mono)">${p.grade}</div>
-      </td>
-      <td style="font-size:12px;color:var(--t-secondary)">${p.country}</td>
-      <td class="pt-price">$${s.v.toFixed(p.dec)}</td>
-      <td style="text-align:right">
-        <span class="pt-prem">+$${spread.toFixed(2)}</span>
-      </td>
-      <td style="text-align:right;font-size:10px;color:var(--t-meta);font-family:var(--f-mono)">${p.exchange}<br>${p.src_updated}</td>
-    </tr>`;
-  }).join('') + '</tbody>';
-}
-
-/* ── Map layer buttons ───────────────────────────────────── */
-function setMapLayer(name){
-  ['base','ports','flows','risk'].forEach(l => {
-    const btn = document.getElementById('lb-'+l);
-    if(btn) btn.classList.toggle('on', l === name);
+    </div>`;
   });
-  MapEngine.setLayer(name);
-  renderMapLegend(name);
+  h+=`<div class="p-sec" style="padding-bottom:1px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span>Local OSPs</span>
+      <span style="font-size:9px;letter-spacing:.04em;text-transform:none;color:var(--ink-4);font-style:italic;font-family:var(--ss)">vs Brent</span>
+    </div>
+  </div>`;
+  D.osps.forEach(p=>{
+    const chg=(ps[p.sym].v-p.base)/p.base*100;
+    const spread=(ps[p.sym].v-brent).toFixed(2);
+    h+=`<div class="p-row">
+      <div class="p-left">
+        <span class="p-name">${p.name}</span>
+        <span class="p-spread">+$${spread}</span>
+      </div>
+      <div class="p-right">
+        <span class="p-price">$${ps[p.sym].v.toFixed(p.dec)}</span>
+        <span class="p-chg">${chg>=0?'+':''}${chg.toFixed(2)}%</span>
+      </div>
+    </div>`;
+  });
+  h+=`<div class="p-sec">Other</div>`;
+  D.commodities.forEach(p=>{
+    const chg=(ps[p.sym].v-p.base)/p.base*100;
+    h+=`<div class="p-row">
+      <div class="p-left"><span class="p-name">${p.name}</span></div>
+      <div class="p-right">
+        <span class="p-price">$${ps[p.sym].v.toFixed(p.dec)}</span>
+        <span class="p-chg">${chg>=0?'+':''}${chg.toFixed(2)}%</span>
+      </div>
+    </div>`;
+  });
+  const pa=document.getElementById('prices-area');
+  if(pa) pa.innerHTML=h;
+  const ts=document.getElementById('prices-ts');
+  if(ts) ts.textContent=new Date().toUTCString().slice(17,25)+' UTC';
 }
 
-function renderMapLegend(layer){
-  const el = document.getElementById('map-legend');
+/* ══ Developments ══ */
+function renderDev(){
+  const el=document.getElementById('dev-feed');
   if(!el) return;
-  const defs = {
+  el.innerHTML=D.developments.map(d=>`
+    <div class="dev-item">
+      <div class="dev-meta">
+        <div class="dev-pip ${d.alert?'alert':''}"></div>
+        <span class="dev-src">${d.src}</span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-left:4px">${d.region}</span>
+      </div>
+      <div class="dev-hl">${d.hl}</div>
+      <div class="dev-time">${d.time}</div>
+    </div>`).join('');
+}
+
+/* ══ OPEC ══ */
+function renderOpec(){
+  const el=document.getElementById('opec-rows');
+  if(!el) return;
+  el.innerHTML=D.opec.map(o=>{
+    const diff=o.q!==null?o.a-o.q:null;
+    const ds=diff===null
+      ?`<span class="opec-v">—</span>`
+      :diff>0
+      ?`<span class="opec-v opec-over">+${diff.toFixed(1)}</span>`
+      :`<span class="opec-v">${diff.toFixed(1)}</span>`;
+    return `<div class="opec-row">
+      <span class="opec-n">${o.n}</span>
+      <span class="opec-v">${o.q===null?'Ex.':o.q.toFixed(1)}</span>
+      <span class="opec-v">${o.a.toFixed(1)}</span>
+      ${ds}
+    </div>`;
+  }).join('');
+  const dt=document.getElementById('opec-date');
+  if(dt) dt.textContent=D.opec_updated;
+  const src=document.getElementById('opec-src');
+  if(src) src.textContent=D.opec_src;
+}
+
+/* ══ Chokepoints ══ */
+function renderChoke(){
+  const el=document.getElementById('choke-list');
+  if(!el) return;
+  const bc={high:'b-high',moderate:'b-mod',low:'b-low'};
+  el.innerHTML=D.chokepoints.map(c=>`
+    <div class="rr">
+      <div class="rr-left">
+        <div class="rr-name">${c.n}</div>
+        <div class="rr-sub">${c.vol} · ${c.src} · ${c.updated}</div>
+      </div>
+      <span class="badge ${bc[c.risk]||'b-low'}">${c.risk.toUpperCase()}</span>
+    </div>`).join('');
+}
+
+/* ══ Ports ══ */
+function renderPorts(){
+  const el=document.getElementById('port-list');
+  if(!el) return;
+  const list=D.ports.filter(p=>p.t==='export'||p.t==='strategic').slice(0,6);
+  el.innerHTML=list.map(p=>{
+    const col=p.util>88?'var(--red)':p.util>72?'#8a6020':'var(--teal)';
+    return `<div class="port-row">
+      <div class="port-top">
+        <span class="port-name">${p.n}</span>
+        <span class="port-util" style="color:${col}">${p.util}%</span>
+      </div>
+      <div class="port-sub">${p.c} · ${p.cap}M bbl/d capacity</div>
+      <div class="port-bar">
+        <div class="port-fill" style="width:${p.util}%;background:${col}"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ══ MAP ══ */
+function isDark(){return document.documentElement.getAttribute('data-theme')==='dark'}
+
+function getMapFill(id){
+  const c=D.countries[+id];
+  const dk=isDark();
+  if(activeLayer==='risk'){
+    if(!c) return dk?'#1a1a19':'#ebebea';
+    if(c.risk==='high')     return dk?'rgba(179,48,0,.42)':'rgba(179,48,0,.18)';
+    if(c.risk==='moderate') return dk?'rgba(140,110,10,.38)':'rgba(140,110,10,.13)';
+    return dk?'rgba(60,110,60,.28)':'rgba(60,110,60,.1)';
+  }
+  if(!c) return dk?'#1a1a19':'#e4e4e2';
+  if(c.conflict) return dk?'rgba(160,38,28,.38)':'rgba(179,48,0,.14)';
+  if(c.producer) return dk?'rgba(90,78,44,.65)':'rgba(200,178,108,.38)';
+  return dk?'#1a1a19':'#e4e4e2';
+}
+
+function buildMap(){
+  const el=document.getElementById('map-svg');
+  if(!el) return;
+  const W=el.parentElement.offsetWidth||880;
+  const H=480;
+  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  msvg=d3.select('#map-svg');
+  mproj=d3.geoMercator().center([50,26]).scale(640).translate([W/2,H/2]);
+  const path=d3.geoPath().projection(mproj);
+  mzoom=d3.zoom().scaleExtent([0.25,40]).on('zoom',ev=>{
+    mg.attr('transform',ev.transform);
+    const k=ev.transform.k;
+    mg.selectAll('.port-c').attr('r',d=>Math.max(2,portR(d)/Math.sqrt(k)));
+    mg.selectAll('.ck-r2').attr('r',Math.max(4,8/Math.sqrt(k)));
+    mg.selectAll('.ck-r1').attr('r',Math.max(7,12/Math.sqrt(k)));
+  });
+  msvg.call(mzoom);
+  msvg.append('rect').attr('class','sea-rect').attr('width',W).attr('height',H).attr('fill',isDark()?'#0e1014':'#cddbe6');
+  mg=msvg.append('g');
+
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(topo=>{
+    mworld=topo;
+    const features=topojson.feature(topo,topo.objects.countries).features;
+    mg.selectAll('.ctry').data(features).join('path')
+      .attr('class','ctry').attr('d',path)
+      .attr('fill',d=>getMapFill(+d.id))
+      .attr('stroke',isDark()?'#282826':'#c8c6c0')
+      .attr('stroke-width',.45)
+      .style('cursor','pointer')
+      .on('mouseover',(ev,d)=>onCHover(ev,+d.id))
+      .on('mouseleave',hideTT)
+      .on('click',(ev,d)=>onCClick(+d.id));
+
+    /* Country labels */
+    [
+      {lon:44.5,lat:23.5,t:'Saudi Arabia',sz:9.5,w:500},
+      {lon:53.5,lat:32.5,t:'Iran',sz:9.5,w:500},
+      {lon:43.8,lat:33.2,t:'Iraq',sz:8.5,w:500},
+      {lon:33.5,lat:39.2,t:'Turkey',sz:8.5,w:500},
+      {lon:67.5,lat:48.5,t:'Kazakhstan',sz:8.5,w:500},
+      {lon:29.5,lat:26.0,t:'Egypt',sz:8.5,w:500},
+      {lon:57.5,lat:22.0,t:'Oman',sz:8,w:400},
+      {lon:54.5,lat:23.8,t:'UAE',sz:7.5,w:400},
+      {lon:47.5,lat:15.5,t:'Yemen',sz:7.5,w:400},
+      {lon:65.0,lat:34.0,t:'Afghanistan',sz:7.5,w:400},
+      {lon:37.8,lat:55.8,t:'Russia',sz:9.5,w:500},
+      {lon:104, lat:35,  t:'China',sz:9.5,w:500},
+      {lon:78,  lat:22,  t:'India',sz:9,  w:500},
+      {lon:-97, lat:38,  t:'United States',sz:10,w:500},
+      {lon:27.0,lat:16.0,t:'Sudan',sz:7.5,w:400},
+      {lon:40.5,lat:9.0, t:'Ethiopia',sz:7.5,w:400},
+      {lon:17.0,lat:15.5,t:'Chad',sz:7,w:400},
+    ].forEach(lb=>{
+      const [lx,ly]=mproj([lb.lon,lb.lat]);
+      ['h','t'].forEach(pass=>{
+        mg.append('text').attr('class',`clbl clbl-${pass}`)
+          .attr('x',lx).attr('y',ly).attr('text-anchor','middle')
+          .attr('dominant-baseline','middle')
+          .attr('font-size',lb.sz).attr('font-weight',lb.w)
+          .attr('font-family',"'IBM Plex Mono',monospace")
+          .attr('letter-spacing','.06em').attr('pointer-events','none')
+          .attr('fill',pass==='h'?(isDark()?'#111110':'#ffffff'):(isDark()?'rgba(220,210,190,.5)':'rgba(15,15,14,.42)'))
+          .attr('stroke',pass==='h'?(isDark()?'#111110':'#ffffff'):'none')
+          .attr('stroke-width',pass==='h'?3:0).attr('paint-order','stroke')
+          .text(lb.t.toUpperCase());
+      });
+    });
+
+    /* Sea labels */
+    [
+      {t:'Persian Gulf', lon:51,lat:27,sz:8.5,rot:0},
+      {t:'Arabian Sea',  lon:63,lat:17,sz:10, rot:0},
+      {t:'Red Sea',      lon:38,lat:21,sz:8.5,rot:-55},
+      {t:'Gulf of Aden', lon:47,lat:11,sz:8,  rot:0},
+      {t:'Mediterranean',lon:20,lat:35,sz:8,  rot:0},
+      {t:'Caspian Sea',  lon:51,lat:42,sz:8,  rot:0},
+      {t:'Indian Ocean', lon:72,lat:9, sz:10, rot:0},
+      {t:'Black Sea',    lon:33,lat:43,sz:7.5,rot:0},
+    ].forEach(s=>{
+      const [sx,sy]=mproj([s.lon,s.lat]);
+      mg.append('text').attr('class','sea-lbl')
+        .attr('x',sx).attr('y',sy).attr('text-anchor','middle')
+        .attr('dominant-baseline','middle').attr('font-size',s.sz)
+        .attr('font-style','italic').attr('font-family',"'Source Serif 4',serif")
+        .attr('fill',isDark()?'rgba(140,180,220,.45)':'rgba(30,70,110,.28)')
+        .attr('pointer-events','none').attr('letter-spacing','.04em')
+        .attr('transform',s.rot?`rotate(${s.rot},${sx},${sy})`:null).text(s.t);
+    });
+
+    drawOverlays();
+    renderLegend();
+  }).catch(()=>{
+    msvg.append('text').attr('x','50%').attr('y','50%')
+      .attr('text-anchor','middle').attr('fill','#888').attr('font-size',13)
+      .attr('font-family','Source Serif 4,serif').text('Map requires internet — please reload');
+  });
+}
+
+function portR(p){return p.t==='conflict'?3.5:Math.max(3,Math.sqrt(p.cap)*2.2)}
+
+function drawOverlays(){
+  if(!mg||!mproj) return;
+  mg.selectAll('.ov').remove();
+
+  /* Pipelines */
+  if(activeLayer==='base'||activeLayer==='ports'){
+    D.pipelines.forEach(pipe=>{
+      const [x1,y1]=mproj(pipe.from),[x2,y2]=mproj(pipe.to);
+      const col=pipe.status==='active'?'#1d4480':pipe.status==='disrupted'?'#8a5020':'#888';
+      const sw=pipe.status==='active'?1.8:1.4;
+      const da=pipe.status==='inactive'?'5 4':pipe.status==='disrupted'?'3 2':'none';
+      mg.append('line').attr('class','ov')
+        .attr('x1',x1).attr('y1',y1).attr('x2',x2).attr('y2',y2)
+        .attr('stroke',col).attr('stroke-width',sw).attr('stroke-dasharray',da).attr('opacity',.65)
+        .style('cursor','pointer')
+        .on('mousemove',ev=>showTT(ev,`<div class="mtt-name">${pipe.n}</div>
+          <div class="mtt-row"><span class="mtt-l">Capacity</span><span class="mtt-v">${pipe.cap}</span></div>
+          <div class="mtt-row"><span class="mtt-l">Status</span><span class="mtt-v">${pipe.status.toUpperCase()}</span></div>`))
+        .on('mouseleave',hideTT);
+    });
+  }
+
+  /* Flows */
+  if(activeLayer==='flows'){
+    D.flows.forEach(f=>{
+      const [sx,sy]=mproj(f.from),[dx,dy]=mproj(f.to);
+      if(Math.abs(dx)>3000||Math.abs(dy)>3000) return;
+      const mx=(sx+dx)/2,my=Math.min(sy,dy)-Math.abs(dx-sx)*.2-30;
+      mg.append('path').attr('class','ov')
+        .attr('d',`M${sx},${sy} Q${mx},${my} ${dx},${dy}`)
+        .attr('fill','none').attr('stroke','#1d4480')
+        .attr('stroke-width',Math.max(1,f.vol*1.2))
+        .attr('opacity',.42).attr('stroke-dasharray','5 3').attr('pointer-events','none');
+      mg.append('text').attr('class','ov')
+        .attr('x',dx+(dx>sx?7:-7)).attr('y',dy+2)
+        .attr('text-anchor',dx>sx?'start':'end')
+        .attr('font-size',8).attr('font-family',"'IBM Plex Mono',monospace")
+        .attr('font-style','italic')
+        .attr('fill',isDark()?'rgba(100,150,210,.65)':'rgba(29,68,128,.55)')
+        .attr('pointer-events','none').text(f.lbl);
+    });
+  }
+
+  /* Ports */
+  D.ports.forEach(p=>{
+    const [px,py]=mproj([p.lon,p.lat]);
+    const col=p.t==='conflict'?'var(--red)':p.t==='strategic'?'#6a6660':'#1d4480';
+    const r=portR(p);
+    const pg=mg.append('g').attr('class','ov').style('cursor','pointer');
+    pg.append('circle').attr('cx',px).attr('cy',py).attr('r',r)
+      .attr('class','port-c').datum(p)
+      .attr('fill',isDark()?col:col).attr('opacity',.88)
+      .attr('stroke',isDark()?'#111110':'#f7f7f5').attr('stroke-width',1);
+    if(p.util>88){
+      pg.append('circle').attr('cx',px).attr('cy',py).attr('r',r+5)
+        .attr('fill','none').attr('stroke','var(--red)')
+        .attr('stroke-width',.8).attr('opacity',.38).attr('stroke-dasharray','3 2');
+    }
+    const uc=p.util>88?'var(--red)':p.util>72?'#8a5020':'var(--teal)';
+    pg.on('mousemove',ev=>showTT(ev,`<div class="mtt-name">${p.n}</div>
+      <div class="mtt-row"><span class="mtt-l">Country</span><span class="mtt-v">${p.c}</span></div>
+      <div class="mtt-row"><span class="mtt-l">Capacity</span><span class="mtt-v">${p.cap}M bbl/d</span></div>
+      <div class="mtt-row"><span class="mtt-l">Utilisation</span><span class="mtt-v" style="color:${uc}">${p.util}%</span></div>`))
+    .on('mouseleave',hideTT)
+    .on('click',()=>openPortPanel(p));
+  });
+
+  /* Chokepoints */
+  D.chokepoints.forEach(cp=>{
+    const [cx,cy]=mproj([cp.lon,cp.lat]);
+    const col=cp.risk==='high'?'var(--red)':cp.risk==='moderate'?'#8a7020':'var(--teal)';
+    const cg=mg.append('g').attr('class','ov').style('cursor','pointer');
+    cg.append('circle').attr('cx',cx).attr('cy',cy).attr('r',12).attr('class','ck-r1')
+      .attr('fill','none').attr('stroke',col).attr('stroke-width',.8).attr('opacity',.3);
+    cg.append('circle').attr('cx',cx).attr('cy',cy).attr('r',8).attr('class','ck-r2')
+      .attr('fill','none').attr('stroke',col).attr('stroke-width',1.4).attr('opacity',.6);
+    cg.append('circle').attr('cx',cx).attr('cy',cy).attr('r',3.5).attr('fill',col).attr('opacity',1);
+    cg.on('mousemove',ev=>showTT(ev,`<div class="mtt-name">${cp.n}</div>
+      <div class="mtt-row"><span class="mtt-l">Volume</span><span class="mtt-v">${cp.vol}</span></div>
+      <div class="mtt-row"><span class="mtt-l">Risk</span><span class="mtt-v">${cp.risk.toUpperCase()}</span></div>
+      <div class="mtt-row"><span class="mtt-l">Source</span><span class="mtt-v" style="font-size:9px;opacity:.7">${cp.src}</span></div>`))
+    .on('mouseleave',hideTT)
+    .on('click',()=>openChokePanel(cp));
+  });
+}
+
+function redrawMap(){
+  if(!msvg||!mworld) return;
+  msvg.select('.sea-rect').attr('fill',isDark()?'#0e1014':'#cddbe6');
+  mg.selectAll('.ctry').attr('fill',d=>getMapFill(+d.id)).attr('stroke',isDark()?'#282826':'#c8c6c0');
+  mg.selectAll('.clbl-h').attr('fill',isDark()?'#111110':'#ffffff').attr('stroke',isDark()?'#111110':'#ffffff');
+  mg.selectAll('.clbl-t').attr('fill',isDark()?'rgba(220,210,190,.5)':'rgba(15,15,14,.42)');
+  mg.selectAll('.sea-lbl').attr('fill',isDark()?'rgba(140,180,220,.45)':'rgba(30,70,110,.28)');
+  mg.selectAll('.port-c').attr('stroke',isDark()?'#111110':'#f7f7f5');
+  drawOverlays();
+}
+
+function setLayer(name){
+  activeLayer=name;
+  ['base','ports','flows','risk'].forEach(l=>{
+    const b=document.getElementById('ml-'+l);
+    if(b) b.classList.toggle('on',l===name);
+  });
+  if(msvg&&mworld) redrawMap();
+  renderLegend();
+}
+
+/* Tooltip */
+function showTT(ev,html){
+  const t=document.getElementById('mtt');if(!t)return;
+  t.innerHTML=html;t.style.opacity=1;
+  const x=ev.clientX+14,y=ev.clientY-18;
+  t.style.left=(x+240>window.innerWidth?ev.clientX-250:x)+'px';
+  t.style.top=Math.max(8,y)+'px';
+}
+function hideTT(){const t=document.getElementById('mtt');if(t)t.style.opacity=0}
+
+/* Country hover/click */
+function onCHover(ev,id){
+  const c=D.countries[id];if(!c)return;
+  const brent=ps['BRENT'].v;
+  const prem=c.crude?`+$${(c.crude-brent).toFixed(2)} vs Brent`:'';
+  const rcol={high:'var(--red)',moderate:'#8a7020',low:'var(--teal)'}[c.risk]||'var(--ink-3)';
+  showTT(ev,`<div class="mtt-name">${c.n}${c.url?' →':''}</div>
+    <div class="mtt-row"><span class="mtt-l">OSP</span><span class="mtt-v">${c.osp}${prem?`<br><span style="font-size:9px;opacity:.55">${prem}</span>`:''}</span></div>
+    <div class="mtt-row"><span class="mtt-l">Output</span><span class="mtt-v">${c.prod}</span></div>
+    <div class="mtt-row"><span class="mtt-l">Grade</span><span class="mtt-v">${c.type}</span></div>
+    <div class="mtt-row"><span class="mtt-l">Risk</span><span class="mtt-v" style="color:${rcol}">${c.risk}</span></div>`);
+}
+function onCClick(id){
+  const c=D.countries[id];if(!c)return;
+  if(c.url){window.location.href=c.url;return}
+  openCountryPanel(id);
+}
+
+/* Panels */
+function badgeHtml(risk){
+  const bc={high:'b-high',moderate:'b-mod',low:'b-low'};
+  return `<span class="badge ${bc[risk]||'b-low'}">${risk.toUpperCase()}</span>`;
+}
+function openCountryPanel(id){
+  const c=D.countries[id];if(!c)return;
+  const brent=ps['BRENT'].v;
+  const prem=c.crude?`+$${(c.crude-brent).toFixed(2)}`:'—';
+  document.getElementById('mp-title').textContent=c.n;
+  document.getElementById('mp-body').innerHTML=`
+    <div class="mp-row"><span class="mp-l">Local OSP</span><span class="mp-v">${c.osp}</span></div>
+    <div class="mp-row"><span class="mp-l">vs Brent</span><span class="mp-v" style="color:var(--red)">${prem}</span></div>
+    <div class="mp-row"><span class="mp-l">Output</span><span class="mp-v">${c.prod}</span></div>
+    <div class="mp-row"><span class="mp-l">Grade</span><span class="mp-v" style="font-size:11px">${c.type}</span></div>
+    <div class="mp-row"><span class="mp-l">Main buyers</span><span class="mp-v" style="font-size:11px">${c.dest}</span></div>
+    <div class="mp-row"><span class="mp-l">Risk</span><span class="mp-v">${badgeHtml(c.risk)}</span></div>
+    ${c.url?`<div style="margin-top:14px"><a href="${c.url}" style="font-family:var(--mono);font-size:12px;color:var(--navy)">→ Country intelligence page</a></div>`:''}`;
+  document.getElementById('map-panel').classList.add('open');
+}
+function openPortPanel(p){
+  const col=p.util>88?'var(--red)':p.util>72?'#8a5020':'var(--teal)';
+  document.getElementById('mp-title').textContent=p.n;
+  document.getElementById('mp-body').innerHTML=`
+    <div class="mp-row"><span class="mp-l">Country</span><span class="mp-v">${p.c}</span></div>
+    <div class="mp-row"><span class="mp-l">Capacity</span><span class="mp-v">${p.cap}M bbl/d</span></div>
+    <div class="mp-row"><span class="mp-l">Utilisation</span><span class="mp-v" style="color:${col}">${p.util}%</span></div>
+    <div class="mp-row"><span class="mp-l">Status</span><span class="mp-v">${p.util>88?'Near capacity':p.util>72?'Elevated':'Normal'}</span></div>`;
+  document.getElementById('map-panel').classList.add('open');
+}
+function openChokePanel(cp){
+  document.getElementById('mp-title').textContent=cp.n;
+  document.getElementById('mp-body').innerHTML=`
+    <div class="mp-row"><span class="mp-l">Daily volume</span><span class="mp-v">${cp.vol}</span></div>
+    <div class="mp-row"><span class="mp-l">Risk</span><span class="mp-v">${badgeHtml(cp.risk)}</span></div>
+    <div style="margin-top:10px">
+      <div style="font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);line-height:1.6">${cp.src} · ${cp.updated}</div>
+    </div>`;
+  document.getElementById('map-panel').classList.add('open');
+}
+function closePanel(){document.getElementById('map-panel').classList.remove('open')}
+
+/* Legend */
+function renderLegend(){
+  const el=document.getElementById('map-legend');if(!el)return;
+  const defs={
     base:[
-      {c:'rgba(200,160,80,.35)',b:'#c8a050',l:'Producer'},
-      {c:'rgba(184,80,66,.3)',b:'#b85042',l:'Conflict zone'},
-      {c:'var(--b-default)',b:'var(--t-meta)',l:'Non-producer'},
-      {dot:'#1F5A94',l:'Export terminal'},
-      {dot:'#B85042',l:'Conflict port'},
-      {ring:'#B85042',l:'Chokepoint'},
+      {sq:'rgba(200,178,108,.38)',b:'#c0a860',l:'Producer'},
+      {sq:'rgba(179,48,0,.18)',   b:'#b33000',l:'Conflict'},
+      {dot:'#1d4480',l:'Export terminal'},
+      {dot:'var(--red)',l:'Conflict port'},
+      {ring:'var(--red)',l:'Chokepoint'},
     ],
     risk:[
-      {c:'rgba(184,80,66,.25)',b:'#b85042',l:'High risk'},
-      {c:'rgba(192,112,32,.22)',b:'#c07020',l:'Elevated'},
-      {c:'rgba(184,134,11,.18)',b:'#b8860b',l:'Moderate'},
-      {c:'rgba(46,125,90,.15)',b:'#2e7d5a',l:'Low risk'},
+      {sq:'rgba(179,48,0,.18)',  b:'#b33000',l:'High'},
+      {sq:'rgba(140,110,10,.13)',b:'#8c6e0a',l:'Moderate'},
+      {sq:'rgba(60,110,60,.10)', b:'#3c6e3c',l:'Low'},
     ],
     flows:[
-      {line:'#C58B2A',l:'Export flow (width = volume)'},
-      {ring:'#B85042',l:'Active chokepoint'},
+      {line:'#1d4480',l:'Export flow — width = volume'},
+      {ring:'var(--red)',l:'Chokepoint'},
     ],
     ports:[
-      {dot:'#1F5A94',l:'Export terminal'},
-      {dot:'#B85042',l:'Conflict / closed'},
-      {dot:'#6B7C93',l:'Strategic hub'},
-      {ring:'#B85042',l:'Near capacity (>88%)'},
+      {dot:'#1d4480',l:'Export terminal'},
+      {dot:'var(--red)',l:'Conflict / closed'},
+      {ring:'var(--red)',l:'Near capacity >88%'},
     ],
   };
-  const items = defs[layer] || defs.base;
-  el.innerHTML = items.map(i => {
-    let icon = '';
-    if(i.c)    icon = `<span style="width:12px;height:10px;border-radius:2px;background:${i.c};border:1px solid ${i.b};display:inline-block;flex-shrink:0"></span>`;
-    if(i.dot)  icon = `<span style="width:8px;height:8px;border-radius:50%;background:${i.dot};display:inline-block;flex-shrink:0"></span>`;
-    if(i.line) icon = `<span style="width:18px;height:2px;background:${i.line};display:inline-block;flex-shrink:0;border-radius:1px"></span>`;
-    if(i.ring) icon = `<span style="width:10px;height:10px;border-radius:50%;border:1.5px solid ${i.ring};display:inline-block;flex-shrink:0"></span>`;
-    return `<div style="display:flex;align-items:center;gap:5px">${icon}<span>${i.l}</span></div>`;
+  const list=defs[activeLayer]||defs.base;
+  el.innerHTML=list.map(i=>{
+    let ico='';
+    if(i.sq)   ico=`<span class="leg-sq" style="background:${i.sq};border:1px solid ${i.b}"></span>`;
+    if(i.dot)  ico=`<span class="leg-d" style="background:${i.dot}"></span>`;
+    if(i.line) ico=`<span class="leg-l" style="background:${i.line}"></span>`;
+    if(i.ring) ico=`<span class="leg-r" style="color:${i.ring}"></span>`;
+    return `<div class="leg">${ico}<span>${i.l}</span></div>`;
   }).join('');
 }
 
-/* ── Newsletter ──────────────────────────────────────────── */
-function nlSubmit(){
-  const email = document.getElementById('nl-email').value;
-  if(!email || !email.includes('@')) return;
-  document.getElementById('nl-email').parentElement.style.display='none';
-  document.getElementById('nl-confirm').style.display='block';
-}
+/* Zoom controls */
+const M={
+  zoomIn(){msvg.transition().duration(300).call(mzoom.scaleBy,1.6)},
+  zoomOut(){msvg.transition().duration(300).call(mzoom.scaleBy,0.625)},
+  reset(){msvg.transition().duration(500).call(mzoom.transform,d3.zoomIdentity)}
+};
 
-/* ── Footer version ──────────────────────────────────────── */
-function renderFooter(){
-  const el = document.getElementById('footer-version');
-  if(el) el.textContent = `${D.meta.version} · ${D.meta.updated}`;
-}
-
-/* ── Init ────────────────────────────────────────────────── */
+/* ══ Init ══ */
 function init(){
   renderTicker();
-  renderDivStrip();
-  renderSpreadBars();
-  renderKeyMetrics();
-  renderIntelFeed();
-  renderOpecTable();
-  renderYanbuChart();
-  renderPortUtil();
-  renderBenchTable();
-  renderOSPTable();
-  renderFooter();
-  renderMapLegend('base');
-
-  MapEngine.build('map-svg', {
-    height: 508,
-    onReady: () => { MapEngine.drawScaleBar(); }
-  });
-
-  /* Tick prices every 5s */
-  setInterval(() => {
-    tick();
-    window._brentPrice = ps['BRENT'].v;
-    renderTicker();
-    renderDivStrip();
-    renderSpreadBars();
-    renderKeyMetrics();
-  }, 5000);
+  renderSpreads();
+  renderPrices();
+  renderDev();
+  renderOpec();
+  renderChoke();
+  renderPorts();
+  buildMap();
+  document.getElementById('footer-v').textContent=`${D.meta.version} · ${D.meta.updated}`;
+  setInterval(()=>{tick();renderTicker();renderSpreads();renderPrices()},5000);
 }
-
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
