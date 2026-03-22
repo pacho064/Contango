@@ -1,1 +1,5 @@
+# Contango Energy — Python dependencies
+# updater.py uses only the standard library (urllib, json, base64, os)
+# No external packages required for the core update pipeline.
+# Add packages here if you extend the updater with additional data sources.
 requests==2.31.0
