@@ -56,6 +56,9 @@ def parse_args():
     p.add_argument("--aheavy", type=float, required=True,  help="Arab Heavy diff vs Oman/Dubai (e.g. -0.95)")
     p.add_argument("--month",  type=str,   default=None,   help="Override month label (e.g. 'April 2026'). Auto-detects if omitted.")
     p.add_argument("--file",   type=str,   default="data/prices.json", help="Path to prices.json")
+    p.add_argument("--ttf",   type=float, default=None, help="TTF gas EUR/MWh (manual, optional)")
+    p.add_argument("--jkm",   type=float, default=None, help="JKM LNG $/MMBtu (manual, optional)")
+    p.add_argument("--urals", type=float, default=None, help="Urals $/bbl (manual, optional)")
     return p.parse_args()
 
 
