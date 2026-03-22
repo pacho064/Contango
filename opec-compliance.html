@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<!-- Contango Energy · OPEC+ Compliance History · v1.0 · 22 March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OPEC+ compliance history — Contango Energy</title>
+<meta name="description" content="OPEC+ quota compliance history. Iraq, Kazakhstan, Russia, UAE — who overproduces, by how much, and what it means politically.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/opec-compliance.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+.ph{background:var(--card);border-bottom:3px solid var(--red);padding:36px 0 28px}
+.ph-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:700px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+.main{max-width:1200px;margin:0 auto;padding:40px 28px 60px;display:grid;grid-template-columns:1fr 300px;gap:48px}
+.content{min-width:0}
+.sidebar{min-width:0}
+
+.sec{margin-bottom:48px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:30px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.15}
+.body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:12px;padding-top:8px;border-top:1px solid var(--border)}
+
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.info-box{border-left:3px solid var(--navy);padding:14px 18px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .info-box{background:rgba(29,68,128,.12)}
+.info-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* ── Compliance chart ── */
+.compliance-wrap{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:16px}
+.cw-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cw-title{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink)}
+.cw-legend{display:flex;gap:14px}
+.cw-leg{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--ink-4);letter-spacing:.04em}
+.cw-leg-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.cw-body{padding:0}
+
+/* Country compliance row */
+.cr{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--border)}
+.cr:last-child{border-bottom:none}
+.cr-info{padding:14px 16px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:3px}
+.cr-name{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink)}
+.cr-quota{font-family:var(--mono);font-size:10px;color:var(--ink-4)}
+.cr-verdict{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;margin-top:4px;display:inline-block;letter-spacing:.04em}
+.v-chronic{background:rgba(179,48,0,.1);color:var(--red);border:1px solid rgba(179,48,0,.2)}
+.v-improving{background:rgba(74,124,111,.1);color:var(--teal);border:1px solid rgba(74,124,111,.2)}
+.v-compliant{background:rgba(29,68,128,.08);color:var(--navy);border:1px solid rgba(29,68,128,.2)}
+.v-under{background:rgba(0,0,0,.04);color:var(--ink-3);border:1px solid var(--border)}
+[data-theme=dark] .v-chronic{background:rgba(179,48,0,.15);color:#c84000;border-color:rgba(179,48,0,.25)}
+[data-theme=dark] .v-improving{background:rgba(74,124,111,.15);color:#4a9c8a;border-color:rgba(74,124,111,.25)}
+[data-theme=dark] .v-compliant{background:rgba(29,68,128,.15);color:#4a80c0;border-color:rgba(29,68,128,.25)}
+[data-theme=dark] .v-under{background:rgba(221,214,200,.07);color:#8a8070;border-color:rgba(221,214,200,.12)}
+
+.cr-months{padding:14px 16px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+/* Month dot */
+.md{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1px;cursor:default;transition:transform .1s;flex-shrink:0}
+.md:hover{transform:scale(1.15)}
+.md-lbl{font-family:var(--mono);font-size:7px;color:rgba(255,255,255,.6);letter-spacing:.04em}
+.md-val{font-family:var(--mono);font-size:8px;font-weight:500;color:rgba(255,255,255,.9)}
+/* Over = red shades, Under = teal shades, On = neutral */
+.md-over-hi{background:#b33000}
+.md-over-md{background:#c85020}
+.md-over-lo{background:#d87050}
+.md-on{background:#9a9590}
+.md-under{background:#4a7c6f}
+.md-na{background:var(--border);opacity:.5}
+[data-theme=dark] .md-over-hi{background:#c84000}
+[data-theme=dark] .md-over-md{background:#a83800}
+[data-theme=dark] .md-over-lo{background:#884020}
+[data-theme=dark] .md-on{background:#505868}
+[data-theme=dark] .md-under{background:#3a6050}
+
+/* Summary callouts */
+.callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:20px}
+.co{background:var(--card);padding:16px 18px}
+.co-num{font-family:var(--cg);font-size:42px;font-weight:600;line-height:1;margin-bottom:4px}
+.co-label{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.co-desc{font-family:var(--ss);font-size:13px;line-height:1.55;color:var(--ink-2)}
+
+/* Country deep-dive */
+.country-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.ccard-red{border-top:3px solid var(--red)}
+.ccard-orange{border-top:3px solid #8a5a00}
+.ccard-teal{border-top:3px solid var(--teal)}
+.ccard-navy{border-top:3px solid var(--navy)}
+.ccard-head{padding:11px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.ccard-flag{font-size:18px}
+.ccard-name{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink);flex:1}
+.ccard-body{padding:12px 14px}
+.ccard-body p{font-family:var(--ss);font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:8px}
+.ccard-body p:last-child{margin-bottom:0}
+.ccard-stat{display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.cs-item{display:flex;flex-direction:column;gap:2px}
+.cs-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)}
+.cs-val{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink)}
+
+/* Sidebar */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.sc-red{border-top:3px solid var(--red)}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.sc-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-v-red{color:var(--red)!important}
+.sc-v-teal{color:var(--teal)!important}
+.sc-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55;margin-top:8px}
+
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:none}
+.tl-date{font-family:var(--mono);font-size:10px;color:var(--ink-4);white-space:nowrap;padding-top:2px;min-width:70px}
+.tl-text{font-family:var(--ss);font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:960px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .country-grid{grid-template-columns:1fr}
+  .callouts{grid-template-columns:1fr}
+  .cr{grid-template-columns:120px 1fr}
+  .nav-links{display:none}
+  .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a" href="spare-capacity.html">Spare capacity</a>
+      <a class="nav-a on" href="opec-compliance.html">OPEC+ compliance</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Analysis · OPEC+ · Updated March 2026</div>
+    <h1 class="ph-title">The pattern, not the snapshot</h1>
+    <div class="ph-sub">Iraq overproduced its quota for 16 consecutive months before force majeure. Kazakhstan broke records. Russia runs soft. The current month's compliance number is the wrong thing to watch — the 12-month pattern reveals the politics.</div>
+    <div class="ph-src">Sources: OPEC JMMC communiqués 2024–2026 · Argus Media · Commodity Context (Rory Johnston) · Reuters output survey · IEA Oil Market Report · OPEC secondary source estimates · March 2026</div>
+  </div>
+</div>
+
+<div class="main">
+<div class="content">
+
+  <!-- Callout stats -->
+  <div class="sec" style="margin-bottom:32px">
+    <div class="callouts">
+      <div class="co">
+        <div class="co-num" style="color:var(--red)">16</div>
+        <div class="co-label">Months Iraq overproduced</div>
+        <div class="co-desc">Iraq exceeded its OPEC+ quota every month from Jan 2024 through Apr 2025 before briefly complying under intense pressure — then force majeure made the question academic.</div>
+      </div>
+      <div class="co">
+        <div class="co-num" style="color:var(--red)">441K</div>
+        <div class="co-label">bbl/d Kazakhstan excess · July 2025</div>
+        <div class="co-desc">Kazakhstan's highest-ever overproduction in any single month. State oil company Tengizchevroil's expansion drove output far above quota. OPEC+ imposed no sanctions.</div>
+      </div>
+      <div class="co">
+        <div class="co-num" style="color:var(--ink-3)">0</div>
+        <div class="co-label">Formal sanctions ever imposed</div>
+        <div class="co-desc">OPEC has no formal mechanism to sanction chronic overproducers. The only tool is peer pressure — and the only credible enforcer is Saudi Arabia threatening to flood the market.</div>
+      </div>
+    </div>
+    <div class="src-line">Commodity Context OPEC+ Data Deck Aug 2025 · Argus Media July 2025 · Middle East Institute Jan 2026</div>
+  </div>
+
+  <!-- Compliance chart -->
+  <div class="sec">
+    <div class="sec-label">12-month compliance history · Jan 2025 – Jan 2026</div>
+    <h2 class="sec-title">Who cheats, who complies, who underproduces</h2>
+    <div class="body">
+      <p>Each square below represents one month. Red = overproduction above quota (darker = more excess). Teal = underproduction. Grey = broadly on quota. Hover for monthly detail.</p>
+    </div>
+
+    <div class="compliance-wrap">
+      <div class="cw-head">
+        <span class="cw-title">Monthly compliance — Jan 2025 to Jan 2026 · K bbl/d vs quota</span>
+        <div class="cw-legend">
+          <div class="cw-leg"><div class="cw-leg-sq" style="background:#b33000"></div>Over &gt;200K</div>
+          <div class="cw-leg"><div class="cw-leg-sq" style="background:#d87050"></div>Over 50–200K</div>
+          <div class="cw-leg"><div class="cw-leg-sq" style="background:#9a9590"></div>On quota</div>
+          <div class="cw-leg"><div class="cw-leg-sq" style="background:#4a7c6f"></div>Under</div>
+        </div>
+      </div>
+      <div class="cw-body" id="compliance-chart"></div>
+    </div>
+    <div class="src-line">OPEC secondary source estimates · Argus Media assessments · Commodity Context OPEC+ Data Deck · Reuters output survey · Indicative — exact monthly figures vary by source</div>
+  </div>
+
+  <!-- The political economy -->
+  <div class="sec">
+    <div class="sec-label">Why it matters</div>
+    <h2 class="sec-title">Quota cheating is never random — it reveals the politics</h2>
+    <div class="body">
+      <p>Every month of OPEC+ overproduction is a political act, not an administrative failure. Countries overproduce because they need the revenue, because they have infrastructure they want to utilise before it deteriorates, or because they calculate the political cost of cheating is lower than the fiscal cost of compliance.</p>
+      <p><strong>Iraq's overproduction pattern is a fiscal distress signal.</strong> Baghdad's budget requires oil at roughly $70/bbl to break even — and requires production at maximum sustainable levels to generate enough revenue to pay government salaries, subsidies, and debt service. When Argus assessed Iraq producing 130K bbl/d above quota throughout 2024, that was not bureaucratic incompetence. It was Baghdad telling OPEC+ that it cannot afford to comply. The force majeure of March 2026 — the production collapse from 4.16M to 1.4M bbl/d — is, paradoxically, the most complete compliance Iraq has ever achieved. It just required Hormuz to close to make it happen.</p>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">The "use it or lose it" problem</div>
+      <div class="alert-body">The Middle East Institute identified a structural driver behind chronic overproduction: some producers have adopted a "use it or lose it" approach based on fears that hydrocarbon reserves could become stranded assets as energy transition accelerates. If you believe your reserves will eventually be worthless — or worth less — the rational strategy is to produce and sell them now, above quota if necessary. This is a long-term structural pressure on OPEC+ cohesion that the monthly compliance numbers don't capture.</div>
+    </div>
+
+    <div class="body">
+      <p><strong>Kazakhstan's overproduction is an infrastructure story.</strong> The Tengizchevroil expansion — a joint venture between Chevron, ExxonMobil, KazMunayGas, and LukArco — added significant production capacity that the Kazakh government does not control directly. When the expansion came online, Kazakhstan's output rose above its OPEC+ quota because the IOC-operated field's production ramp-up was not synchronised with the quota agreement. Nazarbayev's successors have less leverage over the IOC-operated Tengiz field than OPEC+ members expect them to exercise.</p>
+      <p>Russia's soft overproduction is different again — it is partly a measurement issue. Russia exports both crude and crude products, and the way these are counted in production estimates creates inherent uncertainty. Russian output numbers in any given month represent estimates, not confirmed figures. OPEC+ accepts this ambiguity because forcing the issue with Moscow is politically untenable for Riyadh.</p>
+      <p><strong>The most important compliance dynamic in 2025 was not the cheating itself — it was Saudi Arabia's response.</strong> Riyadh accelerated the unwind of voluntary cuts four times faster than the original plan, moving to bring back 2.2M bbl/d in five months rather than eighteen. This was explicitly framed as punishment: countries that had overproduced were told they would lose the benefit of Saudi restraint if they continued to do so. The message was clear enough that Iraq briefly complied in April and May 2025 for the first time in over a year.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-body">Argus Media, July 2025: <em>"Iraq managed to produce just below its formal OPEC+ crude production target in April for the second month in a row, following intense pressure from other members of the group to improve on its historically poor compliance record. But the country still has much to do to compensate for past overproduction."</em></div>
+    </div>
+
+    <div class="src-line">Argus Media July 2025 · Middle East Institute January 2026 · Commodity Context March/August 2025 · OPEC JMMC communiqués</div>
+  </div>
+
+  <!-- Country deep dives -->
+  <div class="sec">
+    <div class="sec-label">Country profiles</div>
+    <h2 class="sec-title">The chronic overproducers — why each one cheats</h2>
+    <div class="country-grid">
+
+      <div class="ccard ccard-red">
+        <div class="ccard-head">
+          <span class="ccard-flag">🇮🇶</span>
+          <span class="ccard-name">Iraq</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(179,48,0,.08);color:var(--red);border:1px solid rgba(179,48,0,.2)">CHRONIC</span>
+        </div>
+        <div class="ccard-body">
+          <div class="ccard-stat">
+            <div class="cs-item"><div class="cs-lbl">2024 avg excess</div><div class="cs-val" style="color:var(--red)">+130K bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Quota</div><div class="cs-val">4.0M bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Status</div><div class="cs-val" style="color:var(--red)">Force majeure</div></div>
+          </div>
+          <p>Fiscal need is the driver. Baghdad's budget requires maximum production at all times — the government cannot afford to comply. Overproduced every month Jan 2024–Mar 2025 before briefly meeting quota under extreme pressure. 16 consecutive months of overproduction drove Saudi Arabia to accelerate the production increase unwind as punishment.</p>
+          <p>Force majeure since March 17, 2026. The question is now moot — Iraq's output is at one-third of pre-crisis levels, all directed to domestic refining.</p>
+        </div>
+        <div class="src-line" style="padding:0 14px 10px;margin:0">Argus Media · OPEC JMMC · Commodity Context</div>
+      </div>
+
+      <div class="ccard ccard-red">
+        <div class="ccard-head">
+          <span class="ccard-flag">🇰🇿</span>
+          <span class="ccard-name">Kazakhstan</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(179,48,0,.08);color:var(--red);border:1px solid rgba(179,48,0,.2)">CHRONIC</span>
+        </div>
+        <div class="ccard-body">
+          <div class="ccard-stat">
+            <div class="cs-item"><div class="cs-lbl">Jul 2025 excess</div><div class="cs-val" style="color:var(--red)">+441K bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Quota</div><div class="cs-val">1.7M bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Status</div><div class="cs-val" style="color:var(--red)">Over</div></div>
+          </div>
+          <p>Infrastructure-driven overproduction. The Tengizchevroil expansion (Chevron, ExxonMobil, KazMunayGas) brought significant new capacity online that the Kazakh government cannot easily throttle without damaging IOC relationships. Astana promises to compensate with future cuts but delivery is consistently poor.</p>
+          <p>Set the all-time record for single-month overproduction in July 2025 at 441K bbl/d above quota — the highest since the end of the COVID-era output cuts in 2020.</p>
+        </div>
+        <div class="src-line" style="padding:0 14px 10px;margin:0">Commodity Context Aug 2025 · Argus Media</div>
+      </div>
+
+      <div class="ccard ccard-orange" style="border-top-color:#8a5a00">
+        <div class="ccard-head">
+          <span class="ccard-flag">🇷🇺</span>
+          <span class="ccard-name">Russia</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(140,90,0,.08);color:#8a5a00;border:1px solid rgba(140,90,0,.2)">SOFT OVER</span>
+        </div>
+        <div class="ccard-body">
+          <div class="ccard-stat">
+            <div class="cs-item"><div class="cs-lbl">Typical excess</div><div class="cs-val" style="color:#8a5a00">+50–150K</div></div>
+            <div class="cs-item"><div class="cs-lbl">Quota</div><div class="cs-val">9.0M bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Verification</div><div class="cs-val">Opaque</div></div>
+          </div>
+          <p>Russia's overproduction is partly a measurement problem. Output estimates for Russian crude vary by 100–200K bbl/d depending on the methodology, and the Kremlin's incentive to publish accurate numbers is limited. Soft overproduction is tolerated by Riyadh because challenging Moscow directly would fracture the OPEC+ coalition.</p>
+          <p>Sanctions rerouting via India and China has complicated tracking. Russia's effective production is assessed through tanker flows rather than official statements.</p>
+        </div>
+        <div class="src-line" style="padding:0 14px 10px;margin:0">Argus Media · Reuters output survey · Kpler tanker data</div>
+      </div>
+
+      <div class="ccard ccard-teal">
+        <div class="ccard-head">
+          <span class="ccard-flag">🇦🇪</span>
+          <span class="ccard-name">UAE</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(74,124,111,.08);color:var(--teal);border:1px solid rgba(74,124,111,.2)">BASELINE RAISED</span>
+        </div>
+        <div class="ccard-body">
+          <div class="ccard-stat">
+            <div class="cs-item"><div class="cs-lbl">Quota (incl. uplift)</div><div class="cs-val">3.5M bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Actual</div><div class="cs-val">~3.7M bbl/d</div></div>
+            <div class="cs-item"><div class="cs-lbl">Pattern</div><div class="cs-val" style="color:#8a5a00">Mild over</div></div>
+          </div>
+          <p>The UAE's compliance picture is complicated by a 300K bbl/d capacity-related baseline uplift agreed in 2024, which raised its effective quota. Abu Dhabi has been pushing for higher production allowances for years, citing significant capacity investment at ADNOC. Some of what appears as overproduction is contested as legitimate against the raised baseline.</p>
+          <p>ADNOC is targeting 5M bbl/d capacity by 2025 — a level that fundamentally cannot be accommodated within any realistic OPEC+ quota allocation, creating an inherent long-term tension.</p>
+        </div>
+        <div class="src-line" style="padding:0 14px 10px;margin:0">OPEC JMMC communiqués · Argus Media · ADNOC capacity plans</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- The enforcement problem -->
+  <div class="sec">
+    <div class="sec-label">Structural weakness</div>
+    <h2 class="sec-title">No sanctions mechanism — why the cartel has no teeth</h2>
+    <div class="body">
+      <p>OPEC has no formal mechanism for sanctioning countries that chronically overproduce. This is not an oversight — it is a structural feature of a voluntary agreement between sovereign states. The only enforcement tool available to Saudi Arabia, which acts as the de facto enforcer, is the threat to flood the market with its own production, collapsing prices and making everyone's overproduction worthless. Saudi Arabia used this nuclear option briefly in 2020 against Russia; the resulting price collapse lasted weeks before a deal was struck.</p>
+      <p>The acceleration of the voluntary cut unwind in 2025 — moving four times faster than originally planned — was the next level down from this nuclear option. Riyadh essentially told overproducers: if you insist on flooding the market, we will too, and we can sustain lower prices longer than you can. It worked briefly. Iraq complied in April and May. Kazakhstan promised compensation plans. The effect faded by summer.</p>
+      <p><strong>The deeper problem is that OPEC+'s cohesion depends on all major members having aligned incentives around price stability. Those incentives are diverging.</strong> Countries with large reserves and long time horizons (Saudi Arabia, UAE) want prices stable at a level that maximises long-term revenue. Countries with fiscal crises and high production costs (Iraq, Venezuela) need to maximise current output. Countries with IOC-operated fields (Kazakhstan) cannot throttle production without damaging investor relationships. The coalition is under structural stress that monthly compliance numbers understate.</p>
+    </div>
+    <div class="src-line">Middle East Institute January 2026 · Argus Media · OPEC JMMC · Commodity Context</div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <div class="sc sc-red">
+    <div class="sc-head">
+      <div class="sc-title">Current compliance snapshot</div>
+      <div class="sc-meta">OPEC JMMC · March 2026</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">Saudi Arabia</span><span class="sc-v">Compliant</span></div>
+      <div class="sc-row"><span class="sc-l">Russia</span><span class="sc-v sc-v-red">+50–100K est.</span></div>
+      <div class="sc-row"><span class="sc-l">Iraq</span><span class="sc-v sc-v-red">Force majeure</span></div>
+      <div class="sc-row"><span class="sc-l">UAE</span><span class="sc-v sc-v-red">+200K est.</span></div>
+      <div class="sc-row"><span class="sc-l">Kuwait</span><span class="sc-v">Broadly compliant</span></div>
+      <div class="sc-row"><span class="sc-l">Kazakhstan</span><span class="sc-v sc-v-red">+300K+ est.</span></div>
+      <div class="sc-row"><span class="sc-l">Nigeria</span><span class="sc-v sc-v-teal">−200K (under)</span></div>
+      <div class="sc-row"><span class="sc-l">Venezuela</span><span class="sc-v sc-v-teal">−100K (under)</span></div>
+      <div class="sc-note">Iraq force majeure makes its compliance status irrelevant. Production at 1.4M bbl/d vs 4.0M quota — effectively 2.6M bbl/d under, involuntarily.</div>
+      <div class="src-line" style="margin:8px 0 0">OPEC JMMC · Reuters survey · March 2026</div>
+    </div>
+  </div>
+
+  <div class="sc sc-navy">
+    <div class="sc-head">
+      <div class="sc-title">Key events timeline</div>
+      <div class="sc-meta">2024–2026</div>
+    </div>
+    <div class="sc-body" style="padding:0 14px">
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="tl-date">Jan 2024</span>
+          <span class="tl-text">OPEC+ reaffirms compensation plans. Iraq, Kazakhstan begin chronic overproduction cycle.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Apr 2024</span>
+          <span class="tl-text">JMMC confirms intention to compensate overproduction since Jan 2024. No mechanism to enforce it.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Feb 2025</span>
+          <span class="tl-text">Kazakhstan hits all-time overproduction record. Groupwide excess reaches highest since 2020.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Apr 2025</span>
+          <span class="tl-text">Saudi Arabia accelerates cut unwind 4× — explicit punishment for overproducers. Iraq briefly complies.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Jul 2025</span>
+          <span class="tl-text">Kazakhstan at 441K bbl/d over quota — highest ever. Saudi acceleration continues.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Jan 2026</span>
+          <span class="tl-text">Iraq at 4.16M bbl/d — still 160K above 4.0M quota. Compliance improving but debt remains.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Mar 2026</span>
+          <span class="tl-text">Force majeure. Iraq at 1.4M bbl/d. OPEC+ compliance question rendered academic by Hormuz disruption.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc sc-navy">
+    <div class="sc-head">
+      <div class="sc-title">What to watch</div>
+    </div>
+    <div class="sc-body">
+      <p style="font-family:var(--ss);font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:10px">The compliance questions that matter once Hormuz reopens:</p>
+      <div class="sc-row"><span class="sc-l">Will Iraq compensate past overproduction?</span></div>
+      <div style="padding:4px 0 8px;font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.5;border-bottom:1px solid var(--border)">Baghdad owes ~1.5M bbl of compensation. Fiscal crisis makes this extremely unlikely.</div>
+      <div class="sc-row"><span class="sc-l">Will Kazakhstan cut to compensate?</span></div>
+      <div style="padding:4px 0 8px;font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.5;border-bottom:1px solid var(--border)">Tengizchevroil expansion continues. IOC leverage limits Astana's options.</div>
+      <div class="sc-row"><span class="sc-l">Will Saudi Arabia reward compliance?</span></div>
+      <div style="padding:4px 0 8px;font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.5">Riyadh's leverage depends on its willingness to slow the unwind. Post-crisis, this is the key swing factor.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · OPEC+ compliance history · March 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="iraq.html">Iraq</a>
+      <a href="spare-capacity.html">Spare capacity</a>
+      <a href="buyer-exposure.html">Buyer exposure</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+
+/* ── Compliance chart data ──
+   Each entry: [month_label, deviation_K_bbl_d]
+   Positive = over quota, negative = under, 0 = on quota
+   Based on: Argus Media, Commodity Context OPEC+ Data Deck, Reuters output survey
+*/
+const COMPLIANCE = {
+  'Iraq': {
+    quota: 4000,
+    data: [
+      ['Jan 25',+130],['Feb 25',+150],['Mar 25',+120],['Apr 25',0],
+      ['May 25',+10],['Jun 25',+80],['Jul 25',+100],['Aug 25',+120],
+      ['Sep 25',+110],['Oct 25',+140],['Nov 25',+160],['Dec 25',+150],['Jan 26',+160],
+    ],
+    verdict:'chronic', verdictLabel:'Chronic overproducer'
+  },
+  'Kazakhstan': {
+    quota: 1700,
+    data: [
+      ['Jan 25',+320],['Feb 25',+380],['Mar 25',+350],['Apr 25',+300],
+      ['May 25',+360],['Jun 25',+400],['Jul 25',+441],['Aug 25',+420],
+      ['Sep 25',+350],['Oct 25',+300],['Nov 25',+320],['Dec 25',+340],['Jan 26',+310],
+    ],
+    verdict:'chronic', verdictLabel:'Chronic overproducer'
+  },
+  'Russia': {
+    quota: 9000,
+    data: [
+      ['Jan 25',+80],['Feb 25',+100],['Mar 25',+60],['Apr 25',+90],
+      ['May 25',+70],['Jun 25',+80],['Jul 25',+50],['Aug 25',+60],
+      ['Sep 25',+70],['Oct 25',+80],['Nov 25',+90],['Dec 25',+100],['Jan 26',+90],
+    ],
+    verdict:'chronic', verdictLabel:'Soft overproducer'
+  },
+  'UAE': {
+    quota: 3200,
+    data: [
+      ['Jan 25',+180],['Feb 25',+200],['Mar 25',+220],['Apr 25',+190],
+      ['May 25',+210],['Jun 25',+230],['Jul 25',+200],['Aug 25',+190],
+      ['Sep 25',+210],['Oct 25',+200],['Nov 25',+220],['Dec 25',+230],['Jan 26',+220],
+    ],
+    verdict:'chronic', verdictLabel:'Baseline contested'
+  },
+  'Saudi Arabia': {
+    quota: 10000,
+    data: [
+      ['Jan 25',0],['Feb 25',-20],['Mar 25',0],['Apr 25',-10],
+      ['May 25',0],['Jun 25',0],['Jul 25',+20],['Aug 25',+10],
+      ['Sep 25',0],['Oct 25',-10],['Nov 25',0],['Dec 25',0],['Jan 26',+20],
+    ],
+    verdict:'compliant', verdictLabel:'Broadly compliant'
+  },
+  'Kuwait': {
+    quota: 2700,
+    data: [
+      ['Jan 25',-10],['Feb 25',0],['Mar 25',-20],['Apr 25',-10],
+      ['May 25',0],['Jun 25',-10],['Jul 25',+10],['Aug 25',0],
+      ['Sep 25',-10],['Oct 25',-20],['Nov 25',0],['Dec 25',-10],['Jan 26',0],
+    ],
+    verdict:'compliant', verdictLabel:'Broadly compliant'
+  },
+  'Nigeria': {
+    quota: 1500,
+    data: [
+      ['Jan 25',-300],['Feb 25',-250],['Mar 25',-280],['Apr 25',-260],
+      ['May 25',-240],['Jun 25',-220],['Jul 25',-200],['Aug 25',-180],
+      ['Sep 25',-190],['Oct 25',-200],['Nov 25',-210],['Dec 25',-200],['Jan 26',-190],
+    ],
+    verdict:'under', verdictLabel:'Chronic underproducer'
+  },
+  'Venezuela': {
+    quota: 900,
+    data: [
+      ['Jan 25',-80],['Feb 25',-90],['Mar 25',-100],['Apr 25',-110],
+      ['May 25',-100],['Jun 25',-90],['Jul 25',-80],['Aug 25',-90],
+      ['Sep 25',-100],['Oct 25',-110],['Nov 25',-100],['Dec 25',-90],['Jan 26',-100],
+    ],
+    verdict:'under', verdictLabel:'Capacity constrained'
+  },
+};
+
+function dotClass(dev) {
+  if (dev === null) return 'md-na';
+  if (dev > 200)  return 'md-over-hi';
+  if (dev > 50)   return 'md-over-md';
+  if (dev > 0)    return 'md-over-lo';
+  if (dev < -50)  return 'md-under';
+  return 'md-on';
+}
+
+function renderChart() {
+  const el = document.getElementById('compliance-chart');
+  if (!el) return;
+  let html = '';
+  Object.entries(COMPLIANCE).forEach(([country, d]) => {
+    const vcls = {chronic:'v-chronic',improving:'v-improving',compliant:'v-compliant',under:'v-under'}[d.verdict] || 'v-compliant';
+    const dots = d.data.map(([lbl, dev]) => {
+      const cls = dotClass(dev);
+      const sign = dev > 0 ? '+' : '';
+      const tip = `title="${lbl}: ${sign}${dev}K bbl/d"`;
+      return `<div class="md ${cls}" ${tip}><span class="md-lbl">${lbl.slice(0,3)}</span><span class="md-val">${sign}${dev}</span></div>`;
+    }).join('');
+    html += `<div class="cr">
+      <div class="cr-info">
+        <div class="cr-name">${country}</div>
+        <div class="cr-quota">Quota: ${(d.quota/1000).toFixed(1)}M bbl/d</div>
+        <span class="cr-verdict ${vcls}">${d.verdictLabel}</span>
+      </div>
+      <div class="cr-months">${dots}</div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', renderChart);
+</script>
+</body>
+</html>
