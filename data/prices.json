@@ -1,0 +1,58 @@
+{
+  "_note": "Brent and WTI updated by EIA API. OSPs updated manually each month.",
+  "_updated": "2026-03-22T00:00:00Z",
+
+  "benchmarks": {
+    "brent": { "price": 72.16, "change_pct": 0.8,  "updated": "2026-03-21", "source": "EIA" },
+    "wti":   { "price": 68.26, "change_pct": 0.6,  "updated": "2026-03-21", "source": "EIA" },
+    "ttf":   { "price": 48.30, "change_pct": 0.4,  "updated": "2026-03-21", "source": "ICE" },
+    "jkm":   { "price": 24.70, "change_pct": 0.2,  "updated": "2026-03-21", "source": "Platts" },
+    "urals": { "price": 52.40, "change_pct": -0.6, "updated": "2026-03-21", "source": "Argus" }
+  },
+
+  "osps": {
+    "arab_light":    { "price": 84.00, "grade": "Arab Light",    "country": "Saudi Arabia", "operator": "Saudi Aramco", "source": "Aramco OSP release",            "for_month": "March 2026", "updated": "2026-03-01", "spread_vs_brent": 11.84, "context": null },
+    "murban":        { "price": 83.68, "grade": "Murban",        "country": "UAE",          "operator": "ADNOC",        "source": "ADNOC OSP release",             "for_month": "March 2026", "updated": "2026-03-01", "spread_vs_brent": 11.52, "context": "ICE Murban futures contract" },
+    "oman_dubai":    { "price": 80.75, "grade": "Oman / Dubai",  "country": "Oman / UAE",   "operator": "DME / Platts", "source": "DME settlement + Platts Dubai", "for_month": "March 2026", "updated": "2026-03-21", "spread_vs_brent": 8.59,  "context": "Asian cargo benchmark" },
+    "basra_medium":  { "price": 81.40, "grade": "Basra Medium",  "country": "Iraq",         "operator": "SOMO",         "source": "SOMO Iraq official OSP",        "for_month": "March 2026", "updated": "2026-03-01", "spread_vs_brent": 9.24,  "context": null },
+    "kuwait_export": { "price": 80.95, "grade": "Kuwait Export", "country": "Kuwait",       "operator": "KPC",          "source": "Kuwait Petroleum Corp OSP",     "for_month": "March 2026", "updated": "2026-03-01", "spread_vs_brent": 8.79,  "context": null },
+    "arab_heavy":    { "price": 79.80, "grade": "Arab Heavy",    "country": "Saudi Arabia", "operator": "Saudi Aramco", "source": "Aramco OSP release",            "for_month": "March 2026", "updated": "2026-03-01", "spread_vs_brent": 7.64,  "context": null }
+  },
+
+  "chokepoints": [
+    { "name": "Bab el-Mandeb",    "risk": "high",     "volume": "9M bbl/d",   "source": "ACLED · Lloyd's JWC · US State Dept L4", "updated": "Mar 2026" },
+    { "name": "Strait of Hormuz", "risk": "high",     "volume": "21M bbl/d",  "source": "Lloyd's JWC · IEA · US State Dept L3",   "updated": "Mar 2026" },
+    { "name": "Suez Canal",       "risk": "moderate", "volume": "2.5M bbl/d", "source": "US State Dept L2 (Egypt)",               "updated": "Jan 2026" }
+  ],
+
+  "opec": [
+    { "n": "Saudi Arabia", "q": 10.0, "a": 10.2 },
+    { "n": "Russia",       "q": 9.0,  "a": 9.2  },
+    { "n": "Iraq",         "q": 4.0,  "a": 4.5  },
+    { "n": "UAE",          "q": 3.2,  "a": 3.7  },
+    { "n": "Kuwait",       "q": 2.7,  "a": 2.9  },
+    { "n": "Iran",         "q": null, "a": 3.0  },
+    { "n": "Nigeria",      "q": 1.5,  "a": 1.3  },
+    { "n": "Venezuela",    "q": 0.9,  "a": 0.8  },
+    { "n": "Kazakhstan",   "q": 1.7,  "a": 2.0  }
+  ],
+  "opec_src": "OPEC JMMC communiqué + Reuters output survey",
+  "opec_updated": "March 2026",
+
+  "ports": [
+    { "n": "Ras Tanura",    "c": "Saudi Arabia", "cap": 6.5, "util": 88, "type": "export" },
+    { "n": "Basra SPM",     "c": "Iraq",         "cap": 2.0, "util": 94, "type": "export" },
+    { "n": "Khor al-Amaya", "c": "Iraq",         "cap": 1.8, "util": 91, "type": "export" },
+    { "n": "Fujairah",      "c": "UAE",          "cap": 1.4, "util": 85, "type": "export" },
+    { "n": "Yanbu",         "c": "Saudi Arabia", "cap": 1.8, "util": 61, "type": "export" },
+    { "n": "Jebel Ali",     "c": "UAE",          "cap": 3.5, "util": 79, "type": "export" }
+  ],
+
+  "developments": [
+    { "src": "CFR · Reuters",           "alert": true,  "region": "Red Sea",       "hl": "~30 supertankers rerouted to Yanbu, far above usual two per month. Port approaching capacity.", "time": "Mid-March 2026" },
+    { "src": "IEA",                     "alert": true,  "region": "Hormuz",        "hl": "Hormuz transit severely disrupted. Gulf producers cut output by at least 10M bbl/d.", "time": "12 March 2026" },
+    { "src": "MEES",                    "alert": false, "region": "Saudi Arabia",  "hl": "East-West pipeline at 38% of 5M bbl/d capacity. Yanbu port is the binding constraint, not the pipeline.", "time": "March 2026" },
+    { "src": "Gulf International Forum","alert": false, "region": "Yemen",         "hl": "Houthi conditional deterrence: strategic pause, not capacity degradation. Calibrated to political timing.", "time": "15 March 2026" },
+    { "src": "OPEC JMMC",               "alert": false, "region": "Iraq",          "hl": "Iraq production at 4.5M bbl/d vs 4.0M bbl/d quota. Overproduction continues despite compliance pressure.", "time": "March 2026" }
+  ]
+}
