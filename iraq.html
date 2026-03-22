@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<!-- Contango Energy · Iraq · v1.0 · 22 March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Iraq — Contango Energy</title>
+<meta name="description" content="Iraq oil infrastructure, Basra force majeure, Hormuz dependency, Kirkuk-Ceyhan pipeline, OPEC+ compliance. Sourced energy intelligence.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/iraq.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+/* Nav */
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 13px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer;transition:all .12s}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* Country header */
+.ch{border-bottom:1px solid var(--border);padding:32px 0 24px;background:var(--card)}
+.ch-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ch-meta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ch-title{font-family:var(--cg);font-size:46px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:8px}
+.ch-sub{font-family:var(--ss);font-size:16px;color:var(--ink-3);margin-bottom:18px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.badge{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:2px;border:1px solid;letter-spacing:.04em}
+.b-red{background:rgba(179,48,0,.08);color:var(--red);border-color:rgba(179,48,0,.2)}
+.b-navy{background:rgba(29,68,128,.08);color:var(--navy);border-color:rgba(29,68,128,.2)}
+.b-teal{background:rgba(74,124,111,.08);color:var(--teal);border-color:rgba(74,124,111,.2)}
+.b-warn{background:rgba(140,90,0,.08);color:#8a5a00;border-color:rgba(140,90,0,.2)}
+[data-theme=dark] .b-red{background:rgba(179,48,0,.15);color:#c84000;border-color:rgba(179,48,0,.25)}
+[data-theme=dark] .b-navy{background:rgba(29,68,128,.15);color:#4a80c0;border-color:rgba(29,68,128,.25)}
+[data-theme=dark] .b-teal{background:rgba(74,124,111,.15);color:#4a9c8a;border-color:rgba(74,124,111,.25)}
+[data-theme=dark] .b-warn{background:rgba(140,90,0,.15);color:#c89040;border-color:rgba(140,90,0,.25)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:22px}
+.stat{background:var(--bg);padding:14px 18px}
+.stat-label{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-bottom:4px}
+.stat-value{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--ink);line-height:1}
+.stat-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:2px}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+
+/* Layout */
+.main{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 300px;gap:48px;padding-top:40px;padding-bottom:60px}
+.content{min-width:0}
+.sidebar{min-width:0}
+
+/* Sections */
+.sec{margin-bottom:44px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:28px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:14px}
+.body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+
+/* Alert / info boxes */
+.alert-box{border-left:3px solid var(--red);padding:13px 16px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:18px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:4px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+.info-box{border-left:3px solid var(--navy);padding:13px 16px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:18px 0}
+[data-theme=dark] .info-box{background:rgba(29,68,128,.12)}
+.info-body{font-family:var(--ss);font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+
+/* Infrastructure cards */
+.infra-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.ic{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.ic-navy{border-top:3px solid var(--navy)}
+.ic-red{border-top:3px solid var(--red)}
+.ic-warn{border-top:3px solid #8a5a00}
+.ic-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.ic-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.ic-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.ic-body{padding:10px 14px}
+.ic-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.ic-row:last-child{border-bottom:none}
+.ic-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.ic-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.ic-v.red{color:var(--red)}
+.ic-note{font-family:var(--ss);font-style:italic;font-size:11.5px;color:var(--ink-3);padding:8px 14px;border-top:1px solid var(--border);line-height:1.5}
+.cap-wrap{padding:0 14px 10px}
+.cap-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-bottom:3px}
+.cap-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.cap-fill{height:100%;border-radius:2px}
+
+/* Sidebar */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-red{border-top:3px solid var(--red)}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.sc-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-red-v{color:var(--red)!important}
+
+/* Dest bars */
+.dest-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)}
+.dest-row:last-child{border-bottom:none}
+.dest-name{font-family:var(--ss);font-size:13px;color:var(--ink);flex:1}
+.dest-bar-wrap{width:72px}
+.dest-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.dest-fill{height:100%;background:var(--navy);border-radius:2px}
+.dest-pct{font-family:var(--mono);font-size:11px;color:var(--ink-3);min-width:28px;text-align:right}
+
+/* Risk */
+.risk-row{padding:8px 0;border-bottom:1px solid var(--border)}
+.risk-row:last-child{border-bottom:none}
+.risk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.risk-type{font-family:var(--ss);font-size:13px;color:var(--ink)}
+.risk-detail{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.5}
+
+/* Signals */
+.sig-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.sig-item:last-child{border-bottom:none}
+.sig-meta{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.sig-pip{width:4px;height:4px;border-radius:50%;background:var(--ink-3)}
+.sig-pip.hot{background:var(--red)}
+.sig-src{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-4)}
+.sig-hl{font-family:var(--ss);font-size:13px;line-height:1.5;color:var(--ink-2)}
+.sig-date{font-family:var(--mono);font-size:9px;color:var(--ink-4);margin-top:2px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:900px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .stats{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-inner,.ch-inner,.footer-inner{padding-left:16px;padding-right:16px}
+  .main{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a on" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="methodology.html">Methodology</a>
+      <a class="nav-a" href="sources.html">Sources</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ch">
+  <div class="ch-inner">
+    <div class="ch-meta">Country intelligence · Arabian Gulf · OPEC+ member · Force majeure active</div>
+    <h1 class="ch-title">Iraq</h1>
+    <div class="ch-sub">Second-largest OPEC producer. 97% Hormuz-dependent. Force majeure declared March 2026.</div>
+    <div class="badges">
+      <span class="badge b-red">Force majeure: active</span>
+      <span class="badge b-red">Hormuz dependency: 97%</span>
+      <span class="badge b-warn">Production: cut to 1.4M bbl/d</span>
+      <span class="badge b-navy">OPEC+ quota: 4.0M bbl/d</span>
+      <span class="badge b-teal">Proved reserves: 145Bn bbl</span>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Production (pre-crisis)</div>
+        <div class="stat-value">4.16M</div>
+        <div class="stat-note">bbl/day · Jan 2026 · CEIC / OPEC</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Production (current)</div>
+        <div class="stat-value" style="color:var(--red)">~1.4M</div>
+        <div class="stat-note">bbl/day · Mar 2026 · Oil Minister statement</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Basra exports (Feb 2026)</div>
+        <div class="stat-value">3.3M</div>
+        <div class="stat-note">bbl/day · now halted · SOMO</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Oil revenue share</div>
+        <div class="stat-value">~90%</div>
+        <div class="stat-note">of government budget · IMF / World Bank</div>
+      </div>
+    </div>
+    <div class="src-line">Sources: Reuters (March 20, 2026) · Iraq Oil Ministry statement (March 17, 2026) · EIA Country Analysis Brief · CEIC Data · IMF · The National (March 14, 2026)</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="content">
+
+    <!-- Force majeure — lead story -->
+    <div class="sec">
+      <div class="sec-label">Breaking — March 20, 2026</div>
+      <h2 class="sec-title">Force majeure declared — Basra exports halted</h2>
+      <div class="body">
+        <p>Iraq declared force majeure on all oilfields operated by foreign companies on March 20, 2026 — a legal measure that suspends contractual obligations and absolves non-performance liability — after military operations disrupted navigation through the Strait of Hormuz and halted most of the country's crude exports. The decision was communicated in a letter from the oil ministry dated March 17, seen by Reuters.</p>
+        <p><strong>The immediate production collapse is severe.</strong> Basra Oil Company output was cut to 900,000 barrels per day from 3.3 million barrels per day as southern port exports were halted. Total national production fell to approximately 1.4 million barrels per day — less than a third of pre-crisis levels. The produced quantities are being directed entirely to operate domestic refineries.</p>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-title">The economic exposure is existential</div>
+        <div class="alert-body">Oil export revenue accounts for approximately 90% of Iraq's government budget and national income. There is no fiscal buffer capable of sustaining a prolonged export halt. Baghdad faces a severe economic crisis if Hormuz disruptions continue — and has almost no viable alternative export infrastructure to fall back on.</div>
+      </div>
+
+      <div class="body">
+        <p>International oil companies operating in Iraq were unable to nominate tankers to lift crude, blocking exports even though SOMO was ready to load shipments. The ministry ordered a full shutdown of production at affected concession areas, invited companies to urgent talks on essential operations, and said the decision would be reviewed periodically depending on regional developments.</p>
+      </div>
+      <div class="src-line">Reuters, March 20, 2026 · Iraq Oil Ministry letter, March 17, 2026 · Baird Maritime · International Business Times Singapore</div>
+    </div>
+
+    <!-- No viable alternative -->
+    <div class="sec">
+      <div class="sec-label">Infrastructure constraint</div>
+      <h2 class="sec-title">No viable alternative export route — the Kirkuk-Ceyhan illusion</h2>
+      <div class="body">
+        <p>The standard response to Hormuz disruption is to redirect Iraqi crude northward through the Kirkuk-Ceyhan pipeline to the Turkish port of Ceyhan on the Mediterranean. This alternative does not work at scale.</p>
+        <p><strong>The Kirkuk-Ceyhan pipeline carries approximately 200,000 barrels per day at current capacity — about 6% of the 3.3 million barrels per day exported from Basra in February 2026.</strong> Even at theoretical maximum utilisation, the northern route cannot compensate for the loss of southern exports. The pipeline has been operating well below its 1.6 million barrel per day design capacity due to the unresolved KRG-Baghdad revenue dispute that has restricted northern exports since March 2023.</p>
+        <p>A further complication: diverting Kirkuk crude for export would deprive refineries and power plants in northern Iraq of critical feedstock. Iraq's limited pipeline network may not be able to deliver sufficient replacement volumes from Basra to the north. The political hurdles — requiring coordination between Baghdad and the Kurdistan Regional Government — add additional friction at a moment when governance capacity is already under strain.</p>
+      </div>
+
+      <div class="info-box">
+        <div class="info-body">Analyst Mohammed Al Maleki, cited in The National: <em>"There is no viable infrastructure currently capable of redirecting large volumes of southern crude to other routes. The proposal to export via Kirkuk would represent only about 6% of the Basra export volume, offering only marginal relief."</em> — The National, March 14, 2026</div>
+      </div>
+
+      <div class="body">
+        <p>A proposal to build a pipeline from southern Iraq to Jordan's Aqaba port on the Red Sea — which would have provided genuine Hormuz bypass capability — was abandoned years ago due to lack of government consensus and funding. An Iraqi official told The National: <em>"It would have been very useful to us during this difficult time."</em> The alternative now under discussion — transporting crude by lorry to Aqaba — is not viable at the volumes required.</p>
+      </div>
+      <div class="src-line">The National, March 14, 2026 · EIA Country Analysis Brief: Iraq · Reuters · MEES</div>
+    </div>
+
+    <!-- Infrastructure cards -->
+    <div class="sec">
+      <div class="sec-label">Key assets — current status</div>
+      <h2 class="sec-title">Infrastructure</h2>
+      <div class="infra-list">
+
+        <div class="ic ic-red">
+          <div class="ic-head">
+            <div class="ic-title">Basra export terminals (SPM + Khor al-Amaya)</div>
+            <div class="ic-meta">Southern Iraq · SOMO · Persian Gulf</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Pre-crisis capacity</span><span class="ic-v">3.3M bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Current exports</span><span class="ic-v red">Halted</span></div>
+            <div class="ic-row"><span class="ic-l">Route dependency</span><span class="ic-v">Strait of Hormuz (100%)</span></div>
+            <div class="ic-row"><span class="ic-l">Force majeure</span><span class="ic-v red">Active — March 17, 2026</span></div>
+          </div>
+          <div class="ic-note">All seaborne Iraqi exports transit Hormuz. No direct Red Sea access. No bypass pipeline to the west. When Hormuz is disrupted, Basra exports stop.</div>
+          <div class="src-line" style="padding:0 14px 10px;margin:0">Reuters · Iraq Oil Ministry · March 2026</div>
+        </div>
+
+        <div class="ic ic-warn">
+          <div class="ic-head">
+            <div class="ic-title">Kirkuk-Ceyhan pipeline (Iraq-Turkey Pipeline)</div>
+            <div class="ic-meta">Northern Iraq → Ceyhan, Turkey · 970km</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Design capacity</span><span class="ic-v">1.6M bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Current throughput</span><span class="ic-v red">~200K bbl/d (disrupted)</span></div>
+            <div class="ic-row"><span class="ic-l">Status</span><span class="ic-v">Severely restricted — KRG dispute</span></div>
+            <div class="ic-row"><span class="ic-l">Bypass potential</span><span class="ic-v">~6% of Basra volume</span></div>
+          </div>
+          <div class="cap-wrap">
+            <div class="cap-row"><span>Utilisation vs design capacity</span><span>12%</span></div>
+            <div class="cap-bar"><div class="cap-fill" style="width:12%;background:#8a5a00"></div></div>
+          </div>
+          <div class="ic-note">Pipeline has been operating at a fraction of capacity since March 2023 due to the unresolved KRG-Baghdad revenue dispute. Iraq's parliament passed a budget amendment in February 2025 requiring payment of $16/bbl to IOCs operating in KRG — implementation remains contested.</div>
+          <div class="src-line" style="padding:0 14px 10px;margin:0">EIA Country Analysis Brief · The National · MEES · March 2026</div>
+        </div>
+
+        <div class="ic ic-navy">
+          <div class="ic-head">
+            <div class="ic-title">Rumaila oil field</div>
+            <div class="ic-meta">Southern Iraq · BP / CNPC / SOMO · Largest field in Iraq</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Capacity</span><span class="ic-v">~1.4M bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Status</span><span class="ic-v red">Force majeure — production cut</span></div>
+            <div class="ic-row"><span class="ic-l">Operator</span><span class="ic-v">BP / CNPC</span></div>
+            <div class="ic-row"><span class="ic-l">Output directed to</span><span class="ic-v">Domestic refineries only</span></div>
+          </div>
+          <div class="ic-note">Iraq's largest producing field. All export-oriented production suspended. Remaining output directed to Basra refinery complex and domestic supply chain.</div>
+          <div class="src-line" style="padding:0 14px 10px;margin:0">Iraq Oil Ministry · EIA · March 2026</div>
+        </div>
+
+        <div class="ic ic-navy">
+          <div class="ic-head">
+            <div class="ic-title">Basra refinery complex</div>
+            <div class="ic-meta">Southern Iraq · South Refining Company</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Capacity (with 2023 expansion)</span><span class="ic-v">~420K bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Current feedstock</span><span class="ic-v">Basra crude (redirected)</span></div>
+            <div class="ic-row"><span class="ic-l">2026 planned upgrade</span><span class="ic-v">More middle distillates</span></div>
+          </div>
+          <div class="ic-note">A fourth 70,000 bbl/d expansion unit was commissioned in late 2023. The refinery is now receiving crude that would otherwise be exported — maintaining domestic fuel supply during the export halt.</div>
+          <div class="src-line" style="padding:0 14px 10px;margin:0">EIA Country Analysis Brief · MEES · 2025</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- KRG dispute -->
+    <div class="sec">
+      <div class="sec-label">Structural constraint</div>
+      <h2 class="sec-title">The KRG-Baghdad dispute — northern exports paralysed since 2023</h2>
+      <div class="body">
+        <p>The Kurdistan Regional Government controls approximately 400,000-500,000 barrels per day of production in northern Iraq, exported via the Kirkuk-Ceyhan pipeline through Turkey. In March 2023, an international arbitration tribunal ruled in favour of Iraq in a dispute with Turkey over KRG crude exports — and Turkey halted pipeline flows in compliance with the ruling. The pipeline has carried only a fraction of its 1.6 million barrel per day capacity since.</p>
+        <p>The dispute is structural: the KRG wants to sell its crude independently and receive direct payment; Baghdad insists on centralising export revenue. In February 2025, Iraq's parliament passed a budget amendment requiring the federal government to pay independent oil companies operating in the KRG $16 per barrel for crude sold through the pipeline — an attempt to restart flows that has had only partial success.</p>
+        <p><strong>The result is that Iraq entered the Hormuz crisis of March 2026 with its only viable alternative export route already operating at 12% of capacity.</strong> The structural failure to resolve the KRG dispute — compounded by the abandoned Aqaba pipeline proposal — left Iraq with no viable fallback when its southern terminals were shut.</p>
+      </div>
+      <div class="src-line">EIA Country Analysis Brief: Iraq · The National, March 14, 2026 · MEES · Iraq Oil Report</div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sc sc-red">
+      <div class="sc-head">
+        <div class="sc-title">Current status</div>
+        <div class="sc-meta">As of March 20, 2026</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-row"><span class="sc-l">Force majeure</span><span class="sc-v sc-red-v">Active</span></div>
+        <div class="sc-row"><span class="sc-l">Basra exports</span><span class="sc-v sc-red-v">Halted</span></div>
+        <div class="sc-row"><span class="sc-l">Production</span><span class="sc-v sc-red-v">~1.4M bbl/d</span></div>
+        <div class="sc-row"><span class="sc-l">Pre-crisis output</span><span class="sc-v">4.16M bbl/d</span></div>
+        <div class="sc-row"><span class="sc-l">Output reduction</span><span class="sc-v sc-red-v">−66%</span></div>
+        <div class="sc-row"><span class="sc-l">Kirkuk-Ceyhan</span><span class="sc-v">~200K bbl/d only</span></div>
+        <p style="font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55;margin-top:10px">Iraq's oil revenue constitutes ~90% of the government budget. An extended export halt constitutes a fiscal emergency.</p>
+        <div class="src-line" style="margin:8px 0 0">Reuters · Oil Ministry · March 2026</div>
+      </div>
+    </div>
+
+    <div class="sc sc-navy">
+      <div class="sc-head">
+        <div class="sc-title">Export destinations (pre-crisis)</div>
+        <div class="sc-meta">2024 annual · EIA bilateral trade data</div>
+      </div>
+      <div class="sc-body" style="padding:10px 14px">
+        <div class="dest-row"><span class="dest-name">China</span><div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:100%"></div></div></div><span class="dest-pct">34%</span></div>
+        <div class="dest-row"><span class="dest-name">India</span><div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:74%"></div></div></div><span class="dest-pct">25%</span></div>
+        <div class="dest-row"><span class="dest-name">South Korea</span><div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:38%"></div></div></div><span class="dest-pct">13%</span></div>
+        <div class="dest-row"><span class="dest-name">Europe</span><div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:29%"></div></div></div><span class="dest-pct">10%</span></div>
+        <div class="dest-row"><span class="dest-name">Other Asia</span><div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:53%"></div></div></div><span class="dest-pct">18%</span></div>
+        <div class="src-line" style="margin-top:8px">EIA bilateral trade data · 2024 · Vortexa tanker tracking</div>
+      </div>
+    </div>
+
+    <div class="sc sc-red">
+      <div class="sc-head"><div class="sc-title">Risk profile</div></div>
+      <div class="sc-body" style="padding:10px 14px">
+        <div class="risk-row">
+          <div class="risk-top"><span class="risk-type">Export / Hormuz</span><span class="badge b-red">HIGH</span></div>
+          <div class="risk-detail">97% of exports Hormuz-dependent. Force majeure active. Exports halted.</div>
+          <div class="src-line" style="margin:4px 0 0">Reuters · March 2026</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top"><span class="risk-type">Northern route</span><span class="badge b-red">HIGH</span></div>
+          <div class="risk-detail">Kirkuk-Ceyhan at 12% capacity. KRG dispute unresolved. No near-term fix.</div>
+          <div class="src-line" style="margin:4px 0 0">EIA · The National · March 2026</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top"><span class="risk-type">Fiscal</span><span class="badge b-red">HIGH</span></div>
+          <div class="risk-detail">90% budget dependency on oil. Extended halt = fiscal emergency.</div>
+          <div class="src-line" style="margin:4px 0 0">IMF · World Bank · March 2026</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top"><span class="risk-type">Geopolitical</span><span class="badge b-warn">ELEVATED</span></div>
+          <div class="risk-detail">Caught between US and Iran. Iranian attacks on tankers at Basra reported.</div>
+          <div class="src-line" style="margin:4px 0 0">US State Dept · March 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc sc-navy">
+      <div class="sc-head"><div class="sc-title">Latest signals</div></div>
+      <div class="sc-body" style="padding:4px 14px">
+        <div class="sig-item">
+          <div class="sig-meta"><div class="sig-pip hot"></div><span class="sig-src">Reuters</span></div>
+          <div class="sig-hl">Iraq declares force majeure on all foreign-operated oilfields. Production cut to 1.4M bbl/d.</div>
+          <div class="sig-date">March 20, 2026</div>
+        </div>
+        <div class="sig-item">
+          <div class="sig-meta"><div class="sig-pip hot"></div><span class="sig-src">The National</span></div>
+          <div class="sig-hl">Kirkuk-Ceyhan alternative covers only 6% of Basra export volume. No viable large-scale reroute exists.</div>
+          <div class="sig-date">March 14, 2026</div>
+        </div>
+        <div class="sig-item">
+          <div class="sig-meta"><div class="sig-pip"></div><span class="sig-src">EIA</span></div>
+          <div class="sig-hl">Iraq production at 4,157K bbl/d in January 2026 — above 4.0M quota. Now cut to 1.4M.</div>
+          <div class="sig-date">CEIC / EIA · Jan 2026 data</div>
+        </div>
+        <div class="sig-item">
+          <div class="sig-meta"><div class="sig-pip"></div><span class="sig-src">Iraq Oil Ministry</span></div>
+          <div class="sig-hl">Companies invited to urgent talks on essential operations under force majeure. Decision reviewed periodically.</div>
+          <div class="sig-date">March 17, 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Iraq country page · March 2026</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="saudi-arabia.html">Saudi Arabia</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="sources.html">Sources</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+</script>
+</body>
+</html>
