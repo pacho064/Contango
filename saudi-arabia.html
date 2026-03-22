@@ -1,65 +1,541 @@
 <!DOCTYPE html>
+<!-- Contango Energy · Saudi Arabia · v1.0 · 21 March 2026 -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Contango — KSA Intelligence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Source+Serif+4:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f7f7f5; --card: #ffffff; --border: #e8e5e0; --ink: #0f0f0e; --ink-3: #9a9590; --navy: #1d4480;
-      --ss: 'Source Serif 4', serif; --cg: 'Cormorant Garamond', serif; --mono: 'IBM Plex Mono', monospace;
-    }
-    body { font-family: var(--ss); background: var(--bg); color: var(--ink); margin: 0; }
-    .nav { padding: 16px 24px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 12px; }
-    .nav a { color: var(--navy); text-decoration: none; margin-right: 20px; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-    h1 { font-family: var(--cg); font-size: 42px; margin: 8px 0; }
-    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 32px; }
-    .card { background: var(--card); border: 1px solid var(--border); padding: 24px; border-radius: 4px; margin-bottom: 24px; }
-    .card-h { font-family: var(--cg); font-size: 20px; font-weight: 600; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; font-family: var(--mono); font-size: 10px; color: var(--ink-3); padding: 8px; border-bottom: 1px solid var(--border); }
-    td { padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Saudi Arabia — Contango Energy</title>
+<meta name="description" content="Saudi Arabia oil infrastructure, export constraints, Hormuz and Yanbu bottleneck analysis. Sourced energy intelligence.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/saudi-arabia.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;
+  --ss:'Source Serif 4',serif;
+  --mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:inherit}
+
+/* Nav */
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-family:var(--cg);font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 13px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:11px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer;transition:all .12s}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* Country header */
+.country-header{border-bottom:1px solid var(--border);padding:36px 0 28px;background:var(--card)}
+.ch-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ch-meta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:10px}
+.ch-title{font-family:var(--cg);font-size:42px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:8px}
+.ch-sub{font-family:var(--ss);font-size:16px;color:var(--ink-3);margin-bottom:20px}
+.ch-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:2px;border:1px solid}
+.b-red{background:rgba(179,48,0,.08);color:var(--red);border-color:rgba(179,48,0,.2)}
+.b-navy{background:rgba(29,68,128,.08);color:var(--navy);border-color:rgba(29,68,128,.2)}
+.b-teal{background:rgba(74,124,111,.08);color:var(--teal);border-color:rgba(74,124,111,.2)}
+.b-mod{background:rgba(140,110,10,.08);color:#8c6e0a;border-color:rgba(140,110,10,.2)}
+[data-theme=dark] .b-red{background:rgba(179,48,0,.15);color:#c84000;border-color:rgba(179,48,0,.25)}
+[data-theme=dark] .b-navy{background:rgba(29,68,128,.15);color:#4a80c0;border-color:rgba(29,68,128,.25)}
+[data-theme=dark] .b-teal{background:rgba(74,124,111,.15);color:#4a9c8a;border-color:rgba(74,124,111,.25)}
+[data-theme=dark] .b-mod{background:rgba(140,110,10,.15);color:#c8a020;border-color:rgba(140,110,10,.25)}
+
+/* Stats row */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:24px}
+.stat{background:var(--bg);padding:16px 20px}
+.stat-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-bottom:5px}
+.stat-value{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--ink);line-height:1}
+.stat-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);margin-top:3px}
+
+/* Main layout */
+.main{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 320px;gap:48px;padding-top:40px;padding-bottom:60px}
+.content{min-width:0}
+.sidebar{min-width:0}
+
+/* Section */
+.sec{margin-bottom:44px}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.sec-title{font-family:var(--cg);font-size:28px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:16px}
+.sec-body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.sec-body p:last-child{margin-bottom:0}
+.sec-body strong{color:var(--ink);font-weight:600}
+
+/* Alert box */
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+
+/* Info box */
+.info-box{border-left:3px solid var(--navy);padding:14px 18px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .info-box{background:rgba(29,68,128,.12)}
+.info-body{font-family:var(--ss);font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+
+/* Source line */
+.src{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+
+/* Infrastructure cards */
+.infra-grid{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.infra-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.infra-card-navy{border-top:3px solid var(--navy)}
+.infra-card-red{border-top:3px solid var(--red)}
+.ic-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.ic-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.ic-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.ic-body{padding:10px 14px}
+.ic-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.ic-row:last-child{border-bottom:none}
+.ic-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.ic-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.ic-note{font-family:var(--ss);font-style:italic;font-size:11.5px;color:var(--ink-3);padding:8px 14px;border-top:1px solid var(--border);line-height:1.5}
+
+/* Capacity bar */
+.cap-bar-wrap{margin-top:8px}
+.cap-bar-label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-bottom:4px}
+.cap-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.cap-fill{height:100%;border-radius:2px;transition:width .8s}
+
+/* Sidebar cards */
+.side-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-red{border-top:3px solid var(--red)}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-over{color:var(--red)}
+
+/* Export destinations */
+.dest-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.dest-row:last-child{border-bottom:none}
+.dest-flag{font-size:16px;flex-shrink:0}
+.dest-name{font-family:var(--ss);font-size:13px;color:var(--ink);flex:1}
+.dest-bar-wrap{width:80px}
+.dest-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.dest-fill{height:100%;background:var(--navy);border-radius:2px}
+.dest-pct{font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:right;min-width:32px}
+
+/* Risk panel */
+.risk-row{padding:9px 0;border-bottom:1px solid var(--border)}
+.risk-row:last-child{border-bottom:none}
+.risk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.risk-type{font-family:var(--ss);font-size:13px;color:var(--ink)}
+.risk-detail{font-family:var(--ss);font-style:italic;font-size:11.5px;color:var(--ink-3);line-height:1.5}
+
+/* Signals */
+.signal-item{padding:11px 0;border-bottom:1px solid var(--border)}
+.signal-item:last-child{border-bottom:none}
+.signal-meta{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.signal-pip{width:4px;height:4px;border-radius:50%;background:var(--ink-3)}
+.signal-pip.alert{background:var(--red)}
+.signal-src{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4)}
+.signal-hl{font-family:var(--ss);font-size:13px;line-height:1.5;color:var(--ink-2)}
+.signal-date{font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-top:3px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:var(--card);padding:24px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;color:var(--ink-4)}
+.footer-links{display:flex;gap:16px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+/* Responsive */
+@media(max-width:900px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .stats{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-inner,.ch-inner,.footer-inner{padding-left:16px;padding-right:16px}
+  .main{padding-left:16px;padding-right:16px}
+}
+</style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="index.html">← Overview</a>
-  <span>Intelligence Focus: Saudi Arabia</span>
-</nav>
-
-<main class="wrap">
-  <div style="font-family:var(--mono); font-size:11px; color:var(--navy)">MARKET PROFILE</div>
-  <h1>Kingdom of Saudi Arabia</h1>
-  
-  <div class="grid">
-    <div class="col-main">
-      <div class="card">
-        <div class="card-h">Asia Official Selling Prices (OSPs)</div>
-        <table>
-          <thead><tr><th>Grade</th><th>Reference</th><th>Differential</th><th>Change</th></tr></thead>
-          <tbody>
-            <tr><td><b>Arab Light</b></td><td>Oman/Dubai</td><td>+$1.70</td><td style="color:var(--red)">-0.10</td></tr>
-            <tr><td>Arab Extra Light</td><td>Oman/Dubai</td><td>+$2.10</td><td>UNCH</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card">
-        <div class="card-h">Analyst Commentary</div>
-        <p>Aramco is maintaining a defensive posture. Production remains anchored at 9M bpd to support global pricing stability, while internal flows favor the East-West pipeline to mitigate Red Sea transit risks.</p>
-      </div>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a on" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="methodology.html">Methodology</a>
+      <a class="nav-a" href="sources.html">Sources</a>
+      <a class="nav-a" href="about.html">About</a>
     </div>
-    <div class="col-side">
-      <div class="card">
-        <div class="card-h">Logistics Status</div>
-        <p><b>Ras Tanura:</b> Normal<br><b>Yanbu:</b> High Activity<br><b>E-W Pipe:</b> 3.2M bpd</p>
-      </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
     </div>
   </div>
-</main>
+</nav>
 
+<div class="country-header">
+  <div class="ch-inner">
+    <div class="ch-meta">Country intelligence · Arabian Peninsula · OPEC+ member</div>
+    <h1 class="ch-title">Saudi Arabia</h1>
+    <div class="ch-sub">World's largest crude exporter. Swing producer. Hormuz-dependent.</div>
+    <div class="ch-badges">
+      <span class="badge b-red">Hormuz dependency: critical</span>
+      <span class="badge b-mod">Yanbu bypass: constrained</span>
+      <span class="badge b-navy">OPEC+ quota: 10.0M bbl/d</span>
+      <span class="badge b-teal">Production: 10.2M bbl/d est.</span>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Production</div>
+        <div class="stat-value">10.2M</div>
+        <div class="stat-note">bbl/day · est. · Aramco / OPEC survey</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Proved reserves</div>
+        <div class="stat-value">267Bn</div>
+        <div class="stat-note">barrels · ~17% of global · BP Statistical Review</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Arab Light OSP</div>
+        <div class="stat-value">$84.00</div>
+        <div class="stat-note">March 2026 · Aramco OSP release · +$1.74 vs Brent</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Hormuz transit</div>
+        <div class="stat-value">~95%</div>
+        <div class="stat-note">of exports transit Strait of Hormuz · IEA estimate</div>
+      </div>
+    </div>
+    <div class="src">Sources: Saudi Aramco Annual Review 2025 · IEA World Energy Outlook · BP Statistical Review · OPEC JMMC communiqué · Updated March 2026</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="content">
+
+    <!-- The core argument -->
+    <div class="sec">
+      <div class="sec-label">Infrastructure constraint</div>
+      <h2 class="sec-title">The Yanbu bottleneck — why the Red Sea bypass fails at scale</h2>
+      <div class="sec-body">
+        <p>Saudi Arabia's East-West Pipeline (Petroline) runs 1,200 kilometres from Abqaiq in the Eastern Province to Yanbu on the Red Sea. It is routinely cited as the strategic answer to Strait of Hormuz vulnerability. The argument is simple: if Hormuz is disrupted, redirect exports westward through the pipeline to Yanbu and out via the Red Sea.</p>
+        <p>The argument has a structural flaw. <strong>The pipeline can carry up to 5 million barrels per day. Yanbu's export terminal capacity is approximately 1.8 million barrels per day.</strong> The pipeline is not the bottleneck. The port is.</p>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-title">The bypass capacity problem</div>
+        <div class="alert-body">Even at full pipeline utilisation, Saudi Arabia can only bypass Hormuz for ~18% of its daily exports. The remaining ~8.4 million barrels per day remain Hormuz-dependent. No announced investment programme exists to expand Yanbu's export capacity.</div>
+      </div>
+
+      <div class="sec-body">
+        <p>The second structural problem is Bab el-Mandeb. The pipeline bypass trades one chokepoint for another. Saudi crude routed via Yanbu must still transit this strait — and as of March 2026, the Houthi threat to Bab el-Mandeb has moved from historical pattern to active strategic option.</p>
+        <p><strong>As of mid-March 2026, approximately 30 supertankers are rerouting from Hormuz to Yanbu, far exceeding the usual two per month.</strong> Each one of those tankers must then pass through Bab el-Mandeb to reach Asian buyers — a corridor where Houthi missiles remain in range and a blockade decision is explicitly under active consideration in Sanaa.</p>
+      </div>
+
+      <div class="info-box">
+        <div class="info-body">David Butter, associate fellow at Chatham House: <em>"Even at full capacity these routes can only cover about one-quarter of the oil that normally goes through the Strait of Hormuz."</em> The East-West pipeline and UAE's Habshan-Fujairah pipeline combined. Not Saudi Arabia's bypass alone.</div>
+      </div>
+
+      <div class="src">IEA World Energy Outlook 2025 · Saudi Aramco Annual Review · Chatham House Middle East programme · Financial Times, 18 March 2026 · CFR Global Conflict Tracker · Updated March 2026</div>
+    </div>
+
+    <!-- Houthi / Bab el-Mandeb -->
+    <div class="sec">
+      <div class="sec-label">Active threat — updated March 2026</div>
+      <h2 class="sec-title">Bab el-Mandeb: the second chokepoint is now in play</h2>
+      <div class="sec-body">
+        <p>The Houthis have not yet entered the US-Iran war. But the conditions under which they would are now public, sourced, and specific. Houthi political bureau member Mohammed al-Bukhaiti stated on 19 March 2026 that the group is actively examining closure of the Bab el-Mandeb to vessels from nations engaged in hostilities against Iran — and that any decision would be coordinated with Tehran.</p>
+        <p>This matters for Saudi Arabia specifically because of route dependency. <strong>About 75% of Saudi Arabia's crude exports go to Asian markets — China, India, Japan, South Korea — meaning tankers must transit Bab el-Mandeb twice: once to collect crude at Yanbu and again to deliver it to buyers.</strong> A Houthi blockade would not merely inconvenience Saudi exports. It would eliminate the only viable bypass of Hormuz that exists at scale.</p>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-title">Strategic pause, not capacity degradation</div>
+        <div class="alert-body">The absence of current Houthi attacks on Red Sea shipping reflects deliberate strategic timing, not military weakness. Analysts at the International Crisis Group, RUSI, and Global Security Review all assess the group is calibrating its entry to maximise impact — waiting for Iranian coordination rather than acting independently. The Houthis have demonstrated in prior cycles that they calibrate attacks based on political timing. That suggests the current quiet is strategic, not structural.</div>
+      </div>
+
+      <div class="sec-body">
+        <p>The implication for the Yanbu bypass argument is direct: the bypass assumes Bab el-Mandeb is open. That assumption is currently unverified and operationally fragile. The route that is supposed to protect Saudi exports from Hormuz disruption runs directly through the domain of an actor that has explicitly stated its intention to close it.</p>
+      </div>
+      <div class="src">CGTN / RIA Novosti, 20 March 2026 · Gulf International Forum, 15 March 2026 · The National, 17 March 2026 · Global Security Review, March 2026 · NBC News, 18 March 2026 · Center for the National Interest (Greg Priddy) · CFR Global Conflict Tracker</div>
+    </div>
+
+    <!-- Abqaiq -->
+    <div class="sec">
+      <div class="sec-label">Infrastructure vulnerability</div>
+      <h2 class="sec-title">Abqaiq — single point of failure for global supply</h2>
+      <div class="sec-body">
+        <p>Saudi Arabia's oil processing infrastructure is extraordinarily concentrated. The Abqaiq facility in the Eastern Province handles the preparation of crude for export — removing hydrogen sulphide from sour crude, adjusting API gravity, and routing product to export terminals. It processes an estimated 7% of global oil supply from one location.</p>
+        <p>The September 2019 drone and cruise missile attack on Abqaiq temporarily knocked out approximately 5.7 million barrels per day of production — more than half of Saudi output — and demonstrated that the facility's physical vulnerability is real, not theoretical. Saudi Arabia restored capacity within weeks in 2019. The context in March 2026 is materially different: Hormuz is partially blocked, tankers are rerouting to Yanbu, and Iranian-linked actors have demonstrated the capability and willingness to strike Saudi energy infrastructure directly.</p>
+        <p><strong>The concentration of Saudi Arabia's processing capacity in the Eastern Province — adjacent to the Gulf, dependent on Hormuz, within range of Iranian ballistic missiles — is the structural risk that OSP pricing cannot fully price in.</strong></p>
+      </div>
+      <div class="src">IEA Emergency Response · Saudi Aramco Annual Review · CSIS Energy Security Program · US EIA Country Analysis — Saudi Arabia · Updated March 2026</div>
+    </div>
+
+    <!-- Infrastructure cards -->
+    <div class="sec">
+      <div class="sec-label">Key assets</div>
+      <h2 class="sec-title">Infrastructure — capacity and constraint</h2>
+      <div class="infra-grid">
+
+        <div class="infra-card infra-card-navy">
+          <div class="ic-head">
+            <div class="ic-title">East-West Pipeline (Petroline)</div>
+            <div class="ic-meta">Abqaiq → Yanbu · Saudi Aramco</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Design capacity</span><span class="ic-v">5.0M bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Current utilisation</span><span class="ic-v">~38% (est.)</span></div>
+            <div class="ic-row"><span class="ic-l">Status</span><span class="ic-v">Active — increasing</span></div>
+            <div class="ic-row"><span class="ic-l">Bottleneck</span><span class="ic-v">Yanbu port (1.8M bbl/d)</span></div>
+          </div>
+          <div class="cap-bar-wrap" style="padding:0 14px 10px">
+            <div class="cap-bar-label"><span>Pipeline utilisation</span><span>38%</span></div>
+            <div class="cap-bar"><div class="cap-fill" style="width:38%;background:var(--navy)"></div></div>
+          </div>
+          <div class="ic-note">Pipeline capacity exceeds port capacity by 2.8x. Expanding pipeline flow without expanding Yanbu does not increase bypass capability.</div>
+          <div class="src" style="padding:0 14px 10px">MEES · Saudi Aramco disclosures · IEA · March 2026</div>
+        </div>
+
+        <div class="infra-card infra-card-red">
+          <div class="ic-head">
+            <div class="ic-title">Yanbu export terminal</div>
+            <div class="ic-meta">Red Sea coast · Saudi Ports Authority</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Export capacity</span><span class="ic-v">~1.8M bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Current loading</span><span class="ic-v">Surging — 30 tankers rerouted</span></div>
+            <div class="ic-row"><span class="ic-l">Status</span><span class="ic-v">Active — near capacity</span></div>
+            <div class="ic-row"><span class="ic-l">Onward route</span><span class="ic-v">Bab el-Mandeb (contested)</span></div>
+          </div>
+          <div class="ic-note">Approximately 30 supertankers rerouted from Hormuz to Yanbu as of mid-March 2026 — far above the typical two per month. The port is approaching operational capacity. All departing tankers must transit Bab el-Mandeb.</div>
+          <div class="src" style="padding:0 14px 10px">CFR Global Conflict Tracker · Financial Times · March 2026</div>
+        </div>
+
+        <div class="infra-card infra-card-red">
+          <div class="ic-head">
+            <div class="ic-title">Ras Tanura export terminal</div>
+            <div class="ic-meta">Arabian Gulf · Saudi Aramco</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Capacity</span><span class="ic-v">6.5M bbl/d</span></div>
+            <div class="ic-row"><span class="ic-l">Utilisation</span><span class="ic-v">~88% (est.)</span></div>
+            <div class="ic-row"><span class="ic-l">Route dependency</span><span class="ic-v">Strait of Hormuz</span></div>
+            <div class="ic-row"><span class="ic-l">Hormuz status</span><span class="ic-v">Partially disrupted</span></div>
+          </div>
+          <div class="cap-bar-wrap" style="padding:0 14px 10px">
+            <div class="cap-bar-label"><span>Utilisation</span><span>88%</span></div>
+            <div class="cap-bar"><div class="cap-fill" style="width:88%;background:var(--red)"></div></div>
+          </div>
+          <div class="ic-note">World's largest crude export terminal. Entirely east-coast dependent — zero Red Sea access. Every barrel exported from Ras Tanura transits Hormuz.</div>
+          <div class="src" style="padding:0 14px 10px">IEA · Saudi Aramco Annual Review · World Port Index</div>
+        </div>
+
+        <div class="infra-card infra-card-navy">
+          <div class="ic-head">
+            <div class="ic-title">Abqaiq processing facility</div>
+            <div class="ic-meta">Eastern Province · Saudi Aramco</div>
+          </div>
+          <div class="ic-body">
+            <div class="ic-row"><span class="ic-l">Processing share</span><span class="ic-v">~7% of global supply</span></div>
+            <div class="ic-row"><span class="ic-l">Attack precedent</span><span class="ic-v">Sept 2019 — 5.7M bbl/d offline</span></div>
+            <div class="ic-row"><span class="ic-l">Recovery time (2019)</span><span class="ic-v">~2–3 weeks</span></div>
+            <div class="ic-row"><span class="ic-l">Current threat level</span><span class="ic-v">Elevated</span></div>
+          </div>
+          <div class="ic-note">Single point of failure for a large share of Saudi production preparation. Located in the Eastern Province, within Iranian ballistic missile range. The 2019 attack demonstrated physical vulnerability in a lower-threat environment than March 2026.</div>
+          <div class="src" style="padding:0 14px 10px">CSIS Energy Security · IEA Emergency Response · US EIA</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- OPEC+ position -->
+    <div class="side-card sc-navy">
+      <div class="sc-head"><div class="sc-title">OPEC+ position</div></div>
+      <div class="sc-body">
+        <div class="sc-row"><span class="sc-l">Quota</span><span class="sc-v">10.0M bbl/d</span></div>
+        <div class="sc-row"><span class="sc-l">Actual (est.)</span><span class="sc-v sc-over">10.2M bbl/d</span></div>
+        <div class="sc-row"><span class="sc-l">Deviation</span><span class="sc-v sc-over">+0.2M bbl/d over</span></div>
+        <div class="sc-row"><span class="sc-l">Spare capacity</span><span class="sc-v">~2M bbl/d est.</span></div>
+        <p style="font-family:var(--ss);font-style:italic;font-size:11.5px;color:var(--ink-3);line-height:1.55;margin-top:10px">Saudi Arabia retains the world's largest spare capacity — the ability to move output by ~2M bbl/d on short notice. This is the structural basis of its swing-producer role and OPEC+ political leverage.</p>
+        <div class="src">OPEC JMMC communiqué · Reuters output survey · March 2026</div>
+      </div>
+    </div>
+
+    <!-- Export destinations -->
+    <div class="side-card sc-navy">
+      <div class="sc-head">
+        <div class="sc-title">Export destinations</div>
+        <div style="font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px">Est. 10.2M bbl/d total · 2025</div>
+      </div>
+      <div class="sc-body" style="padding:10px 14px">
+        <div class="dest-row">
+          <span class="dest-flag">🇨🇳</span>
+          <span class="dest-name">China</span>
+          <div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:100%"></div></div></div>
+          <span class="dest-pct">23%</span>
+        </div>
+        <div class="dest-row">
+          <span class="dest-flag">🇯🇵</span>
+          <span class="dest-name">Japan</span>
+          <div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:61%"></div></div></div>
+          <span class="dest-pct">14%</span>
+        </div>
+        <div class="dest-row">
+          <span class="dest-flag">🇮🇳</span>
+          <span class="dest-name">India</span>
+          <div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:57%"></div></div></div>
+          <span class="dest-pct">13%</span>
+        </div>
+        <div class="dest-row">
+          <span class="dest-flag">🇰🇷</span>
+          <span class="dest-name">South Korea</span>
+          <div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:48%"></div></div></div>
+          <span class="dest-pct">11%</span>
+        </div>
+        <div class="dest-row">
+          <span class="dest-flag">🇺🇸</span>
+          <span class="dest-name">United States</span>
+          <div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:35%"></div></div></div>
+          <span class="dest-pct">8%</span>
+        </div>
+        <div class="dest-row">
+          <span class="dest-flag">🌐</span>
+          <span class="dest-name">Other</span>
+          <div class="dest-bar-wrap"><div class="dest-bar"><div class="dest-fill" style="width:100%"></div></div></div>
+          <span class="dest-pct">31%</span>
+        </div>
+        <div class="src">Saudi Aramco Annual Review 2025 · EIA bilateral trade data · Indicative</div>
+      </div>
+    </div>
+
+    <!-- Risk profile -->
+    <div class="side-card sc-red">
+      <div class="sc-head"><div class="sc-title">Risk profile</div></div>
+      <div class="sc-body" style="padding:10px 14px">
+        <div class="risk-row">
+          <div class="risk-top">
+            <span class="risk-type">Shipping / Hormuz</span>
+            <span class="badge b-red">HIGH</span>
+          </div>
+          <div class="risk-detail">~95% of exports transit Hormuz. Partial disruption ongoing as of March 2026.</div>
+          <div class="src">Lloyd's JWC · IEA · March 2026</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top">
+            <span class="risk-type">Red Sea bypass</span>
+            <span class="badge b-red">HIGH</span>
+          </div>
+          <div class="risk-detail">Yanbu port capacity constrains bypass to ~18% of exports. Bab el-Mandeb blockade under active Houthi consideration.</div>
+          <div class="src">CFR · CGTN · MEES · March 2026</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top">
+            <span class="risk-type">Infrastructure</span>
+            <span class="badge b-mod">MODERATE</span>
+          </div>
+          <div class="risk-detail">Abqaiq single-point vulnerability demonstrated in 2019. Eastern Province location within Iranian missile range.</div>
+          <div class="src">CSIS · IEA Emergency Response</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top">
+            <span class="risk-type">Geopolitical</span>
+            <span class="badge b-mod">MODERATE</span>
+          </div>
+          <div class="risk-detail">US State Dept Level 2. Saudi-Iran relationship formally hostile. Saudi-Houthi ceasefire fragile.</div>
+          <div class="src">US State Dept Travel Advisory · Feb 2026</div>
+        </div>
+        <div class="risk-row">
+          <div class="risk-top">
+            <span class="risk-type">Sanctions</span>
+            <span class="badge b-teal">LOW</span>
+          </div>
+          <div class="risk-detail">No current sanctions. Strong US-Saudi security relationship.</div>
+          <div class="src">OFAC sanctions list · March 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest signals -->
+    <div class="side-card sc-navy">
+      <div class="sc-head"><div class="sc-title">Latest signals</div></div>
+      <div class="sc-body" style="padding:4px 14px">
+        <div class="signal-item">
+          <div class="signal-meta">
+            <div class="signal-pip alert"></div>
+            <span class="signal-src">CFR · Reuters</span>
+          </div>
+          <div class="signal-hl">~30 supertankers rerouted to Yanbu — far above usual two per month. Port approaching capacity.</div>
+          <div class="signal-date">Mid-March 2026</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-meta">
+            <div class="signal-pip"></div>
+            <span class="signal-src">MEES</span>
+          </div>
+          <div class="signal-hl">East-West pipeline operating at 38% of 5M bbl/d capacity. Yanbu export capacity: 1.8M bbl/d.</div>
+          <div class="signal-date">March 2026</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-meta">
+            <div class="signal-pip"></div>
+            <span class="signal-src">Aramco OSP</span>
+          </div>
+          <div class="signal-hl">Arab Light OSP for March 2026 loading: $84.00/bbl. Differential to Brent: +$1.74.</div>
+          <div class="signal-date">1 March 2026</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-meta">
+            <div class="signal-pip"></div>
+            <span class="signal-src">OPEC JMMC</span>
+          </div>
+          <div class="signal-hl">Saudi Arabia producing ~10.2M bbl/d against quota of 10.0M bbl/d. Broadly compliant.</div>
+          <div class="signal-date">March 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Saudi Arabia country page · March 2026</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="sources.html">Sources</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark = false;
+function toggleTheme(){
+  dark = !dark;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+  document.getElementById('theme-btn').textContent = dark ? 'Light' : 'Dark';
+}
+</script>
 </body>
 </html>
