@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<!-- Contango Energy · Spare Capacity · v1.0 · 22 March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Spare capacity — Contango Energy</title>
+<meta name="description" content="Saudi Arabia and OPEC+ spare crude oil production capacity. The real buffer between stability and a price spike — and why the official number is misleading.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/spare-capacity.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* Page header */
+.ph{background:var(--card);border-bottom:3px solid var(--navy);padding:36px 0 28px}
+.ph-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:700px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+.main{max-width:1200px;margin:0 auto;padding:40px 28px 60px;display:grid;grid-template-columns:1fr 320px;gap:48px}
+.content{min-width:0}
+.sidebar{min-width:0}
+
+.sec{margin-bottom:48px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:30px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.15}
+.body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:12px;padding-top:8px;border-top:1px solid var(--border)}
+
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+.info-box{border-left:3px solid var(--navy);padding:14px 18px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .info-box{background:rgba(29,68,128,.12)}
+.info-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* ── GAUGE ── */
+.gauge-section{margin-bottom:48px}
+.gauge-wrap{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:16px}
+.gauge-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.gauge-title{font-family:var(--cg);font-size:18px;font-weight:500;color:var(--ink)}
+.gauge-updated{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4)}
+.gauge-body{padding:24px 20px}
+
+/* Big number */
+.gauge-number-row{display:flex;align-items:flex-end;gap:32px;margin-bottom:24px;flex-wrap:wrap}
+.gauge-main{display:flex;flex-direction:column;gap:4px}
+.gauge-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+.gauge-value{font-family:var(--cg);font-size:72px;font-weight:600;color:var(--navy);line-height:1;letter-spacing:-.02em}
+.gauge-unit{font-family:var(--mono);font-size:16px;color:var(--ink-3);margin-left:4px}
+.gauge-context{font-family:var(--ss);font-size:13px;color:var(--ink-3);margin-top:4px;font-style:italic}
+.gauge-secondary{display:grid;grid-template-columns:repeat(3,auto);gap:0 28px}
+.gs-item{display:flex;flex-direction:column;gap:3px}
+.gs-label{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4)}
+.gs-val{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--ink)}
+.gs-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4)}
+
+/* Visual bar */
+.capacity-bar-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.cb-label{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-4);margin-bottom:12px}
+.cb-track{position:relative;height:36px;background:var(--border);border-radius:4px;overflow:visible;margin-bottom:8px}
+.cb-fill-prod{position:absolute;left:0;top:0;height:100%;background:var(--navy);border-radius:4px 0 0 4px;transition:width 1s}
+.cb-fill-spare{position:absolute;top:0;height:100%;background:rgba(29,68,128,.25);border-left:2px dashed var(--navy);transition:width 1s}
+.cb-fill-deployable{position:absolute;top:0;height:100%;background:rgba(29,68,128,.5);border-left:2px solid #4a7c6f;transition:width 1s}
+.cb-marker{position:absolute;top:-20px;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--red);white-space:nowrap}
+.cb-marker-line{position:absolute;top:0;bottom:0;width:2px;background:var(--red);opacity:.7}
+.cb-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+.cb-leg-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--ink-4);letter-spacing:.04em}
+.cb-leg-swatch{width:14px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* Threshold bands */
+.thresholds{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:20px}
+.th-item{background:var(--card);padding:14px 16px}
+.th-range{font-family:var(--mono);font-size:15px;font-weight:500;margin-bottom:4px}
+.th-label{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.th-desc{font-family:var(--ss);font-style:italic;font-size:12px;color:var(--ink-3);line-height:1.5}
+.th-comfortable{border-top:3px solid var(--teal)}
+.th-tight{border-top:3px solid #8a5a00}
+.th-critical{border-top:3px solid var(--red)}
+
+/* Country breakdown */
+.country-bars{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.cbar{display:flex;flex-direction:column;gap:4px}
+.cbar-top{display:flex;justify-content:space-between;align-items:baseline}
+.cbar-name{font-family:var(--ss);font-size:13px;color:var(--ink)}
+.cbar-nums{display:flex;gap:12px;align-items:baseline}
+.cbar-spare{font-family:var(--mono);font-size:13px;font-weight:500}
+.cbar-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4)}
+.cbar-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.cbar-fill{height:100%;border-radius:3px;transition:width .8s}
+.cbar-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+
+/* Sidebar cards */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-red{border-top:3px solid var(--red)}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.sc-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-v-red{color:var(--red)!important}
+.sc-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55;margin-top:8px}
+
+/* Key facts */
+.fact-list{display:flex;flex-direction:column;gap:0}
+.fact-item{padding:12px 0;border-bottom:1px solid var(--border)}
+.fact-item:last-child{border-bottom:none}
+.fact-num{font-family:var(--cg);font-size:32px;font-weight:600;color:var(--navy);line-height:1;margin-bottom:3px}
+.fact-desc{font-family:var(--ss);font-size:13px;line-height:1.55;color:var(--ink-2)}
+.fact-src{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:3px}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:960px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .gauge-number-row{flex-direction:column;gap:16px}
+  .thresholds{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a on" href="spare-capacity.html">Spare capacity</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Analysis · OPEC+ spare capacity · Updated March 2026</div>
+    <h1 class="ph-title">The buffer between stability and a spike</h1>
+    <div class="ph-sub">Spare capacity is the single most important number in the oil market that almost nobody presents properly. It is the difference between a supply shock being absorbed and becoming a crisis. Right now, it is thinner than the official number suggests — and mostly Hormuz-dependent.</div>
+    <div class="ph-src">Sources: IEA Oil Market Report January 2026 · IEA Strait of Hormuz analysis · EIA OPEC capacity definitions update December 2025 · Energy Aspects · Rapidan Energy Group · OilPrice.com · EnergyNow.com · March 2026</div>
+  </div>
+</div>
+
+<div class="main">
+<div class="content">
+
+  <!-- Main gauge -->
+  <div class="gauge-section">
+    <div class="sec-label">The headline number</div>
+    <h2 class="sec-title" style="margin-bottom:8px">OPEC+ spare capacity</h2>
+
+    <div class="gauge-wrap">
+      <div class="gauge-header">
+        <span class="gauge-title">Total OPEC+ surplus production capacity</span>
+        <span class="gauge-updated">IEA Q4 2025 estimate · March 2026</span>
+      </div>
+      <div class="gauge-body">
+        <div class="gauge-number-row">
+          <div class="gauge-main">
+            <div class="gauge-label">Official IEA estimate (excl. sanctioned)</div>
+            <div>
+              <span class="gauge-value">4.05</span>
+              <span class="gauge-unit">M bbl/d</span>
+            </div>
+            <div class="gauge-context">Q4 2025 · Can be brought online within 30 days, sustained 90 days</div>
+          </div>
+          <div class="gauge-secondary">
+            <div class="gs-item">
+              <span class="gs-label">Saudi Arabia</span>
+              <span class="gs-val">2.43M</span>
+              <span class="gs-note">60% of total</span>
+            </div>
+            <div class="gs-item">
+              <span class="gs-label">UAE</span>
+              <span class="gs-val">850K</span>
+              <span class="gs-note">21% of total</span>
+            </div>
+            <div class="gs-item">
+              <span class="gs-label">Iraq</span>
+              <span class="gs-val" style="color:var(--red)">320K</span>
+              <span class="gs-note">Force majeure active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual bar -->
+        <div class="capacity-bar-section">
+          <div class="cb-label">Saudi Arabia production capacity visualised · M bbl/d</div>
+          <div class="cb-track" id="cap-bar-track">
+            <!-- Current production: 10.2M / 12M max = 85% -->
+            <div class="cb-fill-prod" style="width:85%" title="Current production ~10.2M bbl/d"></div>
+            <!-- IEA spare: +2.43M → total 12.63M, shown as extra 20% -->
+            <div class="cb-fill-spare" style="left:85%;width:15%" title="IEA spare capacity 2.43M bbl/d"></div>
+            <!-- Deployable reality: 1.5-2.5M — midpoint 2M = ~17% of 12M -->
+            <!-- Panic zone marker at 1.5M spare = 88.75% of 12M max -->
+            <div class="cb-marker-line" style="left:88.75%"></div>
+            <div class="cb-marker" style="left:88.75%">← Panic zone below here</div>
+          </div>
+          <div class="cb-legend">
+            <div class="cb-leg-item"><div class="cb-leg-swatch" style="background:var(--navy)"></div>Current production (~10.2M bbl/d)</div>
+            <div class="cb-leg-item"><div class="cb-leg-swatch" style="background:rgba(29,68,128,.25);border:1px dashed var(--navy)"></div>IEA spare (2.43M bbl/d)</div>
+            <div class="cb-leg-item"><div class="cb-leg-swatch" style="background:var(--red);width:2px;height:14px;border-radius:1px"></div>Panic threshold (~1.5M bbl/d)</div>
+          </div>
+        </div>
+
+        <!-- Threshold bands -->
+        <div class="thresholds">
+          <div class="th-item th-comfortable">
+            <div class="th-range" style="color:var(--teal)">&gt; 3M bbl/d</div>
+            <div class="th-label" style="color:var(--teal)">Comfortable</div>
+            <div class="th-desc">Market well supplied. Supply shocks absorbed without major price impact. Risk premium low.</div>
+          </div>
+          <div class="th-item th-tight">
+            <div class="th-range" style="color:#8a5a00">1.5 – 3M bbl/d</div>
+            <div class="th-label" style="color:#8a5a00">Tight</div>
+            <div class="th-desc">Risk premium building. A 2M bbl/d disruption exhausts the buffer. Prices sensitive to any shock. Current level.</div>
+          </div>
+          <div class="th-item th-critical">
+            <div class="th-range" style="color:var(--red)">&lt; 1.5M bbl/d</div>
+            <div class="th-label" style="color:var(--red)">Critical</div>
+            <div class="th-desc">Panic zone. Historical price spikes occur here. Any disruption becomes a crisis. No margin for error.</div>
+          </div>
+        </div>
+
+        <div class="src-line">IEA Oil Market Report January 2026 · IEA Strait of Hormuz analysis (early 2026) · EIA OPEC capacity update December 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The real number -->
+  <div class="sec">
+    <div class="sec-label">The critical distinction</div>
+    <h2 class="sec-title">Official vs deployable — the gap that matters</h2>
+    <div class="body">
+      <p>The IEA's official estimate of 4.05M bbl/d uses a definition of spare capacity that includes production that can be brought online within 30 days and sustained for 90 days. This is a generous definition. It includes fields that are technically capable of producing more but require significant preparation, coordination, and sometimes investment to restart.</p>
+      <p><strong>Independent analysts at Energy Aspects and Rapidan Energy Group estimate true deployable spare capacity — production available within weeks without major capital spending — at just 1.5–2.5M bbl/d.</strong> That range is concentrated almost entirely in Saudi Arabia and the UAE. Outside the two Gulf states, other OPEC+ producers are essentially at or near maximum sustainable output.</p>
+      <p>The distinction matters because the EIA definition of spare capacity requires it to be available within 30 days. In a genuine crisis — say, a Hormuz disruption — the 30-day window is not a comfort. Markets move in hours. The question is what can be physically deployed into tankers within days, not what can theoretically be achieved within a month.</p>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">The Abqaiq precedent — why surge claims are untested</div>
+      <div class="alert-body">Saudi Arabia claims a maximum sustainable capacity of 12M bbl/d. The kingdom has produced 12M bbl/d exactly once in its history — for one month in early 2020, during the brief price war with Russia, before COVID destroyed demand and forced cuts. It has produced 11M bbl/d or more only for short periods in 2018 and 2023. During the 2019 Abqaiq attack, Saudi Arabia took months to restore just 5.7M bbl/d of disrupted capacity — raising serious questions about its ability to surge production from a higher baseline under crisis conditions.</div>
+    </div>
+
+    <div class="body">
+      <p>The Hormuz dimension compounds the problem significantly. <strong>Most of Saudi Arabia's spare capacity — and essentially all of it outside Yanbu — is located in the Eastern Province and must transit the Strait of Hormuz to reach export terminals.</strong> A Hormuz disruption simultaneously removes demand for Saudi exports and makes it physically impossible to deploy the spare capacity that is supposed to stabilise the market. The safety valve is inside the disrupted zone.</p>
+      <p>The IEA's own Hormuz analysis, published in early 2026, notes that any prolonged disruption would render unavailable the vast majority of the world's spare production capacity. This is not a secondary effect of a Hormuz closure — it is the primary one.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-body">IEA Strait of Hormuz analysis, early 2026: <em>"Apart from physically disrupting oil shipments from these countries, any prolonged disruption in the Strait of Hormuz could also render unavailable the vast majority of the world's spare production capacity — most of which is held by Saudi Arabia."</em></div>
+    </div>
+
+    <div class="src-line">Energy Aspects · Rapidan Energy Group · OilPrice.com, October 2025 · IEA Strait of Hormuz · EIA OPEC capacity update</div>
+  </div>
+
+  <!-- Country breakdown -->
+  <div class="sec">
+    <div class="sec-label">Who holds what</div>
+    <h2 class="sec-title">Spare capacity by country — the concentration problem</h2>
+    <div class="body">
+      <p>The concentration of global spare capacity in two countries — Saudi Arabia and the UAE — is not a new story. What is new is the degree to which that concentration has intensified as other OPEC+ members have exhausted their production flexibility.</p>
+    </div>
+
+    <div class="country-bars">
+
+      <div class="cbar">
+        <div class="cbar-top">
+          <span class="cbar-name">Saudi Arabia</span>
+          <div class="cbar-nums">
+            <span class="cbar-spare" style="color:var(--navy)">2.43M bbl/d</span>
+            <span class="cbar-note">IEA estimate · 60% of OPEC+ total</span>
+          </div>
+        </div>
+        <div class="cbar-track"><div class="cbar-fill" style="width:100%;background:var(--navy)"></div></div>
+        <div class="cbar-sub">Mostly Eastern Province. Mostly Hormuz-dependent. Deployable reality: 1.5–2M bbl/d per independent analysts. Includes Shaybah, Khurais, Manifa expansions.</div>
+      </div>
+
+      <div class="cbar">
+        <div class="cbar-top">
+          <span class="cbar-name">UAE</span>
+          <div class="cbar-nums">
+            <span class="cbar-spare" style="color:var(--navy)">850K bbl/d</span>
+            <span class="cbar-note">IEA estimate · 21% of OPEC+ total</span>
+          </div>
+        </div>
+        <div class="cbar-track"><div class="cbar-fill" style="width:35%;background:var(--navy)"></div></div>
+        <div class="cbar-sub">More diversified than Saudi — includes Murban (Abu Dhabi onshore, less Hormuz-exposed), and Habshan-Fujairah pipeline bypass. Partial Hormuz bypass available for ~1.5M bbl/d.</div>
+      </div>
+
+      <div class="cbar">
+        <div class="cbar-top">
+          <span class="cbar-name">Iraq</span>
+          <div class="cbar-nums">
+            <span class="cbar-spare" style="color:var(--red)">320K bbl/d</span>
+            <span class="cbar-note">IEA estimate · force majeure active</span>
+          </div>
+        </div>
+        <div class="cbar-track"><div class="cbar-fill" style="width:13%;background:var(--red)"></div></div>
+        <div class="cbar-sub">Theoretical pre-crisis. Force majeure declared March 17, 2026. Production cut from 4.16M to ~1.4M bbl/d. Not deployable under current conditions.</div>
+      </div>
+
+      <div class="cbar">
+        <div class="cbar-top">
+          <span class="cbar-name">All other OPEC+</span>
+          <div class="cbar-nums">
+            <span class="cbar-spare" style="color:var(--ink-3)">~450K bbl/d</span>
+            <span class="cbar-note">Combined · mostly paper capacity</span>
+          </div>
+        </div>
+        <div class="cbar-track"><div class="cbar-fill" style="width:18%;background:var(--ink-3)"></div></div>
+        <div class="cbar-sub">Russia, Kazakhstan, Nigeria, Libya, Venezuela, others. Largely at or near maximum sustainable output. Infrastructure constraints, sanctions, and field depletion limit upside. Analysts consider most of this non-deployable in a crisis.</div>
+      </div>
+
+    </div>
+    <div class="src-line">IEA Oil Market Report January 2026 · OilPrice.com October 2025 · Energy Aspects · Rapidan Energy Group</div>
+  </div>
+
+  <!-- Why it matters now -->
+  <div class="sec">
+    <div class="sec-label">Current relevance — March 2026</div>
+    <h2 class="sec-title">Why spare capacity is the wrong number to watch right now</h2>
+    <div class="body">
+      <p>In normal market conditions, watching spare capacity tells you how tight the market is and how much upside protection exists against a supply shock. In March 2026, with Hormuz disrupted and Iraq under force majeure, the spare capacity number is almost entirely academic.</p>
+      <p>Saudi Arabia cannot deploy its 2.43M bbl/d of spare capacity to compensate for the Iraqi production loss because: (1) the Iraqi loss is partly the result of Hormuz disruption, which also affects Saudi export routes; (2) Saudi Aramco is being asked to redirect production to Yanbu, not increase total output; and (3) the incremental barrels, even if produced, face the same chokepoint constraints as current production.</p>
+      <p><strong>The correct frame for March 2026 is not "Saudi Arabia has 2.43M bbl/d of spare capacity." It is: "Saudi Arabia has 2.43M bbl/d of spare capacity that cannot reach its main buyers because the export route is disrupted."</strong> The safety valve is on the wrong side of the closed valve.</p>
+      <p>The one genuine exception is the UAE, whose Habshan-Fujairah pipeline bypasses Hormuz and delivers crude to the Indian Ocean directly. The UAE's partial Hormuz bypass is the only meaningful additional supply that can actually reach global markets during a Hormuz disruption — and it is capped at approximately 1.5M bbl/d by Fujairah port capacity.</p>
+    </div>
+    <div class="src-line">IEA Strait of Hormuz analysis · Reuters · Iraq Oil Ministry · March 2026</div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <div class="sc sc-navy">
+    <div class="sc-head">
+      <div class="sc-title">Current numbers</div>
+      <div class="sc-meta">IEA Q4 2025 · March 2026</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">Total OPEC+ spare</span><span class="sc-v">4.05M bbl/d</span></div>
+      <div class="sc-row"><span class="sc-l">Saudi Arabia</span><span class="sc-v">2.43M bbl/d</span></div>
+      <div class="sc-row"><span class="sc-l">UAE</span><span class="sc-v">850K bbl/d</span></div>
+      <div class="sc-row"><span class="sc-l">Iraq (pre-crisis)</span><span class="sc-v sc-v-red">320K bbl/d</span></div>
+      <div class="sc-row"><span class="sc-l">Deployable (est.)</span><span class="sc-v sc-v-red">1.5–2.5M bbl/d</span></div>
+      <div class="sc-row"><span class="sc-l">Panic threshold</span><span class="sc-v sc-v-red">&lt; 1.5M bbl/d</span></div>
+      <div class="sc-note">Independent analysts (Energy Aspects, Rapidan) estimate deployable capacity at 1.5–2.5M bbl/d — well below the IEA headline of 4.05M.</div>
+      <div class="src-line" style="margin:8px 0 0">IEA · Energy Aspects · Rapidan · Q4 2025</div>
+    </div>
+  </div>
+
+  <div class="sc sc-red">
+    <div class="sc-head">
+      <div class="sc-title">The Hormuz problem</div>
+      <div class="sc-meta">Why spare capacity doesn't help right now</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">SA spare location</span><span class="sc-v">Eastern Province</span></div>
+      <div class="sc-row"><span class="sc-l">Eastern Province route</span><span class="sc-v sc-v-red">Hormuz (disrupted)</span></div>
+      <div class="sc-row"><span class="sc-l">Yanbu bypass cap</span><span class="sc-v">1.8M bbl/d port limit</span></div>
+      <div class="sc-row"><span class="sc-l">UAE Fujairah bypass</span><span class="sc-v" style="color:var(--teal)">~1.5M bbl/d</span></div>
+      <div class="sc-row"><span class="sc-l">Net bypassed capacity</span><span class="sc-v sc-v-red">~3.3M bbl/d max</span></div>
+      <div class="sc-note">Total bypass capacity (Yanbu + Fujairah) covers ~25% of normal Hormuz flows. The spare capacity that matters most is physically trapped behind the disrupted strait.</div>
+      <div class="src-line" style="margin:8px 0 0">IEA Strait of Hormuz · March 2026</div>
+    </div>
+  </div>
+
+  <div class="sc sc-navy">
+    <div class="sc-head"><div class="sc-title">Key facts</div></div>
+    <div class="sc-body" style="padding:0 14px">
+      <div class="fact-list">
+        <div class="fact-item">
+          <div class="fact-num">12M</div>
+          <div class="fact-desc">Saudi Arabia's claimed maximum sustainable capacity. Produced at this level exactly once — for one month in early 2020.</div>
+          <div class="fact-src">Aramco · EIA · OilPrice.com</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">2019</div>
+          <div class="fact-desc">Abqaiq attack knocked out 5.7M bbl/d. Took months to restore — raising questions about surge capability.</div>
+          <div class="fact-src">IEA Emergency Response · CSIS</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">~2M</div>
+          <div class="fact-desc">bbl/d disruption would exhaust genuine deployable spare capacity and send prices toward triple digits, per Energy Aspects.</div>
+          <div class="fact-src">Energy Aspects · Rapidan Energy</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">20%</div>
+          <div class="fact-desc">of global oil supply transits Hormuz daily. Spare capacity concentrated inside the disrupted corridor.</div>
+          <div class="fact-src">IEA · EIA · 2025 data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Spare capacity analysis · March 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="buyer-exposure.html">Buyer exposure</a>
+      <a href="saudi-arabia.html">Saudi Arabia</a>
+      <a href="iraq.html">Iraq</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+</script>
+</body>
+</html>
