@@ -1,9 +1,9 @@
 const CONTANGO_DATA = {
-  lastUpdated: "2026-03-22 10:57 UTC",
+  lastUpdated: "2026-03-22 11:48 UTC",
   prices: [
-    {sym: 'BRENT', name: 'ICE Brent', val: 82.87, chg: 1.2, origin: 'Global'},
-    {sym: 'ARAB L', name: 'Arab Light', val: 84.58000000000001, chg: 0.8, origin: 'Saudi Arabia'},
-    {sym: 'MURBAN', name: 'Murban', val: 84.17, chg: 1.1, origin: 'UAE'},
+    {sym: 'BRENT', name: 'ICE Brent', val: 82.5, chg: 1.2, origin: 'Global'},
+    {sym: 'ARAB L', name: 'Arab Light', val: 84.16000000000001, chg: 0.8, origin: 'Saudi Arabia'},
+    {sym: 'MURBAN', name: 'Murban', val: 84.2, chg: 1.1, origin: 'UAE'},
     {sym: 'OMAN', name: 'Oman/Dubai', val: 80.93, chg: -0.4, origin: 'DME'}
   ],
   intel: [
