@@ -1,0 +1,29 @@
+name: Hourly Price Robot
+
+on:
+  schedule:
+    - cron: '0 * * * *' # This means "Run at the start of every hour"
+  workflow_dispatch: # This allows you to run it manually to test it
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Run Robot Brain
+        run: python fetch_data.py
+
+      - name: Save and Commit changes
+        run: |
+          git config --global user.name "Contango-Robot"
+          git config --global user.email "robot@contango.energy"
+          git add data.js
+          git commit -m "Robot: Updated Live Prices" || echo "No changes to commit"
+          git push
