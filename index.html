@@ -1,53 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Contango Energy — Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* ── Design Tokens ── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --cg:'Cormorant Garamond',serif; --ss:'Source Serif 4',serif; --mono:'IBM Plex Mono',monospace;
-  --bg:#f7f7f5; --card:#ffffff; --card-alt:#f1efe9; --border:#e8e5e0;
-  --ink:#0f0f0e; --ink-2:#3a3830; --ink-3:#9a9590; --navy:#1d4480; --red:#b33000; --teal:#4a7c6f;
-}
-[data-theme=dark]{
-  --bg:#111110; --card:#1a1a19; --card-alt:#222221; --border:#2d2d2c;
-  --ink:#ddd6c8; --ink-3:#909090; --navy:#4a76b8; --red:#e64a19; --teal:#66bb6a;
-}
-body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:0.2s}
-a{color:inherit;text-decoration:none}
-/* ── Navigation ── */
-.nav{background:var(--bg);border-bottom:1px solid var(--border);height:54px;position:sticky;top:0;z-index:1000}
-.nav-inner{max-width:1440px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between}
-.brand{font-family:var(--cg);font-size:22px;font-weight:600}
-.nav-links{display:flex;gap:4px}
-.nav-a{padding:6px 12px;font-size:13px;color:var(--ink-3);border-radius:4px;transition:0.2s}
-.nav-a:hover,.nav-a.on{color:var(--ink);background:var(--card-alt)}
-/* ── Layout ── */
-.page-max{max-width:1440px;margin:0 auto}
-.grid-main{display:grid;grid-template-columns:1fr 340px;border-bottom:1px solid var(--border)}
-.col-left{border-right:1px solid var(--border)}
-.map-container{position:relative;background:#d4e2ee}
-[data-theme=dark] .map-container{background:#0e0e0e}
-#map-svg{width:100%;height:600px;display:block}
-/* ── Sidebar & Feeds ── */
-.sidebar-head{padding:16px;border-bottom:1px solid var(--border);font-family:var(--cg);font-size:18px;font-weight:600}
-.price-row{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.p-name{font-size:13px;font-weight:500}
-.p-origin{font-size:11px;color:var(--ink-3)}
-.p-val{font-family:var(--mono);font-size:14px}
-.feed-container{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border)}
-.feed-col{padding:24px;border-right:1px solid var(--border)}
-.feed-title{font-family:var(--cg);font-size:20px;font-weight:600;margin-bottom:20px;border-bottom:2px solid var(--navy);display:inline-block}
-.intel-item{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.intel-hl{font-size:14px;font-weight:500;line-height:1.4}
-.intel-txt{font-size:13px;color:var(--ink-2);margin-top:4px}
-.up{color:var(--teal)} .down{color:var(--red)}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contango Energy — Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -57,58 +16,48 @@ a{color:inherit;text-decoration:none}
     <div class="nav-links">
       <a href="index.html" class="nav-a on">Overview</a>
       <a href="saudi-arabia.html" class="nav-a">Saudi Arabia</a>
-      <a href="methodology.html" class="nav-a">Methodology</a>
       <a href="about.html" class="nav-a">About</a>
     </div>
-    <button onclick="document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')" style="font-family:var(--mono); font-size:10px; border:1px solid var(--border); padding:4px 8px; border-radius:3px; cursor:pointer">Theme</button>
+    <div id="update-tag" style="font-family:var(--mono); font-size:9px; color:var(--ink-3)">Syncing...</div>
   </div>
 </nav>
 
 <div class="page-max">
   <div class="grid-main">
     <div class="col-left">
-      <div class="map-container"><svg id="map-svg"></svg></div>
+      <div id="map-container"><svg id="map-svg"></svg></div>
     </div>
     <div class="col-right">
-      <div class="sidebar-head">Regional Crude Prices</div>
+      <div class="sidebar-head">Live Crude Feed</div>
       <div id="price-list"></div>
     </div>
   </div>
 </div>
 
 <section class="page-max feed-container">
-  <div class="feed-col"><h2 class="feed-title">Market Intel</h2><div id="intel-feed"></div></div>
+  <div class="feed-col"><h2 class="feed-title">Daily Intel</h2><div id="intel-feed"></div></div>
   <div class="feed-col"><h2 class="feed-title">Infrastructure</h2><div id="infra-feed"></div></div>
-  <div class="feed-col"><h2 class="feed-title">OPEC+ Stats</h2><div id="opec-feed"></div></div>
+  <div class="feed-col"><h2 class="feed-title">OPEC+ Quotas</h2><div id="opec-feed"></div></div>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script>
-const D = {
-  prices: [
-    {sym: 'BRENT', name: 'ICE Brent', val: 82.45, chg: 1.2, origin: 'Global'},
-    {sym: 'ARAB L', name: 'Arab Light', val: 84.15, chg: 0.8, origin: 'Saudi Arabia'},
-    {sym: 'MURBAN', name: 'Murban', val: 83.90, chg: 1.1, origin: 'UAE'}
-  ],
-  intel: [
-    {tag: 'LOGISTICS', hl: 'Suez Transit Risk Elevated', txt: 'Shipping volumes down 15% WoW.', time: '14m ago'}
-  ],
-  infra: [
-    {name: 'Ras Tanura', status: 'Normal', desc: '88% utilization.'}
-  ],
-  opec: [{n: 'S. Arabia', q: 9.0, a: 8.98}, {n: 'Iraq', q: 4.0, a: 4.25}]
-};
+<script src="data.js"></script>
 
-function initUI() {
-  document.getElementById('price-list').innerHTML = D.prices.map(p => `
+<script>
+function renderUI() {
+  const d = CONTANGO_DATA;
+  document.getElementById('update-tag').textContent = "Last Update: " + d.lastUpdated;
+  
+  document.getElementById('price-list').innerHTML = d.prices.map(p => `
     <div class="price-row">
       <div><div class="p-name">${p.name}</div><div class="p-origin">${p.origin}</div></div>
       <div style="text-align:right"><div class="p-val">$${p.val.toFixed(2)}</div><div class="${p.chg >= 0 ? 'up' : 'down'}" style="font-size:11px">${p.chg}%</div></div>
     </div>`).join('');
-  document.getElementById('intel-feed').innerHTML = D.intel.map(i => `<div class="intel-item"><div class="intel-hl">${i.hl}</div><div class="intel-txt">${i.txt}</div></div>`).join('');
-  document.getElementById('infra-feed').innerHTML = D.infra.map(i => `<div class="intel-item"><div class="intel-hl">${i.name}</div><div class="intel-txt">${i.desc}</div></div>`).join('');
-  document.getElementById('opec-feed').innerHTML = D.opec.map(o => `<div class="intel-item"><div class="intel-hl">${o.n}</div><div class="intel-txt">Actual: ${o.a}M / Quota: ${o.q}M</div></div>`).join('');
+
+  document.getElementById('intel-feed').innerHTML = d.intel.map(i => `<div class="intel-item"><div class="intel-hl">${i.hl}</div><div class="intel-txt">${i.txt}</div></div>`).join('');
+  document.getElementById('infra-feed').innerHTML = d.infrastructure.map(i => `<div class="intel-item"><div class="intel-hl">${i.name}</div><div class="intel-txt">${i.desc}</div></div>`).join('');
+  document.getElementById('opec-feed').innerHTML = d.opec.map(o => `<div class="intel-item"><div class="intel-hl">${o.nation}</div><div class="intel-txt">Actual: ${o.actual}M / Quota: ${o.quota}M</div></div>`).join('');
 }
 
 const svg = d3.select("#map-svg");
@@ -117,10 +66,10 @@ const path = d3.geoPath().projection(projection);
 
 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(data => {
   svg.append("g").selectAll("path").data(topojson.feature(data, data.objects.countries).features).enter().append("path")
-    .attr("d", path).attr("fill", d => d.id === "682" ? "#1d4480" : "#eee").attr("stroke", "#ccc").attr("stroke-width", 0.5);
+    .attr("d", path).attr("fill", d => d.id === "682" ? "var(--navy)" : "rgba(200,200,200,0.1)").attr("stroke", "var(--border)").attr("stroke-width", 0.5);
 });
 
-initUI();
+renderUI();
 </script>
 </body>
 </html>
