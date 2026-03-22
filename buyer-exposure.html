@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<!-- Contango Energy · Buyer Exposure Matrix · v1.0 · 22 March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Who gets hurt first — Buyer Exposure Matrix — Contango Energy</title>
+<meta name="description" content="Which countries are most exposed to Strait of Hormuz disruption. Japan, South Korea, India, China, Europe, US — oil import dependency, reserve cover, and alternatives.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/buyer-exposure.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+/* Nav */
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* Page header */
+.ph{background:var(--card);border-bottom:3px solid var(--red);padding:36px 0 28px}
+.ph-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:680px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+/* Main */
+.main{max-width:1200px;margin:0 auto;padding:40px 28px 60px}
+
+/* Section */
+.sec{margin-bottom:52px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:30px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.15}
+.body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:12px;padding-top:8px;border-top:1px solid var(--border)}
+
+/* Alert box */
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* ── EXPOSURE MATRIX ── */
+.matrix{margin-top:20px;overflow-x:auto}
+.matrix-table{width:100%;border-collapse:collapse;min-width:800px}
+.matrix-table th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);padding:10px 14px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt)}
+.matrix-table th:not(:first-child){text-align:center}
+.matrix-table td{padding:0;border-bottom:1px solid var(--border);vertical-align:middle}
+.matrix-table tr:last-child td{border-bottom:none}
+.matrix-table tr:hover td{background:var(--card-alt)}
+
+/* Country cell */
+.ct-cell{padding:14px 14px;display:flex;align-items:center;gap:10px}
+.ct-rank{font-family:var(--mono);font-size:11px;color:var(--ink-4);width:16px;flex-shrink:0}
+.ct-flag{font-size:20px;flex-shrink:0}
+.ct-name{font-family:var(--cg);font-size:17px;font-weight:500;color:var(--ink)}
+.ct-sub{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);margin-top:1px}
+
+/* Data cells */
+.dc{padding:14px;text-align:center}
+.dc-main{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink);display:block}
+.dc-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);display:block;margin-top:2px}
+
+/* Dependency bar */
+.dep-cell{padding:10px 14px;min-width:130px}
+.dep-pct{font-family:var(--mono);font-size:14px;font-weight:500;margin-bottom:5px;display:block}
+.dep-bar-bg{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.dep-bar-fill{height:100%;border-radius:2px;transition:width 1s}
+
+/* Risk score cell */
+.rs-cell{padding:14px;text-align:center}
+.rs-score{font-family:var(--mono);font-size:22px;font-weight:500;display:block;line-height:1}
+.rs-label{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:4px;padding:2px 6px;border-radius:2px;border:1px solid;display:inline-block}
+.rs-critical{color:#b33000;background:rgba(179,48,0,.08);border-color:rgba(179,48,0,.2)}
+.rs-high{color:#8a5a00;background:rgba(140,90,0,.08);border-color:rgba(140,90,0,.2)}
+.rs-moderate{color:#4a7c6f;background:rgba(74,124,111,.08);border-color:rgba(74,124,111,.2)}
+.rs-low{color:#9a9590;background:rgba(0,0,0,.04);border-color:#e8e5e0}
+[data-theme=dark] .rs-critical{color:#c84000;background:rgba(179,48,0,.15);border-color:rgba(179,48,0,.25)}
+[data-theme=dark] .rs-high{color:#c89040;background:rgba(140,90,0,.15);border-color:rgba(140,90,0,.25)}
+[data-theme=dark] .rs-moderate{color:#4a9c8a;background:rgba(74,124,111,.15);border-color:rgba(74,124,111,.25)}
+[data-theme=dark] .rs-low{color:#8a8070;background:rgba(221,214,200,.07);border-color:rgba(221,214,200,.12)}
+
+/* Alternatives cell */
+.alt-cell{padding:10px 14px;min-width:180px}
+.alt-item{display:flex;align-items:flex-start;gap:6px;margin-bottom:5px;font-family:var(--ss);font-size:12px;line-height:1.4;color:var(--ink-2)}
+.alt-item:last-child{margin-bottom:0}
+.alt-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.alt-yes{background:var(--teal)}
+.alt-lim{background:#8a5a00}
+.alt-no{background:var(--red)}
+
+/* Reserve bar */
+.res-cell{padding:10px 14px;min-width:120px}
+.res-days{font-family:var(--mono);font-size:18px;font-weight:500;display:block;margin-bottom:4px}
+.res-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-bottom:5px;display:block}
+.res-bar-bg{height:4px;background:var(--border);border-radius:2px;overflow:hidden;max-width:80px}
+.res-bar-fill{height:100%;border-radius:2px}
+
+/* Country detail cards */
+.country-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.cc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.cc-red{border-top:3px solid var(--red)}
+.cc-orange{border-top:3px solid #8a5a00}
+.cc-teal{border-top:3px solid var(--teal)}
+.cc-navy{border-top:3px solid var(--navy)}
+.cc-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.cc-flag{font-size:20px}
+.cc-title{font-family:var(--cg);font-size:16px;font-weight:500;color:var(--ink)}
+.cc-risk{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;border:1px solid;margin-left:auto}
+.cc-body{padding:14px 16px}
+.cc-body p{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2);margin-bottom:10px}
+.cc-body p:last-child{margin-bottom:0}
+.cc-stat{display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.cc-stat-item{display:flex;flex-direction:column;gap:2px}
+.cc-stat-label{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)}
+.cc-stat-val{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--ink)}
+
+/* Cascade section */
+.cascade{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:20px;border-radius:4px;overflow:hidden}
+.cas-item{background:var(--card);padding:18px 20px}
+.cas-num{font-family:var(--cg);font-size:40px;font-weight:600;color:var(--red);line-height:1;margin-bottom:4px}
+.cas-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.cas-body{font-family:var(--ss);font-size:13px;line-height:1.6;color:var(--ink-2)}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:16px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:900px){
+  .country-cards{grid-template-columns:1fr}
+  .cascade{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .ph-title{font-size:36px}
+  .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a on" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a" href="methodology.html">Methodology</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Page header -->
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Analysis · Hormuz disruption · Updated March 2026</div>
+    <h1 class="ph-title">Who gets hurt first</h1>
+    <div class="ph-sub">When the Strait of Hormuz closes, the pain is not shared equally. Japan runs out of alternatives before China does. South Korea's semiconductor industry seizes before Europe's refineries do. This is the exposure matrix.</div>
+    <div class="ph-src">Sources: EIA Q1 2025 Hormuz flow data · Kpler tanker tracking · IEA Strategic Reserve data · Atlantic Council · Zero Carbon Analytics · IG International · World Economic Forum · CNBC · Baird Maritime · March 2026</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- The headline fact -->
+  <div class="sec">
+    <div class="cascade">
+      <div class="cas-item">
+        <div class="cas-num">84%</div>
+        <div class="cas-label">of Hormuz oil flows go to Asia</div>
+        <div class="cas-body">China, India, Japan, South Korea collectively receive 84% of all crude and condensate shipped through the Strait. Europe and the US receive the remainder.</div>
+      </div>
+      <div class="cas-item">
+        <div class="cas-num">95%</div>
+        <div class="cas-label">Japan's Middle East oil dependency</div>
+        <div class="cas-body">Japan imports ~95% of its crude from the Middle East. Nearly all of it transits Hormuz. Japan has no domestic crude production worth mentioning and no pipeline alternatives.</div>
+      </div>
+      <div class="cas-item">
+        <div class="cas-num">~$0</div>
+        <div class="cas-label">US direct exposure to Hormuz oil</div>
+        <div class="cas-body">The US imports only ~2.5% of Hormuz flows. As a net oil exporter, it faces no direct supply shock — only the global price effect. The asymmetry is the story.</div>
+      </div>
+    </div>
+    <div class="src-line">EIA Hormuz flow data Q1 2025 · Zero Carbon Analytics February 2026 · IG International March 2026</div>
+  </div>
+
+  <!-- Matrix -->
+  <div class="sec">
+    <div class="sec-label">Comparative exposure</div>
+    <h2 class="sec-title">Hormuz buyer exposure matrix</h2>
+    <div class="body">
+      <p>Risk score methodology: Zero Carbon Analytics multiplied each country's share of Hormuz oil and LNG flows by its percentage of energy from fossil fuel imports, weighted by oil and gas share of those imports. This produces a relative vulnerability index — not an absolute measure, but a consistent comparative one.</p>
+    </div>
+
+    <div class="matrix">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="min-width:180px">Country</th>
+            <th style="min-width:130px">ME oil dependency</th>
+            <th style="min-width:120px">Hormuz share of flows</th>
+            <th style="min-width:120px">Reserve cover</th>
+            <th style="min-width:180px">Alternatives</th>
+            <th style="min-width:110px">Exposure score</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- Japan -->
+          <tr>
+            <td>
+              <div class="ct-cell">
+                <span class="ct-rank">1</span>
+                <span class="ct-flag">🇯🇵</span>
+                <div><div class="ct-name">Japan</div><div class="ct-sub">~2.8M bbl/d imports</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="dep-cell">
+                <span class="dep-pct" style="color:var(--red)">95%</span>
+                <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:95%;background:var(--red)"></div></div>
+              </div>
+            </td>
+            <td><div class="dc"><span class="dc-main">10.9%</span><span class="dc-sub">of Hormuz flows</span></div></td>
+            <td>
+              <div class="res-cell">
+                <span class="res-days" style="color:var(--teal)">254</span>
+                <span class="res-note">days · IEA member</span>
+                <div class="res-bar-bg"><div class="res-bar-fill" style="width:100%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td>
+              <div class="alt-cell">
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>US LNG (limited, long-term contracts)</div>
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>Russia pipeline (Sakhalin — partial)</div>
+                <div class="alt-item"><div class="alt-dot alt-no"></div>No pipeline crude alternative</div>
+                <div class="alt-item"><div class="alt-dot alt-no"></div>No domestic crude production</div>
+              </div>
+            </td>
+            <td>
+              <div class="rs-cell">
+                <span class="rs-score" style="color:var(--red)">6.4</span>
+                <span class="rs-label rs-critical">Critical</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- South Korea -->
+          <tr>
+            <td>
+              <div class="ct-cell">
+                <span class="ct-rank">2</span>
+                <span class="ct-flag">🇰🇷</span>
+                <div><div class="ct-name">South Korea</div><div class="ct-sub">~2.7M bbl/d net imports</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="dep-cell">
+                <span class="dep-pct" style="color:var(--red)">70%</span>
+                <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:70%;background:var(--red)"></div></div>
+              </div>
+            </td>
+            <td><div class="dc"><span class="dc-main">12.0%</span><span class="dc-sub">of Hormuz flows</span></div></td>
+            <td>
+              <div class="res-cell">
+                <span class="res-days" style="color:var(--teal)">210</span>
+                <span class="res-note">days · IEA member</span>
+                <div class="res-bar-bg"><div class="res-bar-fill" style="width:82%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td>
+              <div class="alt-cell">
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>US crude (diversifying rapidly)</div>
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>West Africa light-sweet grades</div>
+                <div class="alt-item"><div class="alt-dot alt-no"></div>No pipeline crude access</div>
+                <div class="alt-item"><div class="alt-dot alt-no"></div>LNG: 2-4 weeks reserve only</div>
+              </div>
+            </td>
+            <td>
+              <div class="rs-cell">
+                <span class="rs-score" style="color:#8a5a00">5.3</span>
+                <span class="rs-label rs-high">High</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- India -->
+          <tr>
+            <td>
+              <div class="ct-cell">
+                <span class="ct-rank">3</span>
+                <span class="ct-flag">🇮🇳</span>
+                <div><div class="ct-name">India</div><div class="ct-sub">~5.4M bbl/d imports</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="dep-cell">
+                <span class="dep-pct" style="color:#8a5a00">~60%</span>
+                <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:60%;background:#8a5a00"></div></div>
+              </div>
+            </td>
+            <td><div class="dc"><span class="dc-main">14.7%</span><span class="dc-sub">of Hormuz flows</span></div></td>
+            <td>
+              <div class="res-cell">
+                <span class="res-days" style="color:#8a5a00">~60</span>
+                <span class="res-note">days est.</span>
+                <div class="res-bar-bg"><div class="res-bar-fill" style="width:24%;background:#8a5a00"></div></div>
+              </div>
+            </td>
+            <td>
+              <div class="alt-cell">
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Russia (Urals discount — active)</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>US crude (growing volumes)</div>
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>West Africa grades (limited)</div>
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>Domestic production: 0.8M bbl/d</div>
+              </div>
+            </td>
+            <td>
+              <div class="rs-cell">
+                <span class="rs-score" style="color:#8a5a00">4.9</span>
+                <span class="rs-label rs-high">High</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- China -->
+          <tr>
+            <td>
+              <div class="ct-cell">
+                <span class="ct-rank">4</span>
+                <span class="ct-flag">🇨🇳</span>
+                <div><div class="ct-name">China</div><div class="ct-sub">~11M bbl/d imports</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="dep-cell">
+                <span class="dep-pct" style="color:#8a5a00">~50%</span>
+                <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:50%;background:#8a5a00"></div></div>
+              </div>
+            </td>
+            <td><div class="dc"><span class="dc-main">37.7%</span><span class="dc-sub">largest single share</span></div></td>
+            <td>
+              <div class="res-cell">
+                <span class="res-days" style="color:var(--teal)">108</span>
+                <span class="res-note">days (Kpler Jan 2026)</span>
+                <div class="res-bar-bg"><div class="res-bar-fill" style="width:42%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td>
+              <div class="alt-cell">
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Russia pipeline (ESPO) — 1.6M bbl/d</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Russia seaborne (Cape routing)</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Iran (80% of Iran's exports)</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Domestic: 4.3M bbl/d production</div>
+              </div>
+            </td>
+            <td>
+              <div class="rs-cell">
+                <span class="rs-score" style="color:var(--teal)">4.4</span>
+                <span class="rs-label rs-moderate">Moderate</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Europe -->
+          <tr>
+            <td>
+              <div class="ct-cell">
+                <span class="ct-rank">5</span>
+                <span class="ct-flag">🇪🇺</span>
+                <div><div class="ct-name">Europe (EU)</div><div class="ct-sub">Diversified import base</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="dep-cell">
+                <span class="dep-pct" style="color:var(--teal)">~15%</span>
+                <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:15%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td><div class="dc"><span class="dc-main">&lt;5%</span><span class="dc-sub">small Hormuz share</span></div></td>
+            <td>
+              <div class="res-cell">
+                <span class="res-days" style="color:var(--teal)">90+</span>
+                <span class="res-note">days · IEA mandate</span>
+                <div class="res-bar-bg"><div class="res-bar-fill" style="width:35%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td>
+              <div class="alt-cell">
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Norway North Sea crude</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>US LNG + crude (growing)</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>West Africa light-sweet grades</div>
+                <div class="alt-item"><div class="alt-dot alt-lim"></div>LNG: TTF prices surging</div>
+              </div>
+            </td>
+            <td>
+              <div class="rs-cell">
+                <span class="rs-score" style="color:var(--teal)">2.1</span>
+                <span class="rs-label rs-moderate">Moderate</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- United States -->
+          <tr>
+            <td>
+              <div class="ct-cell">
+                <span class="ct-rank">6</span>
+                <span class="ct-flag">🇺🇸</span>
+                <div><div class="ct-name">United States</div><div class="ct-sub">Net oil exporter</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="dep-cell">
+                <span class="dep-pct" style="color:var(--teal)">&lt;5%</span>
+                <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:5%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td><div class="dc"><span class="dc-main">2.5%</span><span class="dc-sub">of Hormuz flows</span></div></td>
+            <td>
+              <div class="res-cell">
+                <span class="res-days" style="color:var(--teal)">SPR</span>
+                <span class="res-note">Strategic Petroleum Reserve</span>
+                <div class="res-bar-bg"><div class="res-bar-fill" style="width:100%;background:var(--teal)"></div></div>
+              </div>
+            </td>
+            <td>
+              <div class="alt-cell">
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Domestic: 13.3M bbl/d production</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Canada pipeline imports</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Strategic Petroleum Reserve</div>
+                <div class="alt-item"><div class="alt-dot alt-yes"></div>Net exporter — benefits from price rise</div>
+              </div>
+            </td>
+            <td>
+              <div class="rs-cell">
+                <span class="rs-score" style="color:var(--teal)">0.4</span>
+                <span class="rs-label rs-low">Low</span>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="src-line">Risk scores: Zero Carbon Analytics (Feb 2026 update) · Hormuz flow shares: EIA Q1 2025 via Vortexa · Reserve cover: IEA, Kpler Jan 2026 · ME dependency: IG International, UBP, Baird Maritime · March 2026</div>
+  </div>
+
+  <!-- Why the asymmetry matters -->
+  <div class="sec">
+    <div class="sec-label">The key insight</div>
+    <h2 class="sec-title">The asymmetry is the story — not the price</h2>
+    <div class="body">
+      <p>The mainstream coverage of a Hormuz disruption focuses on the oil price. Brent at $80, $100, $120, $150. That framing misses the more important question: <strong>the same disruption produces radically different outcomes for different economies, and the most exposed economies are not the ones starting the war.</strong></p>
+      <p>Japan imports 95% of its crude from the Middle East. It has 254 days of reserve cover, which sounds comfortable — but those reserves exist precisely because Japan has no alternatives. They are the buffer, not the solution. A disruption lasting longer than the time needed to negotiate emergency supply arrangements (weeks to months, not days) moves Japan from managed response to genuine supply crisis.</p>
+      <p>South Korea's exposure is acute in a different way. Its net oil imports represent 2.7% of GDP — among the highest ratios in the world. More specifically, South Korea's semiconductor manufacturing complex — which supplies the global electronics industry — is extraordinarily energy-intensive. <strong>A prolonged supply shock doesn't just raise Korean energy bills. It threatens Korean industrial output in a way that cascades through global supply chains.</strong> The Nikkei fell ~8% and Korea's KOSPI fell over 11% from conflict onset through March 10.</p>
+      <p>China's position is structurally different. It absorbs approximately 80% of Iranian crude exports, which gives it a plausible claim to preferential treatment from Tehran even in a closure scenario. It has Russian pipeline supply via ESPO. It has 108 days of crude stockpile at Kpler's January 2026 estimate. China is exposed — but it has options that Japan and South Korea simply do not have.</p>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">The consequence nobody is discussing</div>
+      <div class="alert-body">Qatar's Ras Laffan Industrial City — the world's largest LNG export complex — was struck by Iranian drones in early March 2026. This took approximately one-third of global helium supply offline. Helium is essential for semiconductor manufacturing and medical imaging. South Korea and Taiwan, the world's dominant semiconductor producers, face a supply constraint that has nothing to do with oil prices and everything to do with Gulf geography. The conflict's industrial supply chain effects are being systematically undercovered.</div>
+    </div>
+
+    <div class="src-line">Atlantic Council March 2026 · IG International March 2026 · WEF March 2026 · CNBC March 2026 · Zero Carbon Analytics</div>
+  </div>
+
+  <!-- Country detail cards -->
+  <div class="sec">
+    <div class="sec-label">Country detail</div>
+    <h2 class="sec-title">How each major buyer is managing</h2>
+    <div class="country-cards">
+
+      <div class="cc cc-red">
+        <div class="cc-head">
+          <span class="cc-flag">🇯🇵</span>
+          <div class="cc-title">Japan</div>
+          <span class="cc-risk rs-critical" style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(179,48,0,.08);color:#b33000;border:1px solid rgba(179,48,0,.2)">CRITICAL</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-stat">
+            <div class="cc-stat-item"><div class="cc-stat-label">ME oil dependency</div><div class="cc-stat-val" style="color:var(--red)">95%</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Reserve cover</div><div class="cc-stat-val">254 days</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Jan imports</div><div class="cc-stat-val">2.8M bbl/d</div></div>
+          </div>
+          <p>Saudi Aramco holds 8.2 million barrels in storage tanks on Okinawa — approximately three days of Japanese consumption — under a lease arrangement giving Japan preferential emergency access. JERA, Japan's largest LNG buyer, acts as government agent to secure minimum LNG shipments monthly.</p>
+          <p>Japan has not yet released strategic reserves. In 2022, reserves were released in IEA coordination following Russia's Ukraine invasion — the institutional mechanism exists. The question is duration: reserves buffer weeks to months, not an indefinite closure.</p>
+        </div>
+        <div class="src-line" style="padding:0 16px 12px;margin:0">World Energy News · Japan METI · Kpler · March 2026</div>
+      </div>
+
+      <div class="cc cc-orange" style="border-top-color:#8a5a00">
+        <div class="cc-head">
+          <span class="cc-flag">🇰🇷</span>
+          <div class="cc-title">South Korea</div>
+          <span class="cc-risk rs-high" style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(140,90,0,.08);color:#8a5a00;border:1px solid rgba(140,90,0,.2)">HIGH</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-stat">
+            <div class="cc-stat-item"><div class="cc-stat-label">ME oil dependency</div><div class="cc-stat-val" style="color:var(--red)">70%</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Reserve cover</div><div class="cc-stat-val">210 days</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">LNG reserve</div><div class="cc-stat-val">2–4 weeks</div></div>
+          </div>
+          <p>South Korea has activated a 100 trillion won (~$68bn) market stabilisation programme in response to war-related volatility. Net oil imports represent 2.7% of GDP — highest ratio among major economies — making it acutely sensitive to price shocks at the macroeconomic level.</p>
+          <p>KOSPI fell over 11% from conflict onset, with a circuit breaker triggered on 4 March. The semiconductor sector — Samsung, SK Hynix — faces both energy cost pressure and the helium supply constraint from the Ras Laffan disruption.</p>
+        </div>
+        <div class="src-line" style="padding:0 16px 12px;margin:0">Nomura · CNBC · IG International · Kpler · March 2026</div>
+      </div>
+
+      <div class="cc cc-orange" style="border-top-color:#8a5a00">
+        <div class="cc-head">
+          <span class="cc-flag">🇮🇳</span>
+          <div class="cc-title">India</div>
+          <span class="cc-risk rs-high" style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(140,90,0,.08);color:#8a5a00;border:1px solid rgba(140,90,0,.2)">HIGH</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-stat">
+            <div class="cc-stat-item"><div class="cc-stat-label">ME oil dependency</div><div class="cc-stat-val" style="color:#8a5a00">~60%</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Reserve cover</div><div class="cc-stat-val">~60 days</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Hormuz share</div><div class="cc-stat-val">14.7%</div></div>
+          </div>
+          <p>India has the most actively diversified import base of the major Asian buyers. Russian Urals at a substantial discount has been a feature of Indian buying since 2022 — India now receives significant Russian volumes via Cape routing. This provides genuine partial insulation.</p>
+          <p>India's reserve cover is materially lower than Japan or South Korea — estimated ~60 days — making it more sensitive to duration. Thailand and the Philippines are identified as the most vulnerable Southeast Asian economies given high import reliance and limited fiscal buffers.</p>
+        </div>
+        <div class="src-line" style="padding:0 16px 12px;margin:0">CNBC · Zero Carbon Analytics · Kpler · March 2026</div>
+      </div>
+
+      <div class="cc cc-teal">
+        <div class="cc-head">
+          <span class="cc-flag">🇨🇳</span>
+          <div class="cc-title">China</div>
+          <span class="cc-risk rs-moderate" style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:rgba(74,124,111,.08);color:#4a7c6f;border:1px solid rgba(74,124,111,.2)">MODERATE</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-stat">
+            <div class="cc-stat-item"><div class="cc-stat-label">ME oil dependency</div><div class="cc-stat-val" style="color:#8a5a00">~50%</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Stockpile</div><div class="cc-stat-val">~1.2Bn bbl</div></div>
+            <div class="cc-stat-item"><div class="cc-stat-label">Import cover</div><div class="cc-stat-val">108 days</div></div>
+          </div>
+          <p>China holds approximately 1.2 billion barrels of crude stockpile as of January 2026 — roughly 108 days of import cover even assuming zero new inflows. Russia supplies ~1.6M bbl/d via the ESPO pipeline, unaffected by Hormuz. China absorbs ~80% of Iranian crude, creating a plausible claim to preferential strait access.</p>
+          <p>Atlantic Council analysis: China would fare better than Japan, South Korea, or Taiwan — and the crisis may empower Beijing relative to regional rivals, particularly if LNG outages disproportionately hit Japan and South Korea.</p>
+        </div>
+        <div class="src-line" style="padding:0 16px 12px;margin:0">Atlantic Council · Kpler January 2026 · IG International · March 2026</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- The forgotten exposure -->
+  <div class="sec">
+    <div class="sec-label">Beyond oil — the overlooked cascades</div>
+    <h2 class="sec-title">What the oil price doesn't capture</h2>
+    <div class="body">
+      <p>The Strait of Hormuz is a chokepoint for an interlocking web of commodity flows that extends far beyond crude oil. The mainstream coverage tracks the Brent price. The expert tracks what else moves through that corridor.</p>
+      <p><strong>LNG:</strong> Approximately 20% of global LNG trade passes through Hormuz, overwhelmingly from Qatar. One-fifth of global LNG is currently disrupted or severely repriced. Dutch TTF prices are up more than 50% against pre-conflict levels. Japan and South Korea, already exposed on oil, hold only 2–4 weeks of LNG reserve. This is a separate and simultaneous shock.</p>
+      <p><strong>Fertilisers:</strong> The Gulf is a major artery for urea, ammonia, and sulphur — the inputs for synthetic fertilisers. Urea prices have increased approximately 30% since the conflict began. This is a food system shock operating on a longer timeline than the oil shock but with potentially more severe consequences for import-dependent food markets in South Asia, sub-Saharan Africa, and Southeast Asia.</p>
+      <p><strong>Helium:</strong> Qatar's Ras Laffan produces approximately one-third of global helium. The facility was struck in early March 2026. Helium is essential for semiconductor manufacturing, MRI machines, and other high-precision industrial uses. There is no short-term substitute for helium in these applications. South Korea and Taiwan — the world's dominant semiconductor fabricators — face a supply constraint that no amount of oil reserve drawdown can address.</p>
+    </div>
+    <div class="src-line">WEF March 2026 · Atlantic Council March 2026 · Fortune March 2026 · Kpler</div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Buyer Exposure Matrix · March 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="saudi-arabia.html">Saudi Arabia</a>
+      <a href="iraq.html">Iraq</a>
+      <a href="methodology.html">Methodology</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+</script>
+</body>
+</html>
