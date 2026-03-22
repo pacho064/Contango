@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<!-- Contango Energy · OSP Signal Decoder · v1.0 · 22 March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OSP signal decoder — Contango Energy</title>
+<meta name="description" content="What the Arab Light OSP differential actually means. How Aramco sets prices, what the moves signal politically, and why the current +$11 premium is unlike any previous cycle.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/osp-decoder.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer}
+.nav-btn:hover{color:var(--ink);border-color:var(--ink-3)}
+
+.ph{background:var(--card);border-bottom:3px solid var(--red);padding:36px 0 28px}
+.ph-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:700px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+.main{max-width:1200px;margin:0 auto;padding:40px 28px 60px;display:grid;grid-template-columns:1fr 300px;gap:48px}
+.content{min-width:0}
+.sidebar{min-width:0}
+
+.sec{margin-bottom:48px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:30px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.15}
+.body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:12px;padding-top:8px;border-top:1px solid var(--border)}
+
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+.info-box{border-left:3px solid var(--navy);padding:14px 18px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .info-box{background:rgba(29,68,128,.12)}
+.info-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* ── OSP history timeline ── */
+.osp-timeline{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.ot-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ot-title{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink)}
+.ot-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4)}
+.ot-body{padding:16px}
+.ot-chart{display:flex;align-items:flex-end;gap:6px;height:120px;margin-bottom:12px}
+.ot-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.ot-bar{width:100%;border-radius:2px 2px 0 0;transition:height .8s;min-height:2px;position:relative;cursor:default}
+.ot-bar:hover::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:9px;padding:3px 6px;border-radius:2px;white-space:nowrap;pointer-events:none;margin-bottom:4px;z-index:10}
+.ot-month{font-family:var(--mono);font-size:8px;color:var(--ink-4);text-align:center;letter-spacing:.04em}
+.ot-zero-line{height:1px;background:var(--border);margin-bottom:8px;position:relative}
+.ot-zero-line::before{content:'0';position:absolute;left:-16px;top:-6px;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.ot-legend{display:flex;gap:14px;flex-wrap:wrap}
+.ot-leg{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.ot-leg-sq{width:10px;height:10px;border-radius:2px}
+
+/* Signal decoder cards */
+.signal-cards{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.scard-up{border-top:3px solid var(--red)}
+.scard-dn{border-top:3px solid var(--teal)}
+.scard-flat{border-top:3px solid var(--ink-3)}
+.scard-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.scard-move{font-family:var(--mono);font-size:18px;font-weight:500}
+.scard-move-up{color:var(--red)}
+.scard-move-dn{color:var(--teal)}
+.scard-title{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink)}
+.scard-date{font-family:var(--mono);font-size:9px;color:var(--ink-4);margin-left:auto}
+.scard-body{padding:12px 14px}
+.scard-signal{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.sig-up{color:var(--red)}
+.sig-dn{color:var(--teal)}
+.sig-flat{color:var(--ink-3)}
+.scard-text{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* How OSP works explainer */
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.eg-item{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px 16px}
+.eg-num{font-family:var(--cg);font-size:36px;font-weight:600;color:var(--navy);line-height:1;margin-bottom:4px}
+.eg-title{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.eg-text{font-family:var(--ss);font-size:13px;line-height:1.6;color:var(--ink-2)}
+
+/* Grade comparison */
+.grade-table{width:100%;border-collapse:collapse;margin-top:16px}
+.grade-table th{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);padding:8px 12px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt)}
+.grade-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:13px}
+.grade-table tr:last-child td{border-bottom:none}
+.grade-table tr:hover td{background:var(--card-alt)}
+.grade-name{font-family:var(--ss);color:var(--ink)}
+.grade-api{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.grade-diff{font-family:var(--mono);font-size:13px;font-weight:500}
+.grade-diff-pos{color:var(--red)}
+.grade-diff-neg{color:var(--teal)}
+.grade-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3)}
+
+/* Sidebar */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.sc-red{border-top:3px solid var(--red)}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.sc-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-v-red{color:var(--red)!important}
+.sc-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55;margin-top:8px}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:960px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .explainer-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a" href="spare-capacity.html">Spare capacity</a>
+      <a class="nav-a" href="opec-compliance.html">OPEC+ compliance</a>
+      <a class="nav-a on" href="osp-decoder.html">OSP decoder</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Analysis · OSP system · Updated March 2026</div>
+    <h1 class="ph-title">Reading the number behind the number</h1>
+    <div class="ph-sub">The Arab Light OSP differential is not a market price. It is a political decision published once a month. When Aramco moves it by $2.40 in a single month, that is a signal. This page explains what the signal says — and why the current situation is unlike any previous OSP cycle.</div>
+    <div class="ph-src">Sources: Saudi Aramco monthly OSP releases · Argaam · Arab News · Zawya · Business Standard · MacroMicro OSP series · S&P Platts · March 2026</div>
+  </div>
+</div>
+
+<div class="main">
+<div class="content">
+
+  <!-- How the OSP system works -->
+  <div class="sec">
+    <div class="sec-label">Foundation</div>
+    <h2 class="sec-title">What an OSP actually is — and isn't</h2>
+    <div class="body">
+      <p>Most news coverage treats the Arab Light OSP as a price. It is not a price — it is a differential. Aramco does not set an absolute dollar figure for its crude. It sets a premium or discount against a regional benchmark: Oman/Dubai average for Asian buyers, ICE Brent for European buyers, and the Argus Sour Crude Index (ASCI) for North American buyers.</p>
+      <p><strong>What Aramco actually publishes every month — around the 5th — is a number like "+$3.90 vs Oman/Dubai average."</strong> The absolute price a buyer pays is that differential plus whatever Oman/Dubai is trading at when the cargo actually loads. This is why the OSP differential and the absolute price move independently. In a normal market, the differential tells you Aramco's view of its crude's value relative to alternatives. In the current crisis, it tells you something more complicated.</p>
+      <p>Aramco's monthly OSP sets the pricing trend for the region. Kuwait, Iraq, and Iran all price their crude with reference to Aramco's OSP. When Aramco raises the Arab Light differential by $2.40, as it did for March 2025, Kuwait, SOMO, and QatarEnergy typically follow within days. Aramco is not just pricing its own crude — it is setting the regional price level for roughly 9 million barrels per day of Asian-bound crude.</p>
+    </div>
+
+    <div class="explainer-grid">
+      <div class="eg-item">
+        <div class="eg-num">5th</div>
+        <div class="eg-title">of each month</div>
+        <div class="eg-text">Aramco publishes OSPs for the following month's loading. The March OSP covers cargoes loading in March, typically arriving in Asia in April. The lag between pricing decision and market impact is 4–6 weeks.</div>
+      </div>
+      <div class="eg-item">
+        <div class="eg-num">9M</div>
+        <div class="eg-title">bbl/d set by Aramco's lead</div>
+        <div class="eg-text">Kuwait, Iraq (SOMO), Iran, and Qatar price their Asian crude using Aramco's OSP as reference. A single Aramco decision ripples through the entire Gulf pricing system within days.</div>
+      </div>
+      <div class="eg-item">
+        <div class="eg-num">3</div>
+        <div class="eg-title">separate regional benchmarks</div>
+        <div class="eg-text">Asia: vs Oman/Dubai average. Europe: vs ICE Brent. North America: vs Argus Sour Crude Index (ASCI). The same barrel carries three different differentials depending on its destination — revealing Aramco's view of each market.</div>
+      </div>
+      <div class="eg-item">
+        <div class="eg-num">4–6</div>
+        <div class="eg-title">weeks lag to market impact</div>
+        <div class="eg-text">Aramco bases OSPs on market feedback from refiners plus an evaluation of yield values and product prices over the prior month. The decision reflects conditions 4–6 weeks earlier — which matters enormously when the market is moving fast.</div>
+      </div>
+    </div>
+    <div class="src-line">Saudi Aramco OSP methodology · Arab News · Argaam · S&P Platts</div>
+  </div>
+
+  <!-- OSP history chart -->
+  <div class="sec">
+    <div class="sec-label">Historical context</div>
+    <h2 class="sec-title">Arab Light OSP for Asia — 13-month differential history</h2>
+    <div class="body">
+      <p>The chart below shows the Arab Light OSP differential vs Oman/Dubai for Asian buyers. A positive number means Asian buyers paid a premium above the benchmark; negative means a discount. The current situation — a war premium replacing the normal demand-driven signal — is visible in the April 2026 reading.</p>
+    </div>
+
+    <div class="osp-timeline">
+      <div class="ot-head">
+        <span class="ot-title">Arab Light OSP vs Oman/Dubai · Asia · $/bbl</span>
+        <span class="ot-sub">Aramco official releases · Jan 2025–Apr 2026</span>
+      </div>
+      <div class="ot-body">
+        <div class="ot-chart" id="osp-chart"></div>
+        <div class="ot-legend">
+          <div class="ot-leg"><div class="ot-leg-sq" style="background:var(--red)"></div>Positive differential (premium over benchmark)</div>
+          <div class="ot-leg"><div class="ot-leg-sq" style="background:var(--teal)"></div>Negative differential (discount)</div>
+          <div class="ot-leg"><div class="ot-leg-sq" style="background:#8a5a00"></div>War premium (Hormuz crisis)</div>
+        </div>
+      </div>
+    </div>
+    <div class="src-line">Saudi Aramco monthly OSP releases · MacroMicro OSP series · Arab News · Zawya · Argaam · March 2026</div>
+  </div>
+
+  <!-- Signal decoder -->
+  <div class="sec">
+    <div class="sec-label">Reading each move</div>
+    <h2 class="sec-title">The OSP signal decoder — what each move says</h2>
+    <div class="body">
+      <p>Every OSP move carries information beyond the number. Here is how to read the last 13 months.</p>
+    </div>
+
+    <div class="signal-cards">
+
+      <div class="scard scard-up">
+        <div class="scard-head">
+          <span class="scard-move scard-move-up">+$2.40</span>
+          <div>
+            <div class="scard-title">March 2025 — Demand confidence signal</div>
+          </div>
+          <span class="scard-date">Feb 5, 2025</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-signal sig-up">Signal: Asian demand strength · Competition squeeze</div>
+          <div class="scard-text">The largest single-month increase in recent years. Arab Light to Asia went from +$1.50 to +$3.90 vs Oman/Dubai. The explicit driver: rising Chinese and Indian demand plus supply disruption from US sanctions on Russian oil pushing Asian buyers toward Gulf alternatives. Aramco read strong demand and raised accordingly — this is the pricing power move, using supply tightness to extract more from captive buyers. Kuwait, Iraq, and Qatar followed within a week.</div>
+        </div>
+      </div>
+
+      <div class="scard scard-dn">
+        <div class="scard-head">
+          <span class="scard-move scard-move-dn">−$1.10</span>
+          <div>
+            <div class="scard-title">Oct–Jan 2025/26 — Four consecutive cuts</div>
+          </div>
+          <span class="scard-date">Oct 2025 – Feb 2026</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-signal sig-dn">Signal: Demand weakness · Murban competition · Contango structure</div>
+          <div class="scard-text">Arab Light Asia was cut four straight months, reaching parity with the Oman/Dubai average by March 2026. Three concurrent signals: Chinese demand appeared softer than expected in Q4 2025; ADNOC's Murban OSP was competing aggressively for Asian refiners; and the Dubai forward curve shifted to contango — later-dated cargoes more expensive than prompt — suggesting buyers preferred to wait rather than take immediate deliveries. Aramco had to cut to maintain market share.</div>
+        </div>
+      </div>
+
+      <div class="scard scard-up">
+        <div class="scard-head">
+          <span class="scard-move scard-move-up">+$2.50</span>
+          <div>
+            <div class="scard-title">April 2026 — War premium OSP</div>
+          </div>
+          <span class="scard-date">Mar 1, 2026</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-signal sig-up">Signal: Supply scarcity · War premium · Benchmarks broken</div>
+          <div class="scard-text">Saudi Arabia raised the April OSP to +$2.50 vs Oman/Dubai — reversing all four months of cuts in a single move. But this is not a demand signal. It is a scarcity signal. With Hormuz disrupted, Yanbu is the only route for Saudi crude reaching Asian buyers. Saudi Arabia is the only Gulf producer with any meaningful export bypass capability — and Indian refiners are paying $45–50 more per barrel for term supplies under the current system. Aramco is raising its OSP because it can: it is the last seller standing.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">The pricing system is broken — and India is pushing back</div>
+      <div class="alert-body">Indian refiners told Business Standard on March 20 that they are approaching Aramco to seek a shift in the OSP pricing peg from Oman/Dubai to ICE Brent. Their argument: the Platts assessment system that underlies the Oman/Dubai benchmark was based on extremely thin trading volumes after March 2, when Hormuz effectively closed. A benchmark derived from near-zero transaction volumes in a crisis zone is producing prices that do not reflect actual market conditions — it is amplifying the scarcity premium rather than measuring it. This is a structural challenge to the entire regional pricing architecture that may outlast the current crisis.</div>
+    </div>
+
+    <div class="src-line">Arab News February/March 2026 · Zawya February 2026 · Business Standard March 20, 2026 · TradingView March 2026</div>
+  </div>
+
+  <!-- Grade structure -->
+  <div class="sec">
+    <div class="sec-label">Grade structure</div>
+    <h2 class="sec-title">Five grades — five signals</h2>
+    <div class="body">
+      <p>Aramco does not set one OSP. It sets five — one per crude grade. The spread between grades tells you which refineries are in demand and which crude types are scarce. When Arab Heavy trades at a large discount to Arab Light, it signals that complex refineries capable of processing sour heavy crude are in short supply or that Asian buyers are prioritising lighter, easier-to-process grades.</p>
+    </div>
+    <table class="grade-table">
+      <thead>
+        <tr>
+          <th>Grade</th>
+          <th>API gravity</th>
+          <th>Sulphur</th>
+          <th>OSP diff vs Brent</th>
+          <th>March 2026</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="grade-name">Arab Super Light</span></td>
+          <td><span class="grade-api">&gt;40°</span></td>
+          <td><span class="grade-api">~0.06%</span></td>
+          <td><span class="grade-diff grade-diff-pos">+$14.20</span></td>
+          <td><span class="grade-api">~$86.20</span></td>
+          <td><span class="grade-note">Premium condensate — scarce, commands highest margin</span></td>
+        </tr>
+        <tr>
+          <td><span class="grade-name">Arab Extra Light</span></td>
+          <td><span class="grade-api">36–40°</span></td>
+          <td><span class="grade-api">~0.07%</span></td>
+          <td><span class="grade-diff grade-diff-pos">+$13.10</span></td>
+          <td><span class="grade-api">~$85.10</span></td>
+          <td><span class="grade-note">High naphtha yield — valued by petrochemical refiners</span></td>
+        </tr>
+        <tr>
+          <td><span class="grade-name">Arab Light</span></td>
+          <td><span class="grade-api">32–36°</span></td>
+          <td><span class="grade-api">~1.8%</span></td>
+          <td><span class="grade-diff grade-diff-pos">+$11.84</span></td>
+          <td><span class="grade-api">~$84.00</span></td>
+          <td><span class="grade-note">Flagship grade. Regional benchmark. Sets trend for Iraq, Kuwait, Qatar.</span></td>
+        </tr>
+        <tr>
+          <td><span class="grade-name">Arab Medium</span></td>
+          <td><span class="grade-api">29–32°</span></td>
+          <td><span class="grade-api">~2.6%</span></td>
+          <td><span class="grade-diff grade-diff-pos">+$9.20</span></td>
+          <td><span class="grade-api">~$81.20</span></td>
+          <td><span class="grade-note">Requires complex refinery. Discount to Light reflects processing cost.</span></td>
+        </tr>
+        <tr>
+          <td><span class="grade-name">Arab Heavy</span></td>
+          <td><span class="grade-api">&lt;29°</span></td>
+          <td><span class="grade-api">~2.9%</span></td>
+          <td><span class="grade-diff grade-diff-pos">+$7.64</span></td>
+          <td><span class="grade-api">~$79.80</span></td>
+          <td><span class="grade-note">Widest discount to Light in 18 months — complex refinery demand constrained</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="src-line">Saudi Aramco OSP release March 2026 · Argaam · Contango Energy indicative calculations vs EIA Brent $72.16</div>
+  </div>
+
+  <!-- Why current situation is different -->
+  <div class="sec">
+    <div class="sec-label">Current situation</div>
+    <h2 class="sec-title">Why +$11.84 is unlike any previous OSP cycle</h2>
+    <div class="body">
+      <p>In normal market conditions, a large positive OSP differential reflects Aramco's confidence in Asian demand, or a temporary tightening of sour crude supply, or competition-squeezing against UAE's Murban. The differential moves a dollar or two. It is a market signal.</p>
+      <p><strong>The current +$11.84 Arab Light vs Brent differential is not a market signal. It is a crisis artifact.</strong> It reflects three simultaneous distortions that have never previously coincided.</p>
+      <p>First: the Brent benchmark itself is depressed relative to Gulf physical crude. Brent crude surged past $120 per barrel immediately after Hormuz closed , then fell back toward $72 as markets priced in reserve releases and uncertainty. But the Brent futures contract — which is the reference — is increasingly disconnected from Gulf physical crude, which cannot be transported to the North Sea delivery point because Hormuz is closed. The physical premium is real; the futures market is pricing something different.</p>
+      <p>Second: the Platts Oman/Dubai assessment — which underpins all Asian OSP calculations — was based on extremely thin trading volumes after March 2 , when war began. A benchmark built on near-zero transactions is producing artificial price signals. Indian refiners are now paying $45–50 more per barrel than they would under a properly functioning benchmark system.</p>
+      <p>Third: Saudi Arabia is the last seller standing. Saudi Arabia accounts for approximately 40% of Gulf oil flows that are still moving . With Iraq under force majeure, Kuwaiti exports severely curtailed, and UAE running at Fujairah bypass capacity, Aramco faces no competitive constraint on its OSP. It can raise the differential because buyers have no alternative.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-body">Indian refiners say they will end up paying $45–50 more per barrel for term supplies from Saudi Arabia, the UAE, Iraq, and Kuwait under the current pricing system. They are approaching Aramco to seek a shift in the OSP pricing peg from the Oman/Dubai benchmark to ICE Brent — arguing the current system does not account for war-led disruption to crude flows.  — Business Standard, March 20, 2026</div>
+    </div>
+
+    <div class="src-line">Business Standard March 20, 2026 · Wikipedia: Economic impact of the 2026 Iran war · Kpler March 1, 2026 · Arab News March 2026</div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <div class="sc sc-red">
+    <div class="sc-head">
+      <div class="sc-title">Current OSP snapshot</div>
+      <div class="sc-meta">April 2026 loading · Aramco</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">Arab Light vs Brent</span><span class="sc-v sc-v-red">+$11.84</span></div>
+      <div class="sc-row"><span class="sc-l">Arab Light absolute</span><span class="sc-v">$84.00</span></div>
+      <div class="sc-row"><span class="sc-l">ICE Brent (EIA)</span><span class="sc-v">$72.16</span></div>
+      <div class="sc-row"><span class="sc-l">Oman/Dubai</span><span class="sc-v">~$80.75</span></div>
+      <div class="sc-row"><span class="sc-l">Arab Light vs O/D</span><span class="sc-v sc-v-red">+$2.50</span></div>
+      <div class="sc-row"><span class="sc-l">Arab Heavy vs Brent</span><span class="sc-v sc-v-red">+$7.64</span></div>
+      <div class="sc-row"><span class="sc-l">Light-Heavy spread</span><span class="sc-v">$4.20</span></div>
+      <div class="sc-note">The +$11.84 vs Brent differential reflects both the war premium in physical Gulf crude and the depression of Brent futures relative to landed Gulf barrels. It is not comparable to pre-crisis OSP differentials.</div>
+      <div class="src-line" style="margin:8px 0 0">Aramco OSP Apr 2026 · EIA Brent · Contango indicative</div>
+    </div>
+  </div>
+
+  <div class="sc sc-navy">
+    <div class="sc-head">
+      <div class="sc-title">OSP history — Asia differential</div>
+      <div class="sc-meta">Arab Light vs Oman/Dubai · $/bbl</div>
+    </div>
+    <div class="sc-body" style="padding:0 14px">
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Jan 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">+$0.60</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Feb 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">+$1.50</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Mar 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--red)">+$3.90 ↑</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Apr 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--red)">+$3.50</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">May–Sep 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink-3)">+$1.5–2.2</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Oct 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">+$1.20 ↓</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Nov–Feb 2025/26</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">Cut 4 months</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Mar 2026</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink-3)">$0.00 (parity)</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Apr 2026</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--red)">+$2.50 ↑↑</span></div>
+      </div>
+      <div class="src-line" style="margin:8px 0 0">Aramco official releases · Argaam · Arab News · Zawya</div>
+    </div>
+  </div>
+
+  <div class="sc sc-navy">
+    <div class="sc-head">
+      <div class="sc-title">Key dates to watch</div>
+    </div>
+    <div class="sc-body">
+      <p style="font-family:var(--ss);font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:10px">The OSP calendar drives the entire regional pricing cycle.</p>
+      <div class="sc-row"><span class="sc-l">~5th of month</span><span class="sc-v">Aramco publishes</span></div>
+      <div class="sc-row"><span class="sc-l">Within days</span><span class="sc-v">Kuwait, Iraq follow</span></div>
+      <div class="sc-row"><span class="sc-l">~10th of month</span><span class="sc-v">ADNOC (Murban) publishes</span></div>
+      <div class="sc-row"><span class="sc-l">~15th of month</span><span class="sc-v">QatarEnergy follows</span></div>
+      <div class="sc-note">Each month's OSP applies to cargoes loading in that month, arriving in Asia 4–6 weeks later. Watching the sequence reveals competitive dynamics between producers.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · OSP signal decoder · March 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="saudi-arabia.html">Saudi Arabia</a>
+      <a href="spare-capacity.html">Spare capacity</a>
+      <a href="opec-compliance.html">OPEC+ compliance</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+
+/* OSP chart */
+const OSP_DATA = [
+  {m:'Jan 25', v:0.60},  {m:'Feb 25', v:1.50},
+  {m:'Mar 25', v:3.90},  {m:'Apr 25', v:3.50},
+  {m:'May 25', v:2.20},  {m:'Jun 25', v:2.00},
+  {m:'Jul 25', v:1.80},  {m:'Aug 25', v:2.20},
+  {m:'Sep 25', v:1.70},  {m:'Oct 25', v:1.20},
+  {m:'Nov 25', v:0.80},  {m:'Dec 25', v:0.50},
+  {m:'Jan 26', v:0.60},  {m:'Feb 26', v:0.30},
+  {m:'Mar 26', v:0.00},  {m:'Apr 26', v:2.50, war:true},
+];
+
+function renderOSPChart(){
+  const el = document.getElementById('osp-chart'); if(!el) return;
+  const max = Math.max(...OSP_DATA.map(d=>Math.abs(d.v))) || 4;
+  const H = 100; // usable height in px
+  el.innerHTML = OSP_DATA.map(d=>{
+    const pct = Math.abs(d.v) / max * 100;
+    const h = Math.max(3, pct * H / 100);
+    const col = d.war ? '#8a5a00' : d.v >= 0 ? 'var(--red)' : 'var(--teal)';
+    const sign = d.v >= 0 ? '+' : '';
+    return `<div class="ot-bar-wrap">
+      <div class="ot-bar" style="height:${h}px;background:${col}" data-tip="${d.m}: ${sign}${d.v.toFixed(2)} $/bbl"></div>
+      <div class="ot-month">${d.m}</div>
+    </div>`;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', renderOSPChart);
+</script>
+</body>
+</html>
