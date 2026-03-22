@@ -1,10 +1,10 @@
 const CONTANGO_DATA = {
-  lastUpdated: "2026-03-22 13:56 UTC",
+  lastUpdated: "2026-03-22 14:57 UTC",
   prices: [
-    {sym: 'BRENT', name: 'ICE Brent', val: 82.04, chg: 1.2, origin: 'Global'},
-    {sym: 'ARAB L', name: 'Arab Light', val: 83.76, chg: 0.8, origin: 'Saudi Arabia'},
-    {sym: 'MURBAN', name: 'Murban', val: 84.05000000000001, chg: 1.1, origin: 'UAE'},
-    {sym: 'OMAN', name: 'Oman/Dubai', val: 80.99000000000001, chg: -0.4, origin: 'DME'}
+    {sym: 'BRENT', name: 'ICE Brent', val: 82.44, chg: 1.2, origin: 'Global'},
+    {sym: 'ARAB L', name: 'Arab Light', val: 84.10000000000001, chg: 0.8, origin: 'Saudi Arabia'},
+    {sym: 'MURBAN', name: 'Murban', val: 84.11, chg: 1.1, origin: 'UAE'},
+    {sym: 'OMAN', name: 'Oman/Dubai', val: 81.41, chg: -0.4, origin: 'DME'}
   ],
   intel: [
     {tag: 'LOGISTICS', hl: 'Suez Transit Risk Elevated', txt: 'Shipping volumes down 15% WoW.', time: 'Live'}
