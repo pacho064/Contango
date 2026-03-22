@@ -134,4 +134,21 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(# Optional manual benchmarks
+    for arg_name, json_key, label in [
+        ("ttf",   "ttf",   "TTF Gas (ICE)"),
+        ("jkm",   "jkm",   "JKM LNG (Platts)"),
+        ("urals", "urals", "Urals (Argus)"),
+    ]:
+        val = getattr(args, arg_name)
+        if val is not None:
+            data["benchmarks"].setdefault(json_key, {}).update({
+                "price": val, "updated": today,
+                "source": f"{label} — manually entered",
+            })
+            print(f"  {label}: ${val}")
+```
+
+So your monthly command becomes something like:
+```
+python osp_update.py --arabl 2.50 --murban 2.93 --basra 0.65 --kec 0.20 --aheavy -0.95 --ttf 48.30 --jkm 24.70 --urals 52.40)
