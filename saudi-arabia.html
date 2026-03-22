@@ -1,478 +1,65 @@
 <!DOCTYPE html>
-<!-- Contango v3.0 · 20 March 2026 · github.com/pacho064/Contango -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Saudi Arabia — Contango Energy Intelligence</title>
-<meta name="description" content="Saudi Arabia oil production, OSPs, infrastructure, export flows, risk profile, and the Yanbu bottleneck argument. Open-source energy intelligence.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
-<script src="data.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contango — KSA Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Source+Serif+4:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f5; --card: #ffffff; --border: #e8e5e0; --ink: #0f0f0e; --ink-3: #9a9590; --navy: #1d4480;
+      --ss: 'Source Serif 4', serif; --cg: 'Cormorant Garamond', serif; --mono: 'IBM Plex Mono', monospace;
+    }
+    body { font-family: var(--ss); background: var(--bg); color: var(--ink); margin: 0; }
+    .nav { padding: 16px 24px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 12px; }
+    .nav a { color: var(--navy); text-decoration: none; margin-right: 20px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+    h1 { font-family: var(--cg); font-size: 42px; margin: 8px 0; }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 32px; }
+    .card { background: var(--card); border: 1px solid var(--border); padding: 24px; border-radius: 4px; margin-bottom: 24px; }
+    .card-h { font-family: var(--cg); font-size: 20px; font-weight: 600; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-family: var(--mono); font-size: 10px; color: var(--ink-3); padding: 8px; border-bottom: 1px solid var(--border); }
+    td { padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  </style>
 </head>
 <body>
 
-<!-- ticker -->
-<div class="ticker"><div class="ticker-track" id="ticker-track"></div></div>
-
-<!-- navbar -->
-<nav class="navbar">
-  <div class="container">
-    <div class="nav-brand">
-      <a href="index.html" class="nav-logo">Con<span>tango</span></a>
-      <span class="nav-tagline">ENERGY INTELLIGENCE</span>
-    </div>
-    <div class="nav-links">
-      <a class="nav-link" href="index.html">Overview</a>
-      <a class="nav-link active" href="saudi-arabia.html">Saudi Arabia</a>
-      <a class="nav-link" href="index.html#map-section">Map</a>
-      <a class="nav-link" href="index.html#intelligence">Intelligence</a>
-      <a class="nav-link" href="index.html#methodology">Methodology</a>
-    </div>
-    <div class="nav-actions">
-      <button class="btn-ghost" id="theme-btn" onclick="toggleTheme()">Dark mode</button>
-      <a href="https://github.com/pacho064/Contango" target="_blank" class="btn-ghost">GitHub</a>
-    </div>
-  </div>
+<nav class="nav">
+  <a href="index.html">← Overview</a>
+  <span>Intelligence Focus: Saudi Arabia</span>
 </nav>
 
-<!-- country hero -->
-<div class="country-hero">
-  <div class="container">
-    <div class="country-flag-bar">
-      <div style="font-size:32px">🇸🇦</div>
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
-          <h1 style="font-size:32px;line-height:1">Saudi Arabia</h1>
-          <span class="country-grade-pill">Arab Light · Arab Heavy · Arab Medium</span>
-          <span class="risk-badge risk-mod" style="font-size:11px">
-            <span class="risk-dot"></span>Moderate geopolitical risk
-          </span>
-        </div>
-        <p style="font-size:14px;color:var(--t-tertiary);font-family:var(--f-mono)">
-          Arabian Peninsula · OPEC+ swing producer · Saudi Aramco (100% state-owned)
-        </p>
+<main class="wrap">
+  <div style="font-family:var(--mono); font-size:11px; color:var(--navy)">MARKET PROFILE</div>
+  <h1>Kingdom of Saudi Arabia</h1>
+  
+  <div class="grid">
+    <div class="col-main">
+      <div class="card">
+        <div class="card-h">Asia Official Selling Prices (OSPs)</div>
+        <table>
+          <thead><tr><th>Grade</th><th>Reference</th><th>Differential</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td><b>Arab Light</b></td><td>Oman/Dubai</td><td>+$1.70</td><td style="color:var(--red)">-0.10</td></tr>
+            <tr><td>Arab Extra Light</td><td>Oman/Dubai</td><td>+$2.10</td><td>UNCH</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-h">Analyst Commentary</div>
+        <p>Aramco is maintaining a defensive posture. Production remains anchored at 9M bpd to support global pricing stability, while internal flows favor the East-West pipeline to mitigate Red Sea transit risks.</p>
       </div>
     </div>
-
-    <div class="country-stats" id="country-stats"></div>
-
-    <div style="margin-top:16px;font-size:12px;font-family:var(--f-mono);color:var(--t-meta)">
-      Data compiled from: Saudi Aramco Annual Review 2025 · IEA · OPEC Secretariat · EIA · S&P Global Platts
-      <span style="margin-left:12px">Last updated: March 2026</span>
-    </div>
-  </div>
-</div>
-
-<!-- main body -->
-<div style="background:var(--bg)">
-  <div class="container" style="padding-top:40px;padding-bottom:60px">
-
-    <!-- two-col layout -->
-    <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start">
-
-      <!-- LEFT COLUMN -->
-      <div>
-
-        <!-- Price reality -->
-        <section style="margin-bottom:40px">
-          <div class="section-label">Price reality</div>
-          <h2 style="margin-bottom:8px">Official Selling Prices and the Brent gap</h2>
-          <p style="font-family:var(--f-ed);font-size:16px;line-height:1.7;color:var(--t-secondary);margin-bottom:20px">
-            Saudi Aramco publishes monthly OSPs for each grade, set as a differential to the Oman/Dubai average for Asian customers. The spread to ICE Brent is the market's real signal on Middle East sour crude demand and supply constraints.
-          </p>
-
-          <div class="card" style="margin-bottom:16px">
-            <div class="card-head">
-              <span class="card-title">Saudi Arabian OSPs — current month</span>
-              <span class="card-meta">April 2026 loading · Aramco official release</span>
-            </div>
-            <table class="price-table" id="sa-osp-table"></table>
-            <div style="padding:10px 14px;border-top:1px solid var(--b-subtle)">
-              <div class="source-line" style="margin:0">
-                <div class="source-dot"></div>
-                Saudi Aramco Monthly OSP release · Published 1st of preceding month · Compiled as indicative
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-head">
-              <span class="card-title">Arab Light vs Brent — 6-month history</span>
-              <span class="card-meta">Indicative · compiled from OSP releases</span>
-            </div>
-            <div style="padding:16px 20px">
-              <div style="position:relative;width:100%;height:220px">
-                <canvas id="price-chart"></canvas>
-              </div>
-              <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap">
-                <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-family:var(--f-mono);color:var(--t-tertiary)">
-                  <div style="width:14px;height:2px;background:#B85042;border-radius:1px"></div>Arab Light (OSP)
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-family:var(--f-mono);color:var(--t-tertiary)">
-                  <div style="width:14px;height:2px;background:#1F5A94;border-radius:1px;border-top:2px dashed #1F5A94;height:0"></div>Brent (ICE)
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-family:var(--f-mono);color:var(--t-tertiary)">
-                  <div style="width:14px;height:2px;background:#C58B2A;border-radius:1px;border-top:2px dashed #C58B2A;height:0"></div>Arab Heavy (OSP)
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Infrastructure -->
-        <section style="margin-bottom:40px">
-          <div class="section-label">Infrastructure</div>
-          <h2 style="margin-bottom:8px">Terminals, pipelines and processing capacity</h2>
-          <p style="font-family:var(--f-ed);font-size:16px;line-height:1.7;color:var(--t-secondary);margin-bottom:20px">
-            Saudi Arabia's oil infrastructure is extraordinarily concentrated. The majority of crude processing passes through a single facility — Abqaiq — before reaching export terminals, nearly all of which are located on the Arabian Gulf coast and dependent on Hormuz transit.
-          </p>
-
-          <div id="infra-nodes"></div>
-        </section>
-
-        <!-- The analyst note — full Yanbu argument -->
-        <section style="margin-bottom:40px">
-          <div class="section-label">Analyst note</div>
-          <div class="analyst-note">
-            <div class="analyst-note-label">Contango · March 2026</div>
-            <h3 id="analyst-title"></h3>
-            <div id="analyst-body"></div>
-            <div class="source-line" id="analyst-sources" style="margin-top:16px"></div>
-          </div>
-        </section>
-
-      </div>
-
-      <!-- RIGHT COLUMN -->
-      <div style="position:sticky;top:70px">
-
-        <!-- Export flows -->
-        <div class="card" style="margin-bottom:20px">
-          <div class="card-head">
-            <span class="card-title">Export destinations</span>
-            <span class="card-meta">Est. 10.2M bbl/d total</span>
-          </div>
-          <div style="padding:16px 20px" id="sa-buyers"></div>
-          <div style="padding:0 20px 14px">
-            <div class="source-line" style="margin:0">
-              <div class="source-dot"></div>
-              Saudi Aramco Annual Review 2025 · EIA bilateral trade data · Indicative
-            </div>
-          </div>
-        </div>
-
-        <!-- Risk profile -->
-        <div class="card" style="margin-bottom:20px">
-          <div class="card-head">
-            <span class="card-title">Risk profile</span>
-            <span class="card-meta">Sourced tiers only</span>
-          </div>
-          <div style="padding:16px 20px" id="sa-risks"></div>
-        </div>
-
-        <!-- OPEC+ position -->
-        <div class="card" style="margin-bottom:20px">
-          <div class="card-head">
-            <span class="card-title">OPEC+ position</span>
-            <span class="card-meta">March 2026</span>
-          </div>
-          <div style="padding:16px 20px">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-              <div style="background:var(--bg-subtle);border-radius:5px;padding:10px">
-                <div style="font-size:10px;font-family:var(--f-mono);color:var(--t-meta);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Quota</div>
-                <div style="font-size:20px;font-weight:600;font-family:var(--f-mono)">10.0M</div>
-                <div style="font-size:10px;color:var(--t-tertiary)">bbl/day</div>
-              </div>
-              <div style="background:var(--bg-subtle);border-radius:5px;padding:10px">
-                <div style="font-size:10px;font-family:var(--f-mono);color:var(--t-meta);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Actual</div>
-                <div style="font-size:20px;font-weight:600;font-family:var(--f-mono);color:var(--a-amber)">10.2M</div>
-                <div style="font-size:10px;color:var(--a-amber)">+0.2M over quota</div>
-              </div>
-            </div>
-            <p style="font-size:12px;color:var(--t-secondary);line-height:1.55">Broadly compliant. Minor overage within JMMC tolerance. Saudi Arabia retains swing-producer role — capacity to move output ±2M bbl/d on short notice.</p>
-            <div class="source-line"><div class="source-dot"></div>OPEC JMMC communiqué · Reuters output survey · March 2026</div>
-          </div>
-        </div>
-
-        <!-- Key intel -->
-        <div class="card">
-          <div class="card-head">
-            <span class="card-title">Latest Saudi intelligence</span>
-          </div>
-          <div style="padding:0 4px" id="sa-intel"></div>
-        </div>
-
+    <div class="col-side">
+      <div class="card">
+        <div class="card-h">Logistics Status</div>
+        <p><b>Ras Tanura:</b> Normal<br><b>Yanbu:</b> High Activity<br><b>E-W Pipe:</b> 3.2M bpd</p>
       </div>
     </div>
   </div>
-</div>
+</main>
 
-<!-- footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand-name">Con<span>tango</span></div>
-        <p class="footer-desc">Open-source energy market intelligence.</p>
-      </div>
-      <div>
-        <div class="footer-col-head">Navigate</div>
-        <a class="footer-link" href="index.html">Overview</a>
-        <a class="footer-link" href="index.html#map-section">Map</a>
-        <a class="footer-link" href="index.html#methodology">Methodology</a>
-      </div>
-      <div>
-        <div class="footer-col-head">Data sources</div>
-        <div class="footer-sources">
-          Saudi Aramco Annual Review<br>
-          IEA World Energy Outlook<br>
-          EIA bilateral trade data<br>
-          S&P Global Platts · Argus Media
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-head">Project</div>
-        <a class="footer-link" href="https://github.com/pacho064/Contango" target="_blank">GitHub</a>
-        <a class="footer-link" href="index.html#methodology">Methodology</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>contango.energy — Open source, MIT license</span>
-      <span>Data compiled as indicative · Not financial advice</span>
-    </div>
-  </div>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>
-const D = window.CONTANGO;
-const SA = D.saudiArabia;
-
-/* prices */
-const allPrices = [...D.benchmarks, ...D.localOSPs, ...D.commodities];
-const ps = {};
-allPrices.forEach(p => { ps[p.sym] = { v: p.base, b: p.base }; });
-function tick(){
-  Object.keys(ps).forEach(k => { ps[k].v = ps[k].b * (1 + (Math.random()-.5) * 0.005); });
-}
-window._brentPrice = ps['BRENT'].v;
-
-let dark = false;
-function toggleTheme(){
-  dark = !dark;
-  document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-  document.getElementById('theme-btn').textContent = dark ? 'Light mode' : 'Dark mode';
-}
-
-/* ticker */
-function renderTicker(){
-  const items = D.benchmarks.concat(D.localOSPs.slice(0,4)).map(p => {
-    const s = ps[p.sym];
-    const chg = (s.v - p.base) / p.base * 100;
-    const up = chg >= 0;
-    return `<div class="ticker-item">
-      <span class="ti-sym">${p.sym}</span>
-      <span class="ti-price">$${s.v.toFixed(p.dec)}</span>
-      <span class="${up?'ti-up':'ti-dn'}">${up?'+':''}${chg.toFixed(2)}%</span>
-    </div>`;
-  }).join('');
-  const t = document.getElementById('ticker-track');
-  if(t) t.innerHTML = items + items;
-}
-
-/* country stats */
-function renderStats(){
-  const brent = ps['BRENT'].v;
-  const arabLight = ps['ARAB L'].v;
-  const spread = arabLight - brent;
-  const items = [
-    {label:'Production', val:'10.2M bbl/d', note:'Est. · Aramco Annual Review 2025'},
-    {label:'Arab Light OSP', val:`$${arabLight.toFixed(2)}/bbl`, note:`+$${spread.toFixed(2)} vs Brent`},
-    {label:'Proved reserves', val:'267 billion bbl', note:'~17% of global reserves · BP Statistical Review'},
-    {label:'OPEC+ quota', val:'10.0M bbl/d', note:'Currently producing +0.2M above quota'},
-  ];
-  const el = document.getElementById('country-stats');
-  if(el) el.innerHTML = items.map(m => `
-    <div>
-      <div class="country-stat-label">${m.label}</div>
-      <div class="country-stat-value">${m.val}</div>
-      <div class="country-stat-note">${m.note}</div>
-    </div>`).join('');
-}
-
-/* OSP table */
-function renderOSPTable(){
-  const brent = ps['BRENT'].v;
-  const saudiOSPs = D.localOSPs.filter(p => p.country === 'Saudi Arabia');
-  const el = document.getElementById('sa-osp-table');
-  if(!el) return;
-  el.innerHTML = `<thead><tr>
-    <th>Grade</th><th>API</th>
-    <th style="text-align:right">OSP ($/bbl)</th>
-    <th style="text-align:right">vs Brent</th>
-    <th style="text-align:right">vs last month</th>
-  </tr></thead><tbody>` +
-  saudiOSPs.map(p => {
-    const s = ps[p.sym];
-    const spread = s.v - brent;
-    const chg = (s.v - p.base) / p.base * 100;
-    const up = chg >= 0;
-    const apis = {'ARAB L':'33° (light)','ARAB H':'27° (heavy)','MURBAN2':'—'};
-    return `<tr>
-      <td><div class="pt-name">${p.name}</div></td>
-      <td style="font-size:12px;color:var(--t-tertiary)">${apis[p.sym]||p.grade}</td>
-      <td class="pt-price">$${s.v.toFixed(2)}</td>
-      <td><span class="pt-prem">+$${spread.toFixed(2)}</span></td>
-      <td class="pt-chg ${up?'up':'dn'}" style="text-align:right">${up?'+':''}${chg.toFixed(2)}%</td>
-    </tr>`;
-  }).join('') + '</tbody>';
-}
-
-/* price history chart */
-function renderPriceChart(){
-  const ctx = document.getElementById('price-chart');
-  if(!ctx) return;
-  const labels = SA.priceHistory.map(d => d.month);
-  new Chart(ctx, {
-    type:'line',
-    data:{
-      labels,
-      datasets:[
-        {label:'Arab Light OSP', data:SA.priceHistory.map(d=>d.arabLight), borderColor:'#B85042', borderWidth:2, pointRadius:3, pointBackgroundColor:'#B85042', tension:.3},
-        {label:'Arab Heavy OSP', data:SA.priceHistory.map(d=>d.arabHeavy), borderColor:'#C58B2A', borderWidth:1.5, borderDash:[4,2], pointRadius:2, tension:.3},
-        {label:'Brent (ICE)',    data:SA.priceHistory.map(d=>d.brent),    borderColor:'#1F5A94', borderWidth:1.5, borderDash:[2,2], pointRadius:2, tension:.3},
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{ticks:{font:{family:'IBM Plex Mono',size:10},color:'#9AACBD'},grid:{color:'rgba(0,0,0,.05)'}},
-        y:{ticks:{font:{family:'IBM Plex Mono',size:10},color:'#9AACBD',callback:v=>'$'+v},grid:{color:'rgba(0,0,0,.05)'}}
-      }
-    }
-  });
-}
-
-/* infra nodes */
-function renderInfraNodes(){
-  const el = document.getElementById('infra-nodes');
-  if(!el) return;
-  el.innerHTML = SA.nodesOfInterest.map(n => {
-    const typeColors = {processing:'var(--a-amber)',field:'var(--a-green)',industrial:'var(--a-blue)',port:'#B85042'};
-    const col = typeColors[n.type] || 'var(--a-blue)';
-    return `
-      <div class="card" style="margin-bottom:12px">
-        <div style="padding:14px 18px;display:flex;gap:14px;align-items:flex-start">
-          <div style="width:8px;height:8px;border-radius:50%;background:${col};margin-top:6px;flex-shrink:0"></div>
-          <div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-              <span style="font-size:14px;font-weight:600;color:var(--t-primary)">${n.n}</span>
-              <span style="font-size:10px;font-family:var(--f-mono);padding:2px 6px;border-radius:2px;background:var(--bg-subtle);color:${col};text-transform:capitalize">${n.type}</span>
-            </div>
-            <p style="font-size:13px;color:var(--t-secondary);line-height:1.55;margin:0">${n.note}</p>
-          </div>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-/* analyst note */
-function renderAnalystNote(){
-  const an = SA.analystNote;
-  const titleEl = document.getElementById('analyst-title');
-  const bodyEl = document.getElementById('analyst-body');
-  const srcEl = document.getElementById('analyst-sources');
-  if(titleEl) titleEl.textContent = an.title;
-  if(bodyEl){
-    bodyEl.innerHTML = an.body.split('\n\n').filter(Boolean).map(p =>
-      `<p style="font-family:var(--f-ed);font-size:15px;line-height:1.75;color:var(--t-secondary)">${p}</p>`
-    ).join('');
-  }
-  if(srcEl){
-    srcEl.innerHTML = `<div class="source-dot"></div>Sources: ${an.sources} · Updated ${an.updated}`;
-  }
-}
-
-/* buyers */
-function renderBuyers(){
-  const el = document.getElementById('sa-buyers');
-  if(!el) return;
-  el.innerHTML = SA.topBuyers.map(b => `
-    <div style="margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px">
-          <span style="font-size:16px">${b.flag}</span>${b.country}
-        </span>
-        <span style="font-family:var(--f-mono);font-size:12px;color:var(--t-secondary)">${b.vol}</span>
-      </div>
-      <div style="height:5px;background:var(--b-subtle);border-radius:2px;overflow:hidden">
-        <div style="width:${b.share}%;height:100%;background:var(--a-amber);border-radius:2px"></div>
-      </div>
-      <div style="font-size:10px;color:var(--t-meta);font-family:var(--f-mono);margin-top:2px">${b.share}% of exports</div>
-    </div>`).join('');
-}
-
-/* risks */
-function renderRisks(){
-  const el = document.getElementById('sa-risks');
-  if(!el) return;
-  el.innerHTML = SA.risks.map(r => {
-    const clsMap = {low:'risk-low',moderate:'risk-mod',elevated:'risk-elev',high:'risk-high'};
-    return `
-      <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--b-subtle)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-          <span style="font-size:12px;font-weight:500">${r.type}</span>
-          <span class="risk-badge ${clsMap[r.level]||'risk-low'}">
-            <span class="risk-dot"></span>${r.level.charAt(0).toUpperCase()+r.level.slice(1)}
-          </span>
-        </div>
-        <p style="font-size:12px;color:var(--t-secondary);line-height:1.5;margin:0 0 4px">${r.detail}</p>
-        <div style="font-size:10px;font-family:var(--f-mono);color:var(--t-meta)">
-          ${r.src} · ${r.updated}
-        </div>
-      </div>`;
-  }).join('');
-}
-
-/* saudi intel feed */
-function renderSaudiIntel(){
-  const el = document.getElementById('sa-intel');
-  if(!el) return;
-  const saNews = D.intel.filter(n => n.region === 'Saudi Arabia' || n.region === 'Red Sea').slice(0,4);
-  el.innerHTML = saNews.map(n => `
-    <div class="intel-item" style="padding:12px 16px">
-      <div class="intel-source">
-        <div class="intel-src-pip" style="background:${n.col}"></div>
-        <span class="intel-src-name">${n.src}</span>
-      </div>
-      <div class="intel-hl" style="font-size:12px">${n.hl}</div>
-      <div class="intel-time">${n.time}</div>
-    </div>`).join('');
-}
-
-/* init */
-function init(){
-  renderTicker();
-  renderStats();
-  renderOSPTable();
-  renderPriceChart();
-  renderInfraNodes();
-  renderAnalystNote();
-  renderBuyers();
-  renderRisks();
-  renderSaudiIntel();
-  setInterval(() => {
-    tick();
-    window._brentPrice = ps['BRENT'].v;
-    renderTicker();
-    renderStats();
-    renderOSPTable();
-  }, 5000);
-}
-document.addEventListener('DOMContentLoaded', init);
-</script>
 </body>
 </html>
