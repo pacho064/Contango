@@ -1,29 +1,28 @@
-name: Hourly Price Robot
+name: Daily Price Update
 
 on:
   schedule:
-    - cron: '0 * * * *' # This means "Run at the start of every hour"
-  workflow_dispatch: # This allows you to run it manually to test it
+    - cron: '0 18 * * *'
+  workflow_dispatch:
 
 jobs:
-  build:
+  update-prices:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.11'
 
-      - name: Run Robot Brain
-        run: python fetch_data.py
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-      - name: Save and Commit changes
-        run: |
-          git config --global user.name "Contango-Robot"
-          git config --global user.email "robot@contango.energy"
-          git add data.js
-          git commit -m "Robot: Updated Live Prices" || echo "No changes to commit"
-          git push
+      - name: Run price updater
+        env:
+          EIA_API_KEY:  ${{ secrets.EIA_API_KEY }}
+          GH_TOKEN:     ${{ secrets.GH_TOKEN }}
+          GH_REPO:      ${{ github.repository }}
+        run: python updater.py
