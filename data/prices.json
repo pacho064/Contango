@@ -1,21 +1,20 @@
 {
   "_note": "Benchmarks auto-updated daily by updater.py via GitHub Actions. OSP differentials updated manually ~1st of each month via osp_update.py. Absolute OSP prices are computed: differential + oman_dubai spot.",
-  "_updated": "2026-03-22T00:00:00Z",
+  "_updated": "2026-03-31T00:13:51Z",
   "_osp_month": "March 2026",
   "_osp_updated": "2026-03-01",
-
   "benchmarks": {
     "brent": {
-      "price": 72.16,
-      "change_pct": 0.8,
-      "updated": "2026-03-21",
+      "price": 103.79,
+      "change_pct": -12.35,
+      "updated": "2026-03-23",
       "source": "EIA (RBRTE)",
       "source_url": "https://www.eia.gov/opendata/"
     },
     "wti": {
-      "price": 68.26,
-      "change_pct": 0.6,
-      "updated": "2026-03-21",
+      "price": 89.33,
+      "change_pct": -9.5,
+      "updated": "2026-03-23",
       "source": "EIA (RWTC)",
       "source_url": "https://www.eia.gov/opendata/"
     },
@@ -27,40 +26,38 @@
       "source_url": "https://www.dme.ae/"
     },
     "urals": {
-      "price": 52.40,
+      "price": 52.4,
       "change_pct": -0.6,
       "updated": "2026-03-21",
       "source": "OilPriceAPI / Argus",
       "source_url": "https://www.argusmedia.com/"
     },
     "ttf": {
-      "price": 48.30,
+      "price": 48.3,
       "change_pct": 0.4,
       "updated": "2026-03-21",
       "source": "OilPriceAPI / ICE",
       "source_url": "https://www.theice.com/"
     },
     "jkm": {
-      "price": 24.70,
+      "price": 24.7,
       "change_pct": 0.2,
       "updated": "2026-03-21",
       "source": "OilPriceAPI / Platts",
       "source_url": "https://www.spglobal.com/commodityinsights/"
     }
   },
-
   "osps": {
     "_note": "Differentials are vs Oman/Dubai for Asia. Absolute prices = oman_dubai + differential, recalculated daily by updater.py. Enter new differentials monthly via: python osp_update.py",
-
     "arab_light": {
       "grade": "Arab Light",
       "country": "Saudi Arabia",
       "operator": "Saudi Aramco",
       "source": "Aramco OSP release",
       "source_url": "https://www.argaam.com/en/article/articledetail/id/1741098",
-      "differential_vs_omd": 2.50,
+      "differential_vs_omd": 2.5,
       "price": 83.25,
-      "spread_vs_brent": 11.09,
+      "spread_vs_brent": -20.54,
       "for_month": "March 2026",
       "context": "Flagship grade. Sets regional pricing trend for Iraq, Kuwait, Qatar."
     },
@@ -72,7 +69,7 @@
       "source_url": "https://adnoc.ae/en/adnoc-murban/documents-and-downloads",
       "differential_vs_omd": 2.93,
       "price": 83.68,
-      "spread_vs_brent": 11.52,
+      "spread_vs_brent": -20.11,
       "for_month": "March 2026",
       "context": "ICE Murban futures contract. Competes directly with Arab Light for Asian refiners."
     },
@@ -83,8 +80,8 @@
       "source": "SOMO Iraq official OSP",
       "source_url": "https://www.oil.gov.iq/",
       "differential_vs_omd": 0.65,
-      "price": 81.40,
-      "spread_vs_brent": 9.24,
+      "price": 81.4,
+      "spread_vs_brent": -22.39,
       "for_month": "March 2026",
       "context": "Force majeure active March 2026. Exports halted."
     },
@@ -94,9 +91,9 @@
       "operator": "KPC",
       "source": "Kuwait Petroleum Corp OSP",
       "source_url": "https://www.kpc.com.kw/",
-      "differential_vs_omd": 0.20,
+      "differential_vs_omd": 0.2,
       "price": 80.95,
-      "spread_vs_brent": 8.79,
+      "spread_vs_brent": -22.84,
       "for_month": "March 2026",
       "context": null
     },
@@ -107,19 +104,18 @@
       "source": "Aramco OSP release",
       "source_url": "https://www.argaam.com/en/article/articledetail/id/1741098",
       "differential_vs_omd": -0.95,
-      "price": 79.80,
-      "spread_vs_brent": 7.64,
+      "price": 79.8,
+      "spread_vs_brent": -23.99,
       "for_month": "March 2026",
-      "context": "Widest discount to Arab Light in 18 months — complex refinery demand constrained."
+      "context": "Widest discount to Arab Light in 18 months \u2014 complex refinery demand constrained."
     }
   },
-
   "chokepoints": [
     {
       "name": "Strait of Hormuz",
       "risk": "high",
       "volume": "21M bbl/d",
-      "source": "Lloyd's JWC · IEA · US State Dept L3",
+      "source": "Lloyd's JWC \u00b7 IEA \u00b7 US State Dept L3",
       "updated": "Mar 2026",
       "lon": 56.6,
       "lat": 26.5
@@ -128,7 +124,7 @@
       "name": "Bab el-Mandeb",
       "risk": "high",
       "volume": "9M bbl/d",
-      "source": "ACLED · Lloyd's JWC · US State Dept L4",
+      "source": "ACLED \u00b7 Lloyd's JWC \u00b7 US State Dept L4",
       "updated": "Mar 2026",
       "lon": 43.4,
       "lat": 12.6
@@ -143,30 +139,99 @@
       "lat": 30.7
     }
   ],
-
   "opec": [
-    { "n": "Saudi Arabia", "q": 10.0, "a": 10.2 },
-    { "n": "Russia",       "q": 9.0,  "a": 9.2  },
-    { "n": "Iraq",         "q": 4.0,  "a": 1.4  },
-    { "n": "UAE",          "q": 3.2,  "a": 2.7  },
-    { "n": "Kuwait",       "q": 2.7,  "a": 1.7  },
-    { "n": "Iran",         "q": null, "a": 3.3  },
-    { "n": "Nigeria",      "q": 1.5,  "a": 1.3  },
-    { "n": "Venezuela",    "q": 0.9,  "a": 0.8  },
-    { "n": "Kazakhstan",   "q": 1.7,  "a": 2.0  }
+    {
+      "n": "Saudi Arabia",
+      "q": 10.0,
+      "a": 10.2
+    },
+    {
+      "n": "Russia",
+      "q": 9.0,
+      "a": 9.2
+    },
+    {
+      "n": "Iraq",
+      "q": 4.0,
+      "a": 1.4
+    },
+    {
+      "n": "UAE",
+      "q": 3.2,
+      "a": 2.7
+    },
+    {
+      "n": "Kuwait",
+      "q": 2.7,
+      "a": 1.7
+    },
+    {
+      "n": "Iran",
+      "q": null,
+      "a": 3.3
+    },
+    {
+      "n": "Nigeria",
+      "q": 1.5,
+      "a": 1.3
+    },
+    {
+      "n": "Venezuela",
+      "q": 0.9,
+      "a": 0.8
+    },
+    {
+      "n": "Kazakhstan",
+      "q": 1.7,
+      "a": 2.0
+    }
   ],
-  "opec_src": "OPEC JMMC communiqué + IEA OMR March 2026 · Crisis-adjusted actuals",
+  "opec_src": "OPEC JMMC communiqu\u00e9 + IEA OMR March 2026 \u00b7 Crisis-adjusted actuals",
   "opec_updated": "March 2026",
-
   "ports": [
-    { "n": "Ras Tanura",    "c": "Saudi Arabia", "cap": 6.5, "util": 12, "type": "export" },
-    { "n": "Yanbu",         "c": "Saudi Arabia", "cap": 1.8, "util": 99, "type": "export" },
-    { "n": "Basra SPM",     "c": "Iraq",         "cap": 2.0, "util": 0,  "type": "export" },
-    { "n": "Fujairah",      "c": "UAE",          "cap": 1.8, "util": 99, "type": "export" },
-    { "n": "Jebel Ali",     "c": "UAE",          "cap": 3.5, "util": 8,  "type": "export" },
-    { "n": "Kuwait terminals","c": "Kuwait",     "cap": 2.5, "util": 5,  "type": "export" }
+    {
+      "n": "Ras Tanura",
+      "c": "Saudi Arabia",
+      "cap": 6.5,
+      "util": 12,
+      "type": "export"
+    },
+    {
+      "n": "Yanbu",
+      "c": "Saudi Arabia",
+      "cap": 1.8,
+      "util": 99,
+      "type": "export"
+    },
+    {
+      "n": "Basra SPM",
+      "c": "Iraq",
+      "cap": 2.0,
+      "util": 0,
+      "type": "export"
+    },
+    {
+      "n": "Fujairah",
+      "c": "UAE",
+      "cap": 1.8,
+      "util": 99,
+      "type": "export"
+    },
+    {
+      "n": "Jebel Ali",
+      "c": "UAE",
+      "cap": 3.5,
+      "util": 8,
+      "type": "export"
+    },
+    {
+      "n": "Kuwait terminals",
+      "c": "Kuwait",
+      "cap": 2.5,
+      "util": 5,
+      "type": "export"
+    }
   ],
-
   "developments": [
     {
       "src": "IEA",
@@ -176,14 +241,14 @@
       "time": "12 March 2026"
     },
     {
-      "src": "Reuters · Iraq Oil Ministry",
+      "src": "Reuters \u00b7 Iraq Oil Ministry",
       "alert": true,
       "region": "Iraq",
       "hl": "Iraq declares force majeure on all foreign-operated oilfields. Production at 1.4M bbl/d.",
       "time": "17 March 2026"
     },
     {
-      "src": "CFR · Reuters",
+      "src": "CFR \u00b7 Reuters",
       "alert": false,
       "region": "Red Sea",
       "hl": "~30 supertankers rerouted to Yanbu. Port approaching capacity at 1.8M bbl/d.",
