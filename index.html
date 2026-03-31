@@ -780,40 +780,25 @@ function genHistory(cur,start,days=30){
   return arr;
 }
 
-function renderPrices(){
+function renderTicker(){
   if(!D) return;
   const b=D.benchmarks;
-  let h=`<div class="p-sec-head">Global benchmarks</div>`;
-  [{sym:'Brent',p:b.brent,s:genHistory(b.brent.price,65)},
-   {sym:'WTI',p:b.wti,s:genHistory(b.wti.price,61)},
-   {sym:'TTF Gas',p:b.ttf,s:genHistory(b.ttf?.price||48,44)},
-   {sym:'LNG JKM',p:b.jkm,s:genHistory(b.jkm?.price||24,22)},
-   {sym:'Urals',p:b.urals,s:genHistory(b.urals?.price||52,48)}]
-  .forEach(({sym,p,s})=>{
-    if(!p) return;
-    const up=p.change_pct>0,dn=p.change_pct<0;
-    const sc=up?'#4a7c6f':dn?'#b33000':'#9a9590';
-    const sparkHTML=sparklineSVG(s||[],sc);
-    h+=`<div class="p-row"><div><span class="p-name">${sym}</span><span class="p-sub">${p.source} · ${p.updated}</span></div><div><span class="p-price">$${p.price.toFixed(2)}</span><span class="p-chg ${up?'up':dn?'dn':'flat'}">${p.change_pct>=0?'+':''}${p.change_pct.toFixed(2)}%</span></div><div class="p-spark">${sparkHTML}</div></div>`;
-  });
-  if(D.osps){
-    const ospVals=Object.values(D.osps).filter(o=>o.price);
-    if(ospVals.length){
-      h+=`<div class="p-sec-head">ME OSPs — ${ospVals[0].for_month}</div>`;
-      ospVals.forEach(o=>{
-        const sp=o.spread_vs_brent||0;
-        const hist=genHistory(o.price,o.price-sp*0.6);
-        h+=`<div class="p-row"><div><span class="p-name">${o.grade}</span>${o.context?`<span class="p-sub">${o.context}</span>`:''}<span class="p-spread">${sp>=0?'+':''}$${sp.toFixed(2)} vs Brent</span></div><div><span class="p-price">$${o.price.toFixed(2)}</span></div><div class="p-spark">${sparklineSVG(hist,'#b33000')}</div></div>`;
-      });
-      h+=`<div class="p-src-line">OSPs from NOC monthly releases · Indicative</div>`;
-    }
-  }
-  const pa=document.getElementById('prices-area');
-  if(pa) pa.innerHTML=h;
-  const ts=document.getElementById('prices-ts');
-  if(ts) ts.textContent=b.brent?.updated||'—';
-}
-  
+  const gradeNames={arab_light:'Arab Light',murban:'Murban',basra_medium:'Basra Med',kuwait_export:'Kuwait Exp',arab_heavy:'Arab Heavy',oman_dubai:'Oman/Dubai'};
+  const items=[
+    b.brent&&{sym:'BRENT',p:b.brent.price,chg:b.brent.change_pct},
+    b.wti&&{sym:'WTI',p:b.wti.price,chg:b.wti.change_pct},
+    b.urals&&{sym:'URALS',p:b.urals.price,chg:b.urals.change_pct},
+    b.ttf&&{sym:'TTF',p:b.ttf.price,chg:b.ttf.change_pct},
+    b.jkm&&{sym:'JKM',p:b.jkm.price,chg:b.jkm.change_pct},
+    ...Object.entries(D.osps||{}).map(([k,o])=>o.price?{sym:(gradeNames[k]||k).split(' ').pop().toUpperCase(),p:o.price,spread:o.spread_vs_brent}:null),
+  ].filter(Boolean);
+  const html=items.map(i=>{
+    const chgStr=i.chg!=null?`<span class="${i.chg>0?'tk-up':i.chg<0?'tk-dn':'tk-flat'}">${i.chg>=0?'+':''}${i.chg.toFixed(2)}%</span>`:`<span class="tk-flat">${(i.spread||0)>=0?'+':''}$${(i.spread||0).toFixed(2)}</span>`;
+    return `<div class="tk-item"><span class="tk-sym">${i.sym}</span><span class="tk-price">$${i.p.toFixed(2)}</span>${chgStr}</div>`;
+  }).join('');
+  const el=document.getElementById('tk-track');
+  if(el) el.innerHTML=html+html;
+}  
 /* ══ Crisis timeline render ══ */
 function renderCrisisTimeline(){
   const el=document.getElementById('crisis-timeline');if(!el) return;
