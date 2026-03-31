@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!-- Contango Energy · Commodities · v1.0 · March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Commodities — Contango Energy</title>
+<meta name="description" content="Non-oil physical commodities flowing through the Gulf corridor: LNG, helium, naphtha, diesel, jet fuel, urea. Who produces, who buys, what the Hormuz crisis means for each.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/commodities.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#8a5a00;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;--amber:#c89040;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px}
+
+.ph{background:var(--card);border-bottom:3px solid var(--navy);padding:36px 0 28px}
+.ph-inner{max-width:1300px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:740px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+/* Alert */
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin-bottom:28px}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* Flow context bar */
+.flow-bar{background:var(--card-alt);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.flow-bar::-webkit-scrollbar{display:none}
+.flow-bar-inner{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:stretch}
+.flow-item{display:flex;flex-direction:column;justify-content:center;padding:10px 24px 10px 0;margin-right:24px;border-right:1px solid var(--border);flex-shrink:0}
+.flow-item:last-child{border-right:none;margin-right:0}
+.flow-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px}
+.flow-val{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--ink);line-height:1}
+.flow-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:2px}
+
+/* Section layout */
+.page-inner{max-width:1300px;margin:0 auto;padding:0 28px 60px}
+.section-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px;margin-top:40px}
+.section-title{font-family:var(--cg);font-size:28px;font-weight:500;color:var(--ink);margin-bottom:20px}
+
+/* Commodity cards */
+.comm-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:40px}
+.cc{background:var(--card);padding:0}
+.cc-head{padding:16px 20px;border-bottom:1px solid var(--border)}
+.cc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.cc-name{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink)}
+.cc-badge{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:2px;letter-spacing:.04em;border:1px solid}
+.cc-tagline{font-family:var(--ss);font-style:italic;font-size:12px;color:var(--ink-3)}
+
+/* Status badge colours */
+.s-red{background:rgba(179,48,0,.08);color:var(--red);border-color:rgba(179,48,0,.2)}
+.s-amber{background:rgba(138,90,0,.08);color:var(--amber);border-color:rgba(138,90,0,.2)}
+.s-teal{background:rgba(74,124,111,.08);color:var(--teal);border-color:rgba(74,124,111,.2)}
+.s-navy{background:rgba(29,68,128,.08);color:var(--navy);border-color:rgba(29,68,128,.2)}
+[data-theme=dark] .s-red{background:rgba(179,48,0,.15);color:#c84000;border-color:rgba(179,48,0,.25)}
+[data-theme=dark] .s-amber{background:rgba(138,90,0,.15);color:#c89040;border-color:rgba(138,90,0,.25)}
+[data-theme=dark] .s-teal{background:rgba(74,124,111,.15);color:#4a9c8a;border-color:rgba(74,124,111,.25)}
+[data-theme=dark] .s-navy{background:rgba(29,68,128,.15);color:#4a80c0;border-color:rgba(29,68,128,.25)}
+
+.cc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--border)}
+.cc-stat{padding:10px 14px;border-right:1px solid var(--border)}
+.cc-stat:last-child{border-right:none}
+.cc-stat-label{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px}
+.cc-stat-val{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink)}
+.cc-stat-note{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink-4);margin-top:1px}
+
+.cc-body{padding:14px 20px}
+.cc-body p{font-family:var(--ss);font-size:13px;line-height:1.65;color:var(--ink-2);margin-bottom:8px}
+.cc-body p:last-child{margin-bottom:0}
+.cc-body strong{color:var(--ink);font-weight:600}
+
+.cc-who{padding:10px 20px;border-top:1px solid var(--border);display:flex;gap:20px;flex-wrap:wrap}
+.cc-who-col{flex:1;min-width:120px}
+.cc-who-label{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-bottom:4px}
+.cc-who-list{display:flex;gap:4px;flex-wrap:wrap}
+.who-tag{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:var(--card-alt);color:var(--ink-3);border:1px solid var(--border)}
+
+.cc-status{padding:8px 20px;border-top:1px solid var(--border);display:flex;align-items:flex-start;gap:8px}
+.status-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.dot-red{background:var(--red)}.dot-amber{background:var(--amber)}.dot-teal{background:var(--teal)}.dot-navy{background:var(--navy)}
+.status-text{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55}
+
+/* Refined products table */
+.products-table{width:100%;border-collapse:collapse;margin-bottom:32px}
+.products-table th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);padding:8px 12px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt)}
+.products-table td{font-family:var(--ss);font-size:13px;color:var(--ink-2);padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+.products-table tr:last-child td{border-bottom:none}
+.products-table tr:hover td{background:var(--card-alt)}
+.pt-name{font-family:var(--ss);font-weight:600;color:var(--ink);display:block}
+.pt-sub{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4)}
+.pt-status{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;border:1px solid;white-space:nowrap}
+
+/* Src line */
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:4px;padding-top:10px;border-top:1px solid var(--border)}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:900px){
+  .comm-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .ph-title{font-size:36px}
+  .nav-inner,.ph-inner,.page-inner,.flow-bar-inner,.footer-inner{padding-left:16px;padding-right:16px}
+  .cc-stats{grid-template-columns:1fr 1fr}
+  .cc-stat:nth-child(2){border-right:none}
+  .cc-stat:nth-child(3){border-top:1px solid var(--border);grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a" href="grades.html">Crude grades</a>
+      <a class="nav-a on" href="commodities.html">Commodities</a>
+      <a class="nav-a" href="osp-decoder.html">OSP</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Intelligence · Physical commodities · March 2026</div>
+    <h1 class="ph-title">Beyond crude oil</h1>
+    <div class="ph-sub">The Gulf corridor moves more than crude. LNG, helium, naphtha, ammonia, diesel, jet fuel — all flow through the same chokepoints. When Hormuz closes, they all stop together. The downstream consequences reach semiconductor fabs, fertiliser plants, airlines and power grids.</div>
+    <div class="ph-src">Sources: IEA Oil Market Report March 2026 · QatarEnergy · GIIGNL · USGS Mineral Commodities · IFA · IATA · S&P Global Platts · Argus Media · March 2026</div>
+  </div>
+</div>
+
+<!-- Flow context bar -->
+<div class="flow-bar">
+  <div class="flow-bar-inner">
+    <div class="flow-item">
+      <div class="flow-label">Gulf LNG share of global trade</div>
+      <div class="flow-val">~35%</div>
+      <div class="flow-note">Qatar dominant · March 2026</div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-label">Qatar helium share of global supply</div>
+      <div class="flow-val">~30%</div>
+      <div class="flow-note">Ras Laffan offline</div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-label">Gulf refined product exports</div>
+      <div class="flow-val">~4M bbl/d</div>
+      <div class="flow-note">diesel, naphtha, jet fuel</div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-label">Gulf ammonia share of global trade</div>
+      <div class="flow-val">~20%</div>
+      <div class="flow-note">Saudi, Qatar, UAE</div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-label">Hormuz daily LNG tankers (pre-crisis)</div>
+      <div class="flow-val">~14</div>
+      <div class="flow-note">now near zero</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-inner">
+
+  <!-- Alert -->
+  <div style="margin-top:36px">
+    <div class="alert-box">
+      <div class="alert-title">The single-corridor problem — everything through one strait</div>
+      <div class="alert-body">Qatar's Ras Laffan complex is the world's largest LNG export facility and the world's largest helium plant, and produces significant volumes of naphtha, ethane, propane and urea — all on the same site, all exporting through Hormuz. When Ras Laffan shut on March 2, it was not just an LNG outage. It was a simultaneous shock to global helium supply, Asian naphtha feedstocks, South Asian fertiliser inputs, and regional petrochemical supply chains. No other facility in the world concentrates this many critical commodity streams in one location.</div>
+    </div>
+  </div>
+
+  <!-- Gas section -->
+  <div class="section-label">Natural gas liquids & LNG</div>
+  <div class="section-title">Gas and associated products</div>
+
+  <div class="comm-grid">
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">LNG</div>
+          <span class="cc-badge s-red">DISRUPTED</span>
+        </div>
+        <div class="cc-tagline">Liquefied natural gas. Chilled to −162°C, shipped by specialised tanker. No pipeline alternative for most buyers.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Gulf share of trade</div>
+          <div class="cc-stat-val">~35%</div>
+          <div class="cc-stat-note">Qatar dominant</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Qatar capacity</div>
+          <div class="cc-stat-val">77 mtpa</div>
+          <div class="cc-stat-note">expanding to 126 mtpa</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">JKM price</div>
+          <div class="cc-stat-val">~$25</div>
+          <div class="cc-stat-note">$/mmbtu · spot Asia</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>Qatar is the world's second-largest LNG exporter after Australia, shipping primarily to Japan, South Korea, India and Europe. The entire export infrastructure — liquefaction trains, storage, loading berths — sits at Ras Laffan on the Gulf coast, 100% Hormuz-dependent.</p>
+        <p><strong>Ras Laffan has been shut since March 2, 2026.</strong> Qatar's 77 mtpa of LNG capacity — roughly 210 million cubic feet per day — is offline. Japan and South Korea, which hold long-term contracts for Qatari LNG, are drawing down emergency gas stocks. European buyers who shifted to Qatari LNG after 2022 are exposed again.</p>
+        <p>No alternative single source can replace this volume. US LNG (Sabine Pass, Freeport, Corpus Christi) is operating at capacity and selling into a bidding war. Australian LNG is fully contracted. TTF European gas futures have spiked sharply.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">Qatar</span><span class="who-tag">UAE</span><span class="who-tag">Oman</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main buyers</div>
+          <div class="cc-who-list"><span class="who-tag">Japan</span><span class="who-tag">South Korea</span><span class="who-tag">China</span><span class="who-tag">India</span><span class="who-tag">Europe</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-red"></div>
+        <div class="status-text">Ras Laffan shut since March 2. ~77 mtpa offline. Japan and South Korea activating emergency stocks. US and Australian LNG at capacity. TTF and JKM futures elevated.</div>
+      </div>
+    </div>
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">Helium</div>
+          <span class="cc-badge s-red">CRITICAL SHORTAGE</span>
+        </div>
+        <div class="cc-tagline">Extracted from natural gas at Ras Laffan. No substitute. Essential for MRI machines, semiconductor fabrication, fibre optics, space launch.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Qatar global share</div>
+          <div class="cc-stat-val">~30%</div>
+          <div class="cc-stat-note">of global supply</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Other major sources</div>
+          <div class="cc-stat-val">US · Russia</div>
+          <div class="cc-stat-note">~40% · ~25%</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Stockpile duration</div>
+          <div class="cc-stat-val">4–8 wks</div>
+          <div class="cc-stat-note">chip fabs · typical</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>Helium is extracted as a by-product of natural gas processing. Qatar's North Field gas contains unusually high helium concentrations, making Ras Laffan the single most important helium production site on earth. It accounts for roughly 30% of global supply.</p>
+        <p><strong>The semiconductor industry is the most acutely exposed.</strong> TSMC, Samsung, and Intel fabs use helium continuously for chip cooling, leak detection, and as a carrier gas in lithography. Typical fab stockpiles run 4–8 weeks. With Ras Laffan offline and no rapid scale-up possible from US or Russian sources, chip production faces a potential constraint within weeks.</p>
+        <p>Unlike crude oil, helium cannot be synthesised, recycled at scale, or replaced by another gas. The only response is demand rationing — hospitals and semiconductor fabs compete for the same limited supply.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">Qatar (30%)</span><span class="who-tag">US (40%)</span><span class="who-tag">Russia (25%)</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Critical users</div>
+          <div class="cc-who-list"><span class="who-tag">Semiconductor fabs</span><span class="who-tag">MRI machines</span><span class="who-tag">Fibre optics</span><span class="who-tag">Space launch</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-red"></div>
+        <div class="status-text">Ras Laffan offline. ~30% of global helium supply disrupted. Semiconductor fab stockpiles running down. No rapid replacement possible. Rationing expected within 4–6 weeks.</div>
+      </div>
+    </div>
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">LPG</div>
+          <span class="cc-badge s-red">SEVERELY DISRUPTED</span>
+        </div>
+        <div class="cc-tagline">Liquefied petroleum gas — propane and butane. Cooking fuel for 2.5 billion people. Primary heating fuel across South and Southeast Asia.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Gulf share of Asian imports</div>
+          <div class="cc-stat-val">~55%</div>
+          <div class="cc-stat-note">Saudi dominant</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">India LPG demand blocked</div>
+          <div class="cc-stat-val">2/3</div>
+          <div class="cc-stat-note">of monthly requirement</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">US alternative lead time</div>
+          <div class="cc-stat-val">5–6 wks</div>
+          <div class="cc-stat-note">shipping from Gulf Coast</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>LPG is produced as a by-product of both crude oil refining and natural gas processing. Saudi Arabia (via Aramco's Ju'aymah terminal), Kuwait, Iraq and Qatar are the dominant Gulf exporters. Saudi LPG moves through Hormuz; there is no Red Sea bypass for Ju'aymah.</p>
+        <p><strong>India is the most exposed single country.</strong> India imports roughly two-thirds of its LPG from the Gulf for 300 million households using LPG cylinders as their primary cooking fuel. With Gulf exports blocked, India has approached US suppliers — but at 5–6 weeks shipping time from the Gulf Coast, this is not an immediate solution. The Indian government has begun rationing cylinder refills.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">Saudi Arabia</span><span class="who-tag">Kuwait</span><span class="who-tag">Qatar</span><span class="who-tag">UAE</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Most exposed buyers</div>
+          <div class="cc-who-list"><span class="who-tag">India</span><span class="who-tag">China</span><span class="who-tag">Indonesia</span><span class="who-tag">Pakistan</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-red"></div>
+        <div class="status-text">Gulf LPG exports near zero. India rationing cylinder refills. US alternative 5–6 weeks away. Bangladesh and Pakistan face acute shortage within days.</div>
+      </div>
+    </div>
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">Naphtha</div>
+          <span class="cc-badge s-red">SEVERELY DISRUPTED</span>
+        </div>
+        <div class="cc-tagline">Light distillate from crude refining and gas condensate. Primary petrochemical feedstock in Asia. Makes plastics, synthetic fibres, fertiliser precursors.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Gulf share of Asian supply</div>
+          <div class="cc-stat-val">~40%</div>
+          <div class="cc-stat-note">Kuwait, Qatar, UAE</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Qatar condensate output</div>
+          <div class="cc-stat-val">1.1M bbl/d</div>
+          <div class="cc-stat-note">offline since 2 Mar</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Crack spread impact</div>
+          <div class="cc-stat-val">+$8–12</div>
+          <div class="cc-stat-note">$/bbl vs pre-crisis</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>Naphtha is produced from crude oil distillation and from condensate processing. Qatar's North Field condensate — 1.1 million bbl/d, now offline — was one of the largest single sources of naphtha-rich condensate globally. Kuwait and UAE also export significant volumes.</p>
+        <p>Asian steam crackers — the plants that convert naphtha into ethylene, propylene and other petrochemical building blocks — are scrambling for alternative feedstock. <strong>Japanese and Korean petrochemical complexes that were running at 90%+ utilisation on Gulf naphtha have cut rates to 60–70%.</strong> Downstream polymer prices (polyethylene, polypropylene) are rising sharply, affecting packaging, automotive, electronics and textile supply chains.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">Qatar</span><span class="who-tag">Kuwait</span><span class="who-tag">UAE</span><span class="who-tag">Saudi Arabia</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main buyers</div>
+          <div class="cc-who-list"><span class="who-tag">Japan</span><span class="who-tag">South Korea</span><span class="who-tag">China</span><span class="who-tag">Taiwan</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-red"></div>
+        <div class="status-text">Qatar condensate offline. Asian cracker utilisation cut to 60–70%. Polymer prices rising. European naphtha flowing east to fill partial gap — tightening European supply.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Refined products section -->
+  <div class="section-label">Refined petroleum products</div>
+  <div class="section-title">Diesel, jet fuel and fuel oil</div>
+
+  <div class="comm-grid">
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">Diesel / gasoil</div>
+          <span class="cc-badge s-amber">CONSTRAINED</span>
+        </div>
+        <div class="cc-tagline">Middle distillate. Trucks, trains, ships, power generation, agriculture. The backbone fuel of physical economies.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Gulf exports</div>
+          <div class="cc-stat-val">~1.8M bbl/d</div>
+          <div class="cc-stat-note">pre-crisis</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Crack spread</div>
+          <div class="cc-stat-val">+$28</div>
+          <div class="cc-stat-note">$/bbl vs Brent · Mar</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Key Gulf refineries</div>
+          <div class="cc-stat-val">Jubail · Ruwais</div>
+          <div class="cc-stat-note">Saudi · UAE</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>The Gulf's large export refineries — Saudi Aramco's Jubail complex, ADNOC's Ruwais refinery in the UAE, and Kuwait's Al-Zour — export diesel primarily to Asia, East Africa and Europe. Saudi exports move partly via Yanbu (Red Sea bypass), partially insulating them from Hormuz.</p>
+        <p><strong>The constraint is refinery feedstock, not refinery capacity.</strong> With crude production curtailed, Gulf refineries are running at reduced rates even where the refinery itself is physically intact. Al-Zour, Kuwait's newest refinery, is operating at ~40% capacity due to feedstock shortage. Diesel crack spreads have widened sharply.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">Saudi Arabia</span><span class="who-tag">UAE</span><span class="who-tag">Kuwait</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main buyers</div>
+          <div class="cc-who-list"><span class="who-tag">India</span><span class="who-tag">East Africa</span><span class="who-tag">Europe</span><span class="who-tag">Singapore</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-amber"></div>
+        <div class="status-text">Gulf diesel exports reduced ~60%. Crack spreads +$28/bbl vs Brent. Saudi Yanbu exports partially compensating. European diesel imports diverted from Gulf — tightening global middle distillate balance.</div>
+      </div>
+    </div>
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">Jet fuel</div>
+          <span class="cc-badge s-amber">CONSTRAINED</span>
+        </div>
+        <div class="cc-tagline">Aviation turbine fuel. Gulf hubs — Dubai, Doha, Riyadh — are the world's largest refuelling points for long-haul Asia-Europe routes.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Dubai daily uplift</div>
+          <div class="cc-stat-val">~550K</div>
+          <div class="cc-stat-note">tonnes/day · pre-crisis</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Route impact</div>
+          <div class="cc-stat-val">Asia–Europe</div>
+          <div class="cc-stat-note">most affected</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Crack spread</div>
+          <div class="cc-stat-val">+$32</div>
+          <div class="cc-stat-note">$/bbl vs Brent · Mar</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>Dubai International and Doha Hamad are the two largest refuelling hubs for Asia-Europe aviation. Emirates, Etihad, Qatar Airways and dozens of connecting carriers depend on Gulf jet fuel supply. With Doha shut and Dubai operating on reduced refinery output, jet fuel availability is tightening.</p>
+        <p>Airlines on the Asia-Europe trunk routes have begun carrying extra fuel from origin airports — a practice called "tankering" — to reduce Gulf refuelling stops. <strong>This increases fuel burn, reduces payload, and raises operating costs by 8–12% per flight.</strong> Several carriers have suspended Gulf-transiting routes entirely, adding 3–4 hours to Asia-Europe journeys via northern routes.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Gulf hub airports</div>
+          <div class="cc-who-list"><span class="who-tag">Dubai DXB</span><span class="who-tag">Doha DOH</span><span class="who-tag">Riyadh RUH</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Most affected airlines</div>
+          <div class="cc-who-list"><span class="who-tag">Emirates</span><span class="who-tag">Qatar Airways</span><span class="who-tag">Etihad</span><span class="who-tag">Air India</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-amber"></div>
+        <div class="status-text">Doha hub suspended. Dubai operating on reduced supply. Airlines tankering fuel. Asia-Europe routes extended via northern corridors. IEA demand forecast cut 1 mb/d for aviation.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Fertilisers section -->
+  <div class="section-label">Fertilisers & chemicals</div>
+  <div class="section-title">Urea, ammonia and petrochemicals</div>
+
+  <div class="comm-grid">
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">Urea / ammonia</div>
+          <span class="cc-badge s-red">DISRUPTED</span>
+        </div>
+        <div class="cc-tagline">Nitrogen fertilisers made from natural gas. Gulf = 20% of global ammonia trade. Disruption reaches food production within one growing season.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">Gulf ammonia share</div>
+          <div class="cc-stat-val">~20%</div>
+          <div class="cc-stat-note">of global trade</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Saudi Ma'aden</div>
+          <div class="cc-stat-val">4.5M t/yr</div>
+          <div class="cc-stat-note">ammonia capacity</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Price impact</div>
+          <div class="cc-stat-val">+45%</div>
+          <div class="cc-stat-note">urea vs Jan 2026</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>Natural gas is both the feedstock and the energy source for ammonia synthesis (the Haber-Bosch process). The Gulf's abundant, cheap gas made it a dominant ammonia and urea exporter — Saudi Arabia's Ma'aden, SABIC, Qatar Fertiliser Company (QAFCO), and UAE's FERTIL collectively account for roughly 20% of global ammonia trade.</p>
+        <p><strong>QAFCO at Ras Laffan is completely offline.</strong> Saudi Ma'aden exports are partially rerouted via Yanbu. The timing is acute: March–April is the primary fertiliser application season for South Asian and Southeast Asian rice and wheat crops. Indian and Pakistani buyers who cannot source Gulf urea are turning to Russian and Chinese suppliers — at significantly higher prices and longer lead times.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">Saudi Arabia</span><span class="who-tag">Qatar</span><span class="who-tag">UAE</span><span class="who-tag">Kuwait</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Most exposed buyers</div>
+          <div class="cc-who-list"><span class="who-tag">India</span><span class="who-tag">Pakistan</span><span class="who-tag">Bangladesh</span><span class="who-tag">SE Asia</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-red"></div>
+        <div class="status-text">QAFCO offline. Gulf ammonia exports cut ~45%. Urea prices +45% vs January. South Asian planting season at risk. Russian and Chinese alternatives being sourced at premium.</div>
+      </div>
+    </div>
+
+    <div class="cc">
+      <div class="cc-head">
+        <div class="cc-top">
+          <div class="cc-name">Ethylene / polymers</div>
+          <span class="cc-badge s-amber">CONSTRAINED</span>
+        </div>
+        <div class="cc-tagline">Petrochemical building blocks. SABIC and ADNOC are top-5 global producers. Feedstock for plastics, packaging, textiles, pharmaceuticals.</div>
+      </div>
+      <div class="cc-stats">
+        <div class="cc-stat">
+          <div class="cc-stat-label">SABIC capacity</div>
+          <div class="cc-stat-val">~7M t/yr</div>
+          <div class="cc-stat-note">ethylene · Jubail</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">ADNOC Chemicals</div>
+          <div class="cc-stat-val">~4M t/yr</div>
+          <div class="cc-stat-note">Ruwais complex</div>
+        </div>
+        <div class="cc-stat">
+          <div class="cc-stat-label">Export route</div>
+          <div class="cc-stat-val">Mixed</div>
+          <div class="cc-stat-note">Jubail via Hormuz · Ruwais via Fujairah</div>
+        </div>
+      </div>
+      <div class="cc-body">
+        <p>Saudi SABIC (Jubail) and ADNOC Chemicals (Ruwais) are among the world's largest petrochemical producers. Both use ethane from associated gas as feedstock — giving them a structural cost advantage over naphtha-based crackers in Asia and Europe.</p>
+        <p>SABIC's Jubail exports face Hormuz disruption. ADNOC Ruwais has partial bypass capability via Fujairah port. <strong>The constraint is not production capacity but export logistics</strong> — product is accumulating in storage at Jubail faster than it can be moved. Polyethylene and polypropylene prices in Asia have risen 18–22% since the crisis began.</p>
+      </div>
+      <div class="cc-who">
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main producers</div>
+          <div class="cc-who-list"><span class="who-tag">SABIC (Saudi)</span><span class="who-tag">ADNOC (UAE)</span><span class="who-tag">QAPCO (Qatar)</span></div>
+        </div>
+        <div class="cc-who-col">
+          <div class="cc-who-label">Main buyers</div>
+          <div class="cc-who-list"><span class="who-tag">China</span><span class="who-tag">India</span><span class="who-tag">SE Asia</span><span class="who-tag">Europe</span></div>
+        </div>
+      </div>
+      <div class="cc-status">
+        <div class="status-dot dot-amber"></div>
+        <div class="status-text">SABIC Jubail exports constrained by Hormuz. ADNOC Ruwais partially exporting via Fujairah. Polymer prices +18–22%. Product accumulating in Gulf storage.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Summary table -->
+  <div class="section-label" style="margin-top:20px">Summary — all commodities at a glance</div>
+  <div class="section-title">Disruption severity by product</div>
+
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th>Commodity</th>
+        <th>Gulf share of global trade</th>
+        <th>Status</th>
+        <th>Most exposed buyers</th>
+        <th>Bypass possible?</th>
+        <th>Time to critical shortage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pt-name">LNG</span><span class="pt-sub">Qatar dominant</span></td>
+        <td>~35%</td>
+        <td><span class="pt-status s-red">Offline</span></td>
+        <td>Japan, S. Korea, India</td>
+        <td>No — no pipeline alt.</td>
+        <td>Weeks (LT contracts buffer)</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">Helium</span><span class="pt-sub">Ras Laffan by-product</span></td>
+        <td>~30%</td>
+        <td><span class="pt-status s-red">Offline</span></td>
+        <td>Semiconductor fabs, hospitals</td>
+        <td>No — no substitute</td>
+        <td>4–8 weeks</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">LPG</span><span class="pt-sub">Cooking / heating fuel</span></td>
+        <td>~55% of Asian imports</td>
+        <td><span class="pt-status s-red">Severely disrupted</span></td>
+        <td>India, Pakistan, Bangladesh</td>
+        <td>Partial (US alt. 5–6 wks)</td>
+        <td>Days in exposed markets</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">Naphtha</span><span class="pt-sub">Petrochemical feedstock</span></td>
+        <td>~40% of Asian supply</td>
+        <td><span class="pt-status s-red">Severely disrupted</span></td>
+        <td>Japan, S. Korea, Taiwan crackers</td>
+        <td>Partial (Europe diverting)</td>
+        <td>Already cutting cracker rates</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">Urea / ammonia</span><span class="pt-sub">Nitrogen fertilisers</span></td>
+        <td>~20% of global trade</td>
+        <td><span class="pt-status s-red">Disrupted</span></td>
+        <td>India, Pakistan, SE Asia</td>
+        <td>Partial (Russia, China)</td>
+        <td>Planting season at risk now</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">Diesel / gasoil</span><span class="pt-sub">Transport, power, ag.</span></td>
+        <td>~15% of global trade</td>
+        <td><span class="pt-status s-amber">Constrained</span></td>
+        <td>India, East Africa, Europe</td>
+        <td>Partial (Yanbu, Fujairah)</td>
+        <td>Months (large global stocks)</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">Jet fuel</span><span class="pt-sub">Aviation</span></td>
+        <td>~10% of global supply</td>
+        <td><span class="pt-status s-amber">Constrained</span></td>
+        <td>Gulf carriers, Asia-Europe routes</td>
+        <td>Partial (tankering)</td>
+        <td>Already affecting operations</td>
+      </tr>
+      <tr>
+        <td><span class="pt-name">Ethylene / polymers</span><span class="pt-sub">Plastics feedstock</span></td>
+        <td>~12% of global trade</td>
+        <td><span class="pt-status s-amber">Constrained</span></td>
+        <td>China, India, SE Asia</td>
+        <td>Partial (Ruwais via Fujairah)</td>
+        <td>Months (inventory buffer)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="src-line">Sources: IEA Oil Market Report March 2026 · QatarEnergy production data · GIIGNL Annual Report 2025 · USGS Helium Commodity Summary 2026 · IFA fertiliser trade statistics · IATA fuel monitor · S&amp;P Global Platts crack spread data · Argus Media · March 2026 · All figures indicative</div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Commodities intelligence · March 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="grades.html">Crude grades</a>
+      <a href="osp-decoder.html">OSP decoder</a>
+      <a href="buyer-exposure.html">Buyer exposure</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+</script>
+</body>
+</html>
