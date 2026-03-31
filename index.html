@@ -783,26 +783,33 @@ function renderPrices(){
   if(!D) return;
   const b=D.benchmarks;
   let h=`<div class="p-sec-head">Global benchmarks</div>`;
-  [{sym:'Brent',p:b.brent,h:genHistory(b.brent.price,65)},{sym:'WTI',p:b.wti,h:genHistory(b.wti.price,61)},{sym:'TTF Gas',p:b.ttf,h:genHistory(b.ttf.price,44)},{sym:'LNG JKM',p:b.jkm,h:genHistory(b.jkm.price,22)},{sym:'Urals',p:b.urals,h:genHistory(b.urals.price,48)}]
-  .forEach(({sym,p,h})=>{
+  [{sym:'Brent',p:b.brent,s:genHistory(b.brent.price,65)},
+   {sym:'WTI',p:b.wti,s:genHistory(b.wti.price,61)},
+   {sym:'TTF Gas',p:b.ttf,s:genHistory(b.ttf?.price||48,44)},
+   {sym:'LNG JKM',p:b.jkm,s:genHistory(b.jkm?.price||24,22)},
+   {sym:'Urals',p:b.urals,s:genHistory(b.urals?.price||52,48)}]
+  .forEach(({sym,p,s})=>{
+    if(!p) return;
     const up=p.change_pct>0,dn=p.change_pct<0;
     const sc=up?'#4a7c6f':dn?'#b33000':'#9a9590';
-    h=h||[];
-    const sparkHTML=sparklineSVG(h,sc);
-    html+=`<div class="p-row"><div><span class="p-name">${sym}</span><span class="p-sub">${p.source} · ${p.updated}</span></div><div><span class="p-price">$${p.price.toFixed(2)}</span><span class="p-chg ${up?'up':dn?'dn':'flat'}">${p.change_pct>=0?'+':''}${p.change_pct.toFixed(2)}%</span></div><div class="p-spark">${sparkHTML}</div></div>`;
+    const sparkHTML=sparklineSVG(s||[],sc);
+    h+=`<div class="p-row"><div><span class="p-name">${sym}</span><span class="p-sub">${p.source} · ${p.updated}</span></div><div><span class="p-price">$${p.price.toFixed(2)}</span><span class="p-chg ${up?'up':dn?'dn':'flat'}">${p.change_pct>=0?'+':''}${p.change_pct.toFixed(2)}%</span></div><div class="p-spark">${sparkHTML}</div></div>`;
   });
-  h+=`<div class="p-sec-head">ME OSPs — ${Object.values(D.osps)[0].for_month}</div>`;
-  Object.values(D.osps).forEach(o=>{
-    const sp=o.spread_vs_brent;
-    const hist=genHistory(o.price,o.price-sp*0.6);
-    const sparkHTML=sparklineSVG(hist,'#b33000');
-    h+=`<div class="p-row"><div><span class="p-name">${o.grade}</span>${o.context?`<span class="p-sub">${o.context}</span>`:''}<span class="p-spread">${sp>=0?'+':''}$${sp.toFixed(2)} vs Brent</span></div><div><span class="p-price">$${o.price.toFixed(2)}</span></div><div class="p-spark">${sparkHTML}</div></div>`;
-  });
-  h+=`<div class="p-src-line">OSPs from NOC monthly releases · Indicative</div>`;
+  if(D.osps && Object.keys(D.osps).length){
+    h+=`<div class="p-sec-head">ME OSPs — ${Object.values(D.osps)[0].for_month}</div>`;
+    Object.values(D.osps).forEach(o=>{
+      if(!o.price) return;
+      const sp=o.spread_vs_brent;
+      const hist=genHistory(o.price,o.price-(sp||0)*0.6);
+      const sparkHTML=sparklineSVG(hist,'#b33000');
+      h+=`<div class="p-row"><div><span class="p-name">${o.grade}</span>${o.context?`<span class="p-sub">${o.context}</span>`:''}<span class="p-spread">${sp>=0?'+':''}$${sp.toFixed(2)} vs Brent</span></div><div><span class="p-price">$${o.price.toFixed(2)}</span></div><div class="p-spark">${sparkHTML}</div></div>`;
+    });
+    h+=`<div class="p-src-line">OSPs from NOC monthly releases · Indicative</div>`;
+  }
   const pa=document.getElementById('prices-area');
   if(pa) pa.innerHTML=h;
   const ts=document.getElementById('prices-ts');
-  if(ts) ts.textContent=D.benchmarks.brent.updated;
+  if(ts) ts.textContent=D.benchmarks.brent?.updated||'—';
 }
 
 /* ══ Crisis timeline render ══ */
