@@ -544,7 +544,8 @@ function renderHero(){
   const sign=spread>=0?'+':'';
   const num=document.getElementById('hero-number');if(num) num.textContent=sign+'$'+spread.toFixed(2);
   const ctx=document.getElementById('hero-ctx');if(ctx) ctx.textContent=`Arab Light $${arabl.toFixed(2)} · Brent $${brent.toFixed(2)}`;
-  const sub=document.getElementById('hero-sub');if(sub) sub.textContent=spread>10?'War premium · OSP significantly above benchmark':'OSP near benchmark';
+  const arrow=document.getElementById('hero-arrow');if(arrow) arrow.textContent=spread>=0?'↑':'↓';
+  const sub=document.getElementById('hero-sub');if(sub) sub.textContent=spread<-5?'OSP below Brent benchmark':spread>10?'War premium · OSP significantly above benchmark':'OSP near benchmark';
   const hb=document.getElementById('hero-brent');if(hb) hb.textContent='$'+brent.toFixed(2);
   const hbd=document.getElementById('hero-brent-date');if(hbd) hbd.textContent=D.benchmarks.brent.updated;
   const hw=document.getElementById('hero-wti');if(hw) hw.textContent='$'+D.benchmarks.wti.price.toFixed(2);
