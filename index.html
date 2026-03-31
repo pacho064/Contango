@@ -734,7 +734,7 @@ function renderTicker(){
     {sym:'URALS',p:b.urals.price,chg:b.urals.change_pct},
     {sym:'TTF',p:b.ttf.price,chg:b.ttf.change_pct},
     {sym:'JKM',p:b.jkm.price,chg:b.jkm.change_pct},
-    ...Object.values(D.osps).map(o=>({sym:o.grade.split(' ').pop().toUpperCase(),p:o.price,spread:o.spread_vs_brent})),
+    ...Object.values(D.osps).map(o=>({sym:(o.grade||'OSP').split(' ').pop().toUpperCase(),p:o.price,spread:o.spread_vs_brent})),
   ];
   const html=items.map(i=>{
     const chgStr=i.chg!=null?`<span class="${i.chg>0?'tk-up':i.chg<0?'tk-dn':'tk-flat'}">${i.chg>=0?'+':''}${i.chg.toFixed(2)}%</span>`:`<span class="tk-flat">${i.spread>=0?'+':''}$${i.spread.toFixed(2)}</span>`;
