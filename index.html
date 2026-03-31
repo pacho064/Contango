@@ -970,7 +970,7 @@ function addMapLayers(){
   }
   if(!map.getSource('pipelines')){
     map.addSource('pipelines',{type:'geojson',data:{type:'FeatureCollection',features:PIPELINES_DATA.map(p=>({type:'Feature',properties:{n:p.n,status:p.status,cap:p.cap},geometry:{type:'LineString',coordinates:[p.from,p.to]}}))}});
-    map.addLayer({id:'pipe-lines',type:'line',source:'pipelines',paint:{'line-color':['case',['==',['get','status'],'active'],'#1d4480',['==',['get','status'],'disrupted'],'#8a5020','#666'],'line-width':2,'line-opacity':0.7,'line-dasharray':['case',['==',['get','status'],'inactive'],[5,4],['==',['get','status'],'disrupted'],[3,2],[1,0]]}});
+    map.addLayer({id:'pipe-lines',type:'line',source:'pipelines',paint:{'line-color':['case',['==',['get','status'],'active'],'#1d4480',['==',['get','status'],'disrupted'],'#8a5020','#666'],'line-width':2,'line-opacity':0.7,'line-dasharray':[4,2]}});
   }
   if(!map.getSource('ports')){
     map.addSource('ports',{type:'geojson',data:{type:'FeatureCollection',features:PORTS_DATA.map(p=>({type:'Feature',properties:{...p},geometry:{type:'Point',coordinates:[p.lon,p.lat]}}))}});
