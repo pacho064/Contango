@@ -558,12 +558,17 @@ button{font-family:var(--ss);cursor:pointer;background:none;border:none;color:in
 </footer>
 
 <script>
-let dark = false;
-function toggleTheme(){
-  dark = !dark;
-  document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-  document.getElementById('theme-btn').textContent = dark ? 'Light' : 'Dark';
+let dark = localStorage.getItem('theme') === 'dark';
+function initTheme(){
+  if(dark){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='Light';}
 }
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+  localStorage.setItem('theme',dark?'dark':'light');
+}
+document.addEventListener('DOMContentLoaded', initTheme);
 </script>
 </body>
 </html>
