@@ -795,23 +795,24 @@ function renderPrices(){
     const sparkHTML=sparklineSVG(s||[],sc);
     h+=`<div class="p-row"><div><span class="p-name">${sym}</span><span class="p-sub">${p.source} · ${p.updated}</span></div><div><span class="p-price">$${p.price.toFixed(2)}</span><span class="p-chg ${up?'up':dn?'dn':'flat'}">${p.change_pct>=0?'+':''}${p.change_pct.toFixed(2)}%</span></div><div class="p-spark">${sparkHTML}</div></div>`;
   });
-  if(D.osps && Object.keys(D.osps).length){
-    h+=`<div class="p-sec-head">ME OSPs — ${Object.values(D.osps)[0].for_month}</div>`;
-    Object.values(D.osps).forEach(o=>{
-      if(!o.price) return;
-      const sp=o.spread_vs_brent;
-      const hist=genHistory(o.price,o.price-(sp||0)*0.6);
-      const sparkHTML=sparklineSVG(hist,'#b33000');
-      h+=`<div class="p-row"><div><span class="p-name">${o.grade}</span>${o.context?`<span class="p-sub">${o.context}</span>`:''}<span class="p-spread">${sp>=0?'+':''}$${sp.toFixed(2)} vs Brent</span></div><div><span class="p-price">$${o.price.toFixed(2)}</span></div><div class="p-spark">${sparkHTML}</div></div>`;
-    });
-    h+=`<div class="p-src-line">OSPs from NOC monthly releases · Indicative</div>`;
+  if(D.osps){
+    const ospVals=Object.values(D.osps).filter(o=>o.price);
+    if(ospVals.length){
+      h+=`<div class="p-sec-head">ME OSPs — ${ospVals[0].for_month}</div>`;
+      ospVals.forEach(o=>{
+        const sp=o.spread_vs_brent||0;
+        const hist=genHistory(o.price,o.price-sp*0.6);
+        h+=`<div class="p-row"><div><span class="p-name">${o.grade}</span>${o.context?`<span class="p-sub">${o.context}</span>`:''}<span class="p-spread">${sp>=0?'+':''}$${sp.toFixed(2)} vs Brent</span></div><div><span class="p-price">$${o.price.toFixed(2)}</span></div><div class="p-spark">${sparklineSVG(hist,'#b33000')}</div></div>`;
+      });
+      h+=`<div class="p-src-line">OSPs from NOC monthly releases · Indicative</div>`;
+    }
   }
   const pa=document.getElementById('prices-area');
   if(pa) pa.innerHTML=h;
   const ts=document.getElementById('prices-ts');
-  if(ts) ts.textContent=D.benchmarks.brent?.updated||'—';
+  if(ts) ts.textContent=b.brent?.updated||'—';
 }
-
+  
 /* ══ Crisis timeline render ══ */
 function renderCrisisTimeline(){
   const el=document.getElementById('crisis-timeline');if(!el) return;
