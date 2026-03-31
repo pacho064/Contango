@@ -1,124 +1,437 @@
 <!DOCTYPE html>
+<!-- Contango Energy · Methodology · v2.0 · March 2026 -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Contango Energy — Methodology</title>
-  <meta name="description" content="Contango Energy methodology: source hierarchy, formulas, update cadence, and data quality policy.">
-  <meta name="theme-color" content="#111110">
-  <link rel="canonical" href="https://pacho064.github.io/Contango/methodology.html">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#f7f7f5;--card:#ffffff;--border:#e8e5e0;--ink:#11110f;--ink2:#4a463f;--ink3:#8f8a83;--navy:#1d4480;--red:#b33000;
-      --cg:'Georgia',serif;--ss:'ui-serif,Georgia,Times New Roman,serif';--mono:'Menlo,Monaco,Consolas,monospace';
-    }
-    body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.6}
-    a{color:var(--navy);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .nav{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0}
-    .nav-inner{max-width:1100px;margin:0 auto;min-height:52px;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{font-family:var(--cg);font-size:20px;font-weight:600}
-    .nav-links{display:flex;gap:14px;font-size:13px;color:var(--ink3);flex-wrap:wrap;justify-content:flex-end}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 40px}
-    .hero{margin-bottom:20px}
-    h1{font-family:var(--cg);font-size:34px;line-height:1.1;margin-bottom:8px}
-    .sub{color:var(--ink3);font-size:14px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:4px}
-    .head{padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--cg);font-size:18px}
-    .body{padding:12px 14px}
-    .row{padding:8px 0;border-bottom:1px solid var(--border)}
-    .row:last-child{border-bottom:none}
-    .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
-    .v{font-size:14px;color:var(--ink2)}
-    .note{margin-top:14px;padding:10px 12px;border:1px solid #efdfd7;background:#fff8f5;color:#5f463c;font-size:13px}
-    .table{width:100%;border-collapse:collapse;font-size:13px}
-    .table th,.table td{padding:8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
-    .table th{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
-    .footer{margin-top:18px;color:var(--ink3);font-size:12px}
-    @media(max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .nav-inner{align-items:flex-start}
-      .brand{font-size:18px}
-      .nav-links{font-size:12px;gap:10px}
-      .wrap{padding:18px 14px 32px}
-      h1{font-size:28px}
-      .table{display:block;overflow-x:auto;white-space:nowrap}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Methodology — Contango Energy</title>
+<meta name="description" content="Contango Energy methodology: source hierarchy, formulas, update cadence, and data quality policy.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/methodology.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--body:#2a2820;--label:#6b6860;--muted:#7a7870;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--body:#cec8bc;--label:#909090;--muted:#a0a098;
+  --navy:#4a80c0;--red:#c84000;--teal:#4a9c8a;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:300}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-family:var(--cg);font-size:22px;font-weight:600;color:var(--ink);letter-spacing:-.01em;flex-shrink:0}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:11px;color:var(--label);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-btn{font-family:var(--mono);font-size:9px;color:var(--label);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer;letter-spacing:.04em;transition:all .12s}
+.nav-btn:hover{color:var(--ink);border-color:var(--label)}
+
+.ph{background:var(--card);border-bottom:3px solid var(--navy);padding:40px 0 32px}
+.ph-inner{max-width:1300px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.ph-title{font-family:var(--cg);font-size:48px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:12px}
+.ph-sub{font-family:var(--ss);font-size:15px;color:var(--label);max-width:640px;line-height:1.7}
+
+.page{max-width:1300px;margin:0 auto;padding:40px 28px 72px;display:grid;grid-template-columns:1fr 340px;gap:56px}
+.content{min-width:0}
+.sidebar{min-width:0}
+
+.sec{margin-bottom:48px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sec-title{font-family:var(--cg);font-size:26px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.2}
+.prose p{font-family:var(--ss);font-size:15px;line-height:1.7;color:var(--body);margin-bottom:14px}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--muted);margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
+
+.info-box{border-left:3px solid var(--navy);padding:14px 18px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .info-box{background:rgba(74,128,192,.08)}
+.info-body{font-family:var(--ss);font-size:14px;line-height:1.7;color:var(--body)}
+
+/* Source hierarchy tiers */
+.tiers{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:16px}
+.tier{background:var(--card);padding:16px 18px;display:grid;grid-template-columns:80px 1fr;gap:16px;align-items:start}
+.tier-num{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.tier-label{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.tier-desc{font-family:var(--ss);font-size:14px;line-height:1.65;color:var(--body)}
+.tier-examples{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px}
+
+/* Formula cards */
+.formula-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:16px}
+.fc{background:var(--card);padding:14px 18px}
+.fc-label{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.fc-formula{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--navy);margin-bottom:6px;padding:8px 12px;background:var(--card-alt);border-radius:3px;border-left:3px solid var(--navy)}
+.fc-desc{font-family:var(--ss);font-size:14px;line-height:1.65;color:var(--body)}
+
+/* Cadence table */
+.cadence-table{width:100%;border-collapse:collapse;margin-top:16px}
+.cadence-table th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:9px 12px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt)}
+.cadence-table td{font-family:var(--ss);font-size:14px;color:var(--body);padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+.cadence-table tr:last-child td{border-bottom:none}
+.cadence-table tr:hover td{background:var(--card-alt)}
+.td-series{font-family:var(--ss);font-weight:600;color:var(--ink)}
+.td-mono{font-family:var(--mono);font-size:12px;color:var(--label)}
+.status-badge{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;border:1px solid;white-space:nowrap}
+.s-live{background:rgba(74,124,111,.08);color:var(--teal);border-color:rgba(74,124,111,.2)}
+.s-monthly{background:rgba(29,68,128,.08);color:var(--navy);border-color:rgba(29,68,128,.2)}
+.s-manual{background:rgba(0,0,0,.04);color:var(--label);border-color:var(--border)}
+[data-theme=dark] .s-live{background:rgba(74,156,138,.12);border-color:rgba(74,156,138,.25)}
+[data-theme=dark] .s-monthly{background:rgba(74,128,192,.12);border-color:rgba(74,128,192,.25)}
+[data-theme=dark] .s-manual{background:rgba(221,214,200,.05);border-color:rgba(221,214,200,.1)}
+
+/* Quality policy */
+.policy-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:16px}
+.pl-item{background:var(--card);padding:14px 18px;display:grid;grid-template-columns:120px 1fr;gap:16px}
+.pl-key{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.pl-val{font-family:var(--ss);font-size:14px;line-height:1.65;color:var(--body)}
+
+/* Sidebar */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-head{padding:11px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:15px;font-weight:500;color:var(--ink)}
+.sc-meta{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--muted);margin-top:2px}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--label)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:28px 0 20px}
+.footer-inner{max-width:1300px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:28px;margin-bottom:20px}
+.f-brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.f-tagline{font-family:var(--ss);font-size:13px;color:var(--label);line-height:1.65}
+.f-head{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.f-link{display:block;font-family:var(--ss);font-size:14px;color:var(--label);margin-bottom:4px;transition:color .12s}
+.f-link:hover{color:var(--navy)}
+.f-src{font-family:var(--ss);font-style:italic;font-size:13px;color:var(--muted);line-height:1.9}
+.footer-bottom{max-width:1300px;margin:0 auto;padding:14px 28px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.04em}
+
+@media(max-width:1000px){
+  .page{grid-template-columns:1fr;gap:32px}
+  .nav-links{display:none}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:16px}
+  .ph-title{font-size:36px}
+  .nav-inner,.ph-inner,.page,.footer-inner,.footer-bottom{padding-left:16px;padding-right:16px}
+  .tier{grid-template-columns:60px 1fr}
+  .pl-item{grid-template-columns:100px 1fr}
+}
+</style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">Contango Energy</div>
-      <div class="nav-links">
-        <a href="index.html">Overview</a>
-        <a href="saudi-arabia2.html">Saudi Arabia</a>
-        <a href="methodology.html">Methodology</a>
-        <a href="sources.html">Sources</a>
-        <a href="roadmap.html">Roadmap</a>
-        <a href="about.html">About</a>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a" href="grades.html">Grades</a>
+      <a class="nav-a" href="commodities.html">Commodities</a>
+      <a class="nav-a" href="osp-decoder.html">OSP</a>
+      <a class="nav-a on" href="methodology.html">Methodology</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Reference · Data standards · March 2026</div>
+    <h1 class="ph-title">Methodology</h1>
+    <div class="ph-sub">How numbers are sourced, calculated, and labelled. Every figure on Contango Energy traces to a named source with a defined update cadence. This page makes the chain explicit.</div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="content">
+
+    <div class="sec">
+      <div class="sec-label">Source hierarchy</div>
+      <h2 class="sec-title">Three tiers, strictly ordered</h2>
+      <div class="prose">
+        <p>Every number published on Contango Energy is assigned to one of three source tiers. The tier determines how the number is labelled and how much weight it carries. Higher tiers displace lower tiers when both are available.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-num">Tier 1</div>
+          <div>
+            <div class="tier-label">Official issuer / regulator</div>
+            <div class="tier-desc">Direct publication from the producing entity or its regulatory authority. This is the primary source — preferred in all cases.</div>
+            <div class="tier-examples">Aramco OSP release · SOMO Iraq · KPC Kuwait · ADNOC · EIA · IEA · OPEC JMMC communiqué · DME settlement</div>
+          </div>
+        </div>
+        <div class="tier">
+          <div class="tier-num">Tier 2</div>
+          <div>
+            <div class="tier-label">Official statistical body</div>
+            <div class="tier-desc">Intergovernmental or government statistical publication. Used when the primary issuer does not publish a machine-readable series.</div>
+            <div class="tier-examples">JODI Oil · EIA bilateral trade data · IEA Oil Market Report · OPEC Annual Statistical Bulletin · BP Statistical Review</div>
+          </div>
+        </div>
+        <div class="tier">
+          <div class="tier-num">Tier 3</div>
+          <div>
+            <div class="tier-label">Professional market reporting</div>
+            <div class="tier-desc">Used only as a fallback or for context — never as the sole basis for a headline number. Clearly labelled when used.</div>
+            <div class="tier-examples">Argus Media · S&P Global Platts · Kpler · Reuters output survey · Lloyd's List · Vortexa</div>
+          </div>
+        </div>
+      </div>
+      <div class="src-line">Source hierarchy based on established energy data practice · IEA data quality guidelines · March 2026</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-label">Core formulas</div>
+      <h2 class="sec-title">How the numbers are calculated</h2>
+      <div class="prose">
+        <p>Contango Energy does not generate synthetic prices. Every displayed value derives from a named upstream source via one of the following formulas.</p>
+      </div>
+      <div class="formula-grid">
+        <div class="fc">
+          <div class="fc-label">Arab Light OSP vs Brent spread</div>
+          <div class="fc-formula">Spread = Arab Light OSP (absolute) − ICE Brent spot</div>
+          <div class="fc-desc">Arab Light absolute price is the Aramco monthly OSP differential plus the prevailing Oman/Dubai spot. Brent is the EIA daily RBRTE series. The spread is recomputed daily as Brent moves; the OSP differential is fixed monthly.</div>
+        </div>
+        <div class="fc">
+          <div class="fc-label">OSP absolute prices</div>
+          <div class="fc-formula">OSP absolute = Oman/Dubai spot + differential vs O/D</div>
+          <div class="fc-desc">All Gulf OSP absolute prices are computed this way. The differential is set monthly by each NOC. The Oman/Dubai spot is updated daily by the GitHub Actions pipeline via EIA. This means absolute OSP prices move daily even though differentials are monthly.</div>
+        </div>
+        <div class="fc">
+          <div class="fc-label">Spread vs Brent (all grades)</div>
+          <div class="fc-formula">Spread vs Brent = OSP absolute − EIA Brent spot</div>
+          <div class="fc-desc">Recalculated daily. A positive spread means the grade commands a premium to the global benchmark — which in March 2026 reflects the war premium on Gulf physical crude relative to the North Sea paper market.</div>
+        </div>
+        <div class="fc">
+          <div class="fc-label">Port utilisation</div>
+          <div class="fc-formula">Utilisation % = current throughput ÷ nameplate capacity × 100</div>
+          <div class="fc-desc">Nameplate capacities from official port authority publications and IEA infrastructure data. Current throughput from Kpler tanker tracking and Saudi Aramco operational statements. Updated as new data is available — not automated.</div>
+        </div>
       </div>
     </div>
-  </nav>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Methodology</h1>
-      <p class="sub">How numbers are sourced, calculated, and labeled for trust, reproducibility, and future paid analytics.</p>
-    </section>
-
-    <section class="grid">
-      <article class="card">
-        <div class="head">Source hierarchy</div>
-        <div class="body">
-          <div class="row"><div class="k">Tier 1</div><div class="v">Official issuer / regulator publication (NOC statement, official report, exchange bulletin).</div></div>
-          <div class="row"><div class="k">Tier 2</div><div class="v">Official statistical body / intergovernmental publication (OPEC, EIA, JODI, port authority reports).</div></div>
-          <div class="row"><div class="k">Tier 3</div><div class="v">Professional market reporting used as a fallback (for context, not preferred for benchmark construction).</div></div>
-          <div class="note">Numbers on public pages are indicative and tied to the publication cadence of the upstream source.</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="head">Core 5 formulas</div>
-        <div class="body">
-          <div class="row"><div class="k">Lead series</div><div class="v"><b>Arab Light OSP vs Brent spread</b> = Arab Light reference value - Brent reference value.</div></div>
-          <div class="row"><div class="k">Event baseline</div><div class="v">For each series, baseline is stored at event date (currently 2026-02-01). Change = current - baseline.</div></div>
-          <div class="row"><div class="k">Display logic</div><div class="v">If no new official release is available, last confirmed value is retained with latest ingestion timestamp.</div></div>
-        </div>
-      </article>
-    </section>
-
-    <section class="card" style="margin-top:14px">
-      <div class="head">Coverage and cadence (current model)</div>
-      <div class="body">
-        <table class="table">
-          <thead>
-            <tr><th>Series</th><th>Primary source type</th><th>Typical cadence</th><th>Status label</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Arab Light OSP vs Brent</td><td>NOC + benchmark reference</td><td>Monthly / release-driven</td><td>Official cadence</td></tr>
-            <tr><td>Murban</td><td>Exchange/NOC disclosure</td><td>Daily to monthly (stream dependent)</td><td>Official cadence</td></tr>
-            <tr><td>Oman/Dubai average</td><td>Benchmark methodology stream</td><td>Daily / settlement cadence</td><td>Methodology-derived</td></tr>
-            <tr><td>Basra Medium</td><td>SOMO release</td><td>Monthly / release-driven</td><td>Official cadence</td></tr>
-            <tr><td>Kuwait Export Crude</td><td>KPC release</td><td>Monthly / release-driven</td><td>Official cadence</td></tr>
-          </tbody>
-        </table>
+    <div class="sec">
+      <div class="sec-label">Update cadence</div>
+      <h2 class="sec-title">What updates when</h2>
+      <div class="prose">
+        <p>Different series update at different frequencies. The cadence label on each data point tells you which category it belongs to. Stale data is never presented as current — the last update date is always shown.</p>
       </div>
-    </section>
+      <table class="cadence-table">
+        <thead>
+          <tr>
+            <th>Series</th>
+            <th>Source</th>
+            <th>Cadence</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-series">Brent spot</span></td>
+            <td><span class="td-mono">EIA RBRTE</span></td>
+            <td>Daily (automated)</td>
+            <td><span class="status-badge s-live">Live</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">WTI spot</span></td>
+            <td><span class="td-mono">EIA RWTC</span></td>
+            <td>Daily (automated)</td>
+            <td><span class="status-badge s-live">Live</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Oman/Dubai spot</span></td>
+            <td><span class="td-mono">EIA / DME</span></td>
+            <td>Daily (automated)</td>
+            <td><span class="status-badge s-live">Live</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Arab Light OSP differential</span></td>
+            <td><span class="td-mono">Aramco release</span></td>
+            <td>Monthly (~5th of month)</td>
+            <td><span class="status-badge s-monthly">Monthly</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Murban OSP differential</span></td>
+            <td><span class="td-mono">ADNOC release</span></td>
+            <td>Monthly (~10th)</td>
+            <td><span class="status-badge s-monthly">Monthly</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Basra Medium differential</span></td>
+            <td><span class="td-mono">SOMO Iraq</span></td>
+            <td>Monthly (manual)</td>
+            <td><span class="status-badge s-manual">Manual</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Kuwait Export differential</span></td>
+            <td><span class="td-mono">KPC</span></td>
+            <td>Monthly (manual)</td>
+            <td><span class="status-badge s-manual">Manual</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">OPEC+ compliance</span></td>
+            <td><span class="td-mono">JMMC + Reuters survey</span></td>
+            <td>Monthly (manual)</td>
+            <td><span class="status-badge s-manual">Manual</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Port utilisation</span></td>
+            <td><span class="td-mono">Kpler + Aramco</span></td>
+            <td>As published (manual)</td>
+            <td><span class="status-badge s-manual">Manual</span></td>
+          </tr>
+          <tr>
+            <td><span class="td-series">Crisis timeline</span></td>
+            <td><span class="td-mono">IEA OMR + sourced press</span></td>
+            <td>Editorial (manual)</td>
+            <td><span class="status-badge s-manual">Manual</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="src-line">Automation via GitHub Actions · Daily at 18:00 UTC · EIA OpenData API (free tier) · Manual updates via osp_update.py</div>
+    </div>
 
-    <section class="card" style="margin-top:14px">
-      <div class="head">Quality policy</div>
-      <div class="body">
-        <div class="row"><div class="k">Provenance</div><div class="v">Every displayed figure should map to a source name and source URL.</div></div>
-        <div class="row"><div class="k">No synthetic prices</div><div class="v">Public values are not randomly generated; they should represent latest stored observations.</div></div>
-        <div class="row"><div class="k">Transparency</div><div class="v">Formula definitions remain public for all free-tier headline metrics.</div></div>
-        <div class="row"><div class="k">Paid tier direction</div><div class="v">Future paid features should add depth (scenario dashboards, route stress, disaggregated flows), not hide core methodology.</div></div>
+    <div class="sec">
+      <div class="sec-label">Data quality policy</div>
+      <h2 class="sec-title">What we commit to</h2>
+      <div class="info-box">
+        <div class="info-body">Contango Energy is a research and intelligence product, not a financial service. Nothing on this site constitutes investment advice. All figures are indicative. Source attributions are provided for independent verification.</div>
       </div>
-    </section>
+      <div class="policy-list">
+        <div class="pl-item">
+          <div class="pl-key">Provenance</div>
+          <div class="pl-val">Every headline number maps to a named source. Source URLs are included in the data pipeline where available. No synthetic prices — displayed values derive from upstream observations.</div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-key">Cadence clarity</div>
+          <div class="pl-val">Release-driven indicators are labelled as such — not marketed as real-time. The last-update date is always shown. A stale figure with a clear date is better than a fabricated current one.</div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-key">Conflict sensitivity</div>
+          <div class="pl-val">Event framing uses explicit dates and transparent baseline assumptions. Crisis data (IEA OMR, Reuters, SOMO statements) is sourced and dated — not editorialised without attribution.</div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-key">Methodology transparency</div>
+          <div class="pl-val">All formulas used to derive displayed values are published on this page. The data pipeline (updater.py, osp_update.py) is open source and available on GitHub.</div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-key">Coverage gaps</div>
+          <div class="pl-val">Where a reliable direct source is not yet integrated, the gap is noted rather than filled with an estimate. Known gaps: Basra Medium and Kuwait Export automated feeds, port-level monthly throughput from official authorities.</div>
+        </div>
+      </div>
+    </div>
 
-    <p class="footer">Contango Energy · Not financial advice · Methodology page v1</p>
-  </main>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="sc sc-navy">
+      <div class="sc-head">
+        <div class="sc-title">Data pipeline</div>
+        <div class="sc-meta">GitHub Actions · daily 18:00 UTC</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-row"><span class="sc-l">Brent · WTI</span><span class="sc-v">EIA API · daily</span></div>
+        <div class="sc-row"><span class="sc-l">Oman/Dubai</span><span class="sc-v">EIA API · daily</span></div>
+        <div class="sc-row"><span class="sc-l">OSP differentials</span><span class="sc-v">osp_update.py · monthly</span></div>
+        <div class="sc-row"><span class="sc-l">OSP absolutes</span><span class="sc-v">Auto-recalculated daily</span></div>
+        <div class="sc-row"><span class="sc-l">Spreads vs Brent</span><span class="sc-v">Auto-recalculated daily</span></div>
+        <div class="sc-note">Source code available on GitHub. EIA API key required (free). Monthly OSP update run manually ~1st of each month after NOC releases.</div>
+      </div>
+    </div>
+
+    <div class="sc sc-navy">
+      <div class="sc-head">
+        <div class="sc-title">Monthly OSP sources</div>
+        <div class="sc-meta">Where to find the differentials</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-row"><span class="sc-l">Arab Light</span><span class="sc-v">argaam.com</span></div>
+        <div class="sc-row"><span class="sc-l">Arab Heavy</span><span class="sc-v">argaam.com</span></div>
+        <div class="sc-row"><span class="sc-l">Murban</span><span class="sc-v">adnoc.ae</span></div>
+        <div class="sc-row"><span class="sc-l">Basra Medium</span><span class="sc-v">oil.gov.iq</span></div>
+        <div class="sc-row"><span class="sc-l">Kuwait Export</span><span class="sc-v">kpc.com.kw</span></div>
+        <div class="sc-note">All NOCs publish differentials within the first week of each month. Aramco typically publishes on the 1st–5th. Run osp_update.py once confirmed.</div>
+      </div>
+    </div>
+
+    <div class="sc sc-navy">
+      <div class="sc-head">
+        <div class="sc-title">Known gaps</div>
+        <div class="sc-meta">Not yet automated</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-row"><span class="sc-l">Dubai spot series</span><span class="sc-v" style="color:var(--red)">EIA series unreliable</span></div>
+        <div class="sc-row"><span class="sc-l">Basra auto-feed</span><span class="sc-v" style="color:var(--red)">No stable endpoint</span></div>
+        <div class="sc-row"><span class="sc-l">Kuwait auto-feed</span><span class="sc-v" style="color:var(--red)">No stable endpoint</span></div>
+        <div class="sc-row"><span class="sc-l">Port throughput</span><span class="sc-v" style="color:var(--red)">Manual only</span></div>
+        <div class="sc-note">These are filled manually from official sources. Automation is planned once reliable public endpoints are confirmed.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="f-brand">Contango Energy</div>
+      <p class="f-tagline">Middle East crude intelligence. Infrastructure constraints, OSP differentials, trade flows.</p>
+    </div>
+    <div>
+      <div class="f-head">Pages</div>
+      <a class="f-link" href="index.html">Overview</a>
+      <a class="f-link" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="f-link" href="iraq.html">Iraq</a>
+      <a class="f-link" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="f-link" href="grades.html">Grades</a>
+      <a class="f-link" href="commodities.html">Commodities</a>
+      <a class="f-link" href="osp-decoder.html">OSP decoder</a>
+      <a class="f-link" href="methodology.html">Methodology</a>
+    </div>
+    <div>
+      <div class="f-head">Data sources</div>
+      <div class="f-src">IEA Oil Market Report March 2026<br>EIA (Brent, WTI daily)<br>Aramco · ADNOC · SOMO · QE · KPC<br>OPEC JMMC · Reuters · MEES<br>ACLED · Lloyd's List · CFR · Kpler</div>
+    </div>
+    <div>
+      <div class="f-head">Reference</div>
+      <a class="f-link" href="https://www.eia.gov" target="_blank">EIA</a>
+      <a class="f-link" href="https://www.opec.org" target="_blank">OPEC</a>
+      <a class="f-link" href="https://www.iea.org" target="_blank">IEA</a>
+      <a class="f-link" href="https://www.mees.com" target="_blank">MEES</a>
+      <a class="f-link" href="https://github.com/pacho064/Contango" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Contango Energy · Open source · MIT license · <a href="methodology.html" style="color:var(--muted)">Methodology</a></span>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+</script>
 </body>
 </html>
