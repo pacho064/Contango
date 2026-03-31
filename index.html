@@ -737,9 +737,10 @@ function renderSpreads(){
   if(!D) return;
   const brent=D.benchmarks.brent.price;
   const ref=`<div class="sp"><div class="sp-label">ICE Brent</div><div class="sp-value">$${brent.toFixed(2)}</div><div class="sp-note">EIA · ${D.benchmarks.brent.updated}</div></div>`;
-  const spreads=Object.values(D.osps).map(o=>{
-    const sp=o.spread_vs_brent;
-    return `<div class="sp"><div class="sp-label">${o.grade} vs Brent</div><div class="sp-value ${sp>=0?'sp-pos':'sp-neg'}">${sp>=0?'+':''}$${sp.toFixed(2)}</div><div class="sp-note">${o.country} · ${o.source} · ${o.for_month}</div></div>`;
+ const gradeNames={arab_light:'Arab Light',murban:'Murban',basra_medium:'Basra Medium',kuwait_export:'Kuwait Export',arab_heavy:'Arab Heavy',oman_dubai:'Oman/Dubai'};
+  const spreads=Object.entries(D.osps).map(([k,o])=>{
+    const sp=o.spread_vs_brent||0;
+    return `<div class="sp"><div class="sp-label">${gradeNames[k]||k} vs Brent</div><div class="sp-value ${sp>=0?'sp-pos':'sp-neg'}">${sp>=0?'+':''}$${sp.toFixed(2)}</div><div class="sp-note">${o.source||''} · ${o.for_month||''}</div></div>`;
   }).join('');
   const el=document.getElementById('ss-inner');
   if(el) el.innerHTML=ref+spreads;
