@@ -725,17 +725,6 @@ function renderCkBar(){
   }).join('');
 }
 
-function renderTicker(){
-  if(!D) return;
-  const b=D.benchmarks;
-  const items=[
-    {sym:'BRENT',p:b.brent.price,chg:b.brent.change_pct},
-    {sym:'WTI',p:b.wti.price,chg:b.wti.change_pct},
-    {sym:'URALS',p:b.urals.price,chg:b.urals.change_pct},
-    {sym:'TTF',p:b.ttf.price,chg:b.ttf.change_pct},
-    {sym:'JKM',p:b.jkm.price,chg:b.jkm.change_pct},
-    ...Object.values(D.osps).map(o=>({sym:(o.grade||'OSP').split(' ').pop().toUpperCase(),p:o.price,spread:o.spread_vs_brent})),
-  ];
   const html=items.map(i=>{
     const chgStr=i.chg!=null?`<span class="${i.chg>0?'tk-up':i.chg<0?'tk-dn':'tk-flat'}">${i.chg>=0?'+':''}${i.chg.toFixed(2)}%</span>`:`<span class="tk-flat">${i.spread>=0?'+':''}$${i.spread.toFixed(2)}</span>`;
     return `<div class="tk-item"><span class="tk-sym">${i.sym}</span><span class="tk-price">$${i.p.toFixed(2)}</span>${chgStr}</div>`;
