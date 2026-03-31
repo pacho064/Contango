@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<!-- Contango Energy · Crude Grades · v1.0 · March 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Crude grades — Contango Energy</title>
+<meta name="description" content="Not all oil is the same. Arab Light, Murban, Urals, WTI, Brent — API gravity, sulphur content, refinery requirements, who produces it, who buys it, and what the Hormuz crisis means for each grade.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://pacho064.github.io/Contango/grades.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#8a5a00;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;--amber:#c89040;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}
+.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px;cursor:pointer}
+
+.ph{background:var(--card);border-bottom:3px solid var(--amber);padding:36px 0 28px}
+.ph-inner{max-width:1300px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:740px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+/* ── API/Sulphur explainer ── */
+.explainer{max-width:1300px;margin:0 auto;padding:36px 28px 0}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:16px}
+.exp-item{background:var(--card);padding:20px 24px}
+.exp-num{font-family:var(--cg);font-size:48px;font-weight:600;line-height:1;margin-bottom:4px}
+.exp-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.exp-desc{font-family:var(--ss);font-size:14px;line-height:1.65;color:var(--ink-2)}
+.exp-scale{margin-top:12px}
+.exp-scale-bar{height:8px;border-radius:4px;margin-bottom:6px;position:relative}
+.exp-scale-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+
+/* ── Visual API/Sulphur matrix ── */
+.matrix-wrap{max-width:1300px;margin:0 auto;padding:36px 28px 0}
+.matrix-title{font-family:var(--cg);font-size:24px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.matrix-sub{font-family:var(--ss);font-style:italic;font-size:13px;color:var(--ink-3);margin-bottom:20px}
+.matrix-chart{position:relative;height:320px;background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.matrix-x-label{font-family:var(--mono);font-size:9px;color:var(--ink-4);letter-spacing:.07em;text-transform:uppercase}
+.matrix-y-label{font-family:var(--mono);font-size:9px;color:var(--ink-4);letter-spacing:.07em;text-transform:uppercase}
+.grade-dot{position:absolute;transform:translate(-50%,-50%);border-radius:50%;cursor:pointer;transition:all .15s;border:2px solid transparent}
+.grade-dot:hover{transform:translate(-50%,-50%) scale(1.2);z-index:10}
+.grade-label{position:absolute;font-family:var(--mono);font-size:9px;font-weight:500;white-space:nowrap;pointer-events:none}
+.axis-line{position:absolute;background:var(--border)}
+.quadrant-label{position:absolute;font-family:var(--mono);font-size:9px;color:var(--ink-4);letter-spacing:.05em;text-transform:uppercase;pointer-events:none}
+
+/* ── Grade cards ── */
+.grades-section{max-width:1300px;margin:0 auto;padding:36px 28px 60px}
+.section-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.section-title{font-family:var(--cg);font-size:28px;font-weight:500;color:var(--ink);margin-bottom:20px}
+
+.grades-group{margin-bottom:48px}
+.group-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.grades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.gc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:box-shadow .12s}
+.gc:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.gc-head{padding:14px 16px;border-bottom:1px solid var(--border)}
+.gc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.gc-name{font-family:var(--cg);font-size:18px;font-weight:500;color:var(--ink)}
+.gc-origin{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:2px;letter-spacing:.04em}
+.gc-tagline{font-family:var(--ss);font-style:italic;font-size:12px;color:var(--ink-3)}
+
+.gc-specs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)}
+.gc-spec{padding:10px 12px;border-right:1px solid var(--border)}
+.gc-spec:last-child{border-right:none}
+.gc-spec-label{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px}
+.gc-spec-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink)}
+.gc-spec-note{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink-4);margin-top:1px}
+
+/* API gravity bar */
+.api-bar-wrap{padding:0 12px 10px}
+.api-bar-label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink-4);margin-bottom:3px}
+.api-bar-bg{height:3px;background:var(--border);border-radius:2px;position:relative}
+.api-bar-fill{height:100%;border-radius:2px}
+
+.gc-body{padding:12px 16px}
+.gc-body p{font-family:var(--ss);font-size:13px;line-height:1.65;color:var(--ink-2);margin-bottom:8px}
+.gc-body p:last-child{margin-bottom:0}
+.gc-body strong{color:var(--ink);font-weight:600}
+
+.gc-buyers{padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.gc-buyers-label{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);margin-right:4px}
+.buyer-tag{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:var(--card-alt);color:var(--ink-3);border:1px solid var(--border)}
+
+.gc-status{padding:8px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.status-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.status-text{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.5}
+
+/* Status colours */
+.s-disrupted .status-dot{background:var(--red)}
+.s-active .status-dot{background:var(--teal)}
+.s-constrained .status-dot{background:var(--amber)}
+.s-sanctioned .status-dot{background:#8a5a00}
+
+/* Origin badges */
+.o-gulf{background:rgba(179,48,0,.08);color:var(--red);border:1px solid rgba(179,48,0,.2)}
+.o-russia{background:rgba(140,90,0,.08);color:var(--amber);border:1px solid rgba(140,90,0,.2)}
+.o-west{background:rgba(29,68,128,.08);color:var(--navy);border:1px solid rgba(29,68,128,.2)}
+.o-africa{background:rgba(74,124,111,.08);color:var(--teal);border:1px solid rgba(74,124,111,.2)}
+.o-americas{background:rgba(29,68,128,.08);color:var(--navy);border:1px solid rgba(29,68,128,.2)}
+[data-theme=dark] .o-gulf{background:rgba(179,48,0,.15);color:#c84000;border-color:rgba(179,48,0,.25)}
+[data-theme=dark] .o-russia{background:rgba(140,90,0,.15);color:#c89040;border-color:rgba(140,90,0,.25)}
+[data-theme=dark] .o-west{background:rgba(29,68,128,.15);color:#4a80c0;border-color:rgba(29,68,128,.25)}
+[data-theme=dark] .o-africa{background:rgba(74,124,111,.15);color:#4a9c8a;border-color:rgba(74,124,111,.25)}
+
+/* Refinery explainer */
+.refinery-box{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:36px}
+.rb-head{padding:12px 16px;border-bottom:1px solid var(--border);font-family:var(--cg);font-size:16px;font-weight:500;color:var(--ink)}
+.rb-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.rb-item{padding:14px 16px;border-right:1px solid var(--border)}
+.rb-item:last-child{border-right:none}
+.rb-name{font-family:var(--ss);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.rb-cap{font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-bottom:6px}
+.rb-desc{font-family:var(--ss);font-size:12px;line-height:1.6;color:var(--ink-2)}
+.rb-grades{margin-top:8px;display:flex;gap:4px;flex-wrap:wrap}
+.rb-tag{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;background:var(--card-alt);border:1px solid var(--border);color:var(--ink-3)}
+
+/* Alert */
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin-bottom:28px}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:1000px){
+  .grades-grid{grid-template-columns:1fr 1fr}
+  .exp-grid{grid-template-columns:1fr}
+  .rb-grid{grid-template-columns:1fr}
+  .rb-item{border-right:none;border-bottom:1px solid var(--border)}
+  .rb-item:last-child{border-bottom:none}
+  .nav-links{display:none}
+  .ph-title{font-size:36px}
+  .nav-inner,.ph-inner,.explainer,.matrix-wrap,.grades-section,.footer-inner{padding-left:16px;padding-right:16px}
+}
+@media(max-width:640px){
+  .grades-grid{grid-template-columns:1fr}
+  .gc-specs{grid-template-columns:1fr 1fr}
+  .gc-spec:nth-child(2){border-right:none}
+  .gc-spec:nth-child(3){border-top:1px solid var(--border);grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a on" href="grades.html">Crude grades</a>
+      <a class="nav-a" href="osp-decoder.html">OSP</a>
+      <a class="nav-a" href="spare-capacity.html">Spare capacity</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Intelligence · Crude grades · Updated March 2026</div>
+    <h1 class="ph-title">Oil is not one thing</h1>
+    <div class="ph-sub">When Hormuz closes, the question is not just how much oil is disrupted — it is which oil. Arab Light and Urals are both crude. They are not interchangeable. The refinery built for one cannot simply run the other. This is the grade map.</div>
+    <div class="ph-src">Sources: EIA crude assay database · Saudi Aramco product specifications · ADNOC Murban specifications · S&P Global Platts crude oil assays · IEA Oil Market Report · BP Statistical Review 2025 · Argus Media · March 2026</div>
+  </div>
+</div>
+
+<!-- Explainer: API and Sulphur -->
+<div class="explainer">
+  <div class="section-label">The two numbers that define every crude</div>
+  <div class="exp-grid">
+    <div class="exp-item">
+      <div class="exp-num" style="color:var(--amber)">API°</div>
+      <div class="exp-label">Gravity — how light or heavy</div>
+      <div class="exp-desc">API gravity measures crude density. Higher number = lighter crude. Light crudes (35°+) yield more gasoline and diesel per barrel with less processing. Heavy crudes (&lt;25°) yield more residual fuel oil and require more complex, expensive refineries to crack into valuable products.</div>
+      <div class="exp-scale" style="margin-top:14px">
+        <div class="exp-scale-bar" style="background:linear-gradient(to right,#2d1a0a,#8a5020,#c8901a,#e8c060,#f5f0e0);height:10px;border-radius:4px"></div>
+        <div class="exp-scale-labels">
+          <span>Heavy &lt;25°</span>
+          <span>Medium 25–35°</span>
+          <span>Light 35–45°</span>
+          <span>Condensate 45°+</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-num" style="color:var(--red)">S%</div>
+      <div class="exp-label">Sulphur — sweet or sour</div>
+      <div class="exp-desc">Sulphur content determines processing cost. Sweet crudes (&lt;0.5% S) require less treatment, produce less pollution, and command a premium. Sour crudes (&gt;0.5% S) require desulphurisation units — expensive capital investment. A refinery configured for sweet crude cannot simply process sour crude without major modifications.</div>
+      <div class="exp-scale" style="margin-top:14px">
+        <div class="exp-scale-bar" style="background:linear-gradient(to right,#1d7a5a,#4a9c8a,#b0b0a8,#c85020,#8a2010);height:10px;border-radius:4px"></div>
+        <div class="exp-scale-labels">
+          <span>Sweet &lt;0.5%</span>
+          <span>Medium 0.5–1%</span>
+          <span>Sour 1–2%</span>
+          <span>Very sour 2%+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Refinery types -->
+<div class="explainer" style="padding-top:28px">
+  <div class="section-label" style="margin-bottom:12px">Why grade matters — refinery configuration</div>
+  <div class="refinery-box">
+    <div class="rb-head">Three refinery types — built for different crudes, not interchangeable</div>
+    <div class="rb-grid">
+      <div class="rb-item">
+        <div class="rb-name">Hydroskimming</div>
+        <div class="rb-cap">Simplest · lowest cost · limited flexibility</div>
+        <div class="rb-desc">Distills crude into fractions, removes sulphur. Can process light sweet crudes efficiently. Produces significant residual fuel oil — a low-value product. Cannot handle heavy or high-sulphur crudes profitably.</div>
+        <div class="rb-grades">
+          <span class="rb-tag">Brent</span>
+          <span class="rb-tag">Johan Sverdrup</span>
+          <span class="rb-tag">Bonny Light</span>
+        </div>
+      </div>
+      <div class="rb-item">
+        <div class="rb-name">Cracking</div>
+        <div class="rb-cap">Medium complexity · most common globally</div>
+        <div class="rb-desc">Adds a catalytic cracker to convert heavier fractions into gasoline and diesel. Can handle medium sour crudes. The standard configuration for most Asian refineries built in the 1980s–2000s.</div>
+        <div class="rb-grades">
+          <span class="rb-tag">Arab Light</span>
+          <span class="rb-tag">Murban</span>
+          <span class="rb-tag">Basra Light</span>
+          <span class="rb-tag">Urals</span>
+        </div>
+      </div>
+      <div class="rb-item">
+        <div class="rb-name">Coking / hydrocracking</div>
+        <div class="rb-cap">Most complex · highest capital cost · maximum flexibility</div>
+        <div class="rb-desc">Adds a coker or hydrocracker. Can process heavy sour crudes profitably. These refineries were built specifically to run cheap Gulf heavy grades — they lose their economic advantage when forced to run lighter, more expensive crudes.</div>
+        <div class="rb-grades">
+          <span class="rb-tag">Arab Heavy</span>
+          <span class="rb-tag">Iranian Heavy</span>
+          <span class="rb-tag">Kuwait Export</span>
+          <span class="rb-tag">Venezuela</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-title">The grade mismatch problem — why Hormuz disruption is not fungible</div>
+    <div class="alert-body">Japan's Nagoya refinery, configured for Arab Medium sour crude, cannot simply switch to Norwegian Johan Sverdrup light sweet crude. The catalytic equipment is calibrated for sulphur removal. Running light sweet crude through a complex coking unit generates the same products at significantly higher cost — and the lighter crude may cause operational instability. This is why Hormuz disruption is not simply solved by "buying oil elsewhere." The oil elsewhere is a different product for a different machine.</div>
+  </div>
+</div>
+
+<!-- Grade scatter chart -->
+<div class="matrix-wrap">
+  <div class="section-label">API gravity vs sulphur content — all major grades</div>
+  <div class="matrix-title">The crude quality map</div>
+  <div class="matrix-sub">Higher API = lighter, more valuable. Lower sulphur = sweeter, easier to process. The bottom-right quadrant (light sweet) commands the highest premiums.</div>
+  <div class="matrix-chart" id="grade-chart">
+    <!-- Rendered by JS below -->
+  </div>
+  <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--ink-4)"><div style="width:10px;height:10px;border-radius:50%;background:var(--red)"></div>Gulf / Middle East</div>
+    <div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--ink-4)"><div style="width:10px;height:10px;border-radius:50%;background:#8a5a00"></div>Russia / FSU</div>
+    <div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--ink-4)"><div style="width:10px;height:10px;border-radius:50%;background:var(--navy)"></div>North Sea / Europe</div>
+    <div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--ink-4)"><div style="width:10px;height:10px;border-radius:50%;background:var(--teal)"></div>Africa</div>
+    <div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--ink-4)"><div style="width:10px;height:10px;border-radius:50%;background:#6a5a90"></div>Americas</div>
+  </div>
+</div>
+
+<!-- Grade cards -->
+<div class="grades-section">
+
+  <!-- Gulf grades -->
+  <div class="grades-group">
+    <div class="group-label">Gulf producers — Hormuz-dependent</div>
+    <div class="grades-grid">
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Arab Light</div>
+            <span class="gc-origin o-gulf">Saudi Arabia</span>
+          </div>
+          <div class="gc-tagline">The regional benchmark. Sets the pricing tone for 9M bbl/d of Asian crude.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">34.2°</div>
+            <div class="gc-spec-note">Medium light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">1.77%</div>
+            <div class="gc-spec-note">Medium sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Production</div>
+            <div class="gc-spec-val">~6M</div>
+            <div class="gc-spec-note">bbl/d · curtailed</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:62%;background:var(--red)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>The flagship grade — the one Aramco's OSP is built around. Sets the price signal for Kuwait, Iraq, Iran and Qatar, all of which price relative to Arab Light. <strong>The single most important crude in the global pricing system.</strong></p>
+          <p>Requires a cracking or hydrocracking refinery. Japan's JXTG, India's Reliance, China's Sinopec are all configured to run it. Cannot easily be replaced by North Sea light sweet grades without significant yield loss.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">China</span>
+          <span class="buyer-tag">Japan</span>
+          <span class="buyer-tag">India</span>
+          <span class="buyer-tag">South Korea</span>
+          <span class="buyer-tag">US Gulf Coast</span>
+        </div>
+        <div class="gc-status s-constrained">
+          <div class="status-dot"></div>
+          <div class="status-text">Hormuz route partially disrupted. Rerouting via Yanbu at record pace — port at capacity. OSP for April loading raised to +$2.50 vs Oman/Dubai.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Arab Heavy</div>
+            <span class="gc-origin o-gulf">Saudi Arabia</span>
+          </div>
+          <div class="gc-tagline">The discount grade. Only profitable for refineries built specifically for it.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">27.4°</div>
+            <div class="gc-spec-note">Heavy</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">2.85%</div>
+            <div class="gc-spec-note">Very sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">OSP diff</div>
+            <div class="gc-spec-val">−$4.2</div>
+            <div class="gc-spec-note">vs Arab Light</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:38%;background:#8a5020"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Requires the most complex coking refineries. The discount to Arab Light ($4.20/bbl in March 2026) is near its widest in 18 months — signalling that complex refinery capacity is constrained and buyers prefer lighter grades during the crisis.</p>
+          <p><strong>The widening Light-Heavy spread is a crisis signal:</strong> it shows that heavy sour crude is becoming harder to place because the complex refineries configured to process it are operating at reduced rates or facing feedstock disruption.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">China (coking refineries)</span>
+          <span class="buyer-tag">India</span>
+          <span class="buyer-tag">US Gulf Coast</span>
+        </div>
+        <div class="gc-status s-constrained">
+          <div class="status-dot"></div>
+          <div class="status-text">Discount widening. Complex refinery utilisation falling. Light-Heavy spread now $4.20/bbl — near 18-month wide.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Murban</div>
+            <span class="gc-origin o-gulf">UAE (ADNOC)</span>
+          </div>
+          <div class="gc-tagline">Light, low-sulphur, ICE-traded. The Gulf's most flexible grade.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">40.5°</div>
+            <div class="gc-spec-note">Light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.76%</div>
+            <div class="gc-spec-note">Low sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Exchange</div>
+            <div class="gc-spec-val">ICE</div>
+            <div class="gc-spec-note">Futures traded</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:80%;background:var(--red)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>ADNOC launched Murban as an ICE futures contract in 2021, making it the Gulf's first exchange-traded benchmark grade. Higher API and lower sulphur than Arab Light makes it processable in a wider range of refineries.</p>
+          <p><strong>The critical advantage during the crisis:</strong> Murban can be exported via Habshan-Fujairah pipeline, bypassing Hormuz. UAE's bypass capacity (~1.5M bbl/d through Fujairah) is the only meaningful Gulf alternative to Hormuz for crude exports.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Japan</span>
+          <span class="buyer-tag">India</span>
+          <span class="buyer-tag">China</span>
+          <span class="buyer-tag">South Korea</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Fujairah bypass active. Exports continuing via Indian Ocean route. Utilisation near capacity at ~1.5M bbl/d.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Basra Medium</div>
+            <span class="gc-origin o-gulf">Iraq (SOMO)</span>
+          </div>
+          <div class="gc-tagline">97% Hormuz-dependent. Force majeure March 2026. Exports halted.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">29.7°</div>
+            <div class="gc-spec-note">Medium heavy</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">2.95%</div>
+            <div class="gc-spec-note">Very sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Pre-crisis</div>
+            <div class="gc-spec-val">3.3M</div>
+            <div class="gc-spec-note">bbl/d from Basra</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:45%;background:var(--red)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Iraq's primary export grade — the second-largest single-origin crude stream in Asia-Pacific trade. Very sour with medium-heavy gravity, requiring complex refinery configurations.</p>
+          <p><strong>100% export halt since March 2026.</strong> Refineries in China and India that were running Basra as 20-30% of their feedstock are scrambling to replace a heavy sour grade with limited alternatives. The nearest substitutes are Iranian Heavy (sanctioned), Venezuelan (under sanctions), or Arab Heavy (now at record OSP premium).</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers (pre-crisis)</span>
+          <span class="buyer-tag">China 34%</span>
+          <span class="buyer-tag">India 25%</span>
+          <span class="buyer-tag">South Korea 13%</span>
+        </div>
+        <div class="gc-status s-disrupted">
+          <div class="status-dot"></div>
+          <div class="status-text">Force majeure active. Exports halted. Production cut from 3.3M to ~1.4M bbl/d, directed to domestic refineries only.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Kuwait Export</div>
+            <span class="gc-origin o-gulf">Kuwait (KPC)</span>
+          </div>
+          <div class="gc-tagline">Medium sour, Hormuz-dependent. Production severely curtailed.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">31.4°</div>
+            <div class="gc-spec-note">Medium</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">2.52%</div>
+            <div class="gc-spec-note">Sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Production</div>
+            <div class="gc-spec-val">~1.7M</div>
+            <div class="gc-spec-note">bbl/d · curtailed</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:52%;background:var(--red)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Similar in character to Arab Light but slightly heavier and sourer. Priced at a modest discount to Arab Light — the OSP typically runs $0.50–1.00/bbl below. Kuwait has zero alternative export routes: all oil exits via Mina al-Ahmadi terminal into the Gulf, 100% Hormuz-dependent.</p>
+          <p>Kuwait ran out of available storage within 14 days of Hormuz disruption and began systematic production curtailments. Storage tanks filled faster than any bypass option could empty them.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Japan</span>
+          <span class="buyer-tag">South Korea</span>
+          <span class="buyer-tag">India</span>
+          <span class="buyer-tag">China</span>
+        </div>
+        <div class="gc-status s-disrupted">
+          <div class="status-dot"></div>
+          <div class="status-text">Production cut ~810K bbl/d. Storage full. No bypass route. Exports at minimal levels.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Oman / Dubai</div>
+            <span class="gc-origin o-gulf">Oman · UAE (DME)</span>
+          </div>
+          <div class="gc-tagline">The Asian benchmark. OSP calculations for all Gulf grades reference this.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">33.0°</div>
+            <div class="gc-spec-note">Medium</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">1.96%</div>
+            <div class="gc-spec-note">Sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Role</div>
+            <div class="gc-spec-val">DME</div>
+            <div class="gc-spec-note">Settlement benchmark</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:58%;background:var(--red)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>The Dubai Mercantile Exchange settlement price — Oman and Dubai crudes averaged — underpins OSP differentials for all major Gulf producers exporting to Asia. When Aramco says "Arab Light Asia = +$2.50 vs Oman/Dubai," this is the reference.</p>
+          <p><strong>Currently broken as a benchmark.</strong> The Platts assessment that feeds the DME settlement is based on physical transactions — and physical Gulf transactions have collapsed to near-zero since Hormuz disruption. Indian refiners are now challenging the entire 30-year pricing architecture as a result.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Produced by</span>
+          <span class="buyer-tag">Oman Oil ~800K bbl/d</span>
+          <span class="buyer-tag">ADNOC Upper Zakum</span>
+        </div>
+        <div class="gc-status s-constrained">
+          <div class="status-dot"></div>
+          <div class="status-text">Benchmark integrity compromised. Near-zero Platts assessment transactions since March 2. India challenging the OSP peg.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Russian grades -->
+  <div class="grades-group">
+    <div class="group-label">Russia / FSU — Hormuz-independent, sanctions-affected</div>
+    <div class="grades-grid">
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Urals</div>
+            <span class="gc-origin o-russia">Russia</span>
+          </div>
+          <div class="gc-tagline">Russia's main export blend. Sanctioned in most Western markets. India's discount supply.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">31.7°</div>
+            <div class="gc-spec-note">Medium</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">1.55%</div>
+            <div class="gc-spec-note">Sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Discount</div>
+            <div class="gc-spec-val">~$20</div>
+            <div class="gc-spec-note">vs Brent · est.</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:54%;background:#8a5a00"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Similar in specification to Arab Light — medium sour — but exported via Black Sea (Novorossiysk) and Baltic (Primorsk/Ust-Luga). No Hormuz dependency whatsoever. This is why India's diversification into Russian crude since 2022 provides genuine partial insulation from the current crisis.</p>
+          <p><strong>The discount (~$20/bbl vs Brent) makes it extremely attractive for Indian refiners</strong> who can configure for sour crude. The question during the current crisis is whether Russia can physically scale up exports to compensate for Gulf shortfalls — and whether the shadow fleet tankers can handle the volumes.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">India 35%</span>
+          <span class="buyer-tag">China 30%</span>
+          <span class="buyer-tag">Turkey 15%</span>
+        </div>
+        <div class="gc-status s-sanctioned">
+          <div class="status-dot"></div>
+          <div class="status-text">Western sanctions active. G7 price cap at $60/bbl. Trade rerouted via shadow fleet to India/China. Exports broadly maintained.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">ESPO Blend</div>
+            <span class="gc-origin o-russia">Russia (pipeline)</span>
+          </div>
+          <div class="gc-tagline">East Siberia–Pacific Ocean pipeline. Light, low-sulphur. Unaffected by Hormuz or sanctions.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">34.8°</div>
+            <div class="gc-spec-note">Light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.52%</div>
+            <div class="gc-spec-note">Low sulphur</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Volume</div>
+            <div class="gc-spec-val">~1.6M</div>
+            <div class="gc-spec-note">bbl/d to China</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:64%;background:#8a5a00"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Delivered via pipeline directly to northeast China — no sea transit required, no Hormuz, no Western sanctions enforcement point. China's single most reliable crude supply in the current crisis environment.</p>
+          <p><strong>Light sweet specification makes it processable in simple refineries</strong> — a significant advantage. China does not need its most complex refineries to run ESPO. The 1.6M bbl/d pipeline flow to China is entirely unaffected by the Hormuz closure.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">China (exclusive)</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Fully operational. Pipeline deliveries to China unaffected. 1.6M bbl/d flowing normally. China's anchor supply during crisis.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">CPC Blend</div>
+            <span class="gc-origin o-russia">Kazakhstan (CPC)</span>
+          </div>
+          <div class="gc-tagline">Light sweet Kazakh crude via Black Sea. Key European alternative.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">44.4°</div>
+            <div class="gc-spec-note">Very light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.55%</div>
+            <div class="gc-spec-note">Low sour</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Volume</div>
+            <div class="gc-spec-val">~1.3M</div>
+            <div class="gc-spec-note">bbl/d</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:85%;background:#8a5a00"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Tengizchevroil production (Chevron, ExxonMobil, KazMunayGas) flows via the Caspian Pipeline Consortium to Novorossiysk on the Black Sea, then by tanker to European and Asian markets. No Hormuz dependency.</p>
+          <p>Very light and relatively low sulphur — processable in simple refineries. European buyers who lost access to Russian Urals have increased CPC offtake. Kazakhstan's chronic overproduction of OPEC+ quotas means supply is consistently available.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Italy</span>
+          <span class="buyer-tag">Netherlands</span>
+          <span class="buyer-tag">France</span>
+          <span class="buyer-tag">China</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Fully operational. No Hormuz or sanctions exposure. Kazakhstan above OPEC+ quota — supply ample.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- North Sea / Western grades -->
+  <div class="grades-group">
+    <div class="group-label">North Sea / Western — light sweet, limited volume</div>
+    <div class="grades-grid">
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Dated Brent</div>
+            <span class="gc-origin o-west">North Sea</span>
+          </div>
+          <div class="gc-tagline">The global benchmark. Physical delivery from North Sea fields. Not a Gulf grade.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">38.1°</div>
+            <div class="gc-spec-note">Light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.37%</div>
+            <div class="gc-spec-note">Sweet</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Role</div>
+            <div class="gc-spec-val">Global</div>
+            <div class="gc-spec-note">Benchmark</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:74%;background:var(--navy)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>The ICE Brent futures contract — the world's most traded commodity — is now a basket of North Sea grades (Brent, Forties, Oseberg, Ekofisk, Troll). Physical production is modest (~700K bbl/d net) but the futures price anchors global trade.</p>
+          <p><strong>The disconnect problem:</strong> Brent futures are priced in London for North Sea delivery. Gulf physical crude cannot reach that delivery point when Hormuz is closed. This is why the Arab Light OSP vs Brent spread has blown out to +$11.84 — the benchmark and the physical market are pricing different realities.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Physical buyers</span>
+          <span class="buyer-tag">Europe (primary)</span>
+          <span class="buyer-tag">US East Coast</span>
+          <span class="buyer-tag">Asia (via traders)</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Production unaffected. Benchmark integrity stressed — futures disconnected from Gulf physical market. Spread vs Arab Light at record.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Johan Sverdrup</div>
+            <span class="gc-origin o-west">Norway (Equinor)</span>
+          </div>
+          <div class="gc-tagline">Europe's largest field. Medium gravity, low sulphur. Growing Asian offtake.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">28.0°</div>
+            <div class="gc-spec-note">Medium heavy</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.08%</div>
+            <div class="gc-spec-note">Very sweet</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Production</div>
+            <div class="gc-spec-val">~755K</div>
+            <div class="gc-spec-note">bbl/d</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:40%;background:var(--navy)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Europe's anchor crude supply. Despite its medium-heavy gravity, its extremely low sulphur content (0.08%) means it can run in simple refineries that would normally require light sweet crude. This is its key competitive advantage — broad refinery compatibility.</p>
+          <p>Cannot replace Gulf sour crude in complex Asian refineries configured for medium-sour grades — the sulphur removal units in those refineries are not needed for Johan Sverdrup, creating a processing mismatch even if the crude were available in sufficient volume.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Europe</span>
+          <span class="buyer-tag">Poland</span>
+          <span class="buyer-tag">Germany</span>
+          <span class="buyer-tag">Asia (growing)</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Production normal. No exposure to Middle East disruption. European anchor supply with growing Asian spot demand during crisis.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">WTI</div>
+            <span class="gc-origin o-americas">United States</span>
+          </div>
+          <div class="gc-tagline">Light, sweet US shale blend. Growing export role. No Hormuz exposure.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">39.6°</div>
+            <div class="gc-spec-note">Light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.24%</div>
+            <div class="gc-spec-note">Sweet</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Production</div>
+            <div class="gc-spec-val">13.3M</div>
+            <div class="gc-spec-note">bbl/d · US total</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:78%;background:#6a5a90"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>WTI Cushing is the benchmark for US crude. US exports (primarily WTI Midland and WTI Houston) have grown dramatically since the 2015 export ban was lifted, reaching ~5M bbl/d. No Hormuz exposure whatsoever — all export via Gulf of Mexico ports.</p>
+          <p><strong>The key constraint for Asian buyers:</strong> WTI is too light and too sweet for the complex sour-crude refineries in Japan, South Korea, and China that were configured for Arab Medium or Basra. Switching a coking refinery from Arab Heavy to WTI shale is not a simple feedstock swap — it requires significant operational adjustment and yield loss.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Europe</span>
+          <span class="buyer-tag">South Korea</span>
+          <span class="buyer-tag">Japan (growing)</span>
+          <span class="buyer-tag">India</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Production at record 13.3M bbl/d. Exports rising. US benefits economically from price rise — net exporter position confirmed.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- African grades -->
+  <div class="grades-group">
+    <div class="group-label">Africa — light sweet, limited Hormuz exposure</div>
+    <div class="grades-grid">
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Bonny Light</div>
+            <span class="gc-origin o-africa">Nigeria (NNPC)</span>
+          </div>
+          <div class="gc-tagline">West Africa's premium grade. Light sweet. Popular with Asian buyers during crisis.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">32.9°</div>
+            <div class="gc-spec-note">Light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.14%</div>
+            <div class="gc-spec-note">Very sweet</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Production</div>
+            <div class="gc-spec-val">~1.3M</div>
+            <div class="gc-spec-note">bbl/d · volatile</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:58%;background:var(--teal)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>Nigeria's flagship export grade — light sweet, processable in simple or cracking refineries. Historically priced at a premium to Brent. Nigerian production is chronically below OPEC+ quota due to pipeline theft, sabotage, and infrastructure decay.</p>
+          <p>During the Hormuz crisis, Bonny Light has attracted strong Asian spot buying from South Korea and Japan as buyers seek light sweet alternatives to UAE grades they can no longer easily access. <strong>However, Nigeria's production reliability is a significant constraint on how much volume can actually be committed.</strong></p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Europe</span>
+          <span class="buyer-tag">India</span>
+          <span class="buyer-tag">South Korea (growing)</span>
+        </div>
+        <div class="gc-status s-constrained">
+          <div class="status-dot"></div>
+          <div class="status-text">Production below OPEC+ quota. Infrastructure reliability limits volume commitments. Spot premiums rising due to Asian demand surge.</div>
+        </div>
+      </div>
+
+      <div class="gc">
+        <div class="gc-head">
+          <div class="gc-top">
+            <div class="gc-name">Saharan Blend</div>
+            <span class="gc-origin o-africa">Algeria (Sonatrach)</span>
+          </div>
+          <div class="gc-tagline">Mediterranean light sweet. Europe's preferred alternative to Gulf grades.</div>
+        </div>
+        <div class="gc-specs">
+          <div class="gc-spec">
+            <div class="gc-spec-label">API gravity</div>
+            <div class="gc-spec-val">46.4°</div>
+            <div class="gc-spec-note">Very light</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Sulphur</div>
+            <div class="gc-spec-val">0.09%</div>
+            <div class="gc-spec-note">Very sweet</div>
+          </div>
+          <div class="gc-spec">
+            <div class="gc-spec-label">Production</div>
+            <div class="gc-spec-val">~1.3M</div>
+            <div class="gc-spec-note">bbl/d total</div>
+          </div>
+        </div>
+        <div class="api-bar-wrap">
+          <div class="api-bar-label"><span>Heavy</span><span>Light</span></div>
+          <div class="api-bar-bg"><div class="api-bar-fill" style="width:88%;background:var(--teal)"></div></div>
+        </div>
+        <div class="gc-body">
+          <p>One of the world's lightest crudes — 46° API and nearly sulphur-free. Exported directly to Mediterranean refineries via pipeline and tanker, zero Hormuz exposure. Europe's original light sweet alternative.</p>
+          <p>Its very light specification means it cannot substitute for medium-heavy Gulf grades in complex refineries. Algerian production is declining due to mature field depletion. Volume constraints limit its role as a crisis-period replacement.</p>
+        </div>
+        <div class="gc-buyers">
+          <span class="gc-buyers-label">Main buyers</span>
+          <span class="buyer-tag">Italy</span>
+          <span class="buyer-tag">France</span>
+          <span class="buyer-tag">Spain</span>
+          <span class="buyer-tag">UK</span>
+        </div>
+        <div class="gc-status s-active">
+          <div class="status-dot"></div>
+          <div class="status-text">Production stable but declining. No Hormuz exposure. Mediterranean route unaffected. Increasing spot demand from crisis-period Europe.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="src-line" style="margin-top:-20px">Sources: EIA crude assay database · Saudi Aramco product specifications · ADNOC Murban crude assay · S&P Global Platts crude oil assay database · IEA Oil Market Report March 2026 · BP Statistical Review 2025 · Argus Media crude assessments · March 2026 · All specifications indicative</div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Crude grades intelligence · March 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="osp-decoder.html">OSP decoder</a>
+      <a href="buyer-exposure.html">Buyer exposure</a>
+      <a href="spare-capacity.html">Spare capacity</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'');
+  document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
+}
+
+/* ── Grade scatter chart ── */
+const GRADES = [
+  {name:'Arab Light',   api:34.2, s:1.77, color:'var(--red)',    r:14},
+  {name:'Arab Heavy',   api:27.4, s:2.85, color:'var(--red)',    r:12},
+  {name:'Murban',       api:40.5, s:0.76, color:'var(--red)',    r:11},
+  {name:'Basra Med',    api:29.7, s:2.95, color:'var(--red)',    r:13},
+  {name:'Kuwait Exp',   api:31.4, s:2.52, color:'var(--red)',    r:11},
+  {name:'Oman/Dubai',   api:33.0, s:1.96, color:'var(--red)',    r:10},
+  {name:'Urals',        api:31.7, s:1.55, color:'#8a5a00',       r:13},
+  {name:'ESPO',         api:34.8, s:0.52, color:'#8a5a00',       r:11},
+  {name:'CPC Blend',    api:44.4, s:0.55, color:'#8a5a00',       r:10},
+  {name:'Brent',        api:38.1, s:0.37, color:'var(--navy)',   r:12},
+  {name:'Johan Sver.',  api:28.0, s:0.08, color:'var(--navy)',   r:10},
+  {name:'WTI',          api:39.6, s:0.24, color:'#6a5a90',       r:13},
+  {name:'Bonny Light',  api:32.9, s:0.14, color:'var(--teal)',   r:10},
+  {name:'Saharan',      api:46.4, s:0.09, color:'var(--teal)',   r:9},
+];
+
+function renderChart(){
+  const chart = document.getElementById('grade-chart');
+  const W = chart.offsetWidth || 800;
+  const H = 320;
+  const PAD = {l:60,r:30,t:20,b:40};
+  const apiMin=22, apiMax=50, sMin=0, sMax=3.2;
+
+  const xPos = s => PAD.l + (1 - (s - sMin)/(sMax - sMin)) * (W - PAD.l - PAD.r);
+  const yPos = api => PAD.t + (1 - (api - apiMin)/(apiMax - apiMin)) * (H - PAD.t - PAD.b);
+
+  let html = '';
+
+  // Grid lines
+  [0.5,1.0,1.5,2.0,2.5,3.0].forEach(sv=>{
+    const x = xPos(sv);
+    html += `<div class="axis-line" style="left:${x}px;top:${PAD.t}px;width:1px;height:${H-PAD.t-PAD.b}px;opacity:.15"></div>`;
+    html += `<div class="matrix-x-label" style="position:absolute;left:${x}px;bottom:8px;transform:translateX(-50%)">${sv}%S</div>`;
+  });
+  [25,30,35,40,45].forEach(av=>{
+    const y = yPos(av);
+    html += `<div class="axis-line" style="left:${PAD.l}px;top:${y}px;width:${W-PAD.l-PAD.r}px;height:1px;opacity:.15"></div>`;
+    html += `<div class="matrix-y-label" style="position:absolute;left:4px;top:${y}px;transform:translateY(-50%)">${av}°</div>`;
+  });
+
+  // Quadrant labels
+  const midX = xPos(sMax/2);
+  const midY = yPos((apiMin+apiMax)/2);
+  html += `<div class="quadrant-label" style="left:${PAD.l+12}px;top:${PAD.t+8}px;color:var(--teal)">Light sweet ↗ premium</div>`;
+  html += `<div class="quadrant-label" style="right:${PAD.r+8}px;bottom:${PAD.b+8}px;text-align:right;color:var(--ink-4)">Heavy sour ↙ complex refinery</div>`;
+
+  // Dots
+  GRADES.forEach(g => {
+    const x = xPos(g.s);
+    const y = yPos(g.api);
+    const labelRight = x > W * 0.65;
+    html += `<div class="grade-dot" title="${g.name} · ${g.api}° API · ${g.s}% S"
+      style="left:${x}px;top:${y}px;width:${g.r*2}px;height:${g.r*2}px;background:${g.color};opacity:.85"></div>`;
+    html += `<div class="grade-label" style="left:${x + (labelRight ? -g.r-4 : g.r+4)}px;top:${y - 8}px;
+      ${labelRight?'transform:translateX(-100%)':''};color:var(--ink-3)">${g.name}</div>`;
+  });
+
+  // Axes
+  html += `<div style="position:absolute;left:${PAD.l}px;top:${PAD.t}px;height:${H-PAD.t-PAD.b}px;width:1px;background:var(--border)"></div>`;
+  html += `<div style="position:absolute;left:${PAD.l}px;top:${H-PAD.b}px;width:${W-PAD.l-PAD.r}px;height:1px;background:var(--border)"></div>`;
+
+  chart.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', renderChart);
+window.addEventListener('resize', renderChart);
+</script>
+</body>
+</html>
