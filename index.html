@@ -776,7 +776,7 @@ function renderLegend(){
   }).join('');
 }
 
-let dark=localStorage.getItem('theme')==='dark';
+dark=localStorage.getItem('theme')==='dark';
 function initTheme(){
   if(dark){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='Light';}
 }
