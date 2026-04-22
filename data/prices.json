@@ -1,20 +1,20 @@
 {
   "_note": "Benchmarks auto-updated daily by updater.py via GitHub Actions. OSP differentials updated manually ~1st of each month via osp_update.py. Absolute OSP prices are computed: differential + oman_dubai spot.",
-  "_updated": "2026-04-21T19:22:32Z",
+  "_updated": "2026-04-22T19:23:56Z",
   "_osp_month": "March 2026",
   "_osp_updated": "2026-03-01",
   "benchmarks": {
     "brent": {
-      "price": 123.28,
-      "change_pct": 3.54,
-      "updated": "2026-04-13",
+      "price": 103.4,
+      "change_pct": 4.84,
+      "updated": "2026-04-20",
       "source": "EIA (RBRTE)",
       "source_url": "https://www.eia.gov/opendata/"
     },
     "wti": {
-      "price": 100.72,
-      "change_pct": 2.42,
-      "updated": "2026-04-13",
+      "price": 91.06,
+      "change_pct": 5.99,
+      "updated": "2026-04-20",
       "source": "EIA (RWTC)",
       "source_url": "https://www.eia.gov/opendata/"
     },
@@ -57,7 +57,7 @@
       "source_url": "https://www.argaam.com/en/article/articledetail/id/1741098",
       "differential_vs_omd": 2.5,
       "price": 83.25,
-      "spread_vs_brent": -40.03,
+      "spread_vs_brent": -20.15,
       "for_month": "March 2026",
       "context": "Flagship grade. Sets regional pricing trend for Iraq, Kuwait, Qatar."
     },
@@ -69,7 +69,7 @@
       "source_url": "https://adnoc.ae/en/adnoc-murban/documents-and-downloads",
       "differential_vs_omd": 2.93,
       "price": 83.68,
-      "spread_vs_brent": -39.6,
+      "spread_vs_brent": -19.72,
       "for_month": "March 2026",
       "context": "ICE Murban futures contract. Competes directly with Arab Light for Asian refiners."
     },
@@ -81,7 +81,7 @@
       "source_url": "https://www.oil.gov.iq/",
       "differential_vs_omd": 0.65,
       "price": 81.4,
-      "spread_vs_brent": -41.88,
+      "spread_vs_brent": -22.0,
       "for_month": "March 2026",
       "context": "Force majeure active March 2026. Exports halted."
     },
@@ -93,7 +93,7 @@
       "source_url": "https://www.kpc.com.kw/",
       "differential_vs_omd": 0.2,
       "price": 80.95,
-      "spread_vs_brent": -42.33,
+      "spread_vs_brent": -22.45,
       "for_month": "March 2026",
       "context": null
     },
@@ -105,7 +105,7 @@
       "source_url": "https://www.argaam.com/en/article/articledetail/id/1741098",
       "differential_vs_omd": -0.95,
       "price": 79.8,
-      "spread_vs_brent": -43.48,
+      "spread_vs_brent": -23.6,
       "for_month": "March 2026",
       "context": "Widest discount to Arab Light in 18 months \u2014 complex refinery demand constrained."
     }
