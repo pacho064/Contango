@@ -513,7 +513,52 @@ function toggleTheme(){
   document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
   localStorage.setItem('theme',dark?'dark':'light');
 }
-document.addEventListener('DOMContentLoaded',initTheme);
+
+async function loadEvents(){
+  try{
+    const r=await fetch('./data/events.json?_='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const e=await r.json();
+    renderSignals(e.signals?.iraq||[]);
+    renderStats(e.country_stats?.iraq||null);
+  }catch(err){
+    console.warn('events.json failed:',err.message);
+  }
+}
+
+function renderSignals(signals){
+  const el=document.getElementById('signals-list');
+  if(!el||!signals.length) return;
+  el.innerHTML=signals.map(s=>`
+    <div class="sig-item">
+      <div class="sig-meta">
+        <div class="sig-pip ${s.hot?'hot':s.warm?'warm':''}"></div>
+        <span class="sig-src">${s.src}</span>
+      </div>
+      <div class="sig-hl">${s.hl}</div>
+      <div class="sig-date">${s.date}</div>
+    </div>`).join('');
+}
+
+function renderStats(stats){
+  if(!stats) return;
+  const fields={
+    'stat-prod-current-val':  [stats.production_current,      stats.production_current_red],
+    'stat-prod-current-note': [stats.production_current_note, false],
+    'stat-shutin-val':        [stats.shutin,                  stats.shutin_red],
+    'stat-shutin-note':       [stats.shutin_note,             false],
+    'stat-budget-val':        [stats.budget_share,            false],
+    'stat-budget-note':       [stats.budget_share_note,       false],
+  };
+  Object.entries(fields).forEach(([id,[val,red]])=>{
+    const el=document.getElementById(id);
+    if(el&&val){el.textContent=val;if(red) el.style.color='var(--red)';}
+  });
+  const metaEl=document.getElementById('ch-updated');
+  if(metaEl&&stats.updated) metaEl.textContent='Updated '+stats.updated;
+}
+
+document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();});
 </script>
 </body>
 </html>
