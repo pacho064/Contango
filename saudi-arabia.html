@@ -582,7 +582,49 @@ function toggleTheme(){
   document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
   localStorage.setItem('theme',dark?'dark':'light');
 }
-document.addEventListener('DOMContentLoaded',initTheme);
-</script>
-</body>
+
+async function loadEvents(){
+  try{
+    const r=await fetch('./data/events.json?_='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const e=await r.json();
+    renderSignals(e.signals?.saudi_arabia||[]);
+    renderStats(e.country_stats?.saudi_arabia||null);
+  }catch(err){
+    console.warn('events.json failed:',err.message);
+  }
+}
+
+function renderSignals(signals){
+  const el=document.getElementById('signals-list');
+  if(!el||!signals.length) return;
+  el.innerHTML=signals.map(s=>`
+    <div class="signal-item">
+      <div class="signal-meta">
+        <div class="signal-pip ${s.hot?'alert':''}"></div>
+        <span class="signal-src">${s.src}</span>
+      </div>
+      <div class="signal-hl">${s.hl}</div>
+      <div class="signal-date">${s.date}</div>
+    </div>`).join('');
+}
+
+function renderStats(stats){
+  if(!stats) return;
+  const fields={
+    'stat-production-val':  [stats.production,      stats.production_red],
+    'stat-production-note': [stats.production_note, false],
+    'stat-osp-val':         [stats.osp,             false],
+    'stat-osp-note':        [stats.osp_note,        false],
+    'stat-pipeline-val':    [stats.pipeline_status, stats.pipeline_red],
+    'stat-pipeline-note':   [stats.pipeline_note,   false],
+  };
+  Object.entries(fields).forEach(([id,[val,red]])=>{
+    const el=document.getElementById(id);
+    if(el&&val){el.textContent=val;if(red) el.style.color='var(--red)';}
+  });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();});
+</script></body>
 </html>
