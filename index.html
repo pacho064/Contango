@@ -419,8 +419,8 @@ async function loadData(){
   ]);
   D=pricesResult.status==='fulfilled'?pricesResult.value:getPricesFallback();
   if(pricesResult.status==='rejected') console.warn('prices.json failed, using fallback:',pricesResult.reason?.message);
-  E=eventsResult.status==='fulfilled'?eventsResult.value:null;
-  if(eventsResult.status==='rejected') console.warn('events.json failed:',eventsResult.reason?.message);
+  E=eventsResult.status==='fulfilled'?eventsResult.value:getEventsFallback();
+  if(eventsResult.status==='rejected') console.warn('events.json failed, using fallback:',eventsResult.reason?.message);
   render();
 }
 
