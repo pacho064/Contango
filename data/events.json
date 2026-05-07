@@ -1,0 +1,252 @@
+{
+  "_updated": "2026-04-22",
+  "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
+
+  "chokepoints": [
+    {
+      "name": "Strait of Hormuz",
+      "risk": "high",
+      "volume": "21M bbl/d",
+      "source": "US Navy blockade · Iranian mines · CENTCOM",
+      "updated": "Apr 22 2026",
+      "status": "US naval blockade active. Iran seizing ships. Near-zero commercial transit.",
+      "map": { "lon": 56.61, "lat": 26.55 }
+    },
+    {
+      "name": "Bab el-Mandeb",
+      "risk": "high",
+      "volume": "9M bbl/d",
+      "source": "ACLED · Lloyd's JWC · Houthi threat active",
+      "updated": "Apr 2026",
+      "status": "Houthi entry under active consideration. Strategic pause not incapacity.",
+      "map": { "lon": 43.37, "lat": 12.67 }
+    },
+    {
+      "name": "Suez Canal",
+      "risk": "moderate",
+      "volume": "2.5M bbl/d",
+      "source": "US State Dept L2",
+      "updated": "Jan 2026",
+      "status": "Elevated but operational.",
+      "map": { "lon": 32.35, "lat": 30.65 }
+    }
+  ],
+
+  "ports": [
+    { "n": "Ras Tanura",       "c": "Saudi Arabia", "lon": 50.08, "lat": 26.66, "cap": 6.5, "util": 10,  "t": "export",    "note": "Refinery struck Apr 8. Terminal intact but Hormuz blocked." },
+    { "n": "Yanbu",            "c": "Saudi Arabia", "lon": 38.05, "lat": 24.09, "cap": 1.8, "util": 80,  "t": "export",    "note": "EW pipeline attack Apr 8 reduced throughput. Partial recovery." },
+    { "n": "Basra SPM",        "c": "Iraq",         "lon": 48.83, "lat": 29.67, "cap": 2.0, "util": 2,   "t": "export",    "note": "Near zero. First tanker Apr 5. Force majeure active." },
+    { "n": "Fujairah (ADCOP)", "c": "UAE",          "lon": 56.34, "lat": 25.12, "cap": 1.8, "util": 99,  "t": "export",    "note": "Bypass pipeline near capacity. Primary UAE export point." },
+    { "n": "Jebel Ali",        "c": "UAE",          "lon": 55.07, "lat": 24.98, "cap": 3.5, "util": 8,   "t": "export",    "note": "Gulf coast — Hormuz dependent. Minimal activity." },
+    { "n": "Ras Laffan",       "c": "Qatar",        "lon": 51.57, "lat": 25.90, "cap": 1.5, "util": 0,   "t": "conflict",  "note": "Shut since March 2. Mar 18 attack caused 17% LNG capacity loss." },
+    { "n": "Kuwait terminals", "c": "Kuwait",       "lon": 48.16, "lat": 29.40, "cap": 2.5, "util": 5,   "t": "export",    "note": "Production curtailed. Storage full. Hormuz dependent." },
+    { "n": "Aden",             "c": "Yemen",        "lon": 44.99, "lat": 12.78, "cap": 0.4, "util": 0,   "t": "conflict",  "note": "Conflict zone. Non-operational." },
+    { "n": "Djibouti",         "c": "Djibouti",     "lon": 43.14, "lat": 11.59, "cap": 0.8, "util": 62,  "t": "strategic", "note": "Strategic transshipment. Operating." },
+    { "n": "Salalah",          "c": "Oman",         "lon": 54.00, "lat": 16.94, "cap": 1.0, "util": 55,  "t": "export",    "note": "Outside Hormuz. Oman bypass route." },
+    { "n": "Ceyhan",           "c": "Turkey",       "lon": 35.90, "lat": 36.65, "cap": 1.6, "util": 58,  "t": "export",    "note": "Kirkuk-Ceyhan pipeline terminus. Reduced rate." }
+  ],
+
+  "opec": [
+    { "n": "Saudi Arabia", "q": 10.0, "a": 9.6, "note": "Manifa + Khurais struck Apr 8. −600K bpd capacity loss." },
+    { "n": "Russia",       "q": 9.0,  "a": 9.1, "note": "Broadly on quota. ESPO pipeline to China unaffected." },
+    { "n": "Iraq",         "q": 4.0,  "a": 0.9, "note": "Force majeure. ~875K bpd. First tanker Apr 5." },
+    { "n": "UAE",          "q": 3.2,  "a": 2.6, "note": "Fujairah bypass active. Offshore curtailed." },
+    { "n": "Kuwait",       "q": 2.7,  "a": 1.5, "note": "Production curtailed. Storage full." },
+    { "n": "Iran",         "q": null, "a": 3.1, "note": "Exempt. Controlling Hormuz. Charging tolls." },
+    { "n": "Nigeria",      "q": 1.5,  "a": 1.4, "note": "Below quota. No Hormuz exposure." },
+    { "n": "Kazakhstan",   "q": 1.7,  "a": 2.0, "note": "Chronic overproduction. CPC route unaffected." }
+  ],
+  "opec_src": "OPEC Monthly Oil Market Report April 2026 · Total OPEC output fell 27% in March to 20.79M bpd",
+  "opec_updated": "April 2026",
+
+  "crisis_side": {
+    "supply_loss": [
+      { "l": "OPEC output March (−27%)",    "v": "20.79 mb/d", "red": true },
+      { "l": "Iraq shut-in (from 4.25M)",   "v": "~875K bpd",  "red": true },
+      { "l": "Saudi capacity loss (Apr 8)", "v": "−600K bbl/d","red": true },
+      { "l": "Qatar condensate + NGL",      "v": "1.1 mb/d",   "red": true },
+      { "l": "Kuwait curtailment",          "v": "~810K bbl/d","red": true },
+      { "l": "EW pipeline hit (Apr 8)",     "v": "−700K bbl/d","red": true }
+    ],
+    "bypass": [
+      { "l": "EW pipeline (post-attack)",   "v": "~5–6 mb/d" },
+      { "l": "Yanbu port cap (bottleneck)", "v": "1.8 mb/d",  "red": true },
+      { "l": "UAE Fujairah (ADCOP)",        "v": "1.8 mb/d" },
+      { "l": "Total bypass capacity",       "v": "~5.5 mb/d" },
+      { "l": "vs pre-crisis Hormuz",        "v": "20 mb/d",   "red": true },
+      { "l": "Bab el-Mandeb status",        "v": "Contested", "red": true }
+    ],
+    "price_outlook": [
+      { "l": "Brent today (Apr 22)",         "v": "~$102" },
+      { "l": "Morgan Stanley Q2 forecast",   "v": "$110/bbl" },
+      { "l": "Morgan Stanley Q3 forecast",   "v": "$100/bbl" },
+      { "l": "Morgan Stanley 2027",          "v": "$80/bbl" },
+      { "l": "Brent pre-war (Feb 27)",       "v": "$73/bbl" },
+      { "l": "Peak (early March)",           "v": "~$119/bbl" }
+    ]
+  },
+
+  "timeline": [
+    {
+      "date": "22 Apr", "type": "critical",
+      "src": "CNBC · Reuters · April 22 2026",
+      "hl": "Iran seizes two container ships in Hormuz. Vance cancels Islamabad. Ceasefire extended.",
+      "detail": "Iran's Revolutionary Guard seizes two container ships crossing without authorisation. Vance cancels Islamabad trip after Tehran says it won't participate. Trump extends ceasefire citing 'seriously fractured' Iranian leadership — truce continues until Iran presents a 'unified proposal'. Iran states it will not reopen Hormuz while US Navy intercepts vessels. Brent ~$102.",
+      "numbers": [{ "val": "~$102", "lbl": "Brent · Apr 22" }, { "val": "2", "lbl": "ships seized" }]
+    },
+    {
+      "date": "17–19 Apr", "type": "important",
+      "src": "CNBC · PBS NewsHour · April 17–19 2026",
+      "hl": "Iran declares Hormuz 'completely open'. Oil falls 12% to $83. Then walks it back.",
+      "detail": "Iran's Foreign Minister Araghchi announces Hormuz open to all commercial vessels during Lebanon ceasefire. Oil falls nearly 12% to ~$83/bbl. Trump says US blockade stays until negotiations conclude. Iran then cancels reopening after US maintains naval presence. Video footage shows ships turning away. April 19: Iranian parliament announces plans to legislate tolls from all non-hostile nations.",
+      "numbers": [{ "val": "−12%", "lbl": "oil price drop" }, { "val": "$83", "lbl": "Brent trough" }]
+    },
+    {
+      "date": "13 Apr", "type": "critical",
+      "src": "CNN · Reuters · CENTCOM · April 13 2026",
+      "hl": "US naval blockade of Iranian ports begins. Brent above $100. Mine-clearing underway.",
+      "detail": "US blockade takes effect at 10am ET targeting all vessels entering or leaving Iranian ports. CENTCOM clarifies freedom of navigation for non-Iranian ports is not impeded. OPEC March output fell 27% to 20.79M bpd — largest monthly decline since 2020. Morgan Stanley maintains $110/bbl Q2 forecast. Saudi Arabia announces partial restoration of EW pipeline and Manifa production.",
+      "numbers": [{ "val": "$101–104", "lbl": "Brent range" }, { "val": "−27%", "lbl": "OPEC output March" }, { "val": "$110", "lbl": "MS Q2 forecast" }]
+    },
+    {
+      "date": "11–12 Apr", "type": "critical",
+      "src": "Al Jazeera · Wall Street Journal · April 12 2026",
+      "hl": "Islamabad talks fail. Trump announces US naval blockade of Iranian ports.",
+      "detail": "US Navy destroyers enter Hormuz for mine-clearing. Iran warns military vessels approaching are a ceasefire violation. Vance leaves Islamabad April 12 with no agreement — US accused Iran of refusing to curb nuclear ambitions; Iran sought Hormuz sovereignty, war reparations, and a regional ceasefire. Trump immediately announces blockade effective April 13.",
+      "numbers": [{ "val": "0", "lbl": "deal in Islamabad" }, { "val": "13 Apr", "lbl": "blockade start" }]
+    },
+    {
+      "date": "8–9 Apr", "type": "critical",
+      "src": "Reuters · Bloomberg · Saudi Press Agency · April 8–9 2026",
+      "hl": "Ceasefire agreed then violated. EW pipeline hit. Saudi facilities struck. 230 tankers stranded.",
+      "detail": "Ceasefire brokered by Pakistan on April 8. Hours later Saudi Arabia's East-West pipeline pumping station struck — throughput falls 700K bpd. Manifa and Khurais oilfields hit (−600K bpd combined). SATORP Jubail, Ras Tanura refinery, SAMREF Yanbu and Riyadh refinery also struck. Only 5–9 vessels transit Hormuz in first 24hrs vs prewar average of 100+. 230 loaded tankers stranded in Gulf.",
+      "numbers": [{ "val": "−700K", "lbl": "bbl/d EW pipeline" }, { "val": "−600K", "lbl": "bbl/d Saudi production" }, { "val": "230", "lbl": "tankers stranded" }]
+    },
+    {
+      "date": "5–7 Apr", "type": "important",
+      "src": "Kpler · SOMO · April 7 2026",
+      "hl": "First Iraqi crude tanker transits Hormuz since war began. SOMO requests lifting schedules.",
+      "detail": "Iraqi-owned vessel Ocean Thunder — loaded ~1M bbl Basrah Heavy on March 3, stranded in Gulf throughout March — transits Hormuz April 5. Expected at Malaysia's Pengerang refinery around April 18. SOMO requests lifting schedules from buyers April 7, noting all Basra terminals are 'fully operational'. Kpler estimates ~20M bbl floating storage and 17M bbl onshore stocks ready to move. 3-month recovery timeline if Hormuz reopens fully.",
+      "numbers": [{ "val": "1M", "lbl": "bbl first transit" }, { "val": "20M", "lbl": "bbl floating storage" }]
+    },
+    {
+      "date": "26 Mar", "type": "important",
+      "src": "Iranian Foreign Ministry · Reuters · March 26 2026",
+      "hl": "Iran grants selective Hormuz access to five nations. Charging tolls over $1M per ship.",
+      "detail": "Iran's Foreign Minister Araghchi announces ships from China, Russia, India, Iraq and Pakistan may transit under Iranian armed forces coordination. Malaysia and Thailand gain access days later. Iran also agrees to allow humanitarian and fertiliser shipments March 27. Iran simultaneously demands shipping firms pay tolls in cryptocurrency — Trump condemns this as 'world extortion'.",
+      "numbers": [{ "val": "5", "lbl": "nations granted access" }, { "val": "$1M+", "lbl": "toll per ship" }]
+    },
+    {
+      "date": "20 Mar", "type": "important",
+      "src": "Business Standard · Reuters",
+      "hl": "Indian refiners challenge OSP benchmark — 30-year pricing architecture under stress.",
+      "detail": "Indian refiners approach Aramco to shift OSP benchmark from Oman/Dubai to ICE Brent, saying they are paying $45–50/bbl more due to disrupted Platts assessment. Direct challenge to pricing architecture underpinning Gulf crude trade since the 1980s. Two-thirds of Indian LPG demand remains blocked.",
+      "numbers": [{ "val": "+$45–50", "lbl": "extra cost India/bbl" }, { "val": "2/3", "lbl": "Indian LPG blocked" }]
+    },
+    {
+      "date": "17 Mar", "type": "critical",
+      "src": "Reuters · Iraq Oil Ministry",
+      "hl": "Iraq declares force majeure. Production collapses to ~875K bpd — largest single-country shut-in.",
+      "detail": "Baghdad cites war-related disruptions as force majeure trigger. Production cut from 4.25M bpd to ~875K bpd. All produced crude directed to domestic refineries. Iraq's oil revenue funds 90% of the national budget. 90% of Iraq's imports of food, goods and medicine also transit Hormuz.",
+      "numbers": [{ "val": "875K", "lbl": "bbl/d current" }, { "val": "−79%", "lbl": "output reduction" }, { "val": "90%", "lbl": "budget from oil" }]
+    },
+    {
+      "date": "12 Mar", "time": "Day 12", "type": "important",
+      "src": "IEA Oil Market Report · March 12 2026",
+      "hl": "IEA OMR: global supply to fall 8 mb/d in March. Largest supply disruption in history.",
+      "detail": "IEA formally declares largest supply disruption in history of the global oil market. Brent at ~$92/bbl — up $20/bbl for the month. Global observed inventories stood at 8,210 mb in January.",
+      "numbers": [{ "val": "8 mb/d", "lbl": "supply fall March" }, { "val": "$92", "lbl": "Brent at report date" }, { "val": "10+ mb/d", "lbl": "total curtailments" }]
+    },
+    {
+      "date": "11 Mar", "time": "Day 11", "type": "important",
+      "src": "IEA Emergency Response · March 11 2026",
+      "hl": "IEA releases 400 mb from emergency reserves — largest coordinated release in history.",
+      "detail": "IEA member countries unanimously agree to release 400 million barrels — the largest coordinated emergency stock release ever undertaken, covering approximately 40 days of lost Gulf supply.",
+      "numbers": [{ "val": "400 mb", "lbl": "reserves released" }, { "val": "8,210 mb", "lbl": "global stocks Jan" }]
+    },
+    {
+      "date": "9 Mar", "time": "Day 9", "type": "important",
+      "src": "IEA OMR · Saudi Aramco CEO · Kpler",
+      "hl": "Yanbu hits record 5.9 mb/d exports. VLCC rates 6× five-year average.",
+      "detail": "Saudi Arabia achieves unprecedented pipeline rerouting from Gulf to Red Sea coast. France announces naval deployment. 40 VLCCs — 78 mb of oil — stranded in Gulf.",
+      "numbers": [{ "val": "5.9M", "lbl": "bbl/d Yanbu record" }, { "val": "6×", "lbl": "VLCC rates" }, { "val": "78 mb", "lbl": "oil stranded" }]
+    },
+    {
+      "date": "7 Mar", "time": "Day 7", "type": "critical",
+      "src": "IEA OMR · Saudi Aramco · Kpler",
+      "hl": "Iran attempts to strike Shaybah — first attack 500km inside Saudi territory.",
+      "detail": "Saudi officials report interception of drones targeting the 1 mb/d Shaybah field near the UAE border. Saudi Arabia begins routing flows via East-West pipeline to Yanbu at record pace.",
+      "numbers": [{ "val": "1M", "lbl": "bbl/d Shaybah at risk" }, { "val": "1.8M", "lbl": "bbl/d UAE curtailed" }]
+    },
+    {
+      "date": "3–6 Mar", "time": "Days 3–6", "type": "critical",
+      "src": "IEA OMR · Saudi Aramco · Kuwait Oil Co",
+      "hl": "Gulf producers begin systematic production cuts as storage fills.",
+      "detail": "Kuwait starts curtailing production — 14 days of storage exhausted. Bahrain scales back after drone strike on Sitra refinery. Offshore fields across the region forced to halt.",
+      "numbers": [{ "val": "14 days", "lbl": "Kuwait storage left" }, { "val": "8 mb/d", "lbl": "curtailed by 10 Mar" }]
+    },
+    {
+      "date": "2 Mar", "time": "Day 2", "type": "critical",
+      "src": "IEA OMR · SOMO Iraq · QatarEnergy · WTO/AXSMarine",
+      "hl": "Iraq curtails. QatarEnergy shuts Ras Laffan. WTO/AXSMarine confirms near-total Hormuz halt.",
+      "detail": "Iraq cites storage constraints for 700 kb/d cuts at Rumaila. QatarEnergy shuts LNG liquefaction — 1.1 mb/d condensate and NGL offline, one-third of global helium supply disrupted. WTO/AXSMarine Hormuz Trade Tracker confirms outbound crude fell to near zero on February 28 with simultaneous halts across LNG and fertiliser.",
+      "numbers": [{ "val": "700K", "lbl": "bbl/d Rumaila cut" }, { "val": "1.1M", "lbl": "Qatar condensate offline" }]
+    },
+    {
+      "date": "1 Mar", "time": "Day 1", "type": "critical",
+      "src": "IEA OMR · SOMO Iraq · QatarEnergy",
+      "hl": "Tanker traffic through Hormuz collapses to near zero.",
+      "detail": "Ship owners and charterers halt loadings. Storage tanks in Gulf ports begin filling. OPEC+ emergency meeting supports April target increase of 206 kb/d — academic given shutdown. Maersk, CMA CGM and Hapag-Lloyd suspend transits.",
+      "numbers": [{ "val": "<10%", "lbl": "of pre-crisis flows" }, { "val": "206K", "lbl": "bbl/d OPEC+ approved" }]
+    },
+    {
+      "date": "28 Feb", "time": "Day 0", "type": "critical",
+      "src": "IEA Oil Market Report · March 12 2026",
+      "hl": "US and Israel launch joint air strikes on Iran. War begins. Hormuz effectively closed.",
+      "detail": "Brent futures surge toward $120/bbl. Tanker operators begin refusing Hormuz transit. At least three tankers struck near the strait. Maritime insurance rates immediately suspended.",
+      "numbers": [{ "val": "$120", "lbl": "Brent peak" }, { "val": "20M", "lbl": "bbl/d at risk" }]
+    }
+  ],
+
+  "signals": {
+    "saudi_arabia": [
+      { "hot": true,  "src": "SPA · Reuters · Bloomberg",   "hl": "EW pipeline pumping station struck April 8. −700K bpd throughput. Manifa + Khurais hit (−600K bpd). Four refineries attacked. Partial recovery announced April 12.", "date": "April 8–12 2026" },
+      { "hot": true,  "src": "CENTCOM · Lloyd's JWC",        "hl": "US naval blockade of Iranian ports effective April 13. Iranian mines in strait. Near-zero tanker transits since March 1.", "date": "April 13 2026" },
+      { "hot": false, "src": "IEA OMR · Aramco CEO",         "hl": "Yanbu hit record 5.9M bbl/d exports on March 9. Pipeline rerouting strategy was working before April 8 attack.", "date": "March 9 2026" },
+      { "hot": false, "src": "Aramco OSP",                   "hl": "Arab Light OSP for April 2026 loading: $84.00/bbl vs Oman/Dubai differential. Brent now ~$102.", "date": "April 2026" }
+    ],
+    "iraq": [
+      { "hot": true,  "src": "CNBC · Reuters",               "hl": "Iran seizes two container ships in Hormuz. Brent ~$102. Vance cancels Islamabad. Ceasefire extended by Trump citing 'fractured' Tehran.", "date": "April 22 2026" },
+      { "hot": true,  "src": "OilPrice.com",                  "hl": "Iraq opens Rabia-Yarubiyah border crossing with Syria for overland exports after 13 years. Emergency measure — trucking volumes negligible vs marine.", "date": "April 2026" },
+      { "hot": false, "warm": true, "src": "Kpler",           "hl": "First Iraqi crude tanker (Ocean Thunder, ~1M bbl Basrah Heavy) transits Hormuz April 5. SOMO requests lifting schedules. ~20M bbl floating storage ready.", "date": "April 7 2026" },
+      { "hot": true,  "src": "Reuters · Iraq Oil Ministry",   "hl": "Force majeure declared on all foreign-operated oilfields. Production cut from 4.25M to ~875K bbl/d. Largest single-country shut-in of the crisis.", "date": "March 17–20 2026" }
+    ]
+  },
+
+  "country_stats": {
+    "saudi_arabia": {
+      "production":         "~9.6M",
+      "production_note":    "bbl/day · Manifa + Khurais struck · SPA April 9",
+      "production_red":     true,
+      "osp":                "$84.00",
+      "osp_note":           "April 2026 · Aramco OSP · Brent ~$102",
+      "pipeline_status":    "HIT",
+      "pipeline_note":      "−700K bbl/d throughput · Apr 8 · partial recovery",
+      "pipeline_red":       true,
+      "updated":            "April 13 2026"
+    },
+    "iraq": {
+      "production_prewar":       "4.25M",
+      "production_prewar_note":  "bbl/day · Jan 2026 · Kpler / OPEC",
+      "production_current":      "~875K",
+      "production_current_note": "bbl/day · April 2026 · Kpler estimate",
+      "production_current_red":  true,
+      "shutin":                  "3.4M",
+      "shutin_note":             "bbl/day · largest single-country shut-in",
+      "shutin_red":              true,
+      "budget_share":            "~90%",
+      "budget_share_note":       "of government budget · IMF / World Bank",
+      "updated":                 "April 22 2026"
+    }
+  }
+}
