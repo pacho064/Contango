@@ -1,0 +1,36 @@
+name: Update prices
+
+on:
+  schedule:
+    # Every day at 18:00 UTC (after EIA publishes daily data ~17:30 UTC)
+    - cron: '0 18 * * 1-5'  # Weekdays only — EIA doesn't publish weekends
+  workflow_dispatch:  # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run price updater
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python updater.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Contango Bot"
+          git config user.email "bot@contango-energy.noreply"
+          git add data/prices.json
+          # Only commit if there's an actual change
+          git diff --staged --quiet || git commit -m "prices: auto-update $(date -u +%Y-%m-%d)"
+          git push
