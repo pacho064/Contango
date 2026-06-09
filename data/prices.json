@@ -48,7 +48,6 @@
     }
   },
   "osps": {
-    "_note": "Differentials are vs Oman/Dubai for Asia. Absolute prices = oman_dubai + differential, recalculated daily by updater.py. Enter new differentials monthly via: python osp_update.py",
     "arab_light": {
       "grade": "Arab Light",
       "country": "Saudi Arabia",
