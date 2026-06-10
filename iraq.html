@@ -145,6 +145,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   .footer-inner{grid-template-columns:1fr 1fr;gap:16px}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -209,6 +210,24 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
 
 <div class="main">
   <div class="content">
+
+<div class="section">
+  <div class="section-eyebrow">Production · 2026</div>
+  <h2>The production collapse — and the slow recovery</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start">
+    <div>
+      <p>Iraq entered the war as OPEC's second-largest producer at 4.25M bbl/d. The Hormuz closure produced the largest single-country shut-in of the crisis — production collapsed 79% to approximately 875K bbl/d within weeks. Unlike Saudi Arabia, Iraq has no bypass pipeline. 97% of its exports depend on the Strait.</p>
+      <p>The shutdown was export-driven, not damage-driven. Basra terminals remained physically intact — tankers simply could not transit. Kpler estimates ~17M barrels of onshore stocks and ~20M barrels of floating storage had accumulated by April 7. The first tanker, Ocean Thunder, transited April 5 with ~1M barrels of Basrah Heavy.</p>
+      <p>Kpler base case: recovery to above 4M bbl/d within three months of Hormuz fully reopening.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:2px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:1rem">Iraq crude production · M bbl/d · 2026</div>
+      <div style="position:relative;height:220px">
+        <canvas id="iraqProdChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- April updates — lead -->
     <div class="sec">
@@ -559,6 +578,45 @@ function renderStats(stats){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();});
+</script>
+<script>
+(function(){
+  const isDark=()=>document.documentElement.getAttribute('data-theme')==='dark';
+  const gc=()=>isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+  const lc=()=>isDark()?'#909090':'#6b6860';
+  const ctx=document.getElementById('iraqProdChart');
+  if(!ctx)return;
+  const chart=new Chart(ctx.getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:['Jan','Feb','Mar (war)','Apr','May (est)','Jun (est)'],
+      datasets:[{
+        label:'Production (M bbl/d)',
+        data:[4.2,4.25,0.875,1.1,2.0,3.2],
+        backgroundColor:['#4a7c6f','#4a7c6f','#b33000','#b07800','#b07800','#b07800'],
+        borderRadius:2,barPercentage:.65
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{backgroundColor:isDark()?'#1a1a18':'#fff',titleColor:isDark()?'#f0ede6':'#0f0f0e',bodyColor:isDark()?'#cec8bc':'#2a2820',borderColor:isDark()?'#2a2a28':'#e8e5e0',borderWidth:1,callbacks:{label:c=>` ${c.parsed.y}M bbl/d`}}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:10}}},
+        y:{grid:{color:gc()},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:10},callback:v=>v+'M'},min:0,max:5}
+      }
+    }
+  });
+  const btn=document.getElementById('themeBtn');
+  if(btn)btn.addEventListener('click',()=>setTimeout(()=>{
+    chart.options.scales.x.ticks.color=lc();
+    chart.options.scales.y.ticks.color=lc();
+    chart.options.scales.y.grid.color=gc();
+    chart.update();
+  },50));
+})();
 </script>
 </body>
 </html>
