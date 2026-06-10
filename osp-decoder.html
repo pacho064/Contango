@@ -151,6 +151,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -229,21 +230,13 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <p>The chart below shows the Arab Light OSP differential vs Oman/Dubai for Asian buyers. A positive number means Asian buyers paid a premium above the benchmark; negative means a discount. The current situation — a war premium replacing the normal demand-driven signal — is visible in the April 2026 reading.</p>
     </div>
 
-    <div class="osp-timeline">
-      <div class="ot-head">
-        <span class="ot-title">Arab Light OSP vs Oman/Dubai · Asia · $/bbl</span>
-        <span class="ot-sub">Aramco official releases · Jan 2025–Apr 2026</span>
-      </div>
-      <div class="ot-body">
-        <div class="ot-chart" id="osp-chart"></div>
-        <div class="ot-legend">
-          <div class="ot-leg"><div class="ot-leg-sq" style="background:var(--red)"></div>Positive differential (premium over benchmark)</div>
-          <div class="ot-leg"><div class="ot-leg-sq" style="background:var(--teal)"></div>Negative differential (discount)</div>
-          <div class="ot-leg"><div class="ot-leg-sq" style="background:#8a5a00"></div>War premium (Hormuz crisis)</div>
-        </div>
-      </div>
-    </div>
-    <div class="src-line">Saudi Aramco monthly OSP releases · MacroMicro OSP series · Arab News · Zawya · Argaam · March 2026</div>
+<div style="background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:2px;margin:1.5rem 0">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:1rem">Arab Light OSP vs Oman/Dubai · Asia · $/bbl · Jan 2025–Apr 2026</div>
+  <div style="position:relative;height:260px">
+    <canvas id="ospLineChart"></canvas>
+  </div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--source-line);margin-top:1rem">Saudi Aramco monthly OSP releases · MacroMicro OSP series · Arab News · Zawya · Argaam</div>
+</div>
   </div>
 
   <!-- Signal decoder -->
@@ -420,17 +413,12 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="sc-meta">Arab Light vs Oman/Dubai · $/bbl</div>
     </div>
     <div class="sc-body" style="padding:0 14px">
-      <div style="display:flex;flex-direction:column;gap:0">
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Jan 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">+$0.60</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Feb 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">+$1.50</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Mar 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--red)">+$3.90 ↑</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Apr 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--red)">+$3.50</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">May–Sep 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink-3)">+$1.5–2.2</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Oct 2025</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">+$1.20 ↓</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Nov–Feb 2025/26</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--teal)">Cut 4 months</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Mar 2026</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink-3)">$0.00 (parity)</span></div>
-        <div style="display:flex;justify-content:space-between;padding:5px 0"><span style="font-family:var(--mono);font-size:10px;color:var(--ink-4)">Apr 2026</span><span style="font-family:var(--mono);font-size:11px;font-weight:500;color:var(--red)">+$2.50 ↑↑</span></div>
-      </div>
+<div style="background:var(--card-alt);border:1px solid var(--border);padding:1.5rem;border-radius:2px;margin:1rem 0">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:1rem">OSP history — Asia differential · Arab Light vs Oman/Dubai · $/bbl</div>
+  <div style="position:relative;height:200px">
+    <canvas id="ospBarChart"></canvas>
+  </div>
+</div>
       <div class="src-line" style="margin:8px 0 0">Aramco official releases · Argaam · Arab News · Zawya</div>
     </div>
   </div>
@@ -503,6 +491,69 @@ function renderOSPChart(){
 }
 
 document.addEventListener('DOMContentLoaded', renderOSPChart);
+</script>
+<script>
+(function(){
+  const isDark=()=>document.documentElement.getAttribute('data-theme')==='dark';
+  const gc=()=>isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+  const lc=()=>isDark()?'#909090':'#6b6860';
+
+  const labels=['Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26'];
+  const data=[0.60,1.50,3.90,3.50,2.20,2.00,1.80,1.70,1.50,1.20,0.90,0.60,0.30,0.10,0.00,2.50];
+  const barColors=data.map((v,i)=>i===15?'#b33000':i===2?'#4a7c6f':v>=2?'#1d4480':v>=1?'#4a7c6f':'#b07800');
+
+  const lineCtx=document.getElementById('ospLineChart');
+  if(lineCtx){
+    const lineChart=new Chart(lineCtx.getContext('2d'),{
+      type:'line',
+      data:{
+        labels,
+        datasets:[{
+          label:'Arab Light OSP vs O/D ($/bbl)',
+          data,
+          borderColor:'#1d4480',
+          backgroundColor:'rgba(29,68,128,0.08)',
+          borderWidth:2,
+          pointRadius:4,
+          pointBackgroundColor:barColors,
+          pointBorderColor:barColors,
+          tension:0.3,
+          fill:true
+        }]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{backgroundColor:isDark()?'#1a1a18':'#fff',titleColor:isDark()?'#f0ede6':'#0f0f0e',bodyColor:isDark()?'#cec8bc':'#2a2820',borderColor:isDark()?'#2a2a28':'#e8e5e0',borderWidth:1,callbacks:{label:c=>` OSP: ${c.parsed.y>=0?'+$':'−$'}${Math.abs(c.parsed.y).toFixed(2)} vs O/D`}},
+          annotation:{annotations:{warLine:{type:'line',xMin:'Mar 26',xMax:'Apr 26',borderColor:'rgba(179,48,0,0.4)',borderWidth:1,borderDash:[4,4],label:{content:'War',display:true,color:'#b33000',font:{size:9}}}}}
+        },
+        scales:{
+          x:{grid:{display:false},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:9},maxRotation:45}},
+          y:{grid:{color:gc()},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:10},callback:v=>(v>=0?'+$':'−$')+Math.abs(v).toFixed(2)},min:-1,max:5}
+        }
+      }
+    });
+    const btn=document.getElementById('themeBtn');
+    if(btn)btn.addEventListener('click',()=>setTimeout(()=>{lineChart.options.scales.x.ticks.color=lc();lineChart.options.scales.y.ticks.color=lc();lineChart.options.scales.y.grid.color=gc();lineChart.update();},50));
+  }
+
+  const barCtx=document.getElementById('ospBarChart');
+  if(barCtx){
+    new Chart(barCtx.getContext('2d'),{
+      type:'bar',
+      data:{labels,datasets:[{label:'OSP diff',data,backgroundColor:barColors,borderRadius:2,barPercentage:.75}]},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y>=0?'+$':'−$'}${Math.abs(c.parsed.y).toFixed(2)}`}}},
+        scales:{
+          x:{grid:{display:false},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:9},maxRotation:45}},
+          y:{grid:{color:gc()},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:10},callback:v=>(v>=0?'+$':'-$')+Math.abs(v).toFixed(2)},min:-1,max:5}
+        }
+      }
+    });
+  }
+})();
 </script>
 </body>
 </html>
