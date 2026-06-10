@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Saudi Arabia — Contango Energy</title>
-<meta name="description" content="Saudi Arabia oil infrastructure, East-West Pipeline reroute, Yanbu bypass, Aramco OSP, production crisis. April 2026 updates.">
+<meta name="description" content="Saudi Arabia oil infrastructure, East-West Pipeline reroute, Yanbu bypass, Aramco OSP, production crisis. June 2026 updates.">
 <link rel="canonical" href="https://pacho064.github.io/Contango/saudi-arabia.html">
 <meta name="theme-color" content="#111110">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,159 +12,113 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  :root {
-    --bg:#f7f7f5;--card:#ffffff;--card-alt:#f3f0eb;--border:#e8e5e0;
-    --ink:#0f0f0e;--body:#2a2820;--row-label:#6b6860;--source-line:#7a7870;
-    --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#b07800;
-    --tag-bg:#f0ede8;--tag-border:#dedad4;
-  }
-  [data-theme=dark]{
-    --bg:#111110;--card:#1a1a18;--card-alt:#161614;--border:#2a2a28;
-    --ink:#f0ede6;--body:#cec8bc;--row-label:#909090;--source-line:#a0a098;
-    --navy:#4a80c0;--red:#c84000;--teal:#4a9c8a;--amber:#d09000;
-    --tag-bg:#1e1e1c;--tag-border:#2e2e2c;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{font-size:16px;-webkit-text-size-adjust:100%}
-  body{background:var(--bg);color:var(--body);font-family:'Source Serif 4',Georgia,serif;font-size:1rem;line-height:1.7;transition:background .2s,color .2s}
-
-  /* NAV */
-  nav{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100;transition:background .2s}
-  .nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;height:48px;overflow-x:auto;scrollbar-width:none}
-  .nav-inner::-webkit-scrollbar{display:none}
-  .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none;white-space:nowrap;margin-right:.5rem}
-  .nav-a{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--row-label);text-decoration:none;white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
-  .nav-a:hover,.nav-a.active{color:var(--ink);border-bottom-color:var(--ink)}
-  .nav-right{margin-left:auto;display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-  .theme-btn{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;background:none;border:1px solid var(--border);color:var(--row-label);padding:.25rem .6rem;cursor:pointer;border-radius:2px;transition:color .15s,border-color .15s}
-  .theme-btn:hover{color:var(--ink);border-color:var(--ink)}
-
-  /* HERO */
-  .hero{border-bottom:1px solid var(--border);padding:3rem 1.5rem 2.5rem}
-  .hero-inner{max-width:1100px;margin:0 auto}
-  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--row-label);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
-  .badge{display:inline-flex;align-items:center;gap:.35rem;font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:2px;border:1px solid}
-  .badge-red{color:var(--red);border-color:var(--red);background:rgba(179,48,0,.06)}
-  .badge-teal{color:var(--teal);border-color:var(--teal);background:rgba(74,124,111,.06)}
-  .badge-amber{color:var(--amber);border-color:var(--amber);background:rgba(176,120,0,.06)}
-  .badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:.75rem}
-  .hero-sub{font-size:1.05rem;color:var(--row-label);max-width:640px;line-height:1.6}
-
-  /* STAT ROW */
-  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border-top:1px solid var(--border);margin-top:2.5rem}
-  .stat-cell{padding:1.25rem 1.5rem 1.25rem 0;border-right:1px solid var(--border)}
-  .stat-cell:last-child{border-right:none}
-  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:.35rem}
-  .stat-value{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--ink);line-height:1}
-  .stat-unit{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--row-label);margin-top:.25rem}
-  .stat-value.red{color:var(--red)}
-  .stat-value.teal{color:var(--teal)}
-  .stat-value.amber{color:var(--amber)}
-
-  /* LAYOUT */
-  .page-wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
-  .section{padding:3rem 0;border-bottom:1px solid var(--border)}
-  .section:last-child{border-bottom:none}
-  .section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--row-label);margin-bottom:.75rem}
-  .section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--ink);margin-bottom:1rem;line-height:1.2}
-  .section p{margin-bottom:1rem;color:var(--body)}
-  .section p:last-child{margin-bottom:0}
-  .section strong{color:var(--ink);font-weight:600}
-
-  /* TWO COL */
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-  @media(max-width:680px){.two-col{grid-template-columns:1fr}}
-
-  /* CHART */
-  .chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:1.5rem}
-  .chart-title{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:1rem}
-  .chart-canvas-wrap{position:relative;height:220px}
-
-  /* INFRASTRUCTURE CARDS */
-  .infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem}
-  .infra-card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:1.25rem}
-  .infra-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;gap:.5rem}
-  .infra-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--ink)}
-  .infra-loc{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label);margin-top:.15rem}
-  .infra-rows{border-top:1px solid var(--border);padding-top:.75rem;display:flex;flex-direction:column;gap:.4rem}
-  .infra-row{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
-  .infra-key{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--row-label)}
-  .infra-val{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink);text-align:right}
-  .infra-val.red{color:var(--red)}
-  .infra-val.teal{color:var(--teal)}
-  .infra-val.amber{color:var(--amber)}
-  .infra-note{font-size:.82rem;color:var(--row-label);margin-top:.75rem;line-height:1.5;border-top:1px solid var(--border);padding-top:.65rem}
-
-  /* TIMELINE */
-  .timeline{margin-top:1.5rem;display:flex;flex-direction:column;gap:0}
-  .tl-item{display:grid;grid-template-columns:110px 1fr;gap:1rem;padding:1.25rem 0;border-top:1px solid var(--border)}
-  .tl-item:last-child{border-bottom:1px solid var(--border)}
-  .tl-date{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--row-label);padding-top:.15rem;line-height:1.4}
-  .tl-content{}
-  .tl-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.15rem .4rem;border-radius:2px;margin-bottom:.4rem}
-  .tl-tag.ongoing{background:rgba(179,48,0,.08);color:var(--red);border:1px solid rgba(179,48,0,.2)}
-  .tl-tag.critical{background:rgba(176,120,0,.08);color:var(--amber);border:1px solid rgba(176,120,0,.2)}
-  .tl-tag.milestone{background:rgba(74,124,111,.08);color:var(--teal);border:1px solid rgba(74,124,111,.2)}
-  .tl-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
-  .tl-body{font-size:.88rem;color:var(--body);line-height:1.6}
-  .tl-source{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--source-line);margin-top:.4rem}
-
-  /* OSP TABLE */
-  .osp-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.88rem}
-  .osp-table th{font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);text-align:left;padding:.5rem .75rem;border-bottom:2px solid var(--border)}
-  .osp-table td{padding:.65rem .75rem;border-bottom:1px solid var(--border);color:var(--body);vertical-align:top}
-  .osp-table tr:last-child td{border-bottom:none}
-  .osp-table td:first-child{font-weight:600;color:var(--ink)}
-  .mono{font-family:'IBM Plex Mono',monospace;font-size:.8rem}
-  .pos{color:var(--teal)}
-  .neg{color:var(--red)}
-
-  /* EXPORT DESTINATIONS */
-  .dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-top:1rem}
-  .dest-card{background:var(--card-alt);border:1px solid var(--border);padding:.85rem 1rem;border-radius:2px}
-  .dest-flag{font-size:1.3rem;margin-bottom:.3rem}
-  .dest-country{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink)}
-  .dest-vol{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--navy);margin:.1rem 0}
-  .dest-pct{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label)}
-
-  /* CALLOUT */
-  .callout{background:var(--card-alt);border-left:3px solid var(--navy);padding:1rem 1.25rem;margin:1.25rem 0;border-radius:0 2px 2px 0}
-  .callout p{font-size:.92rem;color:var(--body);margin:0}
-  .callout-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-bottom:.4rem}
-
-  /* SOURCE LINE */
-  .source{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--source-line);margin-top:1rem;line-height:1.6}
-
-  /* SIGNALS */
-  .signals{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
-  .signal-item{background:var(--card);border:1px solid var(--border);padding:.85rem 1rem;border-radius:2px;display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:start}
-  .signal-dot{width:8px;height:8px;border-radius:50%;margin-top:.45rem;flex-shrink:0}
-  .signal-dot.red{background:var(--red)}
-  .signal-dot.amber{background:var(--amber)}
-  .signal-dot.teal{background:var(--teal)}
-  .signal-date{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label)}
-  .signal-text{font-size:.88rem;color:var(--body);margin-top:.1rem;line-height:1.5}
-  .signal-src{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--source-line);margin-top:.3rem}
-
-  /* FOOTER */
-  footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem;margin-top:0}
-  .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem}
-  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.5rem}
-  .footer-desc{font-size:.85rem;color:var(--row-label);line-height:1.5}
-  .footer-head{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--row-label);margin-bottom:.75rem}
-  .footer-links{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-  .footer-links a{font-size:.88rem;color:var(--body);text-decoration:none}
-  .footer-links a:hover{color:var(--ink)}
-  .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--source-line);margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
-
-  @media(max-width:500px){
-    .stat-row{grid-template-columns:1fr 1fr}
-    .stat-cell{border-right:none;border-bottom:1px solid var(--border);padding:1rem 0}
-    .tl-item{grid-template-columns:1fr}
-    .tl-date{padding-bottom:.25rem}
-  }
+:root{--bg:#f7f7f5;--card:#ffffff;--card-alt:#f3f0eb;--border:#e8e5e0;--ink:#0f0f0e;--body:#2a2820;--row-label:#6b6860;--source-line:#7a7870;--navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#b07800}
+[data-theme=dark]{--bg:#111110;--card:#1a1a18;--card-alt:#161614;--border:#2a2a28;--ink:#f0ede6;--body:#cec8bc;--row-label:#909090;--source-line:#a0a098;--navy:#4a80c0;--red:#c84000;--teal:#4a9c8a;--amber:#d09000}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--body);font-family:'Source Serif 4',Georgia,serif;font-size:1rem;line-height:1.7;transition:background .2s,color .2s}
+nav{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;height:48px;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none;white-space:nowrap;margin-right:.5rem}
+.nav-a{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--row-label);text-decoration:none;white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav-a:hover,.nav-a.active{color:var(--ink);border-bottom-color:var(--ink)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.theme-btn{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;background:none;border:1px solid var(--border);color:var(--row-label);padding:.25rem .6rem;cursor:pointer;border-radius:2px;transition:color .15s}
+.theme-btn:hover{color:var(--ink);border-color:var(--ink)}
+.hero{border-bottom:1px solid var(--border);padding:3rem 1.5rem 2.5rem}
+.hero-inner{max-width:1100px;margin:0 auto}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--row-label);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:.35rem;font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:2px;border:1px solid}
+.badge-red{color:var(--red);border-color:var(--red);background:rgba(179,48,0,.06)}
+.badge-teal{color:var(--teal);border-color:var(--teal);background:rgba(74,124,111,.06)}
+.badge-amber{color:var(--amber);border-color:var(--amber);background:rgba(176,120,0,.06)}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:.75rem}
+.hero-sub{font-size:1.05rem;color:var(--row-label);max-width:640px;line-height:1.6}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:0;border-top:1px solid var(--border);margin-top:2.5rem}
+.stat-cell{padding:1.25rem 1.5rem 1.25rem 0;border-right:1px solid var(--border)}
+.stat-cell:last-child{border-right:none}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:.35rem}
+.stat-value{font-family:'Cormorant Garamond',serif;font-size:1.95rem;font-weight:600;color:var(--ink);line-height:1}
+.stat-unit{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label);margin-top:.25rem}
+.stat-sub{font-family:'IBM Plex Mono',monospace;font-size:.72rem;margin-top:.15rem}
+.pos{color:var(--teal)}.neg{color:var(--red)}.amber{color:var(--amber)}
+.page-wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.section{padding:3rem 0;border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--row-label);margin-bottom:.75rem}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--ink);margin-bottom:1rem;line-height:1.2}
+.section p{margin-bottom:1rem;color:var(--body)}
+.section p:last-child{margin-bottom:0}
+strong{color:var(--ink);font-weight:600}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:2px}
+.chart-title{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);margin-bottom:1rem}
+.chart-canvas-wrap{position:relative;height:220px}
+.infra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem}
+.infra-card{background:var(--card);border:1px solid var(--border);padding:1.25rem;border-radius:2px}
+.infra-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;gap:.5rem}
+.infra-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--ink)}
+.infra-loc{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label);margin-top:.15rem}
+.infra-rows{border-top:1px solid var(--border);padding-top:.75rem;display:flex;flex-direction:column;gap:.4rem}
+.infra-row{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.infra-key{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--row-label)}
+.infra-val{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink);text-align:right}
+.infra-val.red{color:var(--red)}.infra-val.teal{color:var(--teal)}.infra-val.amber{color:var(--amber)}
+.infra-note{font-size:.82rem;color:var(--row-label);margin-top:.75rem;line-height:1.5;border-top:1px solid var(--border);padding-top:.65rem}
+.timeline{margin-top:1.5rem;display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:110px 1fr;gap:1rem;padding:1.25rem 0;border-top:1px solid var(--border)}
+.tl-item:last-child{border-bottom:1px solid var(--border)}
+.tl-date{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--row-label);padding-top:.15rem;line-height:1.4}
+.tl-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.15rem .4rem;border-radius:2px;margin-bottom:.4rem}
+.tl-tag.ongoing{background:rgba(179,48,0,.08);color:var(--red);border:1px solid rgba(179,48,0,.2)}
+.tl-tag.critical{background:rgba(176,120,0,.08);color:var(--amber);border:1px solid rgba(176,120,0,.2)}
+.tl-tag.milestone{background:rgba(74,124,111,.08);color:var(--teal);border:1px solid rgba(74,124,111,.2)}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.tl-body{font-size:.88rem;color:var(--body);line-height:1.6}
+.tl-source{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--source-line);margin-top:.4rem}
+.osp-wrap{overflow-x:auto;margin-top:1rem}
+.osp-table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:600px}
+.osp-table th{font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label);text-align:left;padding:.5rem .75rem;border-bottom:2px solid var(--border)}
+.osp-table td{padding:.65rem .75rem;border-bottom:1px solid var(--border);color:var(--body);vertical-align:top}
+.osp-table tr:last-child td{border-bottom:none}
+.osp-table td:first-child{font-weight:600;color:var(--ink)}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:.78rem}
+.dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin-top:1rem}
+.dest-card{background:var(--card-alt);border:1px solid var(--border);padding:.85rem 1rem;border-radius:2px}
+.dest-flag{font-size:1.3rem;margin-bottom:.3rem}
+.dest-country{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink)}
+.dest-vol{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--navy);margin:.1rem 0}
+.dest-pct{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label)}
+.callout{background:var(--card-alt);border-left:3px solid var(--navy);padding:1rem 1.25rem;margin:1.25rem 0;border-radius:0 2px 2px 0}
+.callout p{font-size:.92rem;color:var(--body);margin:0}
+.callout-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-bottom:.4rem}
+.source{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--source-line);margin-top:1rem;line-height:1.6}
+.signals{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
+.signal-item{background:var(--card);border:1px solid var(--border);padding:.85rem 1rem;border-radius:2px;display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:start}
+.signal-dot{width:8px;height:8px;border-radius:50%;margin-top:.45rem;flex-shrink:0}
+.signal-dot.red{background:var(--red)}.signal-dot.amber{background:var(--amber)}.signal-dot.teal{background:var(--teal)}
+.signal-date{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--row-label)}
+.signal-text{font-size:.88rem;color:var(--body);margin-top:.1rem;line-height:1.5}
+.signal-src{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--source-line);margin-top:.3rem}
+.prices-live{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:.75rem;padding:.85rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:2px}
+.price-item{display:flex;flex-direction:column;gap:.15rem}
+.price-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--row-label)}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--ink)}
+.price-chg{font-family:'IBM Plex Mono',monospace;font-size:.72rem}
+.loading-text{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--row-label);animation:pulse 1.5s infinite}
+footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.5rem}
+.footer-desc{font-size:.85rem;color:var(--row-label);line-height:1.5}
+.footer-head{font-family:'IBM Plex Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--row-label);margin-bottom:.75rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.footer-links a{font-size:.88rem;color:var(--body);text-decoration:none}
+.footer-links a:hover{color:var(--ink)}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--source-line);margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);max-width:1100px;margin-left:auto;margin-right:auto}
+@media(max-width:500px){.stat-row{grid-template-columns:1fr 1fr}.stat-cell{border-right:none;border-bottom:1px solid var(--border);padding:1rem 0}.tl-item{grid-template-columns:1fr}.tl-date{padding-bottom:.25rem}}
 </style>
 </head>
 <body>
@@ -187,6 +141,7 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">
@@ -196,9 +151,15 @@
       <span class="badge badge-teal">Yanbu at capacity</span>
     </div>
     <h1>Saudi Arabia</h1>
-    <p class="hero-sub">Arab Light · Arab Medium · Arab Heavy · Berri · Havy. The world's largest oil exporter activated its 45-year-old contingency plan when Hormuz closed — rerouting exports through the East-West Pipeline to Yanbu. It works. But it is not enough.</p>
+    <p class="hero-sub">Arab Light · Arab Medium · Arab Heavy · Berri. The world's largest oil exporter activated its 45-year-old contingency plan when Hormuz closed — rerouting exports through the East-West Pipeline to Yanbu. It works. But it is not enough.</p>
 
     <div class="stat-row">
+      <div class="stat-cell">
+        <div class="stat-label">ICE Brent</div>
+        <div class="stat-value" id="brent-price"><span class="loading-text">—</span></div>
+        <div class="stat-unit">per barrel · EIA · <span id="brent-date">—</span></div>
+        <div class="stat-sub" id="brent-chg">—</div>
+      </div>
       <div class="stat-cell">
         <div class="stat-label">Pre-war production</div>
         <div class="stat-value">10.2<span style="font-size:1.1rem">M</span></div>
@@ -220,14 +181,9 @@
         <div class="stat-unit">bbl/day · at capacity · Mar 28 2026</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-label">OPEC+ quota</div>
-        <div class="stat-value">10.0<span style="font-size:1.1rem">M</span></div>
-        <div class="stat-unit">bbl/day · Q1 2026</div>
-      </div>
-      <div class="stat-cell">
         <div class="stat-label">Spare capacity</div>
         <div class="stat-value">2.43<span style="font-size:1.1rem">M</span></div>
-        <div class="stat-unit">bbl/day · IEA est. · largely Hormuz-trapped</div>
+        <div class="stat-unit">bbl/day · IEA · largely Hormuz-trapped</div>
       </div>
     </div>
   </div>
@@ -241,13 +197,13 @@
     <h2>Output decline and the Yanbu reroute</h2>
     <div class="two-col">
       <div>
-        <p>Saudi Arabia entered the crisis with 10.2M bbl/d of production — near its operational ceiling. The Hormuz closure immediately created an export bottleneck: tankers could not safely load at Ras Tanura or Jubail. <strong>Saudi Aramco responded within hours of the conflict escalation, rerouting crude through the East-West Pipeline (Petroline) to Yanbu on the Red Sea.</strong></p>
-        <p>The response was faster and more effective than any previous test of the contingency. Aramco CEO Amin Nasser confirmed on March 10 that the pipeline would reach its 7M bbl/d maximum capacity within days. Bloomberg confirmed it hit that mark on March 28. But the bypass has a ceiling — and Saudi Arabia was already hitting it.</p>
-        <p>Production was cut by roughly 2M bbl/d in the first weeks of the crisis, not because of infrastructure damage, but because the pipeline could not absorb everything the Eastern Province fields were producing. <strong>The fields not connected to the pipeline — including some Arab Heavy and Arab Medium production — were shut in.</strong></p>
-        <div class="source">Reuters March 9 2026 · Bloomberg March 28 2026 · BloombergNEF April 2 2026 · Kpler · OPEC secondary sources</div>
+        <p>Saudi Arabia entered the crisis with 10.2M bbl/d of production. The Hormuz closure immediately created an export bottleneck: tankers could not safely load at Ras Tanura or Jubail. <strong>Saudi Aramco responded within hours, rerouting crude through the East-West Pipeline (Petroline) to Yanbu on the Red Sea.</strong></p>
+        <p>The response was faster than any previous test of the contingency. Aramco CEO Amin Nasser confirmed on March 10 that the pipeline would reach 7M bbl/d within days. Bloomberg confirmed it hit that mark on March 28. But the bypass has a ceiling.</p>
+        <p>Production was cut ~2M bbl/d in the first weeks — not due to infrastructure damage, but because the pipeline could not absorb full Eastern Province output. <strong>Fields not connected to the pipeline — including some Arab Heavy and Arab Medium production — were shut in.</strong></p>
+        <div class="source">Reuters March 9 2026 · Bloomberg March 28 2026 · BloombergNEF April 2 2026 · Kpler · OPEC</div>
       </div>
       <div class="chart-wrap">
-        <div class="chart-title">Saudi Arabia crude production · M bbl/d · 2026</div>
+        <div class="chart-title">Saudi Arabia crude production &amp; Yanbu exports · M bbl/d · 2026</div>
         <div class="chart-canvas-wrap">
           <canvas id="saudiProdChart"></canvas>
         </div>
@@ -259,48 +215,38 @@
   <div class="section">
     <div class="section-eyebrow">Crisis narrative · February–June 2026</div>
     <h2>The bypass that partially worked — and what it cost</h2>
-    <p>When the US and Israel struck Iran on February 28, Saudi Arabia faced the scenario it had prepared for since the 1980s Iran-Iraq war: Hormuz denial. The East-West Pipeline — built precisely for this contingency — was activated at maximum urgency.</p>
-
+    <p>When the US and Israel struck Iran on February 28, Saudi Arabia faced the scenario it had prepared for since the 1980s: Hormuz denial. The East-West Pipeline was activated at maximum urgency.</p>
     <div class="callout">
       <div class="callout-label">Aramco CEO Amin Nasser · March 10 2026</div>
       <p>"This is the biggest crisis the region's oil and gas industry has faced."</p>
     </div>
-
-    <p><strong>The pipeline is a logistical triumph and a geographic rerouting of risk.</strong> Saudi Arabia traded the certainty of Iranian proximity in the Gulf for exposure to Houthi and Iranian proxy forces in the Red Sea. Yanbu, which sits on the Red Sea coast, must still route tankers through the Bab el-Mandeb Strait — another chokepoint. Attacks on energy facilities in Yanbu, including the Samref refinery, have already occurred.</p>
-    <p>The second structural constraint: <strong>five Red Sea coast refineries absorb approximately 1.8M bbl/d of pipeline throughput before a single export barrel moves.</strong> With the pipeline at 7M bbl/d and 1.8M consumed domestically, the effective export window through Yanbu is roughly 5.2M bbl/d — well below Saudi Arabia's pre-crisis 7M bbl/d export rate through Hormuz.</p>
-    <p>A third problem emerged in April and May: Arab buyers stopped buying. The Dubai backwardation structure — where near-term cargoes command extreme premiums — caused Aramco's OSP formula to mechanically generate differentials that made Saudi crude commercially unworkable for Asian refiners. The Dubai M1-M3 spread averaged $37/bbl in March, compressing to ~$13 in April and ~$8 in May. As spreads normalise, OSPs are expected to return to workable levels — but Saudi Arabia lost weeks of sales volume it cannot recover.</p>
-    <div class="source">BloombergNEF April 2 2026 · Discovery Alert May 2026 · Reuters · Daily News Egypt March 22 2026 · Horn Review March 17 2026</div>
+    <p><strong>The pipeline is a logistical triumph and a geographic rerouting of risk.</strong> Saudi Arabia traded Iranian proximity in the Gulf for exposure to Houthi and Iranian proxy forces in the Red Sea. Yanbu must still route tankers through Bab el-Mandeb. Attacks on Yanbu energy facilities, including the Samref refinery, have already occurred.</p>
+    <p>The second structural constraint: <strong>five Red Sea coast refineries absorb approximately 1.8M bbl/d of pipeline throughput before a single export barrel moves.</strong> With the pipeline at 7M bbl/d and 1.8M consumed domestically, the effective export window through Yanbu is ~5.2M bbl/d — well below the pre-crisis 7M bbl/d exported via Hormuz.</p>
+    <p>A third problem emerged in April–May: Arab buyers stopped buying. Dubai backwardation of $37/bbl caused Aramco's OSP formula to mechanically set differentials that made Saudi crude commercially unworkable for Asian refiners. The spread compressed to ~$8/bbl by May. As it normalises, OSPs are returning to workable levels — but Saudi Arabia lost weeks of sales volume.</p>
+    <div class="source">BloombergNEF April 2 2026 · Discovery Alert May 2026 · Daily News Egypt March 22 2026 · Horn Review March 17 2026</div>
   </div>
 
   <!-- INFRASTRUCTURE -->
   <div class="section">
-    <div class="section-eyebrow">Infrastructure · April 2026 status</div>
+    <div class="section-eyebrow">Infrastructure · June 2026 status</div>
     <h2>Key assets and their current status</h2>
     <div class="infra-grid">
-
       <div class="infra-card">
         <div class="infra-card-head">
-          <div>
-            <div class="infra-name">East-West Pipeline (Petroline)</div>
-            <div class="infra-loc">Eastern Province → Yanbu · 1,200 km</div>
-          </div>
+          <div><div class="infra-name">East-West Pipeline (Petroline)</div><div class="infra-loc">Eastern Province → Yanbu · 1,200 km</div></div>
           <span class="badge badge-teal">At capacity</span>
         </div>
         <div class="infra-rows">
           <div class="infra-row"><span class="infra-key">Design capacity</span><span class="infra-val">7.0M bbl/d</span></div>
           <div class="infra-row"><span class="infra-key">Current throughput</span><span class="infra-val teal">7.0M bbl/d</span></div>
-          <div class="infra-row"><span class="infra-key">Utilisation</span><span class="infra-val teal">100%</span></div>
           <div class="infra-row"><span class="infra-key">Reached capacity</span><span class="infra-val">March 28 2026</span></div>
+          <div class="infra-row"><span class="infra-key">Utilisation</span><span class="infra-val teal">100%</span></div>
         </div>
-        <div class="infra-note">Built 1981 for this exact scenario. Connects Abqaiq processing hub to Red Sea. Operating at maximum since March 28. Cannot be expanded in the short term. Critical vulnerability: Yanbu terminus under drone threat.</div>
+        <div class="infra-note">Built 1981 for this exact scenario. Connects Abqaiq to Red Sea. Cannot be expanded in the short term. Critical vulnerability: Yanbu terminus under drone threat from Houthi-aligned forces.</div>
       </div>
-
       <div class="infra-card">
         <div class="infra-card-head">
-          <div>
-            <div class="infra-name">Abqaiq Processing Complex</div>
-            <div class="infra-loc">Eastern Province · Saudi Aramco</div>
-          </div>
+          <div><div class="infra-name">Abqaiq Processing Complex</div><div class="infra-loc">Eastern Province · Saudi Aramco</div></div>
           <span class="badge badge-amber">Operational</span>
         </div>
         <div class="infra-rows">
@@ -309,259 +255,158 @@
           <div class="infra-row"><span class="infra-key">Status</span><span class="infra-val teal">Operational</span></div>
           <div class="infra-row"><span class="infra-key">Last attack</span><span class="infra-val amber">Sep 2019</span></div>
         </div>
-        <div class="infra-note">The single most critical oil facility on earth. Processes ~65% of Saudi output. The 2019 drone attack took 5.7M bbl/d offline temporarily. No reported attack in current crisis — but represents the ultimate systemic risk.</div>
+        <div class="infra-note">The single most critical oil facility on earth. Processes ~65% of Saudi output. The 2019 drone attack took 5.7M bbl/d offline. No reported attack in current crisis — but represents the ultimate systemic risk.</div>
       </div>
-
       <div class="infra-card">
         <div class="infra-card-head">
-          <div>
-            <div class="infra-name">Ras Tanura Terminal</div>
-            <div class="infra-loc">Eastern Province · Arabian Gulf</div>
-          </div>
+          <div><div class="infra-name">Ras Tanura Terminal &amp; Refinery</div><div class="infra-loc">Eastern Province · Arabian Gulf</div></div>
           <span class="badge badge-red">Severely curtailed</span>
         </div>
         <div class="infra-rows">
           <div class="infra-row"><span class="infra-key">Pre-crisis capacity</span><span class="infra-val">~6M bbl/d</span></div>
           <div class="infra-row"><span class="infra-key">Current exports</span><span class="infra-val red">Near zero</span></div>
-          <div class="infra-row"><span class="infra-key">Route dependency</span><span class="infra-val">Strait of Hormuz</span></div>
+          <div class="infra-row"><span class="infra-key">Route</span><span class="infra-val">Hormuz-dependent</span></div>
           <div class="infra-row"><span class="infra-key">Refinery status</span><span class="infra-val red">Attacked · shut</span></div>
         </div>
-        <div class="infra-note">Saudi Arabia's primary Gulf export terminal. Effectively offline due to Hormuz closure. Ras Tanura refinery — largest in Saudi Arabia — was struck by Iranian drones and halted production. Shutdown caused immediate global price spike.</div>
+        <div class="infra-note">Saudi Arabia's primary Gulf export terminal. Effectively offline due to Hormuz closure. Refinery — largest in the kingdom — was struck by Iranian drones and halted. Shutdown caused immediate global price spike.</div>
       </div>
-
       <div class="infra-card">
         <div class="infra-card-head">
-          <div>
-            <div class="infra-name">Yanbu Export Terminal</div>
-            <div class="infra-loc">Red Sea coast · Medina Province</div>
-          </div>
+          <div><div class="infra-name">Yanbu Export Terminal</div><div class="infra-loc">Red Sea coast · Medina Province</div></div>
           <span class="badge badge-amber">At limit · under threat</span>
         </div>
         <div class="infra-rows">
           <div class="infra-row"><span class="infra-key">Export rate (peak)</span><span class="infra-val teal">3.66M bbl/d</span></div>
           <div class="infra-row"><span class="infra-key">Pipeline feed</span><span class="infra-val">7.0M bbl/d</span></div>
-          <div class="infra-row"><span class="infra-key">Domestic refining (takes)</span><span class="infra-val amber">~1.8M bbl/d</span></div>
+          <div class="infra-row"><span class="infra-key">Domestic refining (absorbs)</span><span class="infra-val amber">~1.8M bbl/d</span></div>
           <div class="infra-row"><span class="infra-key">Net export window</span><span class="infra-val">~5.2M bbl/d</span></div>
         </div>
-        <div class="infra-note">Saudi Arabia's bypass lifeline. Samref refinery (Aramco/ExxonMobil JV) at Yanbu has been targeted. Exports still must transit Bab el-Mandeb Strait — second chokepoint. Grade mix concentrated in Arab Light only.</div>
+        <div class="infra-note">Saudi Arabia's bypass lifeline. Samref refinery (Aramco/ExxonMobil JV) has been targeted. Grade mix concentrated in Arab Light only — Arab Heavy cannot be routed here. Exports still transit Bab el-Mandeb.</div>
       </div>
-
     </div>
-    <div class="source">Reuters · Bloomberg · Daily News Egypt · Wikipedia 2026 Aramco refinery attack · BloombergNEF · OilPrice.com</div>
+    <div class="source">Reuters · Bloomberg · Daily News Egypt · Wikipedia 2026 Aramco refinery attack · BloombergNEF</div>
   </div>
 
-  <!-- CRISIS TIMELINE -->
+  <!-- OSP TABLE — live from prices.json -->
+  <div class="section">
+    <div class="section-eyebrow">Official Selling Prices · Live from prices.json · Aramco</div>
+    <h2>Current OSPs and what they signal</h2>
+    <p>Saudi Aramco publishes monthly OSPs as differentials to the Oman/Dubai average for Asian buyers. The table below is populated live from <code style="font-family:'IBM Plex Mono',monospace;font-size:.85em">data/prices.json</code>, updated daily by the Contango price automation.</p>
+    <div class="osp-wrap">
+      <table class="osp-table">
+        <thead>
+          <tr>
+            <th>Grade</th>
+            <th>API / S%</th>
+            <th>Diff vs O/D</th>
+            <th>Abs. price</th>
+            <th>Spread vs Brent</th>
+            <th>Month</th>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody id="osp-tbody">
+          <tr><td colspan="7" style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--row-label);padding:1rem .75rem">Loading OSP data…</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="source">Saudi Aramco monthly OSP release · data/prices.json · Updated daily · Indicative spreads vs ICE Brent</div>
+  </div>
+
+  <!-- TIMELINE -->
   <div class="section">
     <div class="section-eyebrow">Timeline · February–June 2026</div>
     <h2>How the Saudi crisis unfolded</h2>
     <div class="timeline">
-
       <div class="tl-item">
         <div class="tl-date">Feb 28<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag ongoing">War begins</span>
           <div class="tl-title">US-Israel strikes on Iran — Hormuz closure triggered</div>
-          <div class="tl-body">US and Israel begin strikes against Iran, targeting nuclear and missile programmes. Supreme leader Khamenei killed. Iran launches counter-strikes across the Gulf. Hormuz transit collapses within 48 hours.</div>
+          <div class="tl-body">US and Israel begin strikes against Iran, targeting nuclear and missile programmes. Supreme leader Khamenei killed. Iran launches counter-strikes. Hormuz transit collapses within 48 hours. Saudi Arabia activates contingency planning immediately.</div>
           <div class="tl-source">Reuters · Al Jazeera · Feb 28 2026</div>
         </div>
       </div>
-
       <div class="tl-item">
         <div class="tl-date">Mar 2–4<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag critical">Infrastructure attack</span>
           <div class="tl-title">Ras Tanura refinery struck — Saudi Arabia activates Petroline</div>
-          <div class="tl-body">Iranian drone strikes hit Ras Tanura — Saudi Arabia's largest refinery. Aramco halts production and initiates emergency reroute. East-West Pipeline activated at full urgency. Aramco CEO Nasser calls it "the biggest crisis the region's oil and gas industry has faced."</div>
+          <div class="tl-body">Iranian drone strikes hit Ras Tanura — Saudi Arabia's largest refinery. Aramco halts production and initiates emergency reroute through the East-West Pipeline. Aramco CEO Nasser: "the biggest crisis the region's oil and gas industry has faced."</div>
           <div class="tl-source">Wikipedia · Reuters · OilPrice.com · March 2026</div>
         </div>
       </div>
-
       <div class="tl-item">
         <div class="tl-date">Mar 9<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag critical">Production cut</span>
           <div class="tl-title">Aramco cuts output at two oilfields — pipeline bottleneck confirmed</div>
-          <div class="tl-body">Reuters reports Aramco reducing output at two oilfields. Not damage-driven — export bottleneck means the pipeline cannot absorb full production. Heavy and medium grades with no Yanbu route are shut in. Saudi output falls ~2M bbl/d from pre-crisis level.</div>
-          <div class="tl-source">Reuters · Exclusive March 9 2026</div>
+          <div class="tl-body">Reuters exclusive: Aramco reducing output at two oilfields. Not damage-driven — export bottleneck means the pipeline cannot absorb full production. Heavy and medium grades without Yanbu connectivity are shut in. Output falls ~2M bbl/d.</div>
+          <div class="tl-source">Reuters · Exclusive · March 9 2026</div>
         </div>
       </div>
-
       <div class="tl-item">
         <div class="tl-date">Mar 17<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag milestone">Pipeline milestone</span>
-          <div class="tl-title">East-West Pipeline reaches 80% utilisation — 3M bbl/d incremental</div>
+          <div class="tl-title">East-West Pipeline reaches 80% — Saudi Arabia doubles pre-war utilisation</div>
           <div class="tl-body">BloombergNEF estimates Saudi Arabia has doubled pre-war pipeline utilisation to 80% by March 17, adding ~3M bbl/d of incremental flows. Yanbu exports surge to 3.66M bbl/d five-day average. Aramco targets full 7M bbl/d capacity.</div>
           <div class="tl-source">BloombergNEF · Bloomberg ship tracking · March 17 2026</div>
         </div>
       </div>
-
       <div class="tl-item">
         <div class="tl-date">Mar 28<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag milestone">Capacity reached</span>
-          <div class="tl-title">Petroline hits 7M bbl/d — maximum capacity confirmed</div>
-          <div class="tl-body">Bloomberg confirms the East-West Pipeline operating at its 7M bbl/d maximum. This is the ceiling. No further bypass capacity available without new infrastructure. Saudi Arabia has deployed its full contingency — the gap to pre-crisis exports (~7M bbl/d via Hormuz) now depends entirely on Hormuz reopening.</div>
-          <div class="tl-source">Bloomberg · Bitcoin News · March 28 2026</div>
+          <div class="tl-title">Petroline hits 7M bbl/d maximum — Saudi bypass ceiling confirmed</div>
+          <div class="tl-body">Bloomberg confirms the East-West Pipeline operating at its 7M bbl/d maximum. This is the ceiling — no further bypass capacity available. Saudi Arabia has deployed its full contingency. The remaining gap to pre-crisis export levels depends entirely on Hormuz reopening.</div>
+          <div class="tl-source">Bloomberg · March 28 2026</div>
         </div>
       </div>
-
       <div class="tl-item">
         <div class="tl-date">Apr–May<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag critical">Commercial breakdown</span>
           <div class="tl-title">OSP formula breaks Asian buyer economics — unsold cargoes accumulate</div>
-          <div class="tl-body">Dubai backwardation of $37/bbl forces Aramco's formula to set April OSPs at levels that make Saudi crude commercially unworkable for Asian refiners. Multiple buyers walk away. Saudi Arabia loses market share to US, West African, and Russian barrels. OSP formula expected to normalise as backwardation compresses toward $8/bbl in May.</div>
-          <div class="tl-source">Discovery Alert · May 2026 · MacroMicro · S&P Platts</div>
+          <div class="tl-body">Dubai backwardation of $37/bbl forces Aramco's formula to set April OSPs that make Saudi crude unworkable for Asian refiners. Multiple buyers switch to US, West African, and Russian barrels. Backwardation compresses toward $8/bbl by May — OSPs expected to normalise.</div>
+          <div class="tl-source">Discovery Alert · May 2026 · S&amp;P Platts · MacroMicro</div>
         </div>
       </div>
-
       <div class="tl-item">
         <div class="tl-date">Jun<br>2026</div>
         <div class="tl-content">
           <span class="tl-tag ongoing">Ongoing</span>
-          <div class="tl-title">Partial normalisation — Hormuz still effectively closed</div>
-          <div class="tl-body">EIA May STEO assumes Hormuz begins to reopen in June. Baker Hughes and industry consensus expects full reopening in second half of 2026. Saudi Arabia continues operating at Yanbu capacity. Spare capacity (2.43M bbl/d IEA estimate) remains largely Hormuz-trapped — deployable only when the strait reopens.</div>
+          <div class="tl-title">Partial normalisation — Hormuz still effectively closed, reopening expected H2</div>
+          <div class="tl-body">EIA May STEO assumes Hormuz begins reopening in June. Baker Hughes and industry consensus expects full reopening in H2 2026. Saudi Arabia continues at Yanbu capacity. Spare capacity (2.43M bbl/d IEA estimate) remains Hormuz-trapped — deployable only when the strait reopens.</div>
           <div class="tl-source">EIA STEO May 12 2026 · Baker Hughes Q1 earnings · April 24 2026</div>
         </div>
       </div>
-
     </div>
-  </div>
-
-  <!-- OSP TABLE -->
-  <div class="section">
-    <div class="section-eyebrow">Official Selling Prices · Aramco</div>
-    <h2>Current OSPs and what they signal</h2>
-    <p>Saudi Aramco publishes monthly OSPs as differentials to the Oman/Dubai average for Asian buyers. The April and May 2026 readings reflect the war premium cycle and its subsequent compression as Dubai backwardation normalised.</p>
-
-    <table class="osp-table">
-      <thead>
-        <tr>
-          <th>Grade</th>
-          <th>API / S%</th>
-          <th>Apr 2026 OSP (Asia)</th>
-          <th>vs Brent spread</th>
-          <th>Signal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Arab Light</td>
-          <td class="mono">34.2° / 1.77%</td>
-          <td class="mono pos">+$2.50 vs O/D</td>
-          <td class="mono neg">−$35.01</td>
-          <td>War premium. Scarcity pricing. Dubai backwardation forcing formula up.</td>
-        </tr>
-        <tr>
-          <td>Arab Medium</td>
-          <td class="mono">31.0° / 2.59%</td>
-          <td class="mono pos">+$1.20 vs O/D</td>
-          <td class="mono neg">−$36.10</td>
-          <td>Narrower premium reflects Yanbu grade concentration in Light.</td>
-        </tr>
-        <tr>
-          <td>Arab Heavy</td>
-          <td class="mono">27.4° / 2.85%</td>
-          <td class="mono neg">−$1.70 vs O/D</td>
-          <td class="mono neg">−$38.50</td>
-          <td>Discount widening. Complex refinery utilisation falling. Hardest to route via Yanbu.</td>
-        </tr>
-        <tr>
-          <td>Berri (Extra Light)</td>
-          <td class="mono">39.0° / 0.14%</td>
-          <td class="mono pos">+$3.80 vs O/D</td>
-          <td class="mono neg">−$33.80</td>
-          <td>Light sweet premium elevated. Refiners willing to pay up for simple feedstock.</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="source">Saudi Aramco monthly OSP release · April 2026 loading · Indicative spreads vs ICE Brent ~$98/bbl · Argaam · Arab News</div>
   </div>
 
   <!-- EXPORT DESTINATIONS -->
   <div class="section">
     <div class="section-eyebrow">Export destinations · Pre-crisis baseline</div>
     <h2>Who buys Saudi crude — and who lost supply</h2>
-    <p>Saudi Arabia exports approximately 7M bbl/d in normal conditions. The Hormuz crisis disrupted all Gulf-routed flows. Yanbu now exports ~3.66M bbl/d — about half the pre-crisis level — primarily Arab Light to Asian buyers willing to pay elevated war premiums.</p>
+    <p>Saudi Arabia exports approximately 7M bbl/d in normal conditions. The Hormuz crisis disrupted all Gulf-routed flows. Yanbu now exports ~3.66M bbl/d — roughly half the pre-crisis level — predominantly Arab Light to buyers willing to pay elevated war premiums.</p>
     <div class="dest-grid">
-      <div class="dest-card">
-        <div class="dest-flag">🇨🇳</div>
-        <div class="dest-country">China</div>
-        <div class="dest-vol">1.8M</div>
-        <div class="dest-pct">bbl/d · ~25% of exports</div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-flag">🇯🇵</div>
-        <div class="dest-country">Japan</div>
-        <div class="dest-vol">1.2M</div>
-        <div class="dest-pct">bbl/d · ~17% of exports</div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-flag">🇮🇳</div>
-        <div class="dest-country">India</div>
-        <div class="dest-vol">1.0M</div>
-        <div class="dest-pct">bbl/d · ~14% of exports</div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-flag">🇰🇷</div>
-        <div class="dest-country">South Korea</div>
-        <div class="dest-vol">0.9M</div>
-        <div class="dest-pct">bbl/d · ~13% of exports</div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-flag">🇺🇸</div>
-        <div class="dest-country">United States</div>
-        <div class="dest-vol">0.5M</div>
-        <div class="dest-pct">bbl/d · ~7% of exports</div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-flag">🌍</div>
-        <div class="dest-country">Other</div>
-        <div class="dest-vol">1.6M</div>
-        <div class="dest-pct">bbl/d · ~24% of exports</div>
-      </div>
+      <div class="dest-card"><div class="dest-flag">🇨🇳</div><div class="dest-country">China</div><div class="dest-vol">1.8M</div><div class="dest-pct">bbl/d · ~25% of exports</div></div>
+      <div class="dest-card"><div class="dest-flag">🇯🇵</div><div class="dest-country">Japan</div><div class="dest-vol">1.2M</div><div class="dest-pct">bbl/d · ~17% of exports</div></div>
+      <div class="dest-card"><div class="dest-flag">🇮🇳</div><div class="dest-country">India</div><div class="dest-vol">1.0M</div><div class="dest-pct">bbl/d · ~14% of exports</div></div>
+      <div class="dest-card"><div class="dest-flag">🇰🇷</div><div class="dest-country">South Korea</div><div class="dest-vol">0.9M</div><div class="dest-pct">bbl/d · ~13% of exports</div></div>
+      <div class="dest-card"><div class="dest-flag">🇺🇸</div><div class="dest-country">United States</div><div class="dest-vol">0.5M</div><div class="dest-pct">bbl/d · ~7% of exports</div></div>
+      <div class="dest-card"><div class="dest-flag">🌍</div><div class="dest-country">Other</div><div class="dest-vol">1.6M</div><div class="dest-pct">bbl/d · ~24% of exports</div></div>
     </div>
     <div class="source">Saudi Aramco Annual Review 2025 · EIA bilateral trade data · Indicative · Pre-crisis baseline</div>
   </div>
 
-  <!-- INTELLIGENCE SIGNALS -->
+  <!-- SIGNALS — live from events.json -->
   <div class="section">
-    <div class="section-eyebrow">Latest intelligence</div>
+    <div class="section-eyebrow">Latest intelligence · Live from events.json · Updated daily</div>
     <h2>Recent Saudi signals</h2>
-    <div class="signals" id="saSignals">
-      <div class="signal-item">
-        <div class="signal-dot amber"></div>
-        <div>
-          <div class="signal-date">May 2026</div>
-          <div class="signal-text">Saudi Arabia loses Asian market share as OSP formula produces commercially unworkable April differentials. Multiple Asian buyers source US crude, West African light sweet, and Russian Urals instead. Dubai backwardation compresses to ~$8/bbl — OSPs expected to normalise.</div>
-          <div class="signal-src">Discovery Alert · May 2026 · S&P Platts</div>
-        </div>
-      </div>
-      <div class="signal-item">
-        <div class="signal-dot teal"></div>
-        <div>
-          <div class="signal-date">Mar 28 2026</div>
-          <div class="signal-text">East-West Pipeline confirmed at 7M bbl/d maximum capacity — the fastest activation in the pipeline's 45-year history. Yanbu exports peak at 3.66M bbl/d five-day average. Saudi Arabia has fully deployed its contingency bypass.</div>
-          <div class="signal-src">Bloomberg · March 28 2026</div>
-        </div>
-      </div>
-      <div class="signal-item">
-        <div class="signal-dot red"></div>
-        <div>
-          <div class="signal-date">Mar 4 2026</div>
-          <div class="signal-text">Iranian drone strikes hit Ras Tanura refinery — Saudi Arabia's largest. Aramco halts production, plans weeks-long shutdown. Exports rerouted to propane/butane products via Red Sea. Oil prices spike globally on the announcement.</div>
-          <div class="signal-src">Wikipedia · 2026 Aramco refinery attack · Reuters</div>
-        </div>
-      </div>
-      <div class="signal-item">
-        <div class="signal-dot amber"></div>
-        <div>
-          <div class="signal-date">Mar 9 2026</div>
-          <div class="signal-text">Reuters exclusive: Aramco cutting output at two oilfields due to pipeline bottleneck. Production reduction is logistical — not damage-driven. Fields without Yanbu connectivity shut in. Saudi output falls ~2M bbl/d from pre-crisis level.</div>
-          <div class="signal-src">Reuters · Exclusive · March 9 2026</div>
-        </div>
-      </div>
+    <p style="font-size:.88rem;color:var(--row-label);margin-bottom:1rem">Populated automatically from <code style="font-family:'IBM Plex Mono',monospace;font-size:.85em">data/events.json</code> — updated daily by the Contango intelligence pipeline via GDELT + Claude Haiku extraction.</p>
+    <div class="signals" id="sa-signals">
+      <div class="signal-item"><div class="signal-dot amber"></div><div><div class="signal-text loading-text">Loading signals…</div></div></div>
     </div>
   </div>
 
@@ -598,74 +443,150 @@
       </ul>
     </div>
   </div>
-  <div class="footer-copy page-wrap">Contango Energy · Open source · MIT license · Data compiled as indicative · Not financial advice</div>
+  <div class="footer-copy">Contango Energy · Open source · MIT license · Data compiled as indicative · Not financial advice</div>
 </footer>
 
 <script>
-// Theme
-const root = document.documentElement;
-const btn = document.getElementById('themeBtn');
-const stored = localStorage.getItem('contango-theme');
-if(stored === 'dark') { root.setAttribute('data-theme','dark'); btn.textContent='Light'; }
-btn.addEventListener('click', () => {
-  const isDark = root.getAttribute('data-theme') === 'dark';
-  if(isDark){ root.removeAttribute('data-theme'); btn.textContent='Dark'; localStorage.setItem('contango-theme','light'); }
-  else { root.setAttribute('data-theme','dark'); btn.textContent='Light'; localStorage.setItem('contango-theme','dark'); }
-});
+// ── FALLBACKS ─────────────────────────────────────────────────────────────────
+function getPricesFallback(){return{benchmarks:{brent:{price:98.29,change_pct:5.82,updated:"2026-06-01"},wti:{price:95.96,change_pct:5.27,updated:"2026-06-01"}},osps:{arab_light:{grade:"Arab Light",differential_vs_omd:2.5,price:83.25,spread_vs_brent:-15.04,for_month:"April 2026"},arab_medium:{grade:"Arab Medium",differential_vs_omd:1.2,price:82.0,spread_vs_brent:-16.29,for_month:"April 2026"},arab_heavy:{grade:"Arab Heavy",differential_vs_omd:-1.7,price:79.0,spread_vs_brent:-19.29,for_month:"April 2026"},murban:{grade:"Murban",differential_vs_omd:2.93,price:83.68,spread_vs_brent:-14.61,for_month:"March 2026"}}}}
 
-// Production Chart
-const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
-const gridColor = () => isDark() ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
-const labelColor = () => isDark() ? '#909090' : '#6b6860';
+function getEventsFallback(){return{signals:{saudi_arabia:[{date:"May 2026",text:"Saudi Arabia loses Asian market share as OSP formula produces commercially unworkable April differentials. Multiple Asian buyers source US crude and West African light sweet instead. Dubai backwardation compresses to ~$8/bbl — OSPs expected to normalise.",source:"Discovery Alert · May 2026"},{date:"Mar 28 2026",text:"East-West Pipeline confirmed at 7M bbl/d maximum capacity — fastest activation in the pipeline's 45-year history. Yanbu exports peak at 3.66M bbl/d five-day average.",source:"Bloomberg · March 28 2026"},{date:"Mar 9 2026",text:"Reuters exclusive: Aramco cutting output at two oilfields due to pipeline bottleneck. Production reduction is logistical, not damage-driven. Output falls ~2M bbl/d from pre-crisis level.",source:"Reuters · Exclusive · March 9 2026"},{date:"Mar 4 2026",text:"Iranian drone strikes hit Ras Tanura refinery — Saudi Arabia's largest. Aramco halts production, plans weeks-long shutdown. Oil prices spike globally.",source:"Wikipedia · Reuters · March 2026"}]}}}
 
-const prodCtx = document.getElementById('saudiProdChart').getContext('2d');
-const prodChart = new Chart(prodCtx, {
-  type: 'bar',
-  data: {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May (est)', 'Jun (est)'],
-    datasets: [
-      {
-        label: 'Total production',
-        data: [10.1, 10.2, 8.3, 8.0, 8.2, 8.5],
-        backgroundColor: ['#4a7c6f','#4a7c6f','#b33000','#b07800','#b07800','#b07800'],
-        borderRadius: 2,
-        barPercentage: 0.65,
-      },
-      {
-        label: 'Yanbu exports',
-        data: [null, null, 2.4, 3.4, 3.66, 3.66],
-        backgroundColor: 'rgba(74,124,111,0.25)',
-        borderColor: '#4a7c6f',
-        borderWidth: 1.5,
-        borderRadius: 2,
-        barPercentage: 0.65,
-        type: 'bar',
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: true, labels: { color: labelColor, font: { family: "'IBM Plex Mono'", size: 10 }, boxWidth: 12, padding: 12 } },
-      tooltip: { backgroundColor: isDark() ? '#1a1a18' : '#fff', titleColor: isDark() ? '#f0ede6' : '#0f0f0e', bodyColor: isDark() ? '#cec8bc' : '#2a2820', borderColor: isDark() ? '#2a2a28' : '#e8e5e0', borderWidth: 1, callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}M bbl/d` } }
-    },
-    scales: {
-      x: { grid: { display: false }, ticks: { color: labelColor, font: { family: "'IBM Plex Mono'", size: 10 } } },
-      y: { grid: { color: gridColor }, ticks: { color: labelColor, font: { family: "'IBM Plex Mono'", size: 10 }, callback: v => v + 'M' }, min: 0, max: 12 }
-    }
+// ── LOAD ──────────────────────────────────────────────────────────────────────
+async function loadData(){
+  let prices=null,events=null;
+  try{
+    const[pr,ev]=await Promise.all([
+      fetch('data/prices.json').then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('data/events.json').then(r=>r.ok?r.json():null).catch(()=>null)
+    ]);
+    prices=pr; events=ev;
+  }catch(e){}
+  if(!prices) prices=getPricesFallback();
+  if(!events) events=getEventsFallback();
+  renderPrices(prices);
+  renderOSP(prices);
+  renderSignals(events);
+}
+
+// ── PRICES ────────────────────────────────────────────────────────────────────
+function renderPrices(prices){
+  const bm=prices.benchmarks||{};
+  const brent=bm.brent||{};
+  function set(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+  function setCls(id,cls){const el=document.getElementById(id);if(el){el.className=el.className.replace(/\b(pos|neg|amber)\b/g,'').trim()+' '+cls;}}
+  if(brent.price){
+    set('brent-price','$'+brent.price.toFixed(2));
+    set('brent-chg',(brent.change_pct>=0?'+':'')+brent.change_pct.toFixed(2)+'%');
+    set('brent-date',brent.updated||'');
+    setCls('brent-chg',brent.change_pct>=0?'pos':'neg');
   }
-});
+}
 
-// Update chart colors on theme change
-btn.addEventListener('click', () => {
-  setTimeout(() => {
-    prodChart.options.plugins.legend.labels.color = labelColor();
-    prodChart.options.scales.x.ticks.color = labelColor();
-    prodChart.options.scales.y.ticks.color = labelColor();
-    prodChart.options.scales.y.grid.color = gridColor();
-    prodChart.update();
-  }, 50);
+// ── OSP TABLE ─────────────────────────────────────────────────────────────────
+function renderOSP(prices){
+  const osps=prices.osps||{};
+  const brentPrice=(prices.benchmarks||{}).brent?.price||null;
+  const tbody=document.getElementById('osp-tbody');
+  if(!tbody)return;
+  const grades=[
+    {key:'arab_light', label:'Arab Light',  api:'34.2°',s:'1.77%',signal:'War premium. Dubai backwardation forcing formula up. Yanbu-routable.'},
+    {key:'arab_medium',label:'Arab Medium', api:'31.0°',s:'2.59%',signal:'Narrower premium. Partial Yanbu routability.'},
+    {key:'arab_heavy', label:'Arab Heavy',  api:'27.4°',s:'2.85%',signal:'Discount widening. Hardest to route via Yanbu. Complex refinery demand falling.'},
+    {key:'murban',     label:'Murban (UAE)',api:'39.0°',s:'0.79%',signal:'Abu Dhabi onshore. Partial Hormuz bypass via Fujairah pipeline.'}
+  ];
+  tbody.innerHTML=grades.map(g=>{
+    const o=osps[g.key]||{};
+    const diff=o.differential_vs_omd;
+    const price=o.price;
+    const month=o.for_month||'—';
+    const rawSpread=(brentPrice&&price)?(price-brentPrice):o.spread_vs_brent;
+    const spread=rawSpread!=null?rawSpread.toFixed(2):null;
+    const diffStr=diff!=null?(diff>=0?'+$'+diff.toFixed(2):'−$'+Math.abs(diff).toFixed(2))+' vs O/D':'—';
+    const diffCls=diff!=null?(diff>=0?'pos':'neg'):'';
+    const spreadStr=spread!=null?(parseFloat(spread)>=0?'+$'+spread:'−$'+Math.abs(parseFloat(spread)).toFixed(2)):'—';
+    const spreadCls=spread!=null?(parseFloat(spread)>=0?'pos':'neg'):'';
+    return`<tr>
+      <td>${g.label}</td>
+      <td class="mono">${g.api} / ${g.s}</td>
+      <td class="mono ${diffCls}">${diffStr}</td>
+      <td class="mono">${price?'$'+price.toFixed(2):'—'}</td>
+      <td class="mono ${spreadCls}">${spreadStr}</td>
+      <td class="mono">${month}</td>
+      <td style="font-size:.8rem;color:var(--row-label)">${g.signal}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── SIGNALS ───────────────────────────────────────────────────────────────────
+function renderSignals(events){
+  const container=document.getElementById('sa-signals');
+  if(!container)return;
+  const sigs=((events.signals||{}).saudi_arabia||[]);
+  if(!sigs.length){container.innerHTML='<p style="color:var(--row-label);font-size:.88rem;padding:.5rem">No signals available.</p>';return;}
+  const colors=['red','amber','teal','teal','teal','teal'];
+  container.innerHTML=sigs.slice(0,6).map((s,i)=>`
+    <div class="signal-item">
+      <div class="signal-dot ${colors[i]||'teal'}"></div>
+      <div>
+        <div class="signal-date">${s.date||''}</div>
+        <div class="signal-text">${s.text||s.headline||''}</div>
+        <div class="signal-src">${s.source||s.src||''}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── CHART ─────────────────────────────────────────────────────────────────────
+function buildChart(){
+  const isDark=()=>document.documentElement.getAttribute('data-theme')==='dark';
+  const gc=()=>isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+  const lc=()=>isDark()?'#909090':'#6b6860';
+  const ctx=document.getElementById('saudiProdChart');
+  if(!ctx)return null;
+  return new Chart(ctx.getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May (est)','Jun (est)'],
+      datasets:[
+        {label:'Total production (M bbl/d)',data:[10.1,10.2,8.3,8.0,8.2,8.5],backgroundColor:['#4a7c6f','#4a7c6f','#b33000','#b07800','#b07800','#b07800'],borderRadius:2,barPercentage:.6},
+        {label:'Yanbu exports (M bbl/d)',data:[null,null,2.4,3.4,3.66,3.66],backgroundColor:'rgba(74,124,111,0.2)',borderColor:'#4a7c6f',borderWidth:1.5,borderRadius:2,barPercentage:.6}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:true,labels:{color:lc(),font:{family:"'IBM Plex Mono'",size:10},boxWidth:12,padding:12}},
+        tooltip:{backgroundColor:isDark()?'#1a1a18':'#fff',titleColor:isDark()?'#f0ede6':'#0f0f0e',bodyColor:isDark()?'#cec8bc':'#2a2820',borderColor:isDark()?'#2a2a28':'#e8e5e0',borderWidth:1,callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y??'—'}`}}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:10}}},
+        y:{grid:{color:gc()},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:10},callback:v=>v+'M'},min:0,max:12}
+      }
+    }
+  });
+}
+
+// ── BOOT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  const root=document.documentElement;
+  const btn=document.getElementById('themeBtn');
+  const stored=localStorage.getItem('contango-theme');
+  if(stored==='dark'){root.setAttribute('data-theme','dark');if(btn)btn.textContent='Light';}
+  if(btn)btn.addEventListener('click',()=>{
+    const dark=root.getAttribute('data-theme')==='dark';
+    if(dark){root.removeAttribute('data-theme');btn.textContent='Dark';localStorage.setItem('contango-theme','light');}
+    else{root.setAttribute('data-theme','dark');btn.textContent='Light';localStorage.setItem('contango-theme','dark');}
+    setTimeout(()=>{if(window._sc){
+      const isDark=()=>document.documentElement.getAttribute('data-theme')==='dark';
+      window._sc.options.plugins.legend.labels.color=isDark()?'#909090':'#6b6860';
+      window._sc.options.scales.x.ticks.color=isDark()?'#909090':'#6b6860';
+      window._sc.options.scales.y.ticks.color=isDark()?'#909090':'#6b6860';
+      window._sc.options.scales.y.grid.color=isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+      window._sc.update();
+    }},50);
+  });
+  window._sc=buildChart();
+  loadData();
 });
 </script>
 </body>
