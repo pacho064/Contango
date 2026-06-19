@@ -20,6 +20,17 @@ def fetch(series_id, api_key):
         print(f"  WARNING: fetch failed for {series_id}: {e}", file=sys.stderr)
         return []
 
+def fetch_latest(series_id, api_key, label):
+    """Fetch just the most recent (value, period) for a series. Used for
+    monthly volume series (production, inventories) where only the latest
+    observation matters. Returns (None, None) on failure."""
+    vals = fetch(series_id, api_key)
+    if vals:
+        value, period = vals[0]
+        print(f"  {label}: {value:,.1f}  [{period}]")
+        return value, period
+    return None, None
+
 def write_history(existing, today):
     """Append (or update, if today already exists) one daily row to the
     crude price time-series in JSON Lines format. Pure local file work —
@@ -34,6 +45,11 @@ def write_history(existing, today):
     osps = existing.get("osps", {}) or {}
     arab = osps.get("arab_light") if isinstance(osps, dict) and isinstance(osps.get("arab_light"), dict) else {}
 
+    production = existing.get("production", {}) or {}
+    saudi = production.get("saudi_arabia") if isinstance(production.get("saudi_arabia"), dict) else {}
+    iraq = production.get("iraq") if isinstance(production.get("iraq"), dict) else {}
+    spr = existing.get("spr") if isinstance(existing.get("spr"), dict) else {}
+
     entry = {
         "date": today,
         "brent": brent.get("price"),
@@ -42,6 +58,9 @@ def write_history(existing, today):
         "wti_change_pct": wti.get("change_pct"),
         "arab_light_osp": arab.get("price"),
         "arab_light_spread_vs_brent": arab.get("spread_vs_brent"),
+        "saudi_crude_kbd": saudi.get("value"),
+        "iraq_crude_kbd": iraq.get("value"),
+        "us_spr_kbbl": spr.get("value"),
     }
     line = json.dumps(entry)
 
@@ -129,6 +148,28 @@ def main():
                 osp["price"] = round(omd_price + diff, 2)
                 osp["spread_vs_brent"] = round(osp["price"] - brent_price, 2)
                 print(f"  {grade}: ${osp['price']:.2f}")
+
+    # Monthly crude oil production (EIA International Energy Statistics:
+    # product 57 = crude incl. lease condensate, activity 1 = production, TBPD)
+    print("Fetching monthly production & inventories...")
+    production = existing.setdefault("production", {})
+    saudi_val, saudi_period = fetch_latest("INTL.57-1-SAU-TBPD.M", api_key, "saudi crude prod")
+    if saudi_val is not None:
+        production["saudi_arabia"] = {
+            "value": round(saudi_val, 1), "unit": "thousand bbl/day", "period": saudi_period,
+            "grade": "crude incl. lease condensate", "source": "EIA (INTL.57-1-SAU)"}
+    iraq_val, iraq_period = fetch_latest("INTL.57-1-IRQ-TBPD.M", api_key, "iraq crude prod ")
+    if iraq_val is not None:
+        production["iraq"] = {
+            "value": round(iraq_val, 1), "unit": "thousand bbl/day", "period": iraq_period,
+            "grade": "crude incl. lease condensate", "source": "EIA (INTL.57-1-IRQ)"}
+
+    # U.S. Strategic Petroleum Reserve crude stocks (monthly)
+    spr_val, spr_period = fetch_latest("PET.MCSSTUS1.M", api_key, "us spr stocks ")
+    if spr_val is not None:
+        existing["spr"] = {
+            "value": round(spr_val, 0), "unit": "thousand barrels", "period": spr_period,
+            "description": "U.S. crude oil in Strategic Petroleum Reserve", "source": "EIA (MCSSTUS1)"}
 
     existing["_updated"] = datetime.datetime.utcnow().isoformat() + "Z"
     prices_path.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
