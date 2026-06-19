@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', renderOSPChart);
         }
       }
     });
-    const btn=document.getElementById('themeBtn');
+    const btn=document.getElementById('theme-btn');
     if(btn)btn.addEventListener('click',()=>setTimeout(()=>{lineChart.options.scales.x.ticks.color=lc();lineChart.options.scales.y.ticks.color=lc();lineChart.options.scales.y.grid.color=gc();lineChart.update();},50));
   }
 
