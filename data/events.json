@@ -4,9 +4,9 @@
   "chokepoints": [
     {
       "name": "Strait of Hormuz",
-      "risk": "high",
+      "risk": "moderate",
       "volume": "21M bbl/d",
-      "source": "US Navy blockade \u00b7 Iranian mines \u00b7 CENTCOM",
+      "source": "Reopening \u00b7 residual mine risk",
       "updated": "Apr 22 2026",
       "status": "US naval blockade active. Iran seizing ships. Near-zero commercial transit.",
       "map": {
