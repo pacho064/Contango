@@ -203,6 +203,11 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
         <div class="stat-value red">~90%</div>
         <div class="stat-note">of government budget · IMF / World Bank</div>
       </div>
+      <div class="stat">
+        <div class="stat-label">EIA crude production</div>
+        <div class="stat-value" id="stat-live-prod-val">—</div>
+        <div class="stat-note" id="stat-live-prod-note">EIA</div>
+      </div>
     </div>
     <div class="src-line">Sources: Kpler April 7 2026 · Reuters · Iraq Oil Ministry March 17 2026 · OilPrice.com April 22 2026 · EIA Country Analysis Brief · IMF</div>
   </div>
@@ -519,6 +524,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   <div class="footer-bottom">
     <span>Contango Energy · Open source · MIT license · <a href="methodology.html" style="color:var(--muted)">Methodology</a></span>
   </div>
+<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
 </footer>
 
 <script>
@@ -542,6 +548,31 @@ async function loadEvents(){
     renderStats(e.country_stats?.iraq||null);
   }catch(err){
     console.warn('events.json failed:',err.message);
+  }
+}
+
+function fmtMonth(p){
+  if(!p) return '';
+  const m=/^(\d{4})-(\d{2})/.exec(p);
+  if(!m) return p;
+  const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return names[parseInt(m[2],10)-1]+' '+m[1];
+}
+
+async function loadPrices(){
+  try{
+    const r=await fetch('data/prices.json?_='+Date.now(),{cache:'no-store'});
+    if(!r.ok) return;
+    const d=await r.json();
+    const prod=(d.production||{}).iraq||{};
+    if(prod.value!=null){
+      const v=document.getElementById('stat-live-prod-val');
+      const n=document.getElementById('stat-live-prod-note');
+      if(v) v.textContent=(prod.value/1000).toFixed(1)+'M bbl/d';
+      if(n) n.textContent=(fmtMonth(prod.period)||'')+' · EIA';
+    }
+  }catch(err){
+    console.warn('prices.json failed:',err.message);
   }
 }
 
@@ -577,7 +608,7 @@ function renderStats(stats){
   if(metaEl&&stats.updated) metaEl.textContent='Updated '+stats.updated;
 }
 
-document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();});
+document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();loadPrices();});
 </script>
 <script>
 (function(){
@@ -617,6 +648,9 @@ document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();});
     chart.update();
   },50));
 })();
+</script>
+<script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
+(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>

@@ -161,6 +161,11 @@ footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem}
         <div class="stat-sub" id="brent-chg">—</div>
       </div>
       <div class="stat-cell">
+        <div class="stat-label">Live crude output</div>
+        <div class="stat-value" id="live-prod-val">—</div>
+        <div class="stat-unit" id="live-prod-unit">EIA</div>
+      </div>
+      <div class="stat-cell">
         <div class="stat-label">Pre-war production</div>
         <div class="stat-value">10.2<span style="font-size:1.1rem">M</span></div>
         <div class="stat-unit">bbl/day · Feb 2026 · OPEC</div>
@@ -444,6 +449,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem}
     </div>
   </div>
   <div class="footer-copy">Contango Energy · Open source · MIT license · Data compiled as indicative · Not financial advice</div>
+<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
 </footer>
 
 <script>
@@ -470,6 +476,13 @@ async function loadData(){
 }
 
 // ── PRICES ────────────────────────────────────────────────────────────────────
+function fmtMonth(p){
+  if(!p)return'';
+  const m=/^(\d{4})-(\d{2})/.exec(p);
+  if(!m)return p;
+  const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return names[parseInt(m[2],10)-1]+' '+m[1];
+}
 function renderPrices(prices){
   const bm=prices.benchmarks||{};
   const brent=bm.brent||{};
@@ -480,6 +493,13 @@ function renderPrices(prices){
     set('brent-chg',(brent.change_pct>=0?'+':'')+brent.change_pct.toFixed(2)+'%');
     set('brent-date',brent.updated||'');
     setCls('brent-chg',brent.change_pct>=0?'pos':'neg');
+  }
+  const prod=(prices.production||{}).saudi_arabia||{};
+  if(prod.value!=null){
+    const pv=document.getElementById('live-prod-val');
+    if(pv)pv.innerHTML=(prod.value/1000).toFixed(1)+'<span style="font-size:1.1rem">M</span> bbl/d';
+    const pu=document.getElementById('live-prod-unit');
+    if(pu)pu.textContent=(fmtMonth(prod.period)||'')+' · EIA';
   }
 }
 
@@ -588,6 +608,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   window._sc=buildChart();
   loadData();
 });
+</script>
+<script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
+(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>
