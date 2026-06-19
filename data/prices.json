@@ -1,6 +1,6 @@
 {
   "_note": "Benchmarks auto-updated daily by updater.py via GitHub Actions. OSP differentials updated manually ~1st of each month via osp_update.py. Absolute OSP prices are computed: differential + oman_dubai spot.",
-  "_updated": "2026-06-19T18:57:27.388897Z",
+  "_updated": "2026-06-19T19:10:53.935449Z",
   "_osp_month": "March 2026",
   "_osp_updated": "2026-03-01",
   "benchmarks": {
@@ -265,5 +265,28 @@
       "hl": "East-West pipeline at 38% of 5M bbl/d capacity. Yanbu port is the binding constraint.",
       "time": "March 2026"
     }
-  ]
+  ],
+  "production": {
+    "saudi_arabia": {
+      "value": 10760.0,
+      "unit": "thousand bbl/day",
+      "period": "2026-02",
+      "grade": "crude incl. lease condensate",
+      "source": "EIA (INTL.57-1-SAU)"
+    },
+    "iraq": {
+      "value": 4461.0,
+      "unit": "thousand bbl/day",
+      "period": "2026-02",
+      "grade": "crude incl. lease condensate",
+      "source": "EIA (INTL.57-1-IRQ)"
+    }
+  },
+  "spr": {
+    "value": 414825.0,
+    "unit": "thousand barrels",
+    "period": "2026-03",
+    "description": "U.S. crude oil in Strategic Petroleum Reserve",
+    "source": "EIA (MCSSTUS1)"
+  }
 }
