@@ -20,6 +20,62 @@ def fetch(series_id, api_key):
         print(f"  WARNING: fetch failed for {series_id}: {e}", file=sys.stderr)
         return []
 
+def write_history(existing, today):
+    """Append (or update, if today already exists) one daily row to the
+    crude price time-series in JSON Lines format. Pure local file work —
+    does not touch prices.json or hit any API."""
+    history_path = Path("data/history/crude-daily.jsonl")
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+
+    benchmarks = existing.get("benchmarks", {}) or {}
+    brent = benchmarks.get("brent") if isinstance(benchmarks.get("brent"), dict) else {}
+    wti = benchmarks.get("wti") if isinstance(benchmarks.get("wti"), dict) else {}
+
+    osps = existing.get("osps", {}) or {}
+    arab = osps.get("arab_light") if isinstance(osps, dict) and isinstance(osps.get("arab_light"), dict) else {}
+
+    entry = {
+        "date": today,
+        "brent": brent.get("price"),
+        "brent_change_pct": brent.get("change_pct"),
+        "wti": wti.get("price"),
+        "wti_change_pct": wti.get("change_pct"),
+        "arab_light_osp": arab.get("price"),
+        "arab_light_spread_vs_brent": arab.get("spread_vs_brent"),
+    }
+    line = json.dumps(entry)
+
+    # Idempotent: if today's date is already present, rewrite that line in
+    # place; otherwise append a single line (no full-file rewrite).
+    existing_lines = []
+    if history_path.exists():
+        existing_lines = history_path.read_text(encoding="utf-8").splitlines()
+
+    replaced = False
+    out = []
+    for ln in existing_lines:
+        if not ln.strip():
+            continue
+        try:
+            rec = json.loads(ln)
+        except Exception:
+            out.append(ln)  # preserve anything unparseable rather than drop it
+            continue
+        if rec.get("date") == today:
+            out.append(line)
+            replaced = True
+        else:
+            out.append(ln)
+
+    if replaced:
+        history_path.write_text("\n".join(out) + "\n", encoding="utf-8")
+        print(f"History: updated entry for {today} in {history_path}")
+    else:
+        with history_path.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+        print(f"History: appended entry for {today} to {history_path}")
+
+
 def main():
     api_key = os.environ.get("EIA_API_KEY", "").strip()
     if not api_key:
@@ -77,6 +133,9 @@ def main():
     existing["_updated"] = datetime.datetime.utcnow().isoformat() + "Z"
     prices_path.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
     print(f"Done. Saved to {prices_path}")
+
+    # Also append today's row to the long-lived time-series history.
+    write_history(existing, today)
 
 if __name__ == "__main__":
     main()
