@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-06-09",
+  "_updated": "2026-06-22",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,275 @@
     ]
   },
   "timeline": [
+    {
+      "date": "21 Jun 2026",
+      "type": "critical",
+      "src": "Kpler analytics \u00b7 Arab Herald 22 Jun 2026",
+      "hl": "Iran blocks Strait of Hormuz; tanker transit plummets from 26 to 5 ships in one day",
+      "detail": "Data from analytics firm Kpler showed five ships crossed the Strait of Hormuz on June 21, down from 26 ships on June 20. Iran declared the waterway closed on June 20 in retaliation for Israeli strikes in Lebanon. Three ships were identified as very large crude carriers (VLCC) each holding 2 million barrels of Saudi crude and fuel oil, with one heading to Japan.",
+      "numbers": [
+        {
+          "val": "5 ships",
+          "lbl": "tankers transiting Hormuz on June 21"
+        },
+        {
+          "val": "26 ships",
+          "lbl": "tankers transiting Hormuz on June 20"
+        },
+        {
+          "val": "2 million barrels",
+          "lbl": "capacity per VLCC"
+        },
+        {
+          "val": "20%",
+          "lbl": "world oil and gas supplies normally transiting strait prewar"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "http://www.arabherald.com/news/279139413/encouraging-progress-at-us-iran-talks-but-few-details-released",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "http://www.arabherald.com/news/279139413/encouraging-progress-at-us-iran-talks-but-few-details-released"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "important",
+      "src": "myanmarnews.net \u00b7 22 Jun 2026",
+      "hl": "Iran lifts Strait blockade after cease-fire extension, then reimposed by IRGC",
+      "detail": "Tehran lifted its blockade of the Strait of Hormuz after agreeing with the US to extend a cease-fire announced in April for 60 days to allow peace negotiations. On June 20, the Islamic Revolutionary Guards Corps declared the waterway closed in response to Israeli strikes in Lebanon. Kpler data showed five ships crossed on June 21, down from 26 ships on June 20, including three VLCCs carrying 2 million barrels each of Saudi crude and fuel oil.",
+      "numbers": [
+        {
+          "val": "60 days",
+          "lbl": "cease-fire extension duration"
+        },
+        {
+          "val": "5 ships",
+          "lbl": "vessels crossing Strait on June 21 per Kpler"
+        },
+        {
+          "val": "26 ships",
+          "lbl": "vessels crossing Strait on June 20 per Kpler"
+        },
+        {
+          "val": "2 million barrels",
+          "lbl": "capacity per VLCC"
+        },
+        {
+          "val": "20 percent",
+          "lbl": "world oil and gas supplies transiting Strait prewar"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "http://www.myanmarnews.net/news/279139413/encouraging-progress-at-us-iran-talks-but-few-details-released",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "http://www.myanmarnews.net/news/279139413/encouraging-progress-at-us-iran-talks-but-few-details-released"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 22 Jun 2026",
+      "hl": "Iran closes Strait of Hormuz again, citing US failure to halt Lebanon fighting",
+      "detail": "Iran announced it had again closed the Strait of Hormuz, citing US failure to meet commitments to halt fighting in Lebanon under a memorandum of understanding reached the previous week. A US diplomat told Axios that during talks in Switzerland, parties made good progress on keeping the strait open and focused on enforcing the ceasefire in Lebanon and the nuclear deal.",
+      "numbers": [
+        {
+          "val": "60 days",
+          "lbl": "duration of extended ceasefire under new agreement"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.chronicle.lu/category/international-news/61936-trump-threatens-new-attacks-as-us-iran-peace-talks-open-in-switzerland",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "https://www.chronicle.lu/category/international-news/61936-trump-threatens-new-attacks-as-us-iran-peace-talks-open-in-switzerland"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "important",
+      "src": "Reuters \u00b7 22 Jun 2026",
+      "hl": "Four Qatari LNG tankers enter Strait of Hormuz after Iran ceasefire agreement",
+      "detail": "Four liquefied natural gas tankers controlled by Qatar (Wadi Al Sail, Mekaines, Al Sadd, Mesaimeer) entered the Strait of Hormuz on 22 June 2026 via the Iranian route for the first time since the US-Israeli war with Iran began on 28 February 2025, ship-tracking data from Kpler showed. This occurred after Iran lifted its blockade following a 60-day ceasefire extension agreement with the US, though Tehran's Islamic Revolutionary Guard Corps declared the waterway shut again on Saturday in response to Israeli strikes in Lebanon.",
+      "numbers": [
+        {
+          "val": "4",
+          "lbl": "Qatari LNG tankers entering Hormuz"
+        },
+        {
+          "val": "26 ships",
+          "lbl": "vessels transiting on 20 Jun 2026"
+        },
+        {
+          "val": "5 vessels",
+          "lbl": "vessels transiting on 21 Jun 2026"
+        },
+        {
+          "val": "17 million barrels",
+          "lbl": "oil transited on 20 Jun 2026 per US Central Command"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "qatar",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.chronicle.lu/category/international/61932-qatar-brings-lng-tankers-into-hormuz-despite-shipping-slowdown",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "https://www.chronicle.lu/category/international/61932-qatar-brings-lng-tankers-into-hormuz-despite-shipping-slowdown"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "important",
+      "src": "Asharq Al-Awsat \u00b7 22 June 2026",
+      "hl": "Strait of Hormuz closure costs Iraq $37 billion; pre-crisis output 4.2 million bpd.",
+      "detail": "Regional war and Strait of Hormuz closure have pushed Iraq into a severe economic crisis. Financial and energy analysts estimate Iraq's losses at more than $37 billion. Before the crisis, Iraq produced more than 4.2 million barrels per day, including approximately 3.5 million barrels exported internationally. Energy experts caution Iraqi oil fields may require months to return to prewar output levels.",
+      "numbers": [
+        {
+          "val": "$37 billion",
+          "lbl": "Estimated Iraqi losses from Hormuz closure"
+        },
+        {
+          "val": "4.2 million bpd",
+          "lbl": "Iraq's pre-crisis oil production"
+        },
+        {
+          "val": "3.5 million bpd",
+          "lbl": "Iraq's pre-crisis oil exports to international markets"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iraq",
+        "prices"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://english.aawsat.com/business/5287019-high-cost-hormuz-37-billion-shock-exposes-iraq%E2%80%99s-economic-vulnerability",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "https://english.aawsat.com/business/5287019-high-cost-hormuz-37-billion-shock-exposes-iraq%E2%80%99s-economic-vulnerability"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 22 Jun 2026",
+      "hl": "Iran closes Strait of Hormuz again citing US failures in Lebanon ceasefire enforcement.",
+      "detail": "Iran announced over the weekend of 20-21 June 2026 that it had again closed the Strait of Hormuz, citing US failure to meet commitments to halt fighting in Lebanon. The closure occurred as Vice President JD Vance met Iranian officials at Buergenstock, Switzerland for first talks under interim peace deal reached the previous week extending ceasefire from April for at least 60 days.",
+      "numbers": [
+        {
+          "val": "60 days",
+          "lbl": "ceasefire extension period"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.chronicle.lu/category/international/61936-trump-threatens-new-attacks-as-us-iran-peace-talks-open-in-switzerland",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "https://www.chronicle.lu/category/international/61936-trump-threatens-new-attacks-as-us-iran-peace-talks-open-in-switzerland"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "important",
+      "src": "AOG Digital \u00b7 22 Jun 2026; Kpler shipping data; U.S. Central Command",
+      "hl": "Four Qatari LNG tankers transit Hormuz after Iran declares waterway closed",
+      "detail": "Four Qatari LNG carriers\u2014Wadi Al Sail, Mekaines, Al Sadd and Mesaimeer\u2014entered the Strait of Hormuz on Monday via the Iranian route for the first time since the U.S.-Israeli war with Iran began February 28, despite Iran's Islamic Revolutionary Guard Corps declaring the waterway shut on Saturday. U.S. Central Command reported 55 merchant ships transited Saturday carrying more than 17 million barrels of oil. Kpler data showed five vessels passed Sunday, down from 26 the day prior.",
+      "numbers": [
+        {
+          "val": "4",
+          "lbl": "Qatari LNG tankers entered Hormuz"
+        },
+        {
+          "val": "55",
+          "lbl": "merchant ships transited Hormuz Saturday"
+        },
+        {
+          "val": "17 million barrels",
+          "lbl": "oil volume transited Saturday per U.S. Central Command"
+        },
+        {
+          "val": "5",
+          "lbl": "vessels passed strait Sunday"
+        },
+        {
+          "val": "26",
+          "lbl": "ships spotted Saturday"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "prices",
+        "qatar",
+        "tankers"
+      ],
+      "confidence": 0.88,
+      "article_url": "https://aogdigital.com/news/qatari-lng-carriers-re-enter-hormuz-as-traffic-through-strait-slumps",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "https://aogdigital.com/news/540500-qatari-lng-carriers-reenter-hormuz-as-traffic-through-strait-slumps"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 22 Jun 2026",
+      "hl": "Iran closes Strait of Hormuz again; ship traffic plunges to 5 vessels from 26",
+      "detail": "Iran's Islamic Revolutionary Guard Corps closed the Strait of Hormuz on Saturday in response to Israeli strikes in Lebanon, citing violations of an interim peace deal. Kpler shipping data showed only 5 vessels passed the strait on Sunday, down from 26 on Saturday. The vessels included three VLCCs carrying 2 million barrels of Saudi crude and fuel oil each, with one heading to Japan.",
+      "numbers": [
+        {
+          "val": "5 vessels",
+          "lbl": "ships that passed Strait of Hormuz on Sunday"
+        },
+        {
+          "val": "26 vessels",
+          "lbl": "ships that passed Strait of Hormuz on Saturday"
+        },
+        {
+          "val": "2 million barrels",
+          "lbl": "capacity per VLCC carrying Saudi crude"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.95,
+      "article_url": "http://www.jpost.com/middle-east/iran-news/article-900090",
+      "_auto": true,
+      "_extracted": "2026-06-22",
+      "_source_url": "http://www.jpost.com/middle-east/iran-news/article-900090"
+    },
     {
       "date": "09 Jun 2026",
       "type": "important",
@@ -820,5 +1089,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-06-21"
+  "_news_checked": "2026-06-22"
 }
