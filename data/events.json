@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-06-22",
+  "_updated": "2026-06-23",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,95 @@
     ]
   },
   "timeline": [
+    {
+      "date": "23 Jun 2026",
+      "type": "important",
+      "src": "Reuters \u00b7 23 Jun 2026",
+      "hl": "US waives Iran sanctions for 60 days following peace talks; tanker traffic resumes in Strait of Hormuz",
+      "detail": "The United States waived sanctions on Iran for 60 days from June 23, 2026, following talks in Switzerland on a nascent peace deal. The waiver, announced by the U.S. Treasury and effective until August 21, allows Iran to sell oil and related products and receive payment. Tanker traffic through the Strait of Hormuz started to pick up on Monday following agreement on a communications mechanism for safe commercial passage.",
+      "numbers": [
+        {
+          "val": "60 days",
+          "lbl": "duration of sanctions waiver"
+        },
+        {
+          "val": "3%",
+          "lbl": "crude price decline on Monday"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.al-monitor.com/originals/2026/06/us-waives-iran-sanctions-trump-says-he-will-do-what-i-have-if-tehran-misbehaves",
+      "_auto": true,
+      "_extracted": "2026-06-23",
+      "_source_url": "https://www.al-monitor.com/originals/2026/06/us-waives-iran-sanctions-trump-says-he-will-do-what-i-have-if-tehran-misbehaves"
+    },
+    {
+      "date": "23 Jun 2026",
+      "type": "important",
+      "src": "WRAL \u00b7 23 June 2026",
+      "hl": "Iran-U.S. 60-day negotiating period established; Iran agrees not to charge tolls during talks",
+      "detail": "A memorandum of understanding allows Iran to manage the Strait of Hormuz while holding discussions with Oman and six other Gulf states to define future administration. Iran agreed not to charge transiting vessels tolls for 60 days. President Trump suggested the U.S. might impose its own tolls if a final deal is not reached during the negotiating period.",
+      "numbers": [
+        {
+          "val": "60",
+          "lbl": "days for negotiating period and toll moratorium"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.wral.com/news/ap/e6039-the-strait-of-hormuzs-future-is-unsettled-even-as-more-ships-venture-through/",
+      "_auto": true,
+      "_extracted": "2026-06-23",
+      "_source_url": "https://www.wral.com/news/ap/e6039-the-strait-of-hormuzs-future-is-unsettled-even-as-more-ships-venture-through/"
+    },
+    {
+      "date": "22 Jun 2026",
+      "type": "important",
+      "src": "Kuwait Petroleum Corporation CEO (via Kuwait News Agency) \u00b7 22 Jun 2026",
+      "hl": "Kuwait expects oil output to reach 2 million bpd within a week following Strait of Hormuz reopening",
+      "detail": "KPC CEO stated Kuwait expects output to reach 2 million bpd within a week. Production had collapsed to 573,000 bpd in May following Iran's closure of the Strait of Hormuz in late February. The Strait reopened following a memorandum of understanding between the United States and Iran.",
+      "numbers": [
+        {
+          "val": "2 million bpd",
+          "lbl": "Kuwait expected oil output within one week"
+        },
+        {
+          "val": "573,000 bpd",
+          "lbl": "Kuwait production in May 2026"
+        },
+        {
+          "val": "2.7 million bpd",
+          "lbl": "Kuwait prewar production levels"
+        },
+        {
+          "val": "13 million bpd",
+          "lbl": "Shut-in Middle Eastern production available for restoration"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "kuwait",
+        "opec"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.naturalnews.com/2026-06-22-kuwait-expects-oil-output-2-million-bpd-kpc-ceo.html",
+      "_auto": true,
+      "_extracted": "2026-06-23",
+      "_source_url": "https://www.naturalnews.com/2026-06-22-kuwait-expects-oil-output-2-million-bpd-kpc-ceo.html"
+    },
     {
       "date": "21 Jun 2026",
       "type": "critical",
@@ -1089,5 +1178,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-06-22"
+  "_news_checked": "2026-06-23"
 }
