@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-06-23",
+  "_updated": "2026-06-24",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,34 @@
     ]
   },
   "timeline": [
+    {
+      "date": "24 Jun 2026",
+      "type": "important",
+      "src": "Times of Oman \u00b7 24 June 2026",
+      "hl": "US lifts sanctions on Iranian oil exports for 60 days until August 21, 2026",
+      "detail": "The United States temporarily lifted sanctions on Iranian oil and petrochemical exports for 60 days until August 21, 2026. The waiver covers banking, insurance and shipping linked to Iranian oil exports and allows Iran to transact with international partners and receive payments in dollars. Iranian Foreign Minister Seyed Abbas Araghchi stated that oil and petrochemical exports are waived, the blockade is lifted, and frozen assets are being released.",
+      "numbers": [
+        {
+          "val": "60 days",
+          "lbl": "duration of sanctions waiver"
+        },
+        {
+          "val": "6.79 million barrels",
+          "lbl": "Iranian crude oil exports through Strait of Hormuz week of June 15"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.82,
+      "article_url": "https://timesofoman.com/article/173438-what-us-sanctions-relief-on-iranian-oil-means-for-global-energy-market",
+      "_auto": true,
+      "_extracted": "2026-06-24",
+      "_source_url": "https://timesofoman.com/article/173438-what-us-sanctions-relief-on-iranian-oil-means-for-global-energy-market"
+    },
     {
       "date": "23 Jun 2026",
       "type": "important",
@@ -1178,5 +1206,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-06-23"
+  "_news_checked": "2026-06-24"
 }
