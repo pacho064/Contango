@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-06-24",
+  "_updated": "2026-07-06",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,163 @@
     ]
   },
   "timeline": [
+    {
+      "date": "06 Jul 2026",
+      "type": "important",
+      "src": "Al Jazeera \u00b7 6 July 2026",
+      "hl": "Seven OPEC+ members to increase oil output by 188,000 barrels per day",
+      "detail": "Seven OPEC+ members, including Saudi Arabia and Russia, announced plans to expand monthly oil production. The increase amounts to 188,000 barrels per day according to Al Jazeera.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "Production increase by seven OPEC+ members"
+        }
+      ],
+      "tags": [
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://www.aljazeera.com/economy/2026/7/6/opec-countries-say-they-will-expand-monthly-oil-production",
+      "_auto": true,
+      "_extracted": "2026-07-06",
+      "_source_url": "https://www.aljazeera.com/economy/2026/7/6/opec-countries-say-they-will-expand-monthly-oil-production"
+    },
+    {
+      "date": "06 Jul 2026",
+      "type": "important",
+      "src": "AsiaOne \u00b7 6 July 2026",
+      "hl": "Seven OPEC+ countries agree to increase oil production by 188,000 bpd in August",
+      "detail": "OPEC+ announced on 5 July that Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman would expand combined oil production by 188,000 barrels per day in August. This was the fifth consecutive month OPEC+ agreed to raise oil outputs. The group stated countries would continue monitoring market conditions and adopt a cautious approach to support market stability.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "Combined production increase in August"
+        },
+        {
+          "val": "US$72/barrel",
+          "lbl": "Brent crude price on 6 July 2026"
+        },
+        {
+          "val": "US$120/barrel",
+          "lbl": "Brent crude peak price in March 2026"
+        }
+      ],
+      "tags": [
+        "iraq",
+        "kuwait",
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.asiaone.com/money/7-opec-countries-agree-expand-monthly-oil-production-modestly-prices-slide",
+      "_auto": true,
+      "_extracted": "2026-07-06",
+      "_source_url": "https://www.asiaone.com:443/money/7-opec-countries-agree-expand-monthly-oil-production-modestly-prices-slide"
+    },
+    {
+      "date": "06 Jul 2026",
+      "type": "important",
+      "src": "Siasat.com \u00b7 6 July 2026",
+      "hl": "OPEC+ seven countries to increase oil production by 188,000 bpd in August",
+      "detail": "OPEC+ announced on Sunday that Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman would expand oil production by a combined total of 188,000 barrels per day in August. This marks the fifth consecutive month OPEC+ agreed to raise oil outputs. The decision came as crude oil prices declined following a US-Iran interim deal.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "Combined production increase in August"
+        },
+        {
+          "val": "$72/barrel",
+          "lbl": "Brent crude price at Sunday night open"
+        },
+        {
+          "val": "$120/barrel",
+          "lbl": "Peak price in March"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "iran",
+        "iraq",
+        "kuwait",
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.siasat.com/some-in-opec-to-expand-monthly-oil-production-as-prices-slide-3502057/",
+      "_auto": true,
+      "_extracted": "2026-07-06",
+      "_source_url": "https://www.siasat.com/some-in-opec-to-expand-monthly-oil-production-as-prices-slide-3502057/"
+    },
+    {
+      "date": "05 Jul 2026",
+      "type": "important",
+      "src": "WRAL.com (AP) \u00b7 5 July 2026",
+      "hl": "Seven OPEC+ countries to increase combined oil production by 188,000 bpd in August",
+      "detail": "OPEC+ announced on Sunday that Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman would expand oil production by a combined total of 188,000 barrels per day in August. This marks the fifth consecutive month OPEC+ agreed to raise oil outputs. The decision follows crude oil price declines to levels not seen since before the U.S. and Israel's war with Iran.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "Combined production increase by 7 OPEC+ countries in August"
+        },
+        {
+          "val": "$72/barrel",
+          "lbl": "Brent crude price when commodities trading opened Sunday night"
+        },
+        {
+          "val": "$120/barrel",
+          "lbl": "Brent crude peak price in March during war"
+        }
+      ],
+      "tags": [
+        "iran",
+        "iraq",
+        "kuwait",
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.wral.com/news/ap/bae40-7-opec-countries-agree-to-expand-monthly-oil-production-modestly-as-prices-slide/",
+      "_auto": true,
+      "_extracted": "2026-07-06",
+      "_source_url": "https://www.wral.com/news/ap/bae40-7-opec-countries-agree-to-expand-monthly-oil-production-modestly-as-prices-slide/"
+    },
+    {
+      "date": "06 Jul 2026",
+      "type": "important",
+      "src": "ZeroHedge \u00b7 6 July 2026 (citing Iranian Ambassador Abdolreza Rahmani Fazli speech at World Peace Forum in Beijing)",
+      "hl": "Iran plans service fees for Hormuz transit with special rates for China and friendly nations",
+      "detail": "Iranian Ambassador Abdolreza Rahmani Fazli stated Iran will impose service fees on vessels transiting the Strait of Hormuz, with China and other friendly countries receiving special considerations on fee levels and types. Fees are framed as charges for security, administration, and environmental management rather than tolls. Iran is working with Oman on new transit arrangements for the strait.",
+      "numbers": [
+        {
+          "val": "one-fifth",
+          "lbl": "share of world oil exports through Hormuz before recent conflict"
+        },
+        {
+          "val": "90%",
+          "lbl": "approximate share of Iran's oil exports purchased by China"
+        },
+        {
+          "val": "60 days",
+          "lbl": "period for free commercial transit under June 15 Iran-US MoU"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.78,
+      "article_url": "https://www.zerohedge.com/geopolitical/iran-grant-china-friendly-countries-special-consideration-hormuz-fees",
+      "_auto": true,
+      "_extracted": "2026-07-06",
+      "_source_url": "https://www.zerohedge.com/geopolitical/iran-grant-china-friendly-countries-special-consideration-hormuz-fees"
+    },
     {
       "date": "24 Jun 2026",
       "type": "important",
@@ -1206,5 +1363,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-05"
+  "_news_checked": "2026-07-06"
 }
