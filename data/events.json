@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-06",
+  "_updated": "2026-07-08",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,101 @@
     ]
   },
   "timeline": [
+    {
+      "date": "05 Jul 2026",
+      "type": "important",
+      "src": "OPEC+ \u00b7 5 July 2026",
+      "hl": "OPEC+ approves 188,000 bpd production increase for August across seven members",
+      "detail": "Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman will raise combined production by 188,000 barrels per day in August. OPEC+ stated the countries will continue monitoring market conditions and reaffirmed the importance of adopting a cautious approach to support market stability. This marks the fifth consecutive monthly increase in output.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "Combined production increase for August"
+        },
+        {
+          "val": "$72/barrel",
+          "lbl": "Brent crude price on 5 July 2026 evening"
+        },
+        {
+          "val": "$120/barrel",
+          "lbl": "Brent crude peak price in March 2026"
+        }
+      ],
+      "tags": [
+        "iraq",
+        "kuwait",
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.92,
+      "article_url": "http://www.baltimorestar.com/news/279170846/opec-approves-modest-august-production-increase-amid-price-slide",
+      "_auto": true,
+      "_extracted": "2026-07-08",
+      "_source_url": "http://www.baltimorestar.com/news/279170846/opec-approves-modest-august-production-increase-amid-price-slide"
+    },
+    {
+      "date": "05 Jul 2026",
+      "type": "important",
+      "src": "OPEC+ \u00b7 5 Jul 2026",
+      "hl": "OPEC+ approves 188,000 bpd August production increase from seven members",
+      "detail": "Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman agreed to raise combined production by 188,000 barrels per day in August, marking the fifth consecutive monthly increase. OPEC+ stated the countries will continue monitoring market conditions and adopt a cautious approach to support market stability.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "Combined production increase for August"
+        },
+        {
+          "val": "5",
+          "lbl": "Consecutive monthly increases"
+        }
+      ],
+      "tags": [
+        "iraq",
+        "kuwait",
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.85,
+      "article_url": "http://www.russiaherald.com/news/279170846/opec-approves-modest-august-production-increase-amid-price-slide",
+      "_auto": true,
+      "_extracted": "2026-07-08",
+      "_source_url": "http://www.russiaherald.com/news/279170846/opec-approves-modest-august-production-increase-amid-price-slide"
+    },
+    {
+      "date": "07 Jul 2026",
+      "type": "important",
+      "src": "Caribbean Herald \u00b7 7 Jul 2026",
+      "hl": "OPEC+ approves 188,000 bpd production increase for August with seven members participating",
+      "detail": "OPEC+ announced on July 5 that Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman would raise combined production by 188,000 barrels per day in August. The group stated the countries would continue monitoring market conditions and reaffirmed the importance of a cautious approach to support market stability. This marks the fifth consecutive monthly increase in output.",
+      "numbers": [
+        {
+          "val": "188,000 bpd",
+          "lbl": "combined production increase by seven OPEC+ members for August"
+        },
+        {
+          "val": "$72/barrel",
+          "lbl": "Brent crude price on July 5 evening"
+        },
+        {
+          "val": "$120/barrel",
+          "lbl": "Brent crude peak price in March during conflict"
+        }
+      ],
+      "tags": [
+        "iraq",
+        "kuwait",
+        "opec",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.85,
+      "article_url": "http://www.caribbeanherald.com/news/279170846/opec-approves-modest-august-production-increase-amid-price-slide",
+      "_auto": true,
+      "_extracted": "2026-07-08",
+      "_source_url": "http://www.caribbeanherald.com/news/279170846/opec-approves-modest-august-production-increase-amid-price-slide"
+    },
     {
       "date": "06 Jul 2026",
       "type": "important",
@@ -1363,5 +1458,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-07"
+  "_news_checked": "2026-07-08"
 }
