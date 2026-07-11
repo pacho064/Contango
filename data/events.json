@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-08",
+  "_updated": "2026-07-11",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,117 @@
     ]
   },
   "timeline": [
+    {
+      "date": "11 Jul 2026",
+      "type": "important",
+      "src": "AsiaOne \u00b7 11 July 2026",
+      "hl": "Strait of Hormuz reopened late June after closure; traffic slowed again this week following US-Iran attacks",
+      "detail": "The Strait of Hormuz reopened in late June, enabling rival Middle Eastern producers to resume exports. However, traffic through the vital waterway slowed again this week after tit-for-tat attacks between the US and Iran. Between June 15 and July 6, about 30 million barrels of Iranian oil were loaded, equivalent to 1.35 million barrels per day, according to tanker tracker Vortexa Analytics.",
+      "numbers": [
+        {
+          "val": "30 million barrels",
+          "lbl": "Iranian oil loaded June 15-July 6"
+        },
+        {
+          "val": "1.35 million barrels per day",
+          "lbl": "Iranian crude loading rate (Vortexa Analytics)"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://www.asiaone.com/world/iran-oil-stuck-sea-surges-chinas-teapots-turn-rival-middle-east-supplies-traders-say",
+      "_auto": true,
+      "_extracted": "2026-07-11",
+      "_source_url": "https://www.asiaone.com/world/iran-oil-stuck-sea-surges-chinas-teapots-turn-rival-middle-east-supplies-traders-say"
+    },
+    {
+      "date": "10 Jul 2026",
+      "type": "important",
+      "src": "IEA \u00b7 10 Jul 2026",
+      "hl": "IEA warns US-Iran escalation could upend oil surplus forecast; Gulf exports down 33% from pre-war levels",
+      "detail": "IEA reports global oil supply rebounded 4.1 mb/d to 98.8 mb/d in June, but remains 9.4 mb/d below pre-war levels. Gulf total exports increased 6.5 mb/d MoM to 16.1 mb/d in June versus 24 mb/d pre-war average. IEA forecast supply will decline to 102.6 mb/d in 2026 contingent on swift de-escalation. War insurance for ships in the Gulf reached 3% of vessel value, up from 2% end of prior week, with quotes as high as 5% circulating.",
+      "numbers": [
+        {
+          "val": "4.1 mb/d",
+          "lbl": "June supply rebound MoM"
+        },
+        {
+          "val": "9.4 mb/d",
+          "lbl": "Current supply deficit vs pre-war"
+        },
+        {
+          "val": "16.1 mb/d",
+          "lbl": "June Gulf exports"
+        },
+        {
+          "val": "3%",
+          "lbl": "War insurance rate for Gulf ships"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers",
+        "uae"
+      ],
+      "confidence": 0.82,
+      "article_url": "https://www.zerohedge.com/commodities/iea-warns-escalation-us-iran-hostilities-could-upend-oil-surplus-forecast",
+      "_auto": true,
+      "_extracted": "2026-07-11",
+      "_source_url": "https://www.zerohedge.com/commodities/iea-warns-escalation-us-iran-hostilities-could-upend-oil-surplus-forecast"
+    },
+    {
+      "date": "11 Jul 2026",
+      "type": "critical",
+      "src": "Asia One \u00b7 11 Jul 2026",
+      "hl": "Iran demands sole control of Strait of Hormuz and payment fees from vessels",
+      "detail": "Tehran's UN diplomat stated that any activity in the Strait of Hormuz, including its opening or demining operations, rests exclusively with Iran. Iran has demanded the strait be under its sole control and that vessels pay fees to Tehran, despite the waterway being considered international for decades. About a fifth of all traded oil and natural gas passed through the strait before the war began.",
+      "numbers": [
+        {
+          "val": "~20%",
+          "lbl": "share of traded oil and natural gas through Strait of Hormuz before war"
+        },
+        {
+          "val": "$120/barrel",
+          "lbl": "wartime oil price highs"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.asiaone.com/world/trump-threatens-iran-after-ayatollah-ali-khamenei-funeral-saw-open-calls-his-killing",
+      "_auto": true,
+      "_extracted": "2026-07-11",
+      "_source_url": "https://www.asiaone.com:443/world/trump-threatens-iran-after-ayatollah-ali-khameneis-funeral-saw-open-calls-his-killing"
+    },
+    {
+      "date": "11 Jul 2026",
+      "type": "critical",
+      "src": "Independent \u00b7 11 Jul 2026",
+      "hl": "Iran claims sole control of Strait of Hormuz, refuses U.S. demand for public statement on passage",
+      "detail": "U.S. officials demanded Iran issue a public statement declaring the Strait of Hormuz open and that ships crossing it won't be attacked. Tehran has refused, instead insisting the route remain under Iranian control and that Iran be allowed to charge vessels transiting it. Iran's UN diplomat stated any activity in the strait 'rests exclusively with Iran.'",
+      "numbers": [],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.independent.com.mt/articles/2026-07-11/world-news/Trump-threatens-Iran-after-Ayatollah-Ali-Khamenei-s-funeral-saw-open-calls-for-his-killing-6736291287",
+      "_auto": true,
+      "_extracted": "2026-07-11",
+      "_source_url": "https://www.independent.com.mt/articles/2026-07-11/world-news/Trump-threatens-Iran-after-Ayatollah-Ali-Khamenei-s-funeral-saw-open-calls-for-his-killing-6736291287"
+    },
     {
       "date": "05 Jul 2026",
       "type": "important",
@@ -1458,5 +1569,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-10"
+  "_news_checked": "2026-07-11"
 }
