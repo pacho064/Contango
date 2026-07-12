@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-11",
+  "_updated": "2026-07-12",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,202 @@
     ]
   },
   "timeline": [
+    {
+      "date": "12 Jul 2026",
+      "type": "critical",
+      "src": "ODT \u00b7 12 Jul 2026",
+      "hl": "Iran closes Strait of Hormuz after striking container ship; US retaliates with military strikes",
+      "detail": "Iran said it closed the Strait of Hormuz after firing a warning shot that struck the GFS Galaxy, a Cyprus-flagged container ship, causing significant engine-room damage. US Central Command launched strikes after Iran's statement. Iran's Revolutionary Guards said the strait will remain closed until 'the end of US interference in this region.' Iran's blockade has caused energy prices to surge, fuelling global inflation.",
+      "numbers": [
+        {
+          "val": "1/5",
+          "lbl": "share of world oil and LNG supplies previously transiting the Strait before the war"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.odt.co.nz/news/world/us-strikes-iran-tehran-says-strait-hormuz-closed",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.odt.co.nz/news/world/us-strikes-iran-tehran-says-strait-hormuz-closed"
+    },
+    {
+      "date": "12 Jul 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 12 July 2026",
+      "hl": "Iran closes Strait of Hormuz after striking container ship; US retaliates with strikes",
+      "detail": "US Central Command said it launched strikes on Iran at 7:15 p.m. ET on Saturday, ordered by Trump, following the Islamic Revolutionary Guard Corps striking the M/V GFS Galaxy, a Cyprus-flagged container ship, in the Strait of Hormuz on Sunday. Iran said it closed the vital strait after firing a warning shot at vessels on an unapproved route and warned any retaliation would be met with a severe response. The strait previously conveyed one-fifth of the world's oil and LNG supplies.",
+      "numbers": [
+        {
+          "val": "1/5",
+          "lbl": "share of global oil and LNG supplies transiting Strait of Hormuz before war"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.95,
+      "article_url": "https://kathmandupost.com/world/2026/07/12/us-launches-more-strikes-on-iran-after-commercial-ship-struck-in-strait-of-hormuz",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://kathmandupost.com/world/2026/07/12/us-launches-more-strikes-on-iran-after-commercial-ship-struck-in-strait-of-hormuz"
+    },
+    {
+      "date": "12 Jul 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 12 Jul 2026",
+      "hl": "Iran closes Strait of Hormuz after missile exchanges with U.S., Gulf states targeted",
+      "detail": "Iran said it closed the Strait of Hormuz after firing a warning shot that struck a vessel on an unapproved route and disabled a second vessel on Sunday. Iran's Revolutionary Guards stated the strait will remain closed until the end of U.S. interference in the region. U.S. Central Command reported hitting 140 Iranian military targets on Saturday out of more than 300 during three nights of strikes. Qatar, Kuwait, Oman, and Jordan reported Iranian attacks on military facilities, with Qatar's government saying three people including a child were injured by falling shrapnel.",
+      "numbers": [
+        {
+          "val": "140",
+          "lbl": "Iranian military targets hit by U.S. on Saturday"
+        },
+        {
+          "val": "300+",
+          "lbl": "Iranian targets hit during three nights of U.S. strikes"
+        },
+        {
+          "val": "1/5",
+          "lbl": "Share of world oil and LNG shipments transiting strait before war"
+        }
+      ],
+      "tags": [
+        "critical",
+        "hormuz",
+        "iran",
+        "kuwait",
+        "qatar",
+        "tankers",
+        "uae"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.al-monitor.com/originals/2026/07/us-strikes-iran-tehran-says-strait-hormuz-closed-gulf-states-hit",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.al-monitor.com/originals/2026/07/us-strikes-iran-tehran-says-strait-hormuz-closed-gulf-states-hit"
+    },
+    {
+      "date": "11 Jul 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 11 Jul 2026",
+      "hl": "Iran closes Strait of Hormuz after striking container ship; U.S. launches retaliatory strikes",
+      "detail": "Iran's Islamic Revolutionary Guard Corps struck the M/V GFS Galaxy, a Cyprus-flagged container ship, in the Strait of Hormuz on Sunday, causing significant engine-room damage and a missing civilian crew member. Iran declared the Strait of Hormuz closed and warned of a severe response to any retaliation. U.S. Central Command launched strikes on Iran at 7:15 p.m. ET in response. The closure follows U.S. and Iran attacks over several days, prompting President Trump to declare an end to a ceasefire that began February 28.",
+      "numbers": [
+        {
+          "val": "1/5",
+          "lbl": "proportion of world oil and LNG supplies transited through Strait of Hormuz before war"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.cp24.com/news/world/2026/07/12/iran-declares-strait-of-hormuz-closed-as-unauthorized-vessel-hit/",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.cp24.com/news/world/2026/07/12/iran-declares-strait-of-hormuz-closed-as-unauthorized-vessel-hit/"
+    },
+    {
+      "date": "12 Jul 2026",
+      "type": "important",
+      "src": "CNN \u00b7 12 Jul 2026",
+      "hl": "Oman proposes draft plan for Strait of Hormuz transit with separate corridors for Iranian and international vessels",
+      "detail": "CNN reported that Oman made a draft proposal for the Strait of Hormuz including free navigation through its southern corridor in Omani territorial waters. The plan calls for vessels transiting the northern corridor through Iranian territorial waters to obtain prior approval from Iran, with no tolls imposed. Omani and Iranian negotiators agreed to continue talks at technical and political levels.",
+      "numbers": [],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.asiaone.com:443/world/us-launches-more-strikes-iran-after-commercial-ship-struck-strait-hormuz",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.asiaone.com:443/world/us-launches-more-strikes-iran-after-commercial-ship-struck-strait-hormuz"
+    },
+    {
+      "date": "12 Jul 2026",
+      "type": "critical",
+      "src": "asiaone.com \u00b7 12 Jul 2026",
+      "hl": "Iran declares Strait of Hormuz closed after unauthorised vessel hit; tanker attacks escalate",
+      "detail": "Iran declared the Strait of Hormuz closed following an unauthorised vessel strike. Three Qatari and Saudi commercial tankers came under fire earlier in the week, prompting US strikes on Iranian sites and Iranian retaliatory strikes on US military sites in Gulf states. The US revoked the license authorizing sale of Iranian crude on Tuesday after the vessels were hit.",
+      "numbers": [
+        {
+          "val": "1/5",
+          "lbl": "world oil supply transiting Strait of Hormuz before war"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "qatar",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.78,
+      "article_url": "https://www.asiaone.com/world/iran-declares-strait-hormuz-closed-unauthorised-vessel-hit",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.asiaone.com:443/world/iran-declares-strait-hormuz-closed-unauthorised-vessel-hit"
+    },
+    {
+      "date": "12 Jul 2026",
+      "type": "critical",
+      "src": "asiaone.com \u00b7 12 Jul 2026; CNN reported Saturday",
+      "hl": "Iran declares Strait of Hormuz closed after unauthorised vessel hit; Oman proposes draft corridor plan",
+      "detail": "Iran declared the Strait of Hormuz closed following an unauthorised vessel incident. CNN reported that Oman drafted a proposal allowing free navigation through its southern corridor in Omani waters, while vessels in the northern corridor through Iranian waters would require prior Iranian approval without tolls. Three Qatari and Saudi commercial tankers came under fire earlier in the week, prompting US strikes on Iranian sites and Iranian retaliation on US military sites in Gulf states.",
+      "numbers": [
+        {
+          "val": "one-fifth",
+          "lbl": "world's oil supply transited through Strait of Hormuz before the war"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "qatar",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.82,
+      "article_url": "https://www.asiaone.com/world/iran-declares-strait-hormuz-closed-unauthorised-vessel-hit",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.asiaone.com/world/iran-declares-strait-hormuz-closed-unauthorised-vessel-hit"
+    },
+    {
+      "date": "12 Jul 2026",
+      "type": "important",
+      "src": "CNN \u00b7 12 Jul 2026",
+      "hl": "Oman proposes draft plan for Strait of Hormuz transit with separate corridors for free and restricted passage",
+      "detail": "CNN reported that Oman made a draft proposal for the Strait of Hormuz including free navigation through its southern corridor in Omani territorial waters. The plan called for vessels in the northern corridor through Iranian territorial waters to obtain prior approval from Iran, with no tolls imposed. Omani and Iranian negotiators agreed to continue talks at technical and political levels.",
+      "numbers": [],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.asiaone.com/world/us-launches-more-strikes-iran-after-commercial-ship-struck-strait-hormuz",
+      "_auto": true,
+      "_extracted": "2026-07-12",
+      "_source_url": "https://www.asiaone.com/world/us-launches-more-strikes-iran-after-commercial-ship-struck-strait-hormuz"
+    },
     {
       "date": "11 Jul 2026",
       "type": "important",
@@ -1569,5 +1765,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-11"
+  "_news_checked": "2026-07-12"
 }
