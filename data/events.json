@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-12",
+  "_updated": "2026-07-13",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,39 @@
     ]
   },
   "timeline": [
+    {
+      "date": "13 Jul 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 13 July 2026",
+      "hl": "Strait of Hormuz transit falls to five-week low as US-Iran strikes escalate",
+      "detail": "Six vessels transited the Strait of Hormuz on Sunday, the lowest number in five weeks, according to Kpler ship-tracking data. Tankers exiting included the Very Large Crude Carrier Humanity carrying 2 million barrels of Iranian oil and Capetan Andreas carrying 500,000 barrels of Kuwaiti oil products. Most tankers switched off transponders during transit. Iran's Revolutionary Guards said its navy stopped two ships by shutting down their systems.",
+      "numbers": [
+        {
+          "val": "6 vessels",
+          "lbl": "Sunday transit count"
+        },
+        {
+          "val": "2 million barrels",
+          "lbl": "Iranian oil aboard Humanity tanker"
+        },
+        {
+          "val": "500,000 barrels",
+          "lbl": "Kuwaiti oil products aboard Capetan Andreas"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "kuwait",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.jpost.com/middle-east/iran-news",
+      "_auto": true,
+      "_extracted": "2026-07-13",
+      "_source_url": "https://www.jpost.com/middle-east/iran-news/article-902303"
+    },
     {
       "date": "12 Jul 2026",
       "type": "critical",
@@ -1765,5 +1798,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-12"
+  "_news_checked": "2026-07-13"
 }
