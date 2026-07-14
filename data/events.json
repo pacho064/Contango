@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-13",
+  "_updated": "2026-07-14",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,39 @@
     ]
   },
   "timeline": [
+    {
+      "date": "13 Jul 2026",
+      "type": "critical",
+      "src": "The Epoch Times \u00b7 13 Jul 2026; President Donald Trump (Truth Social post)",
+      "hl": "Trump announces 20% transit fees for Strait of Hormuz and reimposed Iran blockade",
+      "detail": "President Donald Trump announced on July 13 that the United States will impose fees at 20 percent on all cargo shipped through the Strait of Hormuz immediately and will reimpose a blockade on Iranian ports near the Gulf channel. Trump stated the U.S. will be 'THE GUARDIAN OF THE HORMUZ STRAIT' and will be reimbursed at 20 percent on all cargo for providing safety and security.",
+      "numbers": [
+        {
+          "val": "20%",
+          "lbl": "proposed transit fee on Strait of Hormuz cargo"
+        },
+        {
+          "val": "$77",
+          "lbl": "West Texas Intermediate crude price (surged >8%)"
+        },
+        {
+          "val": "$83",
+          "lbl": "Brent crude benchmark price (climbed ~9%)"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.theepochtimes.com/business/uae-doubles-oil-output-after-opec-withdrawal-6061096",
+      "_auto": true,
+      "_extracted": "2026-07-14",
+      "_source_url": "https://www.theepochtimes.com/business/uae-doubles-oil-output-after-opec-withdrawal-6061096"
+    },
     {
       "date": "13 Jul 2026",
       "type": "critical",
@@ -1798,5 +1831,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-13"
+  "_news_checked": "2026-07-14"
 }
