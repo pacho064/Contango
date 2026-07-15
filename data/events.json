@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-14",
+  "_updated": "2026-07-15",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,99 @@
     ]
   },
   "timeline": [
+    {
+      "date": "15 Jul 2026",
+      "type": "important",
+      "src": "Antiwar.com citing Axios reporter Barak Ravid \u00b7 15 Jul 2026",
+      "hl": "Saudi Arabia strikes Sanaa airport after Trump approval, shattering 2022 ceasefire with Houthis.",
+      "detail": "U.S. officials told Axios that Trump approved Saudi Crown Prince Mohammed bin Salman's request for backing a military action against the Houthis. Saudi airstrikes on Sanaa International Airport occurred Monday, July 13, targeting an Iranian flight carrying a Yemeni delegation. In response, Ansar Allah launched missile and drone attacks on a Saudi airport. Mohammed al-Farah of Ansar Allah's political bureau warned oil prices could reach $200 per barrel if escalation closes the Bab al-Mandeb and Strait of Hormuz.",
+      "numbers": [
+        {
+          "val": "$200/barrel",
+          "lbl": "Oil price warning if straits closed per Mohammed al-Farah, Ansar Allah"
+        },
+        {
+          "val": ">10 years",
+          "lbl": "Time since last Iranian aircraft landed at Sanaa airport"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://www.naturalnews.com/2026-07-14-trump-granted-saudi-prince-approval-strike-yemen.html",
+      "_auto": true,
+      "_extracted": "2026-07-15",
+      "_source_url": "https://www.naturalnews.com/2026-07-14-trump-granted-saudi-prince-approval-strike-yemen.html"
+    },
+    {
+      "date": "15 Jul 2026",
+      "type": "critical",
+      "src": "UN News \u00b7 15 Jul 2026",
+      "hl": "UN condemns escalating attacks on ships in Strait of Hormuz; IMO evacuated 11,000 seafarers in June",
+      "detail": "IMO and UN human rights chief Volker T\u00fcrk condemned multiple recent attacks on vessels in the Strait of Hormuz following breakdown of US-Iran ceasefire signed mid-June. IMO had safely evacuated approximately 11,000 seafarers in June but paused operations on 25 June after renewed attacks. Over 20,000 seafarers remain at risk in the region.",
+      "numbers": [
+        {
+          "val": "20%",
+          "lbl": "share of global oil and gas exports via Strait of Hormuz"
+        },
+        {
+          "val": "20,000",
+          "lbl": "seafarers at risk in region"
+        },
+        {
+          "val": "11,000",
+          "lbl": "seafarers evacuated by IMO in June 2026"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://www.globalissues.org/news/2026/07/15/43573",
+      "_auto": true,
+      "_extracted": "2026-07-15",
+      "_source_url": "https://www.globalissues.org/news/2026/07/14/43573"
+    },
+    {
+      "date": "14 Jul 2026",
+      "type": "critical",
+      "src": "Oman's Maritime Security Center \u00b7 14 Jul 2026",
+      "hl": "Three Liberian-flagged oil tankers attacked off Omani coast; 18 crew evacuated, three missing",
+      "detail": "Oman's Maritime Security Center reported Tuesday that three Liberian-flagged oil tankers were targeted in separate incidents off the Omani coast. The Al Bahyah, owned by Al Bahyah Inc. and based in the United Arab Emirates, was targeted approximately 9.6 nautical miles off Musandam Governorate. A Royal Navy of Oman vessel monitored the situation; 18 crew members were evacuated by nearby maritime vessels, while three crew members remained missing.",
+      "numbers": [
+        {
+          "val": "9.6 nautical miles",
+          "lbl": "distance of Al Bahyah attack from Musandam Governorate coast"
+        },
+        {
+          "val": "18 crew members",
+          "lbl": "evacuated from vessels"
+        },
+        {
+          "val": "3 crew members",
+          "lbl": "reported missing"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers",
+        "uae"
+      ],
+      "confidence": 0.85,
+      "article_url": "http://theeconomiccollapseblog.com/the-battle-for-the-strait-of-hormuz-will-show-whether-the-world-can-survive-without-oil-from-the-persian-gulf-or-not/",
+      "_auto": true,
+      "_extracted": "2026-07-15",
+      "_source_url": "http://theeconomiccollapseblog.com/the-battle-for-the-strait-of-hormuz-will-show-whether-the-world-can-survive-without-oil-from-the-persian-gulf-or-not/"
+    },
     {
       "date": "13 Jul 2026",
       "type": "critical",
@@ -1831,5 +1924,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-14"
+  "_news_checked": "2026-07-15"
 }
