@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-15",
+  "_updated": "2026-07-16",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,68 @@
     ]
   },
   "timeline": [
+    {
+      "date": "16 Jul 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 16 Jul 2026",
+      "hl": "Strait of Hormuz vessel traffic drops sharply as US blockade and Iran strikes intensify",
+      "detail": "Seven vessels crossed the Strait of Hormuz on Wednesday, down from 13 the previous day, according to Kpler data. The decline follows the US reimposition of a naval blockade on Iranian ports and Iran's closure announcement on Saturday. The strait carried about a fifth of global oil and gas shipments before the war.",
+      "numbers": [
+        {
+          "val": "7 vessels",
+          "lbl": "Strait crossings on Wednesday"
+        },
+        {
+          "val": "13 vessels",
+          "lbl": "Strait crossings on Tuesday"
+        },
+        {
+          "val": "1 million barrels",
+          "lbl": "Saudi crude on Suezmax tanker exiting Tuesday with transponder off"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.al-monitor.com/originals/2026/07/fewer-vessels-travel-through-hormuz-us-iran-continue-strikes",
+      "_auto": true,
+      "_extracted": "2026-07-16",
+      "_source_url": "https://www.al-monitor.com/originals/2026/07/fewer-vessels-travel-through-hormuz-us-iran-continue-strikes"
+    },
+    {
+      "date": "16 Jul 2026",
+      "type": "critical",
+      "src": "U.S. Central Command (CENTCOM) \u00b7 16 Jul 2026",
+      "hl": "U.S. military disables Cura\u00e7ao-flagged tanker M/T Belma in Arabian Sea with missile strike",
+      "detail": "An American fighter jet struck the unladen tanker M/T Belma with a missile on Wednesday (July 15) as it attempted to reach an Iranian port, according to CENTCOM. The tanker ignored multiple warnings while transiting international waters toward Kharg Island. This marks the first time the U.S. has disabled a ship since reimposing a naval blockade in the Strait of Hormuz earlier this week.",
+      "numbers": [
+        {
+          "val": "140 ships",
+          "lbl": "compliant vessels redirected during first blockade"
+        },
+        {
+          "val": "9 vessels",
+          "lbl": "non-compliant ships disabled during first blockade"
+        },
+        {
+          "val": "$4.8 billion",
+          "lbl": "estimated Iranian oil revenue cost from blockade per Pentagon"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://talkradio1059.iheart.com/content/2026-07-16-us-disables-tanker-in-arabian-sea/",
+      "_auto": true,
+      "_extracted": "2026-07-16",
+      "_source_url": "https://talkradio1059.iheart.com/content/2026-07-16-us-disables-tanker-in-arabian-sea/"
+    },
     {
       "date": "15 Jul 2026",
       "type": "important",
@@ -1924,5 +1986,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-15"
+  "_news_checked": "2026-07-16"
 }
