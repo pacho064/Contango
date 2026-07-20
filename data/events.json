@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-16",
+  "_updated": "2026-07-20",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,37 @@
     ]
   },
   "timeline": [
+    {
+      "date": "20 Jul 2026",
+      "type": "critical",
+      "src": "Reuters, Samaa TV \u00b7 20 Jul 2026",
+      "hl": "US launches ninth consecutive night of strikes on Iran; Hormuz corridor threatened",
+      "detail": "US Central Command confirmed a new wave of strikes targeting Iranian military command centres, air defence systems and coastal surveillance positions to degrade Iran's ability to attack commercial shipping through the Strait of Hormuz. Reports indicated damaged oil tankers and renewed threats to the strategic waterway. Iran responded with missile attacks from Lorestan province, with the IRGC claiming strikes against enemy positions in Syria's Al-Tanf region and at Jordan's Aqaba Airport.",
+      "numbers": [
+        {
+          "val": "9",
+          "lbl": "consecutive nights of US strikes on Iran"
+        },
+        {
+          "val": "17",
+          "lbl": "total US military personnel killed since conflict began"
+        },
+        {
+          "val": "420+",
+          "lbl": "US military personnel wounded"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.samaa.tv/2087353870-us-intensifies-iran-strikes-for-ninth-day-as-hormuz-tensions-deepen",
+      "_auto": true,
+      "_extracted": "2026-07-20",
+      "_source_url": "https://www.samaa.tv/2087353870-us-intensifies-iran-strikes-for-ninth-day-as-hormuz-tensions-deepen"
+    },
     {
       "date": "16 Jul 2026",
       "type": "critical",
@@ -1986,5 +2017,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-19"
+  "_news_checked": "2026-07-20"
 }
