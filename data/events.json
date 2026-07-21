@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-20",
+  "_updated": "2026-07-21",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,38 @@
     ]
   },
   "timeline": [
+    {
+      "date": "02 Mar 2026",
+      "type": "important",
+      "src": "bitacora.com.uy \u00b7 2 Mar 2026",
+      "hl": "Tanker traffic halted in Strait of Hormuz amid Iran tensions; oil prices spike",
+      "detail": "Markets are bracing for sustained disruption in the Strait of Hormuz, where tanker traffic has come to a standstill, following US and Israeli attacks on Iran and subsequent counterattacks. Brent crude futures surged 9% to near $78, while West Texas Intermediate traded just below $72.",
+      "numbers": [
+        {
+          "val": "9%",
+          "lbl": "Brent crude futures price increase"
+        },
+        {
+          "val": "$78",
+          "lbl": "Brent crude futures price"
+        },
+        {
+          "val": "$72",
+          "lbl": "West Texas Intermediate futures price"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.75,
+      "article_url": "https://bitacora.com.uy/dow-sp-500-nasdaq-avoid-steep-sell-off-as-oil-spikes-amid-early-iran-fallout/",
+      "_auto": true,
+      "_extracted": "2026-07-21",
+      "_source_url": "https://bitacora.com.uy/dow-sp-500-nasdaq-avoid-steep-sell-off-as-oil-spikes-amid-early-iran-fallout/"
+    },
     {
       "date": "20 Jul 2026",
       "type": "critical",
@@ -2017,5 +2049,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-20"
+  "_news_checked": "2026-07-21"
 }
