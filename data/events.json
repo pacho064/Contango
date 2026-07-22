@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-21",
+  "_updated": "2026-07-22",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,209 @@
     ]
   },
   "timeline": [
+    {
+      "date": "22 Jul 2026",
+      "type": "critical",
+      "src": "Econotimes \u00b7 22 Jul 2026",
+      "hl": "Two Saudi oil tankers reverse course in Red Sea after Houthi blockade threat",
+      "detail": "Two oil tankers carrying Saudi crude destined for Asia reversed course in the Red Sea after Yemen's Iran-backed Houthi movement threatened to target vessels transporting Saudi oil. The tankers had loaded oil at Saudi Arabia's Yanbu port for China and India, turning back toward the Suez Canal instead of passing through the Bab el-Mandeb Strait. The Houthis announced a naval blockade on Saudi Arabia and warned shipping companies they would target vessels loading or unloading Saudi crude.",
+      "numbers": [
+        {
+          "val": "2",
+          "lbl": "tankers reversed course"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "http://www.econotimes.com/Saudi-Oil-Tankers-Reverse-Course-as-Houthi-Threats-Disrupt-Red-Sea-Shipping-1747378",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "http://www.econotimes.com/Saudi-Oil-Tankers-Reverse-Course-as-Houthi-Threats-Disrupt-Red-Sea-Shipping-1747378"
+    },
+    {
+      "date": "22 Jul 2026",
+      "type": "critical",
+      "src": "Reuters \u00b7 22 July 2026",
+      "hl": "Houthis announce naval blockade on Saudi Arabia; three Saudi oil tankers reverse course in Red Sea",
+      "detail": "Yemen's Iran-aligned Houthis announced a naval blockade on Saudi Arabia on Monday, prompting three oil tankers carrying Saudi crude to Asia to reverse course in the Red Sea. The Red Sea serves as the main alternate route for millions of barrels of Saudi oil per day, as Iran threatens shipping through the Strait of Hormuz.",
+      "numbers": [
+        {
+          "val": "millions of barrels per day",
+          "lbl": "Saudi oil via Red Sea alternate route"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "http://www.jpost.com/middle-east/iran-news/article-903256",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "http://www.jpost.com/middle-east/iran-news/article-903256"
+    },
+    {
+      "date": "22 Jul 2026",
+      "type": "critical",
+      "src": "Shipping Minister Sarbananda Sonowal, Indian Shipping Ministry \u00b7 22 July 2026",
+      "hl": "India evacuates 59 vessels from Strait of Hormuz since March 2026 amid US-Iran conflict",
+      "detail": "India has evacuated 59 vessels (23 Indian-flagged and 36 foreign-flagged carrying Indian cargo) from the Strait of Hormuz since March 1, 2026. Shipping traffic through the strait has declined to 13 crossings per day on average between July 17-19, 2026. Two Indian container vessels remain west of the strait, with four other Indian-flagged vessels engaged in Gulf trade remaining in the region.",
+      "numbers": [
+        {
+          "val": "59 vessels",
+          "lbl": "total evacuated since March 1, 2026"
+        },
+        {
+          "val": "13 crossings/day",
+          "lbl": "average Hormuz transits July 17-19, 2026"
+        },
+        {
+          "val": "23 Indian-flagged",
+          "lbl": "portion of 59 evacuated vessels"
+        },
+        {
+          "val": "36 foreign-flagged",
+          "lbl": "portion of 59 evacuated vessels carrying Indian cargo"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.rediff.com/news/report/59-india-bound-vessels-transited-hormuz-since-war/20260722.htm",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "https://www.rediff.com/news/report/59-india-bound-vessels-transited-hormuz-since-war/20260722.htm"
+    },
+    {
+      "date": "22 Jul 2026",
+      "type": "critical",
+      "src": "India Gazette \u00b7 22 Jul 2026",
+      "hl": "US completes 11th consecutive night of strikes on Iran military targets",
+      "detail": "U.S. Central Command (CENTCOM) completed its 11th consecutive evening of strikes against Iran on July 21 at 8:15 p.m. ET, targeting military operation centres, maritime capabilities, aircraft hangars, drone storage facilities and military logistics infrastructure. CENTCOM stated the operation aimed at degrading Iran's ability to threaten commercial shipping in the Strait of Hormuz.",
+      "numbers": [
+        {
+          "val": "11",
+          "lbl": "consecutive nights of US strikes on Iran"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "http://www.indiagazette.com/news/279202469/oil-prices-hit-five-week-high-brent-crude-touches-usd-92-amid-us-iran-tensions",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "http://www.indiagazette.com/news/279202469/oil-prices-hit-five-week-high-brent-crude-touches-usd-92-amid-us-iran-tensions"
+    },
+    {
+      "date": "21 Jul 2026",
+      "type": "critical",
+      "src": "Big News Network \u00b7 22 Jul 2026",
+      "hl": "US resumes Iran naval blockade; CENTCOM diverts 8 ships in past week",
+      "detail": "US Central Command announced on July 21 that its forces diverted eight commercial ships in the past week since resuming the naval blockade of Iran on July 14 at President Trump's order. The blockade followed attacks by Iran's Islamic Revolutionary Guards Corps on ships at the Strait of Hormuz mouth. US forces also disabled one ship during enforcement of the blockade.",
+      "numbers": [
+        {
+          "val": "8 ships",
+          "lbl": "Commercial vessels diverted by CENTCOM in past week"
+        },
+        {
+          "val": "1 ship",
+          "lbl": "Vessel disabled by US forces"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "tankers"
+      ],
+      "confidence": 0.95,
+      "article_url": "http://www.bignewsnetwork.com/news/279202500/trump-says-us-will-target-iran-again-warns-were-not-done-yet",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "http://www.bignewsnetwork.com/news/279202500/trump-says-us-will-target-iran-again-warns-were-not-done-yet"
+    },
+    {
+      "date": "22 Jul 2026",
+      "type": "important",
+      "src": "ARY News \u00b7 22 Jul 2026",
+      "hl": "Iran receives 10-day ceasefire proposal from mediators; Rubio says US committed to diplomacy",
+      "detail": "A senior Iranian official told Reuters on Monday that Tehran received a proposal from mediators for a 10-day ceasefire to salvage an interim ceasefire agreement signed by the U.S. and Iran in June, which replaced an earlier April ceasefire. Secretary of State Marco Rubio stated in Manila that Washington was 'always committed to diplomacy' but expressed doubt about Tehran's commitment, saying 'If they're serious, we're serious.'",
+      "numbers": [
+        {
+          "val": "10",
+          "lbl": "days proposed for ceasefire"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://arynews.tv/marco-rubio-says-us-still-willing-to-negotiate-over-iran-crisis",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "https://arynews.tv/marco-rubio-says-us-still-willing-to-negotiate-over-iran-crisis"
+    },
+    {
+      "date": "22 Jul 2026",
+      "type": "critical",
+      "src": "Dunyanews \u00b7 22 Jul 2026",
+      "hl": "Houthis announce naval blockade of Saudi Arabia; three Saudi oil tankers reverse course in Red Sea",
+      "detail": "Yemen's Iran-aligned Houthis announced a naval blockade on Saudi Arabia on Monday and three oil tankers carrying Saudi crude to Asia reversed course in the Red Sea in apparent response to Houthi threats. The Red Sea has served as the main alternate route for millions of barrels of Saudi oil per day, with the Strait of Hormuz already threatened by Iran.",
+      "numbers": [
+        {
+          "val": "millions of barrels per day",
+          "lbl": "Saudi oil transit through Red Sea"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://dunyanews.tv/en/World/963951-rubio-says-us-still-willing-to-negotiate-over-iran-crisis",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "https://dunyanews.tv/en/World/963951-rubio-says-us-still-willing-to-negotiate-over-iran-crisis"
+    },
+    {
+      "date": "22 Jul 2026",
+      "type": "critical",
+      "src": "Al-Monitor \u00b7 22 Jul 2026",
+      "hl": "Houthis announce naval blockade on Saudi Arabia; three Saudi oil tankers reverse course in Red Sea",
+      "detail": "Yemen's Iran-aligned Houthis announced a naval blockade on Saudi Arabia on Monday, prompting three oil tankers carrying Saudi crude to Asia to reverse course in the Red Sea. The Red Sea serves as the main alternate route for millions of barrels of Saudi oil per day, as Iran threatens shipping through the Strait of Hormuz.",
+      "numbers": [],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://www.al-monitor.com/originals/2026/07/rubio-says-us-still-willing-negotiate-over-iran-crisis",
+      "_auto": true,
+      "_extracted": "2026-07-22",
+      "_source_url": "https://www.al-monitor.com/originals/2026/07/rubio-says-us-still-willing-negotiate-over-iran-crisis"
+    },
     {
       "date": "02 Mar 2026",
       "type": "important",
@@ -2049,5 +2252,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-21"
+  "_news_checked": "2026-07-22"
 }
