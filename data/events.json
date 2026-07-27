@@ -4,11 +4,11 @@
   "chokepoints": [
     {
       "name": "Strait of Hormuz",
-      "risk": "moderate",
+      "risk": "high",
       "volume": "21M bbl/d",
       "source": "Reopening \u00b7 residual mine risk",
-      "updated": "Jun 18 2026",
-      "status": "Strait reopened June 18 2026 under signed US-Iran agreement. Toll-free transit for 60 days. Shipping cautious \u2014 mine-clearing ongoing, traffic normalizing gradually.",
+      "updated": "Jul 7 2026",
+      "status": "Ceasefire collapsed July 7 2026. Fighting resumed. No large vessel transited after July 7 per Lloyd's List. Shipping halted again.",
       "map": {
         "lon": 56.61,
         "lat": 26.55
