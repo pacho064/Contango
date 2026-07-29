@@ -1,5 +1,5 @@
 {
-  "_updated": "2026-07-22",
+  "_updated": "2026-07-29",
   "_note": "Edit this file to update intelligence across all Contango pages. Commit to data/events.json.",
   "chokepoints": [
     {
@@ -293,6 +293,97 @@
     ]
   },
   "timeline": [
+    {
+      "date": "28 Jul 2026",
+      "type": "critical",
+      "src": "Carnegie Endowment \u00b7 28 Jul 2026",
+      "hl": "Iran closes Strait of Hormuz; US blockades Iranian ports after February 2026 strikes",
+      "detail": "Following U.S.-Israeli strikes on Iran in February 2026, Iran closed the Strait of Hormuz to most shipping. The United States subsequently blockaded Iranian ports. Ship passage through the Strait of Hormuz fell by over 95 percent since March, with Brent Crude rising more than 50 percent against an estimated daily production shortfall of 14.5 million barrels.",
+      "numbers": [
+        {
+          "val": "95%",
+          "lbl": "decline in Strait of Hormuz ship passage since March 2026"
+        },
+        {
+          "val": "50%",
+          "lbl": "increase in Brent Crude price"
+        },
+        {
+          "val": "14.5 million barrels",
+          "lbl": "estimated daily production shortfall"
+        }
+      ],
+      "tags": [
+        "hormuz",
+        "iran",
+        "prices",
+        "tankers"
+      ],
+      "confidence": 0.85,
+      "article_url": "https://carnegieendowment.org/middle-east/research/2026/07/from-hormuz-to-the-maghreb-the-geopolitical-reach-of-a-gulf-crisis",
+      "_auto": true,
+      "_extracted": "2026-07-29",
+      "_source_url": "https://carnegieendowment.org/middle-east/research/2026/07/from-hormuz-to-the-maghreb-the-geopolitical-reach-of-a-gulf-crisis"
+    },
+    {
+      "date": "28 Jul 2026",
+      "type": "important",
+      "src": "Al-Monitor \u00b7 28 Jul 2026; Windward \u00b7 28 Jul 2026; Reuters \u00b7 28 Jul 2026",
+      "hl": "Houthis blockade Saudi shipping; Red Sea transits fall 22% after July 20 declaration",
+      "detail": "Yemen's Houthis declared a blockade on Saudi shipping on July 20 and targeted crude transport infrastructure linked to Saudi Arabia's East-West pipeline. Windward data showed Bab el-Mandeb crossings fell roughly 22% in the six days after the declaration. On Monday, 28 vessels transited Bab el-Mandeb, the highest daily total in four days but below the month's peak of 46 vessels on July 14, per Reuters.",
+      "numbers": [
+        {
+          "val": "22%",
+          "lbl": "decline in Bab el-Mandeb crossings in 6 days after blockade declaration"
+        },
+        {
+          "val": "28 vessels",
+          "lbl": "daily transits on Monday"
+        },
+        {
+          "val": "46 vessels",
+          "lbl": "peak daily transits on July 14"
+        }
+      ],
+      "tags": [
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.92,
+      "article_url": "https://www.al-monitor.com/originals/2026/07/tankers-keep-sailing-red-sea-despite-houthi-threats-saudi-oil-lifeline-faces",
+      "_auto": true,
+      "_extracted": "2026-07-29",
+      "_source_url": "https://www.al-monitor.com/originals/2026/07/tankers-keep-sailing-red-sea-despite-houthi-threats-saudi-oil-lifeline-faces"
+    },
+    {
+      "date": "28 Jul 2026",
+      "type": "important",
+      "src": "dpa-AFX \u00b7 28 Jul 2026; Reuters \u00b7 28 Jul 2026",
+      "hl": "Oman proposes joint regional mechanism to manage Strait of Hormuz shipping traffic",
+      "detail": "Citing a gulf source, Reuters reported that Oman has proposed a joint regional mechanism to manage shipping traffic across the Strait of Hormuz, with backing from gulf states. Iran's Foreign Minister Abbas Araghchi held separate telephone conversations with foreign ministers of Saudi Arabia and Oman to discuss regional developments and management of the Strait of Hormuz.",
+      "numbers": [
+        {
+          "val": "$79.00",
+          "lbl": "WTI Crude Oil September delivery price"
+        },
+        {
+          "val": "4.37%",
+          "lbl": "WTI price decline"
+        }
+      ],
+      "tags": [
+        "diplomatic",
+        "hormuz",
+        "iran",
+        "saudi_arabia",
+        "tankers"
+      ],
+      "confidence": 0.82,
+      "article_url": "https://www.finanznachrichten.de/nachrichten-2026-07/69147565-crude-oil-plummets-as-supply-disruption-concerns-continue-to-diminish-020.htm",
+      "_auto": true,
+      "_extracted": "2026-07-29",
+      "_source_url": "https://www.finanznachrichten.de/nachrichten-2026-07/69147565-crude-oil-plummets-as-supply-disruption-concerns-continue-to-diminish-020.htm"
+    },
     {
       "date": "22 Jul 2026",
       "type": "critical",
@@ -2252,5 +2343,5 @@
       "updated": "April 22 2026"
     }
   },
-  "_news_checked": "2026-07-28"
+  "_news_checked": "2026-07-29"
 }
