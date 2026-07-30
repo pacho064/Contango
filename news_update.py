@@ -177,6 +177,7 @@ JSON format (if extracting):
 {{
   "date": "DD Mon YYYY",
   "type": "critical|important|context",
+  "category": "production|infrastructure|diplomatic|price|shipping",
   "src": "Named source(s) from article · Date",
   "hl": "One sentence factual headline. No opinion. Max 120 chars.",
   "detail": "2-3 sentences. Only facts stated in article. Name sources for numbers. Max 400 chars.",
@@ -189,7 +190,14 @@ JSON format (if extracting):
 Rules for fields:
 - date: Use the article's publication date
 - type: "critical" = major disruption/attack/blockade; "important" = significant development; "context" = background
-- src: Always name the publication and date. E.g. "Reuters · 7 May 2026"  
+- category: The single primary subject of the development (used for color-coding). Choose exactly one:
+    "production"     = crude output levels, quotas, shut-ins, curtailments, field/well production changes
+    "infrastructure" = pipelines, refineries, terminals, ports, storage — construction, damage, repairs, capacity
+    "diplomatic"     = talks, agreements, ceasefires, sanctions, government/OPEC decisions, political actions
+    "price"          = price levels or moves, forecasts, OSPs, differentials, spreads, benchmark quotes
+    "shipping"       = tanker transit, seizures, blockades, escorts, war-risk insurance, routing/rerouting
+  If two fit, pick the one the headline leads with. If none clearly fits, choose the closest.
+- src: Always name the publication and date. E.g. "Reuters · 7 May 2026"
 - hl: Start with the subject. No "breaking:" prefixes. Facts only.
 - detail: If a number is mentioned, include it and its source. No passive voice.
 - numbers: Only include if specific numeric values are in the article (bpd, $, %, mb). Max 3.

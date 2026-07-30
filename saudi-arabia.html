@@ -319,6 +319,19 @@ footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem}
     <div class="source">Saudi Aramco monthly OSP release · data/prices.json · Updated daily · Indicative spreads vs ICE Brent</div>
   </div>
 
+  <!-- SIGNALS — live from events.json -->
+  <div class="section">
+    <div class="section-eyebrow">Latest intelligence · Live from events.json · Updated daily</div>
+    <h2>Recent developments — auto-updated daily</h2>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.04em;color:var(--row-label);margin-bottom:1rem">Pulled automatically from the intelligence pipeline · Updated daily at 06:00 UTC</p>
+    <div class="signals" id="sa-signals">
+      <div class="signal-item"><div class="signal-dot amber"></div><div><div class="signal-text loading-text">Loading signals…</div></div></div>
+    </div>
+  </div>
+
+  <!-- HISTORICAL RECORD SEPARATOR -->
+  <div style="text-align:center;padding:2.5rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--row-label)">— Historical record —</div>
+
   <!-- TIMELINE -->
   <div class="section">
     <div class="section-eyebrow">Timeline · February–June 2026</div>
@@ -422,16 +435,6 @@ footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem}
       <div class="dest-card"><div class="dest-flag">🌍</div><div class="dest-country">Other</div><div class="dest-vol">1.6M</div><div class="dest-pct">bbl/d · ~24% of exports</div></div>
     </div>
     <div class="source">Saudi Aramco Annual Review 2025 · EIA bilateral trade data · Indicative · Pre-crisis baseline</div>
-  </div>
-
-  <!-- SIGNALS — live from events.json -->
-  <div class="section">
-    <div class="section-eyebrow">Latest intelligence · Live from events.json · Updated daily</div>
-    <h2>Recent Saudi signals</h2>
-    <p style="font-size:.88rem;color:var(--row-label);margin-bottom:1rem">Populated automatically from <code style="font-family:'IBM Plex Mono',monospace;font-size:.85em">data/events.json</code> — updated daily by the Contango intelligence pipeline via GDELT + Claude Haiku extraction.</p>
-    <div class="signals" id="sa-signals">
-      <div class="signal-item"><div class="signal-dot amber"></div><div><div class="signal-text loading-text">Loading signals…</div></div></div>
-    </div>
   </div>
 
 </div><!-- end page-wrap -->
