@@ -208,14 +208,73 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   .hero-inner{grid-template-columns:1fr 1fr;gap:16px}.hero-number{font-size:48px}
   .nav-links{display:none}.footer-inner{grid-template-columns:1fr 1fr;gap:16px}
   .nav-inner,.ss-inner,.footer-inner,.footer-bottom,.ck-bar-inner{padding-left:16px;padding-right:16px}
+  .choke-cards{grid-template-columns:1fr!important}
+  .signals-cols{grid-template-columns:1fr!important}
+  .hero-title{font-size:32px!important}
 }
+/* ── Dashboard redesign ─────────────────────────────────────────────── */
+.dash-section{border-bottom:1px solid var(--border)}
+.section-wrap{max-width:1400px;margin:0 auto;padding:28px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
+.sec-title{font-family:var(--cg);font-size:22px;font-weight:600;color:var(--ink);line-height:1.1}
+.sec-note{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--source-line);white-space:nowrap}
+/* hero */
+.hero-inner-new{max-width:1400px;margin:0 auto;padding:0 28px}
+.hero-title{font-family:var(--cg);font-size:clamp(32px,5vw,52px);font-weight:600;color:var(--ink);line-height:1.04;letter-spacing:-.02em;margin-top:4px}
+.hero-subtitle{font-family:var(--ss);font-size:15px;color:var(--row-label);margin-top:8px;max-width:660px;line-height:1.5}
+.hero-pills{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.pill{display:flex;flex-direction:column;gap:2px;padding:10px 16px;border:1px solid var(--border);border-radius:6px;background:var(--card-alt);min-width:150px}
+.pill-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--source-line)}
+.pill-val{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--ink);line-height:1.1}
+.pill-sub{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--source-line)}
+.pill.risk-high{border-color:rgba(179,48,0,.35);background:rgba(179,48,0,.06)}
+.pill.risk-high .pill-val{color:var(--red)}
+.pill.risk-moderate{border-color:rgba(140,110,10,.35);background:rgba(140,110,10,.06)}
+.pill.risk-moderate .pill-val{color:#8a6020}
+.pill.risk-low .pill-val{color:var(--teal)}
+.pill-chg.up{color:var(--teal)}.pill-chg.dn{color:var(--red)}
+/* metrics bar */
+.metrics-bar{background:var(--card-alt);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.metrics-bar::-webkit-scrollbar{display:none}
+.metrics-inner{max-width:1400px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:repeat(6,minmax(140px,1fr));min-width:max-content}
+.metric{padding:15px 22px 15px 0;margin-right:22px;border-right:1px solid var(--border)}
+.metric:last-child{border-right:none;margin-right:0}
+.metric-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--source-line);margin-bottom:5px}
+.metric-val{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--ink);line-height:1}
+.metric-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--source-line);margin-top:4px}
+.metric-chg.up{color:var(--teal)}.metric-chg.dn{color:var(--red)}
+/* chokepoint cards */
+.choke-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ck-card{border:1px solid var(--border);border-radius:8px;padding:18px;background:var(--card-alt);display:flex;flex-direction:column;gap:10px}
+.ck-card.high{border-top:3px solid var(--red)}
+.ck-card.moderate{border-top:3px solid #8a6020}
+.ck-card.low{border-top:3px solid var(--teal)}
+.ck-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.ck-card-name{font-family:var(--cg);font-size:19px;font-weight:600;color:var(--ink);line-height:1.1}
+.ck-card-vol{font-family:var(--mono);font-size:11px;color:var(--source-line);margin-top:3px}
+.ck-card-status{font-family:var(--ss);font-size:13px;line-height:1.55;color:var(--body)}
+.ck-card-src{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--source-line);margin-top:auto;padding-top:8px;border-top:1px solid var(--border)}
+/* price chart */
+.chart-box{position:relative;height:320px;width:100%}
+/* country signals */
+.signals-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.sig-col-head{font-family:var(--cg);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.sig-card{border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:10px;background:var(--card-alt)}
+.sig-card:last-child{margin-bottom:0}
+.sig-card-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.sig-pip{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.sig-pip.hot{background:var(--red);animation:pulse 2s ease-in-out infinite}
+.sig-card-src{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--source-line)}
+.sig-card-hl{font-family:var(--ss);font-size:13px;line-height:1.55;color:var(--body)}
+.sig-card-date{font-family:var(--mono);font-size:10px;color:var(--source-line);margin-top:5px}
+/* map section head + timeline view-all */
+.map-section-head{max-width:1400px;margin:0 auto;padding:22px 28px 12px}
+.tl-viewall{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--source-line);padding:12px 16px;border-top:1px solid var(--border);text-align:center}
 </style>
 </head>
 <body>
 
 <div class="ticker"><div class="tk-track" id="tk-track"><span style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.3);padding:0 24px;height:30px;display:flex;align-items:center">Loading…</span></div></div>
-
-<div class="ck-bar"><div class="ck-bar-inner" id="ck-bar-inner"><div class="loading" style="padding:8px 0">Loading chokepoint status…</div></div></div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -237,93 +296,88 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-eyebrow">Arab Light OSP vs Brent · April 2026 loading · Hormuz deal collapsed</div>
-      <div><span class="hero-number" id="hero-number">—</span><span class="hero-arrow" id="hero-arrow">↑</span></div>
-      <div class="hero-ctx" id="hero-ctx">Loading…</div>
-      <div class="hero-sub" id="hero-sub"></div>
-    </div>
-    <div class="hero-divider"></div>
-    <div class="hero-stat">
-      <div class="hero-stat-lbl">ICE Brent · EIA</div>
-      <div class="hero-stat-val" id="hero-brent">—</div>
-      <div class="hero-stat-note" id="hero-brent-date">—</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-lbl">Arab Light OSP · Aramco</div>
-      <div class="hero-stat-val" id="hero-arabl">—</div>
-      <div class="hero-stat-note">April 2026</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-lbl">WTI · EIA</div>
-      <div class="hero-stat-val" id="hero-wti">—</div>
-      <div class="hero-stat-note" id="hero-wti-date">—</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-lbl">Hormuz · transit status</div>
-      <div class="hero-stat-val" style="font-size:15px;color:#b33000">HIGH RISK</div>
-      <div class="hero-stat-note">Deal collapsed · Jul 7 2026</div>
-    </div>
-    <div class="hero-src">EIA U.S. Energy Information Administration (Brent, WTI) · Saudi Aramco OSP release (Arab Light) · CENTCOM · US Naval blockade of Iranian ports effective April 13 2026 · Indicative</div>
+  <div class="hero-inner-new">
+    <div class="hero-eyebrow">Crisis intelligence · Updated <span id="hero-updated">daily</span></div>
+    <h1 class="hero-title">Middle East Crude Intelligence</h1>
+    <p class="hero-subtitle">Real-time tracking of the 2026 Hormuz crisis, Gulf production, and global crude flows</p>
+    <div class="hero-pills" id="hero-pills"><div class="loading">Loading status…</div></div>
   </div>
 </div>
 
-<div class="spread-strip"><div class="ss-inner" id="ss-inner"><div class="loading">Loading spreads…</div></div></div>
+<!-- LIVE METRICS BAR -->
+<div class="metrics-bar"><div class="metrics-inner" id="metrics-inner"><div class="loading" style="padding:15px 0">Loading metrics…</div></div></div>
 
-<div style="border-bottom:1px solid var(--border)">
-  <div class="layout">
-    <div class="main-area">
-      <div class="map-controls">
-        <div class="layer-btns">
-          <div class="lbtn on" id="lb-base" onclick="setLayer('base')">Overview</div>
-          <div class="lbtn" id="lb-flows" onclick="setLayer('flows')">Flows</div>
-          <div class="lbtn" id="lb-ports" onclick="setLayer('ports')">Ports</div>
-          <div class="lbtn alert-on" id="lb-risk" onclick="setLayer('risk')">Risk ●</div>
-          <div class="lbtn" id="lb-infra" onclick="setLayer('infra')">Infrastructure</div>
-        </div>
-        <div class="zoom-btns">
-          <button class="zbtn" onclick="map.zoomIn()">+</button>
-          <button class="zbtn" onclick="map.zoomOut()">−</button>
-          <button class="zbtn zbtn-txt" onclick="resetView()">Reset</button>
-        </div>
+<!-- CHOKEPOINTS -->
+<section class="dash-section">
+  <div class="section-wrap">
+    <div class="sec-head"><h2 class="sec-title">Maritime chokepoints</h2><span class="sec-note">Global oil transit · risk status</span></div>
+    <div class="choke-cards" id="choke-cards"><div class="loading">Loading chokepoints…</div></div>
+  </div>
+</section>
+
+<!-- PRICE HISTORY -->
+<section class="dash-section" id="price-history-section" style="display:none">
+  <div class="section-wrap">
+    <div class="sec-head"><h2 class="sec-title">Brent — 30-day history</h2><span class="sec-note" id="chart-note">ICE Brent · daily close</span></div>
+    <div class="chart-box"><canvas id="brentChart"></canvas></div>
+  </div>
+</section>
+
+<!-- CRISIS TIMELINE (5 most recent) -->
+<section class="dash-section">
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="tl-header">
+      <div>
+        <div class="tl-title">2026 Hormuz crisis — timeline</div>
+        <div class="tl-subtitle">Largest supply disruption in the history of the global oil market · IEA</div>
       </div>
-      <div id="map"></div>
-      <div class="map-legend" id="map-legend"></div>
+      <span class="tl-badge">5 MOST RECENT</span>
     </div>
-    <div class="side-col">
-      <div class="panel-head"><span class="panel-title">Prices</span><span class="panel-ts" id="prices-ts">—</span></div>
-      <div id="prices-area" style="overflow-y:auto;flex:1"><div class="loading">Loading…</div></div>
+    <div class="tl-list" id="crisis-timeline"></div>
+    <div class="tl-viewall">Showing the 5 most recent developments · auto-updated daily from events.json</div>
+  </div>
+</section>
+
+<!-- COUNTRY SIGNALS -->
+<section class="dash-section">
+  <div class="section-wrap">
+    <div class="sec-head"><h2 class="sec-title">Country signals</h2><span class="sec-note">Auto-updated daily</span></div>
+    <div class="signals-cols">
+      <div class="sig-col"><div class="sig-col-head">Saudi Arabia</div><div id="sig-saudi"><div class="loading">Loading…</div></div></div>
+      <div class="sig-col"><div class="sig-col-head">Iraq</div><div id="sig-iraq"><div class="loading">Loading…</div></div></div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="crisis-section">
-  <div class="crisis-inner">
-    <div class="crisis-main">
-      <div class="tl-header">
-        <div>
-          <div class="tl-title">2026 Hormuz crisis — timeline</div>
-          <div class="tl-subtitle">Largest supply disruption in history of the global oil market · IEA, March 12 2026</div>
+<!-- REGIONAL MAP (moved below signals · logic unchanged) -->
+<div class="dash-section">
+  <div class="map-section-head"><h2 class="sec-title">Regional map &amp; live prices</h2></div>
+  <div style="border-bottom:1px solid var(--border)">
+    <div class="layout">
+      <div class="main-area">
+        <div class="map-controls">
+          <div class="layer-btns">
+            <div class="lbtn on" id="lb-base" onclick="setLayer('base')">Overview</div>
+            <div class="lbtn" id="lb-flows" onclick="setLayer('flows')">Flows</div>
+            <div class="lbtn" id="lb-ports" onclick="setLayer('ports')">Ports</div>
+            <div class="lbtn alert-on" id="lb-risk" onclick="setLayer('risk')">Risk ●</div>
+            <div class="lbtn" id="lb-infra" onclick="setLayer('infra')">Infrastructure</div>
+          </div>
+          <div class="zoom-btns">
+            <button class="zbtn" onclick="map.zoomIn()">+</button>
+            <button class="zbtn" onclick="map.zoomOut()">−</button>
+            <button class="zbtn zbtn-txt" onclick="resetView()">Reset</button>
+          </div>
         </div>
-        <span class="tl-badge">MILESTONE · DEAL SIGNED</span>
+        <div id="map"></div>
+        <div class="map-legend" id="map-legend"></div>
       </div>
-      <div class="tl-list" id="crisis-timeline"></div>
-    </div>
-    <div class="crisis-side"><div class="cs-panel" id="crisis-side-panel"></div></div>
-  </div>
-</div>
-
-<div class="bottom">
-  <div class="bottom-inner">
-    <div class="bp"><div class="bp-title">Chokepoint status</div><div id="choke-list"><div class="loading">Loading…</div></div></div>
-    <div class="bp"><div class="bp-title">Port utilisation</div><div id="port-list"><div class="loading">Loading…</div></div></div>
-    <div class="bp">
-      <div class="bp-title">OPEC+ compliance</div>
-      <div class="opec-hd"><span>Country</span><span>Quota</span><span>Act.</span><span>±</span></div>
-      <div id="opec-rows"><div class="loading">Loading…</div></div>
-      <div style="font-family:var(--ss);font-style:italic;font-size:10px;color:var(--source-line);margin-top:6px;padding-top:5px;border-top:1px solid var(--border)" id="opec-src"></div>
+      <div class="side-col">
+        <div class="panel-head"><span class="panel-title">Prices</span><span class="panel-ts" id="prices-ts">—</span></div>
+        <div id="prices-area" style="overflow-y:auto;flex:1"><div class="loading">Loading…</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -369,6 +423,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
 </footer>
 
 <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 const GRADE_NAMES={arab_light:'Arab Light',murban:'Murban',basra_medium:'Basra Medium',kuwait_export:'Kuwait Export',arab_heavy:'Arab Heavy',oman_dubai:'Oman/Dubai'};
 
@@ -453,20 +508,25 @@ function getEventsFallback(){
 function getPricesFallback(){
   return {
     benchmarks:{
-      brent:{price:101.82,change_pct:3.1,updated:'2026-04-22',source:'EIA (RBRTE)'},
-      wti:{price:92.96,change_pct:3.2,updated:'2026-04-22',source:'EIA (RWTC)'},
+      brent:{price:76.40,change_pct:3.5,updated:'2026-07-27',source:'EIA (RBRTE)'},
+      wti:{price:72.10,change_pct:3.2,updated:'2026-07-27',source:'EIA (RWTC)'},
       oman_dubai:{price:80.75,change_pct:-0.4,updated:'2026-03-21',source:'OilPriceAPI / DME'},
       urals:{price:52.4,change_pct:-0.6,updated:'2026-03-21',source:'Argus'},
       ttf:{price:48.3,change_pct:0.4,updated:'2026-03-21',source:'ICE'},
       jkm:{price:24.7,change_pct:0.2,updated:'2026-03-21',source:'Platts'},
     },
     osps:{
-      arab_light:{price:84.00,differential_vs_omd:2.50,spread_vs_brent:11.84,source:'Aramco OSP',for_month:'April 2026'},
-      murban:{price:83.68,differential_vs_omd:2.93,spread_vs_brent:11.52,source:'ADNOC OSP',for_month:'April 2026'},
-      basra_medium:{price:81.40,differential_vs_omd:0.65,spread_vs_brent:9.24,source:'SOMO',for_month:'April 2026'},
-      kuwait_export:{price:80.95,differential_vs_omd:0.20,spread_vs_brent:8.79,source:'KPC',for_month:'April 2026'},
-      arab_heavy:{price:79.80,differential_vs_omd:-0.95,spread_vs_brent:7.64,source:'Aramco OSP',for_month:'April 2026'},
+      arab_light:{price:83.25,differential_vs_omd:2.50,spread_vs_brent:6.85,source:'Aramco OSP',for_month:'July 2026'},
+      murban:{price:83.68,differential_vs_omd:2.93,spread_vs_brent:7.28,source:'ADNOC OSP',for_month:'July 2026'},
+      basra_medium:{price:81.40,differential_vs_omd:0.65,spread_vs_brent:5.00,source:'SOMO',for_month:'July 2026'},
+      kuwait_export:{price:80.95,differential_vs_omd:0.20,spread_vs_brent:4.55,source:'KPC',for_month:'July 2026'},
+      arab_heavy:{price:79.80,differential_vs_omd:-0.95,spread_vs_brent:3.40,source:'Aramco OSP',for_month:'July 2026'},
     },
+    production:{
+      saudi_arabia:{value:7500.0,unit:'thousand bbl/day',period:'2026-03',source:'EIA (INTL.57-1-SAU)'},
+      iraq:{value:1600.0,unit:'thousand bbl/day',period:'2026-03',source:'EIA (INTL.57-1-IRQ)'},
+    },
+    spr:{value:394524.0,unit:'thousand barrels',period:'2026-04',source:'EIA (MCSSTUS1)'},
     _updated:new Date().toISOString(),
   };
 }
@@ -486,14 +546,11 @@ async function loadData(){
 function render(){
   renderTicker();
   renderHero();
-  renderCkBar();
-  renderSpreads();
-  renderPrices();
+  renderMetrics();
+  renderChokeCards();
   renderCrisisTimeline();
-  renderCrisisSide();
-  renderChoke();
-  renderPorts();
-  renderOpec();
+  renderCountrySignals();
+  renderPrices();
   if(D._updated){
     const d=new Date(D._updated);
     const el=document.getElementById('footer-updated');
@@ -521,42 +578,39 @@ function renderTicker(){
 }
 
 function renderHero(){
-  if(!D) return;
-  const brent=D.benchmarks.brent.price;
-  const arabl=D.osps.arab_light?.price||84.00;
-  const spread=D.osps.arab_light?.spread_vs_brent||(arabl-brent);
-  const sign=spread>=0?'+':'';
-  const num=document.getElementById('hero-number');if(num) num.textContent=sign+'$'+spread.toFixed(2);
-  const ctx=document.getElementById('hero-ctx');if(ctx) ctx.textContent=`Arab Light $${arabl.toFixed(2)} · Brent $${brent.toFixed(2)}`;
-  const arrow=document.getElementById('hero-arrow');if(arrow) arrow.textContent=spread>=0?'↑':'↓';
-  const sub=document.getElementById('hero-sub');if(sub) sub.textContent=spread<-5?'OSP below Brent benchmark':spread>10?'War premium · OSP significantly above benchmark':'OSP near benchmark';
-  const hb=document.getElementById('hero-brent');if(hb) hb.textContent='$'+brent.toFixed(2);
-  const hbd=document.getElementById('hero-brent-date');if(hbd) hbd.textContent=D.benchmarks.brent.updated;
-  const hw=document.getElementById('hero-wti');if(hw) hw.textContent='$'+D.benchmarks.wti.price.toFixed(2);
-  const hwd=document.getElementById('hero-wti-date');if(hwd) hwd.textContent=D.benchmarks.wti.updated;
-  const hl=document.getElementById('hero-arabl');if(hl) hl.textContent='$'+arabl.toFixed(2);
+  if(!D||!E) return;
+  const rm={high:{cls:'risk-high',txt:'HIGH RISK'},moderate:{cls:'risk-moderate',txt:'MODERATE'},low:{cls:'risk-low',txt:'LOW'}};
+  const cks=E.chokepoints||[];
+  const hz=cks.find(c=>/hormuz/i.test(c.name||''))||cks[0]||null;
+  const r=hz?(rm[hz.risk]||rm.low):rm.low;
+  const b=D.benchmarks&&D.benchmarks.brent;
+  const o=(D.osps||{}).arab_light;
+  const bChg=b&&b.change_pct!=null?`<span class="pill-chg ${b.change_pct>0?'up':b.change_pct<0?'dn':''}">${b.change_pct>=0?'+':''}${b.change_pct.toFixed(2)}%</span> · `:'';
+  const pills=[
+    `<div class="pill ${r.cls}"><span class="pill-lbl">Strait of Hormuz</span><span class="pill-val">${r.txt}</span><span class="pill-sub">${hz?hz.updated||'':'—'}</span></div>`,
+    `<div class="pill"><span class="pill-lbl">ICE Brent</span><span class="pill-val">${b?'$'+b.price.toFixed(2):'—'}</span><span class="pill-sub">${bChg}${b?b.updated||'':''}</span></div>`,
+    `<div class="pill"><span class="pill-lbl">Arab Light OSP</span><span class="pill-val">${o&&o.price!=null?'$'+o.price.toFixed(2):'—'}</span><span class="pill-sub">${o&&o.spread_vs_brent!=null?(o.spread_vs_brent>=0?'+':'')+'$'+o.spread_vs_brent.toFixed(2)+' vs Brent':(o&&o.for_month)||''}</span></div>`,
+  ];
+  const el=document.getElementById('hero-pills');if(el) el.innerHTML=pills.join('');
+  const up=document.getElementById('hero-updated');
+  if(up&&D._updated){try{up.textContent=new Date(D._updated).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){}}
 }
 
-function renderCkBar(){
-  const data=E?E.chokepoints:[];
-  const el=document.getElementById('ck-bar-inner');if(!el||!data.length) return;
-  const rm={high:{cls:'ck-high',pulse:'ck-pulse-red',status:'Active threat'},moderate:{cls:'ck-mod',pulse:'ck-pulse-orange',status:'Elevated'},low:{cls:'',pulse:'',status:'Normal'}};
-  el.innerHTML=data.map(c=>{
-    const r=rm[c.risk]||rm.low;
-    return `<div class="ck-bar-item"><div class="ck-pulse ${r.pulse}"></div><span class="ck-bar-name">${c.name}</span><span class="ck-bar-vol">${c.volume}</span><span class="ck-badge ${r.cls}">${c.risk.toUpperCase()}</span><span class="ck-bar-status">${r.status}</span></div>`;
-  }).join('');
-}
-
-function renderSpreads(){
+function renderMetrics(){
   if(!D) return;
-  const brent=D.benchmarks.brent.price;
-  const ref=`<div class="sp"><div class="sp-label">ICE Brent</div><div class="sp-value">$${brent.toFixed(2)}</div><div class="sp-note">EIA · ${D.benchmarks.brent.updated}</div></div>`;
-  const spreads=Object.entries(D.osps||{}).map(([k,o])=>{
-    if(!o||!o.price) return '';
-    const sp=o.spread_vs_brent||0;
-    return `<div class="sp"><div class="sp-label">${GRADE_NAMES[k]||k} vs Brent</div><div class="sp-value ${sp>=0?'sp-pos':'sp-neg'}">${sp>=0?'+':''}$${sp.toFixed(2)}</div><div class="sp-note">${o.source||''} · ${o.for_month||''}</div></div>`;
-  }).join('');
-  const el=document.getElementById('ss-inner');if(el) el.innerHTML=ref+spreads;
+  const el=document.getElementById('metrics-inner');if(!el) return;
+  const b=D.benchmarks||{}, o=(D.osps||{}).arab_light||{}, pr=D.production||{}, spr=D.spr||{};
+  const chg=v=>v==null?'':`<span class="metric-chg ${v>0?'up':v<0?'dn':''}">${v>=0?'+':''}${v.toFixed(2)}%</span>`;
+  const fmtM=k=>k!=null?(k/1000).toFixed(2)+'M bbl/d':'—';
+  const cells=[
+    {lbl:'ICE Brent',val:b.brent?'$'+b.brent.price.toFixed(2):'—',sub:chg(b.brent&&b.brent.change_pct)},
+    {lbl:'WTI',val:b.wti?'$'+b.wti.price.toFixed(2):'—',sub:chg(b.wti&&b.wti.change_pct)},
+    {lbl:'Arab Light vs Brent',val:o.spread_vs_brent!=null?(o.spread_vs_brent>=0?'+':'')+'$'+o.spread_vs_brent.toFixed(2):'—',sub:'OSP spread · '+(o.for_month||'')},
+    {lbl:'Saudi production',val:fmtM(pr.saudi_arabia&&pr.saudi_arabia.value),sub:(pr.saudi_arabia&&pr.saudi_arabia.period)||''},
+    {lbl:'Iraq production',val:fmtM(pr.iraq&&pr.iraq.value),sub:(pr.iraq&&pr.iraq.period)||''},
+    {lbl:'US SPR',val:spr.value!=null?(spr.value/1000).toFixed(1)+'M bbl':'—',sub:spr.period||''},
+  ];
+  el.innerHTML=cells.map(c=>`<div class="metric"><div class="metric-lbl">${c.lbl}</div><div class="metric-val">${c.val}</div><div class="metric-sub">${c.sub||''}</div></div>`).join('');
 }
 
 function sparklineSVG(data,color){
@@ -602,56 +656,70 @@ function renderCrisisTimeline(){
   const el=document.getElementById('crisis-timeline');if(!el) return;
   const data=E?E.timeline:[];
   if(!data.length){el.innerHTML='<div class="loading">Timeline loading…</div>';return;}
-  el.innerHTML=data.map(e=>{
+  el.innerHTML=data.slice(0,5).map(e=>{
     const nums=e.numbers?`<div class="tl-numbers">${e.numbers.map(n=>`<div class="tl-num"><span class="tl-num-val">${n.val}</span><span class="tl-num-lbl">${n.lbl}</span></div>`).join('')}</div>`:'';
     const dotCls=e.type==='critical'?'tl-dot-red':e.type==='important'?'tl-dot-navy':'tl-dot-grey';
     return `<div class="tl-item ${e.type||''}"><div class="tl-date-col"><div class="tl-dot ${dotCls}"></div><div class="tl-date">${e.date}</div>${e.time?`<div class="tl-time">${e.time}</div>`:''}</div><div class="tl-content"><div class="tl-src">${e.src}</div><div class="tl-hl">${e.hl}</div><div class="tl-detail">${e.detail}</div>${nums}<div class="tl-src-line">${e.src}</div></div></div>`;
   }).join('');
 }
 
-function renderCrisisSide(){
-  const el=document.getElementById('crisis-side-panel');if(!el) return;
-  const cs=E?E.crisis_side:null;if(!cs){el.innerHTML='';return;}
-  const sections=[
-    {label:'Supply losses · April 2026',key:'supply_loss',src:'OPEC MOMR April 2026 · Saudi Press Agency · IEA'},
-    {label:'Bypass capacity · post-attack',key:'bypass',src:'Saudi Aramco · ADNOC · Bloomberg April 2026'},
-    {label:'Price outlook · analyst forecasts',key:'price_outlook',src:'Morgan Stanley · Reuters · April 2026'},
-  ];
-  el.innerHTML=sections.map(s=>{
-    const rows=(cs[s.key]||[]).map(r=>`<div class="cs-row"><span class="cs-l">${r.l}</span><span class="cs-v ${r.red?'cs-v-red':r.teal?'cs-v-teal':''}">${r.v}</span></div>`).join('');
-    return `<div class="cs-block"><div class="cs-label">${s.label}</div>${rows}<div class="cs-src">${s.src}</div></div>`;
-  }).join('');
-}
-
-function renderChoke(){
-  const el=document.getElementById('choke-list');if(!el) return;
-  const data=E?E.chokepoints:[];if(!data.length) return;
+function renderChokeCards(){
+  const el=document.getElementById('choke-cards');if(!el) return;
+  const data=E?E.chokepoints:[];if(!data||!data.length){el.innerHTML='<div class="loading">No chokepoint data.</div>';return;}
   const bc={high:'b-high',moderate:'b-mod',low:'b-low'};
-  el.innerHTML=data.map(c=>`<div class="rr"><div><div class="rr-name">${c.name}</div><div class="rr-sub">${c.volume} · ${c.source} · ${c.updated}</div></div><span class="badge ${bc[c.risk]||'b-low'}">${c.risk.toUpperCase()}</span></div>`).join('');
-}
-
-function renderPorts(){
-  const el=document.getElementById('port-list');if(!el) return;
-  const data=E?E.ports:[];if(!data.length) return;
-  el.innerHTML=data.slice(0,6).map(p=>{
-    const util=p.util||0;
-    const col=util>88?'var(--red)':util>74?'#8a6020':util<10?'var(--row-label)':'var(--teal)';
-    const status=util>88?'Near capacity':util<10?'Halted / minimal':'Operating';
-    return `<div class="port-row"><div class="port-top"><span class="port-name">${p.n}</span><span class="port-pct" style="color:${col}">${util}%</span></div><div class="port-sub">${p.c} · ${p.cap}M bbl/d cap · ${status}</div><div class="port-bar"><div class="port-fill" style="width:${util}%;background:${col}"></div></div></div>`;
+  el.innerHTML=data.map(c=>{
+    const risk=(c.risk||'low').toLowerCase();
+    const status=c.status||c.source||'';
+    return `<div class="ck-card ${risk}"><div class="ck-card-top"><div><div class="ck-card-name">${c.name}</div><div class="ck-card-vol">${c.volume||''} daily transit</div></div><span class="badge ${bc[risk]||'b-low'}">${(c.risk||'').toUpperCase()}</span></div><div class="ck-card-status">${status}</div><div class="ck-card-src">${c.source||''} · ${c.updated||''}</div></div>`;
   }).join('');
 }
 
-function renderOpec(){
-  const el=document.getElementById('opec-rows');if(!el) return;
-  const data=E?E.opec:[];if(!data.length) return;
-  el.innerHTML=data.map(o=>{
-    const diff=o.q!==null?o.a-o.q:null;
-    const dc=diff!==null&&diff>0?'opec-over':'';
-    const ds=diff===null?'—':`${diff>0?'+':''}${diff.toFixed(1)}`;
-    return `<div class="opec-row"><span class="opec-n">${o.n}</span><span class="opec-v">${o.q===null?'Ex.':o.q.toFixed(1)}</span><span class="opec-v">${o.a.toFixed(1)}</span><span class="opec-v ${dc}">${ds}</span></div>`;
-  }).join('');
-  const src=document.getElementById('opec-src');
-  if(src&&E) src.textContent=E.opec_src+' · '+E.opec_updated;
+function renderCountrySignals(){
+  if(!E) return;
+  const sig=E.signals||{};
+  const build=arr=>{
+    if(!arr||!arr.length) return '<div class="loading">No signals available.</div>';
+    return arr.slice(0,3).map(s=>`<div class="sig-card"><div class="sig-card-top"><span class="sig-pip ${s.hot?'hot':''}"></span><span class="sig-card-src">${s.src||''}</span></div><div class="sig-card-hl">${s.hl||''}</div><div class="sig-card-date">${s.date||''}</div></div>`).join('');
+  };
+  const sa=document.getElementById('sig-saudi');if(sa) sa.innerHTML=build(sig.saudi_arabia);
+  const iq=document.getElementById('sig-iraq');if(iq) iq.innerHTML=build(sig.iraq);
+}
+
+// ── PRICE HISTORY (30-day Brent) — reads data/history/crude-daily.jsonl ──
+let _brentChart=null, _brentPoints=null;
+async function loadPriceHistory(){
+  const sec=document.getElementById('price-history-section');
+  let points=[];
+  try{
+    const r=await fetch('./data/history/crude-daily.jsonl?_='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const text=await r.text();
+    points=text.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{try{return JSON.parse(l);}catch(e){return null;}}).filter(p=>p&&p.date&&p.brent!=null);
+  }catch(e){console.warn('crude-daily.jsonl failed:',e.message);}
+  // Hide the whole section unless we have a meaningful series
+  if(points.length<7){if(sec) sec.style.display='none';return;}
+  _brentPoints=points.slice(-30);
+  if(sec) sec.style.display='';
+  buildBrentChart(_brentPoints);
+}
+function buildBrentChart(points){
+  const canvas=document.getElementById('brentChart');
+  if(!canvas||typeof Chart==='undefined'||!points) return;
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const grid=isDark?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+  const txt=isDark?'#909090':'#6b6860';
+  const red=isDark?'#c84000':'#b33000';
+  if(_brentChart) _brentChart.destroy();
+  _brentChart=new Chart(canvas.getContext('2d'),{
+    type:'line',
+    data:{labels:points.map(p=>p.date),datasets:[{label:'ICE Brent ($/bbl)',data:points.map(p=>p.brent),borderColor:red,backgroundColor:'rgba(179,48,0,0.08)',borderWidth:1.5,pointRadius:0,pointHoverRadius:4,tension:.25,fill:true}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.parsed.y.toFixed(2)}}},
+      scales:{x:{grid:{color:grid},ticks:{color:txt,font:{family:"'IBM Plex Mono'",size:9},maxTicksLimit:8,autoSkip:true}},y:{grid:{color:grid},ticks:{color:txt,font:{family:"'IBM Plex Mono'",size:9},callback:v=>'$'+v}}}
+    }
+  });
+  const note=document.getElementById('chart-note');
+  if(note) note.textContent=`ICE Brent · ${points.length} days · ${points[0].date} → ${points[points.length-1].date}`;
 }
 
 function initMap(){
@@ -751,6 +819,7 @@ function toggleTheme(){
   document.getElementById('theme-btn').textContent=dark?'Light':'Dark';
   localStorage.setItem('theme',dark?'dark':'light');
   if(map){const c=map.getCenter(),z=map.getZoom();map.remove();mapLoaded=false;initMap();map.on('load',()=>{map.setCenter(c);map.setZoom(z);});}
+  if(_brentPoints) buildBrentChart(_brentPoints);
 }
 function updateClock(){const el=document.getElementById('clk');if(el) el.textContent=new Date().toUTCString().slice(17,25)+' UTC';}
 setInterval(updateClock,1000);updateClock();
@@ -759,6 +828,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   initTheme();
   initMap();
   loadData();
+  loadPriceHistory();
   setInterval(loadData,60*60*1000);
 });
 </script>
