@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<!-- Contango Energy · Natural Gas · v1.0 · July 2026 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Natural gas — Contango Energy</title>
+<meta name="description" content="Global natural gas intelligence: TTF, Henry Hub, JKM, Qatar LNG restart, European storage crisis, Waha-to-Europe arbitrage, Permian pipeline buildout. July 2026.">
+<meta name="theme-color" content="#111110">
+<link rel="canonical" href="https://contango-energy.com/natural-gas.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="Natural gas — Contango Energy">
+<meta property="og:description" content="Global natural gas intelligence: TTF, Henry Hub, JKM, Qatar LNG restart, European storage crisis, Waha-to-Europe arbitrage. July 2026.">
+<meta property="og:url" content="https://contango-energy.com/natural-gas.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#f7f7f5;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink-2:#3a3830;--ink-3:#9a9590;--ink-4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#8a5a00;
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#1a1a19;--border:#272726;
+  --ink:#ddd6c8;--ink-2:#cec8bc;--ink-3:#909090;--ink-4:#787878;
+  --red:#c84000;--teal:#4a9c8a;--amber:#c89040;
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s;animation:fadeIn .25s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+/* NAV */
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--cg);font-size:20px;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;height:50px}
+.nav-a{display:flex;align-items:center;padding:0 12px;font-family:var(--ss);font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover{color:var(--ink)}.nav-a.on{color:var(--navy);border-bottom-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--border);border-radius:3px;padding:4px 10px}
+
+/* PAGE HEADER */
+.ph{background:var(--card);border-bottom:3px solid var(--teal);padding:36px 0 28px}
+.ph-inner{max-width:1200px;margin:0 auto;padding:0 28px}
+.ph-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+.ph-title{font-family:var(--cg);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.ph-sub{font-family:var(--ss);font-size:17px;color:var(--ink-3);max-width:700px;line-height:1.6;margin-bottom:16px}
+.ph-src{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-4);padding-top:12px;border-top:1px solid var(--border)}
+
+/* PRICE BAR */
+.price-bar{background:var(--card-alt);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.price-bar::-webkit-scrollbar{display:none}
+.price-bar-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:stretch}
+.pb-item{display:flex;flex-direction:column;justify-content:center;padding:12px 28px 12px 0;margin-right:28px;border-right:1px solid var(--border);flex-shrink:0}
+.pb-item:last-child{border-right:none;margin-right:0}
+.pb-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px}
+.pb-val{font-family:var(--cg);font-size:28px;font-weight:600;color:var(--ink);line-height:1}
+.pb-unit{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:2px}
+.pb-chg{font-family:var(--mono);font-size:11px;margin-top:2px}
+.up{color:var(--red)}.down{color:var(--teal)}
+
+/* LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:40px 28px 60px;display:grid;grid-template-columns:1fr 300px;gap:48px}
+.content{min-width:0}
+.sidebar{min-width:0}
+.sec{margin-bottom:48px}
+.sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:30px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.15}
+.body p{font-family:var(--ss);font-size:15px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:12px;padding-top:8px;border-top:1px solid var(--border)}
+
+/* CALLOUT BOXES */
+.alert-box{border-left:3px solid var(--red);padding:14px 18px;background:rgba(179,48,0,.06);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .alert-box{background:rgba(179,48,0,.12)}
+.alert-title{font-family:var(--cg);font-size:15px;font-weight:600;color:var(--red);margin-bottom:5px}
+.alert-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.info-box{border-left:3px solid var(--navy);padding:14px 18px;background:rgba(29,68,128,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .info-box{background:rgba(29,68,128,.12)}
+.info-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.teal-box{border-left:3px solid var(--teal);padding:14px 18px;background:rgba(74,124,111,.05);border-radius:0 4px 4px 0;margin:20px 0}
+[data-theme=dark] .teal-box{background:rgba(74,124,111,.1)}
+.teal-body{font-family:var(--ss);font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+
+/* CHART */
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:20px;margin:20px 0}
+.chart-title{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:16px}
+.chart-canvas{position:relative;height:220px}
+
+/* STORAGE BAR */
+.storage-wrap{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:20px;margin:20px 0}
+.storage-title{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:16px}
+.storage-row{margin-bottom:16px}
+.storage-row:last-child{margin-bottom:0}
+.storage-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.storage-name{font-family:var(--ss);font-size:13px;color:var(--ink)}
+.storage-nums{display:flex;gap:12px;align-items:baseline}
+.storage-pct{font-family:var(--mono);font-size:14px;font-weight:500}
+.storage-vs{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4)}
+.storage-track{height:8px;background:var(--border);border-radius:4px;overflow:hidden;position:relative}
+.storage-fill{height:100%;border-radius:4px;transition:width .8s}
+.storage-marker{position:absolute;top:0;bottom:0;width:2px;background:var(--ink-3);opacity:.5}
+
+/* PIPELINE TABLE */
+.pipeline-table{width:100%;border-collapse:collapse;margin:16px 0}
+.pipeline-table th{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);padding:8px 12px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt)}
+.pipeline-table td{font-family:var(--ss);font-size:13px;color:var(--ink-2);padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.pipeline-table tr:last-child td{border-bottom:none}
+.pt-name{font-weight:600;color:var(--ink);display:block}
+.pt-sub{font-style:italic;font-size:11px;color:var(--ink-4)}
+.badge{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px;border:1px solid;white-space:nowrap}
+.b-teal{background:rgba(74,124,111,.08);color:var(--teal);border-color:rgba(74,124,111,.2)}
+.b-amber{background:rgba(138,90,0,.08);color:var(--amber);border-color:rgba(138,90,0,.2)}
+.b-navy{background:rgba(29,68,128,.08);color:var(--navy);border-color:rgba(29,68,128,.2)}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:16px 0}
+
+/* SIDEBAR */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.sc-teal{border-top:3px solid var(--teal)}
+.sc-navy{border-top:3px solid var(--navy)}
+.sc-red{border-top:3px solid var(--red)}
+.sc-amber{border-top:3px solid var(--amber)}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border)}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:500;color:var(--ink)}
+.sc-meta{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink-4);margin-top:1px}
+.sc-body{padding:12px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.sc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+.sc-v-red{color:var(--red)!important}
+.sc-v-teal{color:var(--teal)!important}
+.sc-v-amber{color:var(--amber)!important}
+.sc-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55;margin-top:8px}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:none}
+.tl-date{font-family:var(--mono);font-size:10px;color:var(--ink-4);white-space:nowrap;padding-top:2px;min-width:70px}
+.tl-text{font-family:var(--ss);font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+
+.footer{border-top:1px solid var(--border);background:var(--card);padding:20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink-4);transition:color .12s}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:960px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .two-col{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .ph-title{font-size:36px}
+  .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango Energy</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
+      <a class="nav-a" href="spare-capacity.html">Spare capacity</a>
+      <a class="nav-a" href="opec-compliance.html">OPEC+</a>
+      <a class="nav-a" href="osp-decoder.html">OSP</a>
+      <a class="nav-a" href="grades.html">Grades</a>
+      <a class="nav-a on" href="natural-gas.html">Natural gas</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="ph">
+  <div class="ph-inner">
+    <div class="ph-label">Intelligence · Natural gas & LNG · July 31 2026</div>
+    <h1 class="ph-title">Three markets, one crisis</h1>
+    <div class="ph-sub">Henry Hub at $2.80 — a glut. TTF at $19/MBtu — a crisis. JKM above $20 — a bidding war. The same Hormuz disruption that collapsed Gulf crude exports has fractured global gas markets into three diverging worlds, connected only by the LNG tankers that can physically move between them.</div>
+    <div class="ph-src">Sources: Global LNG Hub July 2026 · Trading Economics July 2026 · EIA · AGSI+ · Bloomberg · Discovery Alert · East Daley Analytics · Natural Gas Intelligence</div>
+  </div>
+</div>
+
+<!-- PRICE BAR -->
+<div class="price-bar">
+  <div class="price-bar-inner">
+    <div class="pb-item">
+      <div class="pb-label">Henry Hub (US)</div>
+      <div class="pb-val">$2.80</div>
+      <div class="pb-unit">/MMBtu · Jul 20 2026</div>
+      <div class="pb-chg down">Glut · Permian stranded gas</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-label">TTF (Europe)</div>
+      <div class="pb-val">$19.2</div>
+      <div class="pb-unit">/MMBtu · Jul 17 2026</div>
+      <div class="pb-chg up">3-year high · storage deficit</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-label">JKM (Asia spot)</div>
+      <div class="pb-val">$20+</div>
+      <div class="pb-unit">/MMBtu · Jul 17 2026</div>
+      <div class="pb-chg up">Bidding war · Qatar offline</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-label">TTF vs Henry Hub</div>
+      <div class="pb-val">~$16</div>
+      <div class="pb-unit">/MMBtu spread · Jul 2026</div>
+      <div class="pb-chg up">US LNG printing margin</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-label">EU storage</div>
+      <div class="pb-val">53.4%</div>
+      <div class="pb-unit">of capacity · Jul 10 2026</div>
+      <div class="pb-chg up">22.4pts below 5-yr avg</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-label">Waha Hub (Texas)</div>
+      <div class="pb-val">$0+</div>
+      <div class="pb-unit">above zero since June 2026</div>
+      <div class="pb-chg down">First positive in months</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<div class="content">
+
+  <!-- THE DIVERGENCE -->
+  <div class="sec">
+    <div class="sec-label">The core story · July 2026</div>
+    <h2 class="sec-title">The $16/MMBtu arbitrage that changed everything</h2>
+    <div class="body">
+      <p>Before the 2026 Hormuz crisis, global gas markets were converging. TTF was ~$9/MMBtu, JKM was ~$9.50–10, Henry Hub was $3.63. The spread between US and European gas was narrow enough that US LNG was competitive but not dominant.</p>
+      <p>The crisis blew that convergence apart. <strong>Qatar — the world's second-largest LNG exporter at 77 mtpa — went offline in March when Iranian missiles struck Ras Laffan.</strong> Europe and Asia simultaneously lost ~20% of their LNG supply. TTF surged above $19/MMBtu. JKM surged above $20. Henry Hub stayed at $2.80 — constrained by Permian pipeline bottlenecks, not by any lack of gas.</p>
+      <p>The result: a $16/MMBtu spread between US production cost and European delivery price. US LNG export terminals — Sabine Pass, Freeport, Corpus Christi, Sabine Pass, Cove Point — are printing margin they have never seen. <strong>The US has become Europe's swing LNG supplier by default, not by design.</strong> And the Permian Basin's stranded gas problem — the Waha glut that sent prices negative for months — is now the feedstock for the most valuable LNG in the world.</p>
+    </div>
+
+    <div class="teal-box">
+      <div class="teal-body"><strong>The accidental arbitrage:</strong> Gulf Coast Express expansion entered service in June 2026, moving Waha gas east. Hugh Brinson Phase 1 began flowing. Waha prices turned positive for the first time in months. The timing was almost perfectly aligned with Qatar going offline — US LNG feedgas became near-free precisely when European buyers were most desperate. Sabine Pass is running at margins it has never seen. The same stranded Permian molecules that were worth negative $7.95/MMBtu in April are now the feedstock for cargoes selling into Europe at $19.</div>
+    </div>
+
+    <div class="src-line">EIA · Global LNG Hub July 2026 · Discovery Alert · East Daley Analytics · Natural Gas Intelligence</div>
+  </div>
+
+  <!-- EUROPE STORAGE CRISIS -->
+  <div class="sec">
+    <div class="sec-label">Europe · Storage crisis</div>
+    <h2 class="sec-title">The storage deficit that cannot be closed before winter</h2>
+    <div class="body">
+      <p>Europe's gas storage trajectory in 2026 is the slow-burning crisis underneath the TTF price spike. The EU entered the year at critically low storage levels after a cold winter. Recovery has been persistently below the pace needed to reach the 90% target by November 1 — the EU's mandated pre-winter target.</p>
+      <p><strong>As of July 10, EU-wide storage stood at 53.4% of capacity</strong> — 17 percentage points below the same period last year and 22.4 percentage points below the five-year average. The CFO of one of Europe's largest gas producers has warned that the region is "very unlikely" to reach its storage target before winter. Norway has been the primary alternative supply source, but unplanned maintenance reduced Norwegian output in July, adding further upward pressure on TTF.</p>
+      <p>The Russian drone attack on Naftogaz gas production facilities on July 17 added another risk premium — pushing TTF to $19.2/MMBtu. Multiple supply risks are now compounding: Qatari LNG offline or unreliable, Norwegian maintenance, Russian attack on Ukrainian gas infrastructure. <strong>Europe is heading into the 2026–27 heating season with the thinnest storage buffer since the 2022 crisis.</strong></p>
+    </div>
+
+    <!-- Storage chart -->
+    <div class="storage-wrap">
+      <div class="storage-title">EU gas storage fill rate · 2026 vs targets · % of capacity</div>
+      <div class="storage-row">
+        <div class="storage-top">
+          <span class="storage-name">Current (Jul 10 2026)</span>
+          <div class="storage-nums">
+            <span class="storage-pct" style="color:var(--red)">53.4%</span>
+            <span class="storage-vs">−22.4pts vs 5-yr avg</span>
+          </div>
+        </div>
+        <div class="storage-track">
+          <div class="storage-fill" style="width:53.4%;background:var(--red)"></div>
+          <div class="storage-marker" style="left:75.8%"></div>
+        </div>
+      </div>
+      <div class="storage-row">
+        <div class="storage-top">
+          <span class="storage-name">5-year average (Jul 10)</span>
+          <div class="storage-nums">
+            <span class="storage-pct" style="color:var(--ink-3)">75.8%</span>
+            <span class="storage-vs">Historical norm</span>
+          </div>
+        </div>
+        <div class="storage-track">
+          <div class="storage-fill" style="width:75.8%;background:var(--ink-3)"></div>
+        </div>
+      </div>
+      <div class="storage-row">
+        <div class="storage-top">
+          <span class="storage-name">EU winter target (Nov 1)</span>
+          <div class="storage-nums">
+            <span class="storage-pct" style="color:var(--navy)">90%</span>
+            <span class="storage-vs">Mandated target · looks unreachable</span>
+          </div>
+        </div>
+        <div class="storage-track">
+          <div class="storage-fill" style="width:90%;background:var(--navy)"></div>
+        </div>
+      </div>
+      <div class="src-line">AGSI+ · European Network of Transmission System Operators for Gas · July 10 2026</div>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">The winter risk</div>
+      <div class="alert-body">At the current injection pace, Europe is unlikely to reach even 80% storage by November 1. A cold winter would exhaust storage faster than any recent year. The EU's emergency gas rationing framework — triggered at 20% storage — could be invoked as early as February 2027 if winter temperatures are below normal. Industrial users would be cut first; residential supply protected. The economic impact of rationing European industry would dwarf the energy cost increase alone.</div>
+    </div>
+
+    <div class="src-line">Global LNG Hub July 2026 · Trading Economics · Equinor CFO statement · AGSI+</div>
+  </div>
+
+  <!-- THE WAHA STORY -->
+  <div class="sec">
+    <div class="sec-label">United States · Permian pipeline buildout</div>
+    <h2 class="sec-title">The Waha glut becomes Europe's lifeline</h2>
+    <div class="body">
+      <p>The Waha hub in West Texas is the pricing benchmark for Permian Basin associated natural gas. For most of the first half of 2026, Waha gas was effectively worthless — prices averaged −$2.19/MMBtu in H1 2026, with a record low of −$7.95/MMBtu at the end of April. Producers were paying to have their gas taken away.</p>
+      <p>The problem: the Permian Basin produces vast quantities of natural gas as a by-product of oil drilling. With oil prices elevated by the Hormuz crisis, producers had every incentive to keep drilling for oil — generating gas that had no pipeline to move it east. Flaring, shut-ins, and negative pricing were the pressure valves.</p>
+      <p><strong>June 2026 changed everything.</strong> The Gulf Coast Express expansion (570 MMcf/d of new compression) entered service, sparking a near-$3/MMBtu rally at Waha. Hugh Brinson Phase 1 began initial flows. Waha turned positive for the first time in months and has held above zero since. Producers who had curtailed volumes began restoring output rapidly — the pent-up supply dynamic of the Permian.</p>
+      <p>The molecules now flowing east via GCX expansion and Hugh Brinson reach Gulf Coast LNG export terminals — Sabine Pass, Freeport, Corpus Christi — where they are liquefied and loaded onto tankers bound for Europe and Asia at $16+ premiums to Henry Hub. <strong>The Waha glut is the feedstock for the most valuable LNG in the world right now.</strong></p>
+    </div>
+
+    <!-- Pipeline table -->
+    <div style="margin-top:16px">
+      <table class="pipeline-table">
+        <thead>
+          <tr>
+            <th>Pipeline</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th>Destination</th>
+            <th>Significance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pt-name">Gulf Coast Express expansion</span><span class="pt-sub">Kinder Morgan · GCX</span></td>
+            <td>+570 MMcf/d</td>
+            <td><span class="badge b-teal">In service</span></td>
+            <td>Waha → South Texas / Gulf Coast</td>
+            <td>First relief. Sparked $3/MMBtu rally at Waha. June 2026.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-name">Blackcomb Pipeline</span><span class="pt-sub">WhiteWater Midstream</span></td>
+            <td>2.5 Bcf/d</td>
+            <td><span class="badge b-amber">Q3 2026 target</span></td>
+            <td>Waha → Agua Dulce hub</td>
+            <td>Major capacity addition. Agua Dulce connects to LNG export corridor.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-name">Hugh Brinson Pipeline Phase 1</span><span class="pt-sub">Energy Transfer · 400 miles · 42-inch</span></td>
+            <td>1.5 Bcf/d</td>
+            <td><span class="badge b-amber">Q4 2026 target · flowing early</span></td>
+            <td>Waha → Maypearl (Dallas/Fort Worth)</td>
+            <td>New corridor. Opens North Texas markets. Full capacity March 2027.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-name">Hugh Brinson Pipeline Phase 2</span><span class="pt-sub">Energy Transfer · additional compression</span></td>
+            <td>+0.7 Bcf/d (total 2.2)</td>
+            <td><span class="badge b-navy">Q1 2027</span></td>
+            <td>Extended from Phase 1</td>
+            <td>Full debottlenecking of Permian egress.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <div class="info-body"><strong>The irony:</strong> the same geopolitical pressures that drive crude oil revenues higher for Permian producers could simultaneously push their associated gas revenues back below zero if pipeline capacity is overwhelmed. A $60+ Brent price incentivises more Permian oil drilling, which generates more associated gas, which could re-flood Waha if Hugh Brinson and Blackcomb are delayed. The pipeline buildout and the LNG crisis are in a race — and Europe's winter depends on who wins.</div>
+    </div>
+
+    <div class="src-line">EIA May 2026 · East Daley Analytics June 2026 · Natural Gas Intelligence · Discovery Alert · Hugh Brinson Pipeline project site</div>
+  </div>
+
+  <!-- QATAR RESTART -->
+  <div class="sec">
+    <div class="sec-label">Qatar · LNG restart · July 30 2026</div>
+    <h2 class="sec-title">Ras Laffan: cautious restart, permanent damage</h2>
+    <div class="body">
+      <p>Qatar's Ras Laffan complex — the world's largest LNG export facility at 77 mtpa — was struck by Iranian missiles in mid-March 2026. Two of 14 LNG trains and one gas-to-liquids facility were permanently damaged. QatarEnergy declared force majeure, idled remaining trains due to the Hormuz closure, and estimated repairs could take up to five years at a cost of ~$20bn per year in lost revenue.</p>
+      <p>The June 18 Hormuz deal briefly opened the prospect of a rapid restart. QatarEnergy told buyers it could restore 50% capacity within one month of safe transit and 80% within two months. Engineers were mobilised, equipment tested, maintenance performed on undamaged trains.</p>
+      <p><strong>On July 7, an Iranian strike hit the Al Rekayyat LNG carrier in Hormuz</strong> — QatarEnergy CEO Saad Al-Kaabi immediately halted the restart plan. Ras Laffan was kept at minimum operations. More than a dozen tankers idled near the facility.</p>
+      <p>On July 30 2026, Qatar sent its first LNG shipment through Hormuz in three weeks — tanker Al Areesh, bound for Pakistan. The move signals QatarEnergy may be cautiously resuming deliveries. But with US and Iran resuming strikes as of July 29, the restart remains fragile. The 80% capacity target is 2 months away if Hormuz stays open — and there is no guarantee it will.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="chart-wrap">
+          <div class="chart-title">Qatar LNG capacity status · mtpa · July 2026</div>
+          <div class="chart-canvas"><canvas id="qatarChart"></canvas></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:16px">
+          <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-4);margin-bottom:8px">Restart timeline (if Hormuz stays open)</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span style="font-family:var(--ss);font-size:12px;color:var(--ink-2)">Month 1</span><span style="font-family:var(--mono);font-size:12px;color:var(--amber)">~50% capacity</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-family:var(--ss);font-size:12px;color:var(--ink-2)">Month 2</span><span style="font-family:var(--mono);font-size:12px;color:var(--teal)">~80% capacity</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-family:var(--ss);font-size:12px;color:var(--ink-2)">Full recovery</span><span style="font-family:var(--mono);font-size:12px;color:var(--red)">Up to 5 years</span></div>
+          </div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:16px">
+          <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-4);margin-bottom:8px">Permanent damage</div>
+          <div style="font-family:var(--ss);font-size:12px;color:var(--ink-2);line-height:1.6">2 of 14 LNG trains damaged. 1 GTL facility damaged. ~13 mtpa (~17%) capacity permanently lost until rebuilt. Revenue loss ~$20bn/yr.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="src-line">Bloomberg July 30 2026 · Oil & Gas Middle East June 17 2026 · OilPrice.com June 22 2026 · ZeroHedge June 16 2026 · The National July 30 2026</div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <div class="sc sc-teal">
+    <div class="sc-head">
+      <div class="sc-title">Benchmark prices</div>
+      <div class="sc-meta">July 2026 · $/MMBtu</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">Henry Hub (US)</span><span class="sc-v">$2.80</span></div>
+      <div class="sc-row"><span class="sc-l">TTF (Europe)</span><span class="sc-v sc-v-red">$19.2</span></div>
+      <div class="sc-row"><span class="sc-l">JKM (Asia spot)</span><span class="sc-v sc-v-red">$20+</span></div>
+      <div class="sc-row"><span class="sc-l">TTF vs Henry Hub</span><span class="sc-v sc-v-red">~$16</span></div>
+      <div class="sc-row"><span class="sc-l">Waha Hub (Texas)</span><span class="sc-v sc-v-teal">$0+ (positive)</span></div>
+      <div class="sc-note">Henry Hub stability masks the global crisis. The US is in structural surplus; Europe and Asia are in structural deficit. LNG tankers are the only bridge.</div>
+      <div class="src-line" style="margin:8px 0 0">Global LNG Hub · EIA · Jul 2026</div>
+    </div>
+  </div>
+
+  <div class="sc sc-red">
+    <div class="sc-head">
+      <div class="sc-title">European storage</div>
+      <div class="sc-meta">AGSI+ · July 10 2026</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">Current fill</span><span class="sc-v sc-v-red">53.4%</span></div>
+      <div class="sc-row"><span class="sc-l">5-year average</span><span class="sc-v">75.8%</span></div>
+      <div class="sc-row"><span class="sc-l">vs last year</span><span class="sc-v sc-v-red">−17.0 pts</span></div>
+      <div class="sc-row"><span class="sc-l">vs 5-yr avg</span><span class="sc-v sc-v-red">−22.4 pts</span></div>
+      <div class="sc-row"><span class="sc-l">Winter target (Nov 1)</span><span class="sc-v">90%</span></div>
+      <div class="sc-row"><span class="sc-l">Target achievable?</span><span class="sc-v sc-v-red">Unlikely</span></div>
+      <div class="sc-note">At current injection pace, Europe may enter winter at 70–75% storage. Equinor CFO: "very fragile." Rationing framework triggered at 20%.</div>
+    </div>
+  </div>
+
+  <div class="sc sc-navy">
+    <div class="sc-head">
+      <div class="sc-title">US LNG export capacity</div>
+      <div class="sc-meta">Operating terminals · 2026</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">Sabine Pass</span><span class="sc-v">~30 mtpa</span></div>
+      <div class="sc-row"><span class="sc-l">Freeport LNG</span><span class="sc-v">~15 mtpa</span></div>
+      <div class="sc-row"><span class="sc-l">Corpus Christi</span><span class="sc-v">~15 mtpa</span></div>
+      <div class="sc-row"><span class="sc-l">Cove Point</span><span class="sc-v">~5.75 mtpa</span></div>
+      <div class="sc-row"><span class="sc-l">Total operating</span><span class="sc-v sc-v-teal">~88 mtpa</span></div>
+      <div class="sc-row"><span class="sc-l">Utilisation</span><span class="sc-v sc-v-teal">Near max</span></div>
+      <div class="sc-note">All US terminals running at or near maximum. Cannot meaningfully increase short-term. New capacity (Plaquemines, CP2) not online until 2027+.</div>
+    </div>
+  </div>
+
+  <div class="sc sc-amber">
+    <div class="sc-head">
+      <div class="sc-title">Key events timeline</div>
+      <div class="sc-meta">2026</div>
+    </div>
+    <div class="sc-body" style="padding:0 14px">
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="tl-date">Jan 2026</span>
+          <span class="tl-text">TTF ~$9/MMBtu. JKM ~$9.50. Waha at −$2+ and deteriorating. EU storage recovering but below average.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Mar 2–17</span>
+          <span class="tl-text">Ras Laffan struck by Iranian missiles. Force majeure declared. 77 mtpa of LNG effectively offline. TTF begins rapid ascent.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Apr 2026</span>
+          <span class="tl-text">Waha hits record low of −$7.95/MMBtu. EU storage at critically low 28%. TTF above $15/MMBtu. US LNG margins surge.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Jun 2026</span>
+          <span class="tl-text">GCX expansion enters service. Waha turns positive for first time in months. QatarEnergy announces 50%/80% restart plan after June 18 Hormuz deal.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Jul 7 2026</span>
+          <span class="tl-text">Al Rekayyat LNG tanker attacked in Hormuz. QatarEnergy halts restart. Ras Laffan back to minimum. TTF spikes to $19.2.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Jul 17 2026</span>
+          <span class="tl-text">Russian drone attack on Naftogaz gas facilities. Additional supply risk premium. TTF $19.2/MMBtu. EU storage 53.4% — 22.4pts below 5-yr avg.</span>
+        </div>
+        <div class="tl-item">
+          <span class="tl-date">Jul 30 2026</span>
+          <span class="tl-text">Al Areesh transits Hormuz — first Qatari LNG cargo in 3 weeks. 12+ tankers idling at Ras Laffan. Cautious restart signal.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Contango Energy · Natural gas intelligence · July 2026 · Not financial advice</span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="commodities.html">Commodities</a>
+      <a href="saudi-arabia.html">Saudi Arabia</a>
+      <a href="spare-capacity.html">Spare capacity</a>
+      <a href="methodology.html">Methodology</a>
+    </div>
+  </div>
+  <div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Updated: <span id="data-updated-date"></span></div>
+</footer>
+
+<script>
+let dark=localStorage.getItem('theme')==='dark';
+function initTheme(){if(dark){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='Light';}}
+function toggleTheme(){dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'');document.getElementById('theme-btn').textContent=dark?'Light':'Dark';localStorage.setItem('theme',dark?'dark':'light');}
+document.addEventListener('DOMContentLoaded',function(){
+  initTheme();
+
+  // Qatar capacity chart
+  const isDark=()=>document.documentElement.getAttribute('data-theme')==='dark';
+  const lc=()=>isDark()?'#909090':'#6b6860';
+  const gc=()=>isDark()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.06)';
+  const ctx=document.getElementById('qatarChart');
+  if(ctx){
+    const chart=new Chart(ctx.getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:['Pre-war','Permanently lost','Current intact capacity','80% restart target'],
+        datasets:[{
+          data:[77,13,64,51.2],
+          backgroundColor:['#4a7c6f','#b33000','#1d4480','#b07800'],
+          borderRadius:2,barPercentage:.65
+        }]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y} mtpa`}}},
+        scales:{
+          x:{grid:{display:false},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:9},maxRotation:20}},
+          y:{grid:{color:gc()},ticks:{color:lc(),font:{family:"'IBM Plex Mono'",size:9},callback:v=>v+' mt'},min:0,max:85}
+        }
+      }
+    });
+    document.getElementById('theme-btn').addEventListener('click',()=>setTimeout(()=>{
+      chart.options.scales.x.ticks.color=lc();
+      chart.options.scales.y.ticks.color=lc();
+      chart.options.scales.y.grid.color=gc();
+      chart.update();
+    },50));
+  }
+});
+</script>
+<script>(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();</script>
+</body>
+</html>
