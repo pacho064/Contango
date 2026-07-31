@@ -634,7 +634,7 @@ function renderCountrySignals(){
   const sig=E.signals||{};
   const build=arr=>{
     if(!arr||!arr.length) return '<div class="loading">No signals available.</div>';
-    return arr.slice(0,3).map(s=>`<div class="sig-card"><div class="sig-card-top"><span class="sig-pip ${s.hot?'hot':''}"></span><span class="sig-card-src">${s.src||''}</span></div><div class="sig-card-hl">${s.hl||''}</div><div class="sig-card-date">${s.date||''}</div></div>`).join('');
+    return arr.slice(0,3).map(s=>`<div class="sig-card"><div class="sig-card-top"><span class="sig-pip ${s.hot?'hot':''}"></span><span class="sig-card-src">${s.src||s.source||''}</span></div><div class="sig-card-hl">${s.hl||s.text||s.headline||''}</div><div class="sig-card-date">${s.date||''}</div></div>`).join('');
   };
   const sa=document.getElementById('sig-saudi');if(sa) sa.innerHTML=build(sig.saudi_arabia);
   const iq=document.getElementById('sig-iraq');if(iq) iq.innerHTML=build(sig.iraq);
