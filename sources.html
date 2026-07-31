@@ -6,7 +6,12 @@
   <title>Contango Energy — Sources</title>
   <meta name="description" content="Contango Energy source registry: source links, status, cadence, and coverage gaps.">
   <meta name="theme-color" content="#111110">
-  <link rel="canonical" href="https://pacho064.github.io/Contango/sources.html">
+  <link rel="canonical" href="https://contango-energy.com/sources.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="Contango Energy — Sources">
+<meta property="og:description" content="Contango Energy source registry: source links, status, cadence, and coverage gaps.">
+<meta property="og:url" content="https://contango-energy.com/sources.html">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -47,7 +52,9 @@
       h1{font-size:28px}
       .table{display:block;overflow-x:auto;white-space:nowrap}
     }
-  </style>
+  body{animation:fadeIn .25s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+</style>
 </head>
 <body>
   <nav class="nav">
@@ -155,10 +162,10 @@
     </section>
 
     <p class="foot">Contango Energy · Source registry v1</p>
-  <div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
+  <div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Updated: <span id="data-updated-date"></span></div>
 </main>
 <script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
-(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
+(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>

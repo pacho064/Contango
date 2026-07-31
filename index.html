@@ -7,7 +7,12 @@
 <title>Contango Energy — Middle East oil intelligence</title>
 <meta name="description" content="Middle East crude prices, OSP differentials, infrastructure constraints, trade flows and crisis intelligence.">
 <meta name="theme-color" content="#111110">
-<link rel="canonical" href="https://pacho064.github.io/Contango/">
+<link rel="canonical" href="https://contango-energy.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="Contango Energy — Middle East oil intelligence">
+<meta property="og:description" content="Middle East crude prices, OSP differentials, infrastructure constraints, trade flows and crisis intelligence.">
+<meta property="og:url" content="https://contango-energy.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet">
@@ -199,6 +204,12 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
 /* map section head + timeline view-all */
 .map-section-head{max-width:1400px;margin:0 auto;padding:22px 28px 12px}
 .tl-viewall{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--source-line);padding:12px 16px;border-top:1px solid var(--border);text-align:center}
+body{animation:fadeIn .25s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{background-position:-1000px 0}100%{background-position:1000px 0}}
+.skeleton{background:linear-gradient(90deg,var(--border) 25%,var(--card-alt) 50%,var(--border) 75%);background-size:1000px 100%;animation:shimmer 1.5s infinite;border-radius:2px;display:inline-block}
+#nav-brent{font-family:var(--mono);font-size:.65rem;letter-spacing:.04em;font-weight:500;white-space:nowrap;display:none}
+#nav-brent.up{color:var(--teal)}#nav-brent.dn{color:var(--red)}
 </style>
 </head>
 <body>
@@ -220,6 +231,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
       <a class="nav-a" href="commodities.html">Commodities</a>
     </div>
     <div class="nav-right">
+      <span id="nav-brent"></span>
       <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
     </div>
   </div>
@@ -231,18 +243,18 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
     <div class="hero-eyebrow">Crisis intelligence · Updated <span id="hero-updated">daily</span></div>
     <h1 class="hero-title">Middle East Crude Intelligence</h1>
     <p class="hero-subtitle">Real-time tracking of the 2026 Hormuz crisis, Gulf production, and global crude flows</p>
-    <div class="hero-pills" id="hero-pills"><div class="loading">Loading status…</div></div>
+    <div class="hero-pills" id="hero-pills"><span class="skeleton" style="height:46px;width:150px"></span><span class="skeleton" style="height:46px;width:150px"></span><span class="skeleton" style="height:46px;width:150px"></span></div>
   </div>
 </div>
 
 <!-- LIVE METRICS BAR -->
-<div class="metrics-bar"><div class="metrics-inner" id="metrics-inner"><div class="loading" style="padding:15px 0">Loading metrics…</div></div></div>
+<div class="metrics-bar"><div class="metrics-inner" id="metrics-inner"><div class="metric"><span class="skeleton" style="display:block;height:.6rem;width:70%;margin-bottom:6px"></span><span class="skeleton" style="display:block;height:1.1rem;width:55%"></span></div><div class="metric"><span class="skeleton" style="display:block;height:.6rem;width:70%;margin-bottom:6px"></span><span class="skeleton" style="display:block;height:1.1rem;width:55%"></span></div><div class="metric"><span class="skeleton" style="display:block;height:.6rem;width:70%;margin-bottom:6px"></span><span class="skeleton" style="display:block;height:1.1rem;width:55%"></span></div><div class="metric"><span class="skeleton" style="display:block;height:.6rem;width:70%;margin-bottom:6px"></span><span class="skeleton" style="display:block;height:1.1rem;width:55%"></span></div><div class="metric"><span class="skeleton" style="display:block;height:.6rem;width:70%;margin-bottom:6px"></span><span class="skeleton" style="display:block;height:1.1rem;width:55%"></span></div><div class="metric"><span class="skeleton" style="display:block;height:.6rem;width:70%;margin-bottom:6px"></span><span class="skeleton" style="display:block;height:1.1rem;width:55%"></span></div></div></div>
 
 <!-- CHOKEPOINTS -->
 <section class="dash-section">
   <div class="section-wrap">
     <div class="sec-head"><h2 class="sec-title">Maritime chokepoints</h2><span class="sec-note">Global oil transit · risk status</span></div>
-    <div class="choke-cards" id="choke-cards"><div class="loading">Loading chokepoints…</div></div>
+    <div class="choke-cards" id="choke-cards"><div class="skeleton" style="height:120px;width:100%"></div><div class="skeleton" style="height:120px;width:100%"></div><div class="skeleton" style="height:120px;width:100%"></div></div>
   </div>
 </section>
 
@@ -274,8 +286,8 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   <div class="section-wrap">
     <div class="sec-head"><h2 class="sec-title">Country signals</h2><span class="sec-note">Auto-updated daily</span></div>
     <div class="signals-cols">
-      <div class="sig-col"><div class="sig-col-head">Saudi Arabia</div><div id="sig-saudi"><div class="loading">Loading…</div></div></div>
-      <div class="sig-col"><div class="sig-col-head">Iraq</div><div id="sig-iraq"><div class="loading">Loading…</div></div></div>
+      <div class="sig-col"><div class="sig-col-head">Saudi Arabia</div><div id="sig-saudi"><div class="skeleton" style="height:1.2rem;width:60%;margin:.5rem 0"></div></div></div>
+      <div class="sig-col"><div class="sig-col-head">Iraq</div><div id="sig-iraq"><div class="skeleton" style="height:1.2rem;width:60%;margin:.5rem 0"></div></div></div>
     </div>
   </div>
 </section>
@@ -317,7 +329,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
       </div>
       <div class="side-col">
         <div class="panel-head"><span class="panel-title">Prices</span><span class="panel-ts" id="prices-ts">—</span></div>
-        <div id="prices-area" style="overflow-y:auto;flex:1"><div class="loading">Loading…</div></div>
+        <div id="prices-area" style="overflow-y:auto;flex:1"><div class="skeleton" style="height:1.2rem;width:60%;margin:.5rem 16px"></div></div>
       </div>
     </div>
   </div>
@@ -360,7 +372,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
     <span>Contango Energy · Open source · MIT license · <a href="methodology.html" style="color:var(--source-line)">Methodology</a></span>
     <span id="footer-updated"></span>
   </div>
-<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
+<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Updated: <span id="data-updated-date"></span></div>
 </footer>
 
 <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
@@ -535,6 +547,8 @@ function renderHero(){
   const el=document.getElementById('hero-pills');if(el) el.innerHTML=pills.join('');
   const up=document.getElementById('hero-updated');
   if(up&&D._updated){try{up.textContent=new Date(D._updated).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(e){}}
+  const nb=document.getElementById('nav-brent');
+  if(nb&&b){nb.textContent='BRENT $'+b.price.toFixed(2);nb.className=(b.change_pct>0?'up':b.change_pct<0?'dn':'');nb.style.display='';}
 }
 
 function renderMetrics(){
@@ -774,7 +788,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
 <script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
-(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
+(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>

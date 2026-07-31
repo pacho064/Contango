@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pacho064.github.io/Contango/sitemap.xml
+Sitemap: https://contango-energy.com/sitemap.xml

@@ -7,7 +7,12 @@
 <title>Iraq — Contango Energy</title>
 <meta name="description" content="Iraq oil infrastructure, Basra force majeure, Hormuz dependency, overland Syria route, Kirkuk-Ceyhan pipeline. April 2026 updates.">
 <meta name="theme-color" content="#111110">
-<link rel="canonical" href="https://pacho064.github.io/Contango/iraq.html">
+<link rel="canonical" href="https://contango-energy.com/iraq.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="Iraq — Contango Energy">
+<meta property="og:description" content="Iraq oil infrastructure, Basra force majeure, Hormuz dependency, overland Syria route, Kirkuk-Ceyhan pipeline. April 2026 updates.">
+<meta property="og:url" content="https://contango-energy.com/iraq.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -144,6 +149,8 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   .main{padding-left:16px;padding-right:16px}
   .footer-inner{grid-template-columns:1fr 1fr;gap:16px}
 }
+body{animation:fadeIn .25s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -525,7 +532,7 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:var(
   <div class="footer-bottom">
     <span>Contango Energy · Open source · MIT license · <a href="methodology.html" style="color:var(--muted)">Methodology</a></span>
   </div>
-<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
+<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Updated: <span id="data-updated-date"></span></div>
 </footer>
 
 <script>
@@ -651,7 +658,7 @@ document.addEventListener('DOMContentLoaded',()=>{initTheme();loadEvents();loadP
 })();
 </script>
 <script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
-(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
+(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>

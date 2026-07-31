@@ -1,59 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pacho064.github.io/Contango/</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>daily</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/index.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/saudi-arabia.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/saudi-arabia.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/iraq.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/iraq.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/buyer-exposure.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/buyer-exposure.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/spare-capacity.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/spare-capacity.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/opec-compliance.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/opec-compliance.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/osp-decoder.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/osp-decoder.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/grades.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/grades.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/commodities.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://pacho064.github.io/Contango/commodities.html</loc>
-    <lastmod>2026-03-30</lastmod>
-  </url>
-  <url>
-    <loc>https://pacho064.github.io/Contango/methodology.html</loc>
-    <lastmod>2026-03-30</lastmod>
-  </url>
-  <url>
-    <loc>https://pacho064.github.io/Contango/sources.html</loc>
-    <lastmod>2026-03-30</lastmod>
-  </url>
-  <url>
-    <loc>https://pacho064.github.io/Contango/about.html</loc>
-    <lastmod>2026-03-30</lastmod>
-  </url>
-  <url>
-    <loc>https://pacho064.github.io/Contango/roadmap.html</loc>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://contango-energy.com/methodology.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>

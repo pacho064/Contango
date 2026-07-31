@@ -7,7 +7,12 @@
 <title>Methodology — Contango Energy</title>
 <meta name="description" content="Contango Energy methodology: source hierarchy, formulas, update cadence, and data quality policy.">
 <meta name="theme-color" content="#111110">
-<link rel="canonical" href="https://pacho064.github.io/Contango/methodology.html">
+<link rel="canonical" href="https://contango-energy.com/methodology.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="Methodology — Contango Energy">
+<meta property="og:description" content="Contango Energy methodology: source hierarchy, formulas, update cadence, and data quality policy.">
+<meta property="og:url" content="https://contango-energy.com/methodology.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -129,6 +134,8 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   .tier{grid-template-columns:60px 1fr}
   .pl-item{grid-template-columns:100px 1fr}
 }
+body{animation:fadeIn .25s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
@@ -423,7 +430,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   <div class="footer-bottom">
     <span>Contango Energy · Open source · MIT license · <a href="methodology.html" style="color:var(--muted)">Methodology</a></span>
   </div>
-<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
+<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Updated: <span id="data-updated-date"></span></div>
 </footer>
 
 <script>
@@ -435,7 +442,7 @@ function toggleTheme(){
 }
 </script>
 <script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
-(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
+(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>

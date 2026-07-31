@@ -7,7 +7,12 @@
 <title>OSP signal decoder — Contango Energy</title>
 <meta name="description" content="What the Arab Light OSP differential actually means. How Aramco sets prices, what the moves signal politically, and why the current +$11 premium is unlike any previous cycle.">
 <meta name="theme-color" content="#111110">
-<link rel="canonical" href="https://pacho064.github.io/Contango/osp-decoder.html">
+<link rel="canonical" href="https://contango-energy.com/osp-decoder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="OSP signal decoder — Contango Energy">
+<meta property="og:description" content="What the Arab Light OSP differential actually means. How Aramco sets prices, what the moves signal politically, and why the current +$11 premium is unlike any previous cycle.">
+<meta property="og:url" content="https://contango-energy.com/osp-decoder.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -150,6 +155,8 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   .nav-links{display:none}
   .nav-inner,.ph-inner,.main,.footer-inner{padding-left:16px;padding-right:16px}
 }
+body{animation:fadeIn .25s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -452,7 +459,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <a href="https://datalab.wto.org/Strait-of-Hormuz-Trade-Tracker" target="_blank">WTO Hormuz Tracker ↗</a>
     </div>
   </div>
-<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Data last updated: <span id="data-updated-date"></span></div>
+<div id="data-updated" style="display:none;text-align:center;font-family:var(--mono,monospace);font-size:9px;letter-spacing:.04em;opacity:.6;padding:10px 0 4px">Updated: <span id="data-updated-date"></span></div>
 </footer>
 
 <script>
@@ -557,7 +564,7 @@ document.addEventListener('DOMContentLoaded', renderOSPChart);
 })();
 </script>
 <script>/* live "data last updated" stamp from data/prices.json — stays hidden on any failure */
-(function(){fetch('data/prices.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
+(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();
 </script>
 </body>
 </html>
