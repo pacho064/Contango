@@ -625,7 +625,9 @@ function renderChokeCards(){
   el.innerHTML=data.map(c=>{
     const risk=(c.risk||'low').toLowerCase();
     const status=c.status||c.source||'';
-    return `<div class="ck-card ${risk}"><div class="ck-card-top"><div><div class="ck-card-name">${c.name}</div><div class="ck-card-vol">${c.volume||''} daily transit</div></div><span class="badge ${bc[risk]||'b-low'}">${(c.risk||'').toUpperCase()}</span></div><div class="ck-card-status">${status}</div><div class="ck-card-src">${c.source||''} · ${c.updated||''}</div></div>`;
+    const statusText=c.status||c.source||'';
+const srcText=c.source||'';
+return `<div class="ck-card ${risk}"><div class="ck-card-top"><div><div class="ck-card-name">${c.name}</div><div class="ck-card-vol">${c.volume||''} daily transit</div></div><span class="badge ${bc[risk]||'b-low'}">${(c.risk||'').toUpperCase()}</span></div><div class="ck-card-status">${statusText}</div><div class="ck-card-src">${srcText} · ${c.updated||''}</div></div>`;
   }).join('');
 }
 
