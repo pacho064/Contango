@@ -223,7 +223,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     <div class="hero-thesis">
       <strong>The central argument:</strong> Export controls on AI accelerators focus on the most visible layer of the compute stack — but the binding constraint is not fixed. As capacity expands at one node, scarcity can migrate to packaging, memory, power, or grid infrastructure. Policy therefore depends on identifying not only where concentration exists, but <strong>how durable each constraint is, and when announced capacity expansions are likely to produce usable relief.</strong> This page tracks concentration, substitution difficulty, and time-to-relief across the AI compute stack.
     </div>
-    <div class="hero-src">This page is a live research project. Sources are named inline throughout. Quantitative claims carry confidence notes where sourcing is imprecise. Last updated August 2026. · Silicon Analysts · SIA June 2026 · TSMC investor reports · ASML Q1 2026 earnings · BIS Federal Register · CSIS Wadhwani Center · Epoch AI · Berkeley Lab · Santiago & Company · SemiAnalysis</div>
+    <div class="hero-src">This page is a live research project. Sources are named inline throughout. Quantitative claims carry confidence notes where sourcing is imprecise. Last updated August 2026. · Silicon Analysts · <a href="https://www.semiconductors.org/new-report-finds-semiconductors-account-for-95-of-an-ai-data-server-racks-value-encompassing-the-full-stack-of-chip-technologies/" style="color:var(--navy)">SIA June 2026</a> · TSMC investor reports · ASML Q1 2026 earnings · BIS Federal Register · CSIS Wadhwani Center · Epoch AI · Berkeley Lab · Santiago & Company · SemiAnalysis</div>
   </div>
 </div>
 
@@ -486,8 +486,8 @@ button{cursor:pointer;background:none;border:none;color:inherit}
         <div class="ck-stats">
           <div class="ck-stat">
             <div class="ck-stat-label">TSMC adv. logic share</div>
-            <div class="ck-stat-val">~90%</div>
-            <div class="ck-stat-src">sub-7nm · Silicon Analysts · TSMC 60% of foundry revenue</div>
+            <div class="ck-stat-val">~70–90%</div>
+            <div class="ck-stat-src">70% pure-play foundry revenue · ~90% advanced foundry sub-7nm · Counterpoint Q3 2025 · denominator matters — see text</div>
           </div>
           <div class="ck-stat">
             <div class="ck-stat-label">2nm booking status</div>
@@ -496,7 +496,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
           </div>
         </div>
         <div class="ck-body">
-          TSMC controls approximately 90% of advanced logic chip production below 7nm. Taiwan-based companies account for ~67% of total foundry revenue. TSMC's 2nm node is fully booked well into 2028; new 3nm project kickoffs have been suspended with customers steered toward 2nm. TSMC's strategic significance is primarily about <strong>Taiwan's vulnerability, not Taiwan's leverage</strong> — TSMC does not deploy its market position as a unilateral foreign policy instrument. A Taiwan contingency would simultaneously disrupt every AI hardware program globally.
+          TSMC controls approximately 90% of advanced <em>foundry</em> capacity at sub-7nm nodes — meaning chips manufactured for external customers at leading-edge nodes (Counterpoint Research Q3 2025; Economy Insights March 2026). This figure excludes integrated device manufacturers (Samsung, Intel) producing for their own designs, and excludes DRAM/NAND. Within the narrower category of AI accelerator foundry production, TSMC's share is even higher. Taiwan-based companies account for ~67% of total foundry revenue. TSMC's 2nm node is fully booked well into 2028; new 3nm project kickoffs have been suspended with customers steered toward 2nm. TSMC's strategic significance is primarily about <strong>Taiwan's vulnerability, not Taiwan's leverage</strong> — TSMC does not deploy its market position as a unilateral foreign policy instrument. A Taiwan contingency would simultaneously disrupt every AI hardware program globally.
         </div>
         <div class="ck-relief">
           <div class="ck-relief-label">Time to relief</div>
@@ -557,13 +557,17 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       </div>
 
     </div>
-    <div class="src-line">Silicon Analysts March–August 2026 · TSMC investor reports · ASML Q1 2026 earnings · SK Hynix earnings · Santiago & Company June 2026 · Epoch AI 2026 · Berkeley Lab 2025 · CSIS Wadhwani Center · SIA June 2026</div>
+    <div class="src-line">Silicon Analysts March–August 2026 · TSMC investor reports · ASML Q1 2026 earnings · SK Hynix earnings · Santiago & Company June 2026 · <a href="https://epoch.ai/trends" style="color:var(--navy)">Epoch AI 2026</a> · Berkeley Lab 2025 · CSIS Wadhwani Center · SIA June 2026</div>
   </div>
 
   <!-- MATRIX -->
   <div class="sec">
     <div class="sec-label">Analytical framework</div>
     <div class="sec-title">Chokepoint durability matrix</div>
+    <div style="background:var(--card-alt);border:1px solid var(--border);border-radius:3px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--ink2);line-height:1.65">
+      <span style="font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:6px">Methodology note — durability ratings</span>
+      Ratings are qualitative assessments across three dimensions, not mathematical scores. <strong>Substitution difficulty:</strong> very high = no demonstrated alternative at commercial yields; high = alternatives exist but require 2+ year qualification cycles; moderate = alternatives available with 6–18 month transition; low = commodity-like substitution. <strong>Expansion lead time:</strong> very high = 5+ years from announcement to usable capacity; high = 2–5 years; moderate = 1–2 years; low = &lt;1 year. <strong>Policy controllability:</strong> very high = single jurisdiction can restrict; high = requires allied coordination; moderate = controls exist but incomplete; low = not meaningfully controllable. Overall durability is a judgment across all three — not a formula applied to ordinal scores.
+    </div>
     <div class="body">
       <p>A market-share figure does not equal a chokepoint. This matrix tracks the variables that determine whether concentration creates durable geopolitical leverage. Question marks indicate genuine gaps in available evidence — not assumed absence of constraint. Scores are qualitative; the evidence behind each is in the cards above.</p>
     </div>
@@ -683,7 +687,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
         <div class="lev-body">BIS can extend US export-control jurisdiction to certain foreign-produced semiconductor items made with specified US technology or equipment when defined destination or end-user conditions are met. <strong>Because US tools and software sit deep in the semiconductor production stack, that jurisdiction can reach well beyond goods manufactured inside the United States — but FPDP is not a blanket rule covering every foreign chip containing US technology.</strong> It applies through defined product, technology, destination, and end-user conditions. This is why the equipment coalition with the Netherlands and Japan is essential: it extends the coverage perimeter by bringing Dutch EUV and Japanese materials and equipment into a coordinated allied control architecture.</div>
       </div>
     </div>
-    <div class="src-line">BIS Federal Register · EAR 15 CFR 730–774 · CSIS Wadhwani Center export control analysis · Congressional Research Service R48642</div>
+    <div class="src-line">BIS Federal Register · EAR 15 CFR 730–774 · Congressional Research Service R48642</div>
   </div>
 
   <!-- EXPORT CONTROL TIMELINE -->
@@ -700,7 +704,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
           <span class="tl-tag tag-shift">PERIMETER SHIFT</span>
           <div class="tl-hl"><strong>BIS imposes sweeping chip and equipment controls</strong> — largest restriction in a generation</div>
           <div class="tl-what">What changed in the control perimeter: from controlling specific chip exports → constraining China's ability to produce advanced chips domestically. Controls covered advanced computing chips (&gt;A100 performance), semiconductor manufacturing equipment, and US-person support for advanced PRC fabs. The foreign-produced direct product rule was substantially expanded to cover items produced using US-origin equipment or software in specified categories.</div>
-          <div class="tl-src">BIS Federal Register · October 7 2022</div>
+          <div class="tl-src"><a href="https://www.federalregister.gov/documents/2022/10/13/2022-21658/export-administration-regulations-expansion-of-export-controls-on-advanced-computing-and" style="color:var(--navy)">BIS Federal Register · October 7 2022</a></div>
         </div>
       </div>
       <div class="tl-item">
@@ -736,7 +740,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
           <span class="tl-tag tag-expand">CAPACITY REDIRECT</span>
           <div class="tl-hl"><strong>Nvidia redirects TSMC CoWoS capacity</strong> from H200 to Vera Rubin — export uncertainty reshapes production allocation</div>
           <div class="tl-what">What changed: regulatory uncertainty over H200 China approvals caused Nvidia to reallocate constrained CoWoS packaging capacity toward next-generation Vera Rubin chips with confirmed US/allied orders. Illustrates a mechanism beyond enforcement: export control uncertainty itself shapes supply allocation decisions, effectively reducing China's access even before formal rulings. Vera Rubin entered full production May 2026.</div>
-          <div class="tl-src">Financial Times March 5 2026 · Nvidia Newsroom May 2026 · CNAS "American AI Companies Can't Get Enough Chips" May 2026</div>
+          <div class="tl-src">Financial Times March 5 2026 · Nvidia Newsroom May 2026 · <a href="https://www.cnas.org/publications/reports/american-ai-companies-cant-get-enough-chips" style="color:var(--navy)">CNAS "American AI Companies Can't Get Enough Chips" May 2026</a></div>
         </div>
       </div>
       <div class="tl-item">
@@ -818,7 +822,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <p>Current signals suggest the next constraint migration: as TSMC, SK Hynix, and Micron expand CoWoS and HBM capacity through 2027–2029, and as the AI hardware market fragments across frontier training, inference, and edge deployment, the binding constraint may increasingly be <strong>power availability, grid interconnection timelines, transformer procurement, and cooling infrastructure</strong> — none of which respond to capital the way chip fabs do, and none of which are concentrated in a small number of countries.</p>
       <p>If that migration occurs, the most important AI industrial policy decisions in 2028–2030 may involve permitting reform, transmission infrastructure, nuclear power restarts, and data-center siting — not chip export controls. That reorientation would represent a significant shift in where geopolitical leverage over AI compute actually resides.</p>
     </div>
-    <div class="src-line">Berkeley Lab 2025 US data center energy report · Epoch AI compute trends · Santiago & Company June 2026</div>
+    <div class="src-line"><a href="https://eta.lbl.gov/publications/united-states-data-center-energy-2024" style="color:var(--navy)">Berkeley Lab 2024 US data center energy report</a> · <a href="https://www.csis.org/programs/wadhwani-center-ai-and-advanced-technologies" style="color:var(--navy)">CSIS Wadhwani Center</a> "Powering Innovation" 2026 · Epoch AI compute trends · Santiago & Company June 2026</div>
   </div>
 
 </div>
@@ -842,7 +846,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="sc-row"><span class="sc-l">EUV to China</span><span class="sc-v red">Zero · controls holding</span></div>
       <div class="sc-row"><span class="sc-l">TSMC US commitment</span><span class="sc-v teal">$265B total</span></div>
       <div class="sc-row"><span class="sc-l">Semis share of AI rack</span><span class="sc-v">95% of value</span></div>
-      <div class="sc-row"><span class="sc-l">US data centers by 2030</span><span class="sc-v amber">9.5–15% US power</span></div>
+      <div class="sc-row"><span class="sc-l">US data centers by 2028</span><span class="sc-v amber">up to 12% US power</span></div>
       <div class="sc-note">Sources: Silicon Analysts · ASML Q1 2026 · SK Hynix CEO · SIA June 2026 · Berkeley Lab 2025. Quantitative claims marked with confidence notes in card text where precision is uncertain.</div>
     </div>
   </div>
