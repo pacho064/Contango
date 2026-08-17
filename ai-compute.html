@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Compute Chokepoints — Contango Energy</title>
+<meta name="description" content="Where the AI compute stack is physically concentrated, which nodes create durable geopolitical leverage, and where the bottleneck moves next. Export controls, TSMC, HBM, ASML. Updated 2026.">
+<link rel="canonical" href="https://contango-energy.com/ai-compute.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contango Energy">
+<meta property="og:title" content="AI Compute Chokepoints — Contango Energy">
+<meta property="og:description" content="Mapping concentration, substitution difficulty, and geopolitical leverage in the AI compute stack. TSMC, HBM, ASML, export controls, China substitution.">
+<meta property="og:url" content="https://contango-energy.com/ai-compute.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-font-smoothing:antialiased}
+:root{
+  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --bg:#f7f7f5;--card:#fff;--card-alt:#f3f0eb;--border:#e8e5e0;
+  --ink:#0f0f0e;--ink2:#3a3830;--ink3:#9a9590;--ink4:#b0b0a8;
+  --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#8a5a00;--purple:#5a3a8a
+}
+[data-theme=dark]{
+  --bg:#111110;--card:#1a1a19;--card-alt:#161614;--border:#272726;
+  --ink:#ddd6c8;--ink2:#cec8bc;--ink3:#909090;--ink4:#6a6a68;
+  --red:#c84000;--teal:#4a9c8a;--amber:#c89040;--purple:#8a60c0
+}
+body{font-family:var(--ss);background:var(--bg);color:var(--ink);line-height:1.6;transition:background .2s,color .2s;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;background:none;border:none;color:inherit}
+
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:50px;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;width:100%;display:flex;align-items:center}
+.brand{font-family:var(--cg);font-size:19px;font-weight:600;color:var(--ink);white-space:nowrap;margin-right:16px}
+.nav-links{display:flex;height:50px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-a{display:flex;align-items:center;padding:0 10px;font-family:var(--ss);font-size:13px;color:var(--ink3);border-bottom:2px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+.nav-a:hover,.nav-a.on{color:var(--ink);border-bottom-color:var(--navy)}
+.nav-right{margin-left:auto;flex-shrink:0}
+.nav-btn{font-family:var(--mono);font-size:10px;color:var(--ink3);border:1px solid var(--border);border-radius:3px;padding:3px 9px}
+
+/* HERO */
+.hero{background:var(--card);border-bottom:3px solid var(--purple);padding:36px 24px 28px}
+.hero-inner{max-width:1200px;margin:0 auto}
+.hero-label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px}
+.hero-title{font-family:var(--cg);font-size:clamp(36px,5vw,58px);font-weight:600;color:var(--ink);line-height:1.05;margin-bottom:10px}
+.hero-sub{font-size:16px;color:var(--ink3);max-width:660px;line-height:1.65;margin-bottom:20px}
+.hero-thesis{background:var(--card-alt);border-left:3px solid var(--purple);padding:14px 18px;border-radius:0 3px 3px 0;max-width:660px;font-size:14px;color:var(--ink2);line-height:1.7}
+.hero-thesis strong{color:var(--ink)}
+.hero-src{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink4);margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* STACK BAR */
+.stack-bar{background:var(--card-alt);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;padding:0}
+.stack-bar::-webkit-scrollbar{display:none}
+.stack-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;min-height:52px;gap:0}
+.stack-node{display:flex;flex-direction:column;justify-content:center;padding:10px 16px 10px 0;margin-right:16px;border-right:1px solid var(--border);flex-shrink:0;cursor:default}
+.stack-node:last-child{border-right:none}
+.stack-node-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:2px}
+.stack-node-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink)}
+.stack-node-sub{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink4);margin-top:1px}
+.bottleneck{border-bottom:2px solid var(--red)!important}
+.bottleneck .stack-node-val{color:var(--red)}
+
+/* LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:36px 24px 60px;display:grid;grid-template-columns:1fr 300px;gap:40px}
+.content{min-width:0}
+.sidebar{min-width:0}
+.sec{margin-bottom:44px}
+.sec-label{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
+.sec-title{font-family:var(--cg);font-size:26px;font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.2}
+.body p{font-size:14.5px;line-height:1.75;color:var(--ink2);margin-bottom:13px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--ink);font-weight:600}
+.src-line{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink4);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+
+/* CHOKEPOINT CARDS */
+.ck-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.ck-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;border-top:3px solid}
+.ck-card.critical{border-top-color:var(--red)}
+.ck-card.high{border-top-color:var(--amber)}
+.ck-card.moderate{border-top-color:var(--teal)}
+.ck-card.info{border-top-color:var(--navy)}
+.ck-head{padding:14px 16px;border-bottom:1px solid var(--border)}
+.ck-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:5px}
+.ck-name{font-family:var(--cg);font-size:17px;font-weight:600;color:var(--ink)}
+.ck-layer{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-top:2px}
+.badge{font-family:var(--mono);font-size:8px;padding:2px 7px;border-radius:2px;border:1px solid;letter-spacing:.04em;white-space:nowrap}
+.b-red{color:var(--red);border-color:rgba(179,48,0,.25);background:rgba(179,48,0,.07)}
+.b-amber{color:var(--amber);border-color:rgba(138,90,0,.25);background:rgba(138,90,0,.07)}
+.b-teal{color:var(--teal);border-color:rgba(74,124,111,.25);background:rgba(74,124,111,.07)}
+.b-navy{color:var(--navy);border-color:rgba(29,68,128,.25);background:rgba(29,68,128,.07)}
+.b-purple{color:var(--purple);border-color:rgba(90,58,138,.25);background:rgba(90,58,138,.07)}
+.ck-stats{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.ck-stat{padding:9px 12px;border-right:1px solid var(--border)}
+.ck-stat:last-child{border-right:none}
+.ck-stat-label{font-family:var(--mono);font-size:7px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);margin-bottom:2px}
+.ck-stat-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink)}
+.ck-stat-note{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink4);margin-top:1px}
+.ck-body{padding:12px 16px;font-size:12.5px;line-height:1.65;color:var(--ink2)}
+.ck-body strong{color:var(--ink);font-weight:600}
+.ck-why{padding:8px 16px;border-top:1px solid var(--border);background:var(--card-alt)}
+.ck-why-label{font-family:var(--mono);font-size:7px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);margin-bottom:3px}
+.ck-why-text{font-size:11.5px;color:var(--ink3);line-height:1.55;font-style:italic}
+
+/* MATRIX TABLE */
+.matrix-wrap{overflow-x:auto;margin:16px 0}
+.matrix{width:100%;border-collapse:collapse;font-size:12px}
+.matrix th{font-family:var(--mono);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);padding:8px 10px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt);white-space:nowrap}
+.matrix td{padding:10px 10px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.5}
+.matrix tr:last-child td{border-bottom:none}
+.matrix tr:hover td{background:var(--card-alt)}
+.matrix td:first-child{font-family:var(--ss);font-weight:600;color:var(--ink);white-space:nowrap}
+.m-mono{font-family:var(--mono);font-size:10px}
+.dot-5{color:var(--red);font-weight:600}
+.dot-4{color:var(--amber);font-weight:600}
+.dot-3{color:var(--teal)}
+.dot-2{color:var(--ink3)}
+.dot-1{color:var(--ink4)}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
+.tl-item:last-child{border-bottom:1px solid var(--border)}
+.tl-date{font-family:var(--mono);font-size:9px;color:var(--ink4);padding-top:3px;line-height:1.4}
+.tl-tag{font-family:var(--mono);font-size:7.5px;padding:1px 5px;border-radius:2px;margin-bottom:4px;display:inline-block;letter-spacing:.04em}
+.tag-critical{background:rgba(179,48,0,.1);color:var(--red);border:1px solid rgba(179,48,0,.2)}
+.tag-expand{background:rgba(29,68,128,.08);color:var(--navy);border:1px solid rgba(29,68,128,.15)}
+.tag-china{background:rgba(138,90,0,.08);color:var(--amber);border:1px solid rgba(138,90,0,.2)}
+.tl-hl{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:3px}
+.tl-hl strong{color:var(--ink)}
+.tl-what{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--teal);line-height:1.55;margin-top:4px}
+.tl-src{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:3px}
+
+/* CHINA TABLE */
+.china-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.china-card{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:12px 14px}
+.china-card-name{font-family:var(--cg);font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.china-rows{display:flex;flex-direction:column;gap:4px}
+.china-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid var(--border)}
+.china-row:last-child{border-bottom:none}
+.china-key{font-family:var(--mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4)}
+.china-val{font-family:var(--mono);font-size:10px;color:var(--ink)}
+.china-val.gap{color:var(--red)}
+.china-val.partial{color:var(--amber)}
+.china-val.progressing{color:var(--teal)}
+.china-note{font-size:11px;color:var(--ink3);line-height:1.55;margin-top:6px;font-style:italic}
+
+/* LEVERAGE CARDS */
+.lev-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.lev-card{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:14px}
+.lev-type{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.lev-type.tech{color:var(--purple)}
+.lev-type.mfg{color:var(--navy)}
+.lev-type.supplier{color:var(--teal)}
+.lev-type.legal{color:var(--red)}
+.lev-name{font-family:var(--cg);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.lev-holder{font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:8px}
+.lev-body{font-size:12px;color:var(--ink2);line-height:1.6}
+.lev-body strong{color:var(--ink)}
+
+/* SIDEBAR */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:12px}
+.sc-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline}
+.sc-title{font-family:var(--cg);font-size:14px;font-weight:600;color:var(--ink)}
+.sc-meta{font-family:var(--mono);font-size:8px;color:var(--ink4)}
+.sc-body{padding:10px 14px}
+.sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
+.sc-row:last-child{border-bottom:none}
+.sc-l{font-family:var(--ss);font-size:11px;color:var(--ink3)}
+.sc-v{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink)}
+.sc-v.red{color:var(--red)}.sc-v.teal{color:var(--teal)}.sc-v.amber{color:var(--amber)}
+.sc-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink3);margin-top:6px;line-height:1.55}
+
+.callout{border-left:3px solid var(--navy);padding:13px 16px;background:rgba(29,68,128,.05);border-radius:0 3px 3px 0;margin:16px 0}
+[data-theme=dark] .callout{background:rgba(29,68,128,.12)}
+.callout-label{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--navy);margin-bottom:4px}
+.callout-body{font-size:13px;line-height:1.65;color:var(--ink2)}
+.callout-body strong{color:var(--ink)}
+
+.footer{border-top:1px solid var(--border);padding:16px 24px;font-family:var(--mono);font-size:9px;color:var(--ink4);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-links{display:flex;gap:14px}
+.footer-links a{color:var(--ink4)}
+.footer-links a:hover{color:var(--navy)}
+
+@media(max-width:900px){
+  .main{grid-template-columns:1fr;gap:24px}
+  .ck-grid{grid-template-columns:1fr}
+  .china-grid{grid-template-columns:1fr}
+  .lev-grid{grid-template-columns:1fr}
+  .nav-links .nav-a{font-size:12px;padding:0 8px}
+  .nav-inner,.hero-inner,.main,.footer{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Contango</a>
+    <div class="nav-links">
+      <a class="nav-a" href="index.html">Overview</a>
+      <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
+      <a class="nav-a" href="iraq.html">Iraq</a>
+      <a class="nav-a" href="spare-capacity.html">Spare capacity</a>
+      <a class="nav-a" href="opec-compliance.html">OPEC+</a>
+      <a class="nav-a" href="commodities.html">Commodities</a>
+      <a class="nav-a" href="natural-gas.html">Natural gas</a>
+      <a class="nav-a on" href="ai-compute.html">AI compute</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">AI compute intelligence · August 2026 · A Contango research project</div>
+    <h1 class="hero-title">AI compute<br>chokepoints</h1>
+    <p class="hero-sub">The same analytical method that maps oil chokepoints applies to AI compute. Where is the stack physically concentrated? Which nodes can be converted into geopolitical leverage? And where does the bottleneck move next?</p>
+    <div class="hero-thesis">
+      <strong>The central argument:</strong> Export controls on AI accelerators target the most visible layer of the compute stack, but the marginal constraint has already migrated — from chips to advanced packaging, then toward HBM memory, and increasingly toward power and grid infrastructure. Policy that tracks the wrong node creates false confidence while the actual bottleneck shifts underneath it.
+    </div>
+    <div class="hero-src">Sources: Silicon Analysts · SIA June 2026 · TSMC investor reports · ASML earnings Q1 2026 · BIS Federal Register · CSIS Wadhwani Center · Epoch AI · Berkeley Lab · Santiago & Company · SemiAnalysis</div>
+  </div>
+</div>
+
+<!-- COMPUTE STACK BAR -->
+<div class="stack-bar">
+  <div class="stack-inner">
+    <div class="stack-node">
+      <div class="stack-node-label">Model / software</div>
+      <div class="stack-node-val">CUDA ecosystem</div>
+      <div class="stack-node-sub">Nvidia · ecosystem lock-in</div>
+    </div>
+    <div class="stack-node">
+      <div class="stack-node-label">AI accelerator</div>
+      <div class="stack-node-val">GPU / ASIC</div>
+      <div class="stack-node-sub">Nvidia · Google · AMD</div>
+    </div>
+    <div class="stack-node bottleneck">
+      <div class="stack-node-label">Advanced packaging ← bottleneck</div>
+      <div class="stack-node-val">CoWoS fully booked</div>
+      <div class="stack-node-sub">TSMC · 50+ week lead time</div>
+    </div>
+    <div class="stack-node bottleneck">
+      <div class="stack-node-label">HBM memory ← bottleneck</div>
+      <div class="stack-node-val">2026 sold out</div>
+      <div class="stack-node-sub">SK Hynix 53% · Samsung 35%</div>
+    </div>
+    <div class="stack-node">
+      <div class="stack-node-label">Leading-edge foundry</div>
+      <div class="stack-node-val">2nm booked to 2028</div>
+      <div class="stack-node-sub">TSMC 90% adv. logic</div>
+    </div>
+    <div class="stack-node">
+      <div class="stack-node-label">Lithography equipment</div>
+      <div class="stack-node-val">ASML EUV monopoly</div>
+      <div class="stack-node-sub">100% · Veldhoven NL</div>
+    </div>
+    <div class="stack-node">
+      <div class="stack-node-label">Power / data center</div>
+      <div class="stack-node-val">Emerging constraint</div>
+      <div class="stack-node-sub">Grid · transformers · water</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<div class="content">
+
+  <!-- CHOKEPOINTS -->
+  <div class="sec">
+    <div class="sec-label">Chokepoints · August 2026</div>
+    <div class="sec-title">Where concentration creates leverage</div>
+    <div class="body">
+      <p>Not all concentration is a chokepoint. A node with 80% market share but 6-month substitution time has limited coercive leverage. A node with 60% concentration but a 5-year qualification cycle may be strategically decisive. The key variables are: <strong>substitution difficulty, capacity expansion lead time, and whether a state actor can actually weaponise the concentration.</strong></p>
+    </div>
+
+    <div class="ck-grid">
+
+      <div class="ck-card critical">
+        <div class="ck-head">
+          <div class="ck-top">
+            <div>
+              <div class="ck-name">EUV Lithography</div>
+              <div class="ck-layer">Equipment layer · upstream</div>
+            </div>
+            <span class="badge b-red">CRITICAL</span>
+          </div>
+        </div>
+        <div class="ck-stats">
+          <div class="ck-stat">
+            <div class="ck-stat-label">EUV supplier concentration</div>
+            <div class="ck-stat-val">100%</div>
+            <div class="ck-stat-note">ASML sole commercial supplier</div>
+          </div>
+          <div class="ck-stat">
+            <div class="ck-stat-label">Geography</div>
+            <div class="ck-stat-val">Netherlands</div>
+            <div class="ck-stat-note">+ Carl Zeiss optics (DE) + Trumpf laser (DE)</div>
+          </div>
+        </div>
+        <div class="ck-body">
+          ASML is the sole commercial supplier of EUV lithography systems required to manufacture chips at sub-3nm nodes — the nodes used in frontier AI accelerators. The concentration is not one building: EUV depends on <strong>Carl Zeiss SMT (100% monopoly on EUV optics), TRUMPF (sole EUV laser supplier), and a network of specialist suppliers no other ecosystem has replicated.</strong> EUV systems have never been exported to China — controls have held. ASML raised 2026 revenue guidance to €43–45B, up ~19% from prior midpoint, with SK Hynix alone placing a $7B+ multi-year EUV order for HBM expansion.
+        </div>
+        <div class="ck-why">
+          <div class="ck-why-label">Why it's a durable chokepoint</div>
+          <div class="ck-why-text">Technology monopoly + long replication timeline + Dutch/US allied export control alignment = the most durable control node in the stack. China cannot substitute EUV at commercial yields on any known timeline.</div>
+        </div>
+      </div>
+
+      <div class="ck-card critical">
+        <div class="ck-head">
+          <div class="ck-top">
+            <div>
+              <div class="ck-name">Advanced Packaging (CoWoS)</div>
+              <div class="ck-layer">Assembly layer · current bottleneck</div>
+            </div>
+            <span class="badge b-red">BINDING NOW</span>
+          </div>
+        </div>
+        <div class="ck-stats">
+          <div class="ck-stat">
+            <div class="ck-stat-label">CoWoS utilisation</div>
+            <div class="ck-stat-val">100%</div>
+            <div class="ck-stat-note">Fully booked · both CoWoS-S and -L</div>
+          </div>
+          <div class="ck-stat">
+            <div class="ck-stat-label">Lead time</div>
+            <div class="ck-stat-val">50–78 wks</div>
+            <div class="ck-stat-note">Nvidia holds ~60% of capacity</div>
+          </div>
+        </div>
+        <div class="ck-body">
+          Advanced packaging is where chips are integrated with HBM into a functional AI accelerator. <strong>Taiwan-based companies account for approximately 85% of advanced packaging (CoWoS and InFO).</strong> TSMC CoWoS lines are fully booked through 2026–2027, with lead times of 50–78 weeks. Nvidia alone holds ~60% (~595K wafers) of 2026 CoWoS capacity; the top three customers account for &gt;85%. Epoch AI data shows leading AI chip designers accounted for ~90% of global CoWoS and HBM supply in 2025 while using only 12% of advanced logic die production — packaging, not wafer production, became the binding constraint. CoWoS-S costs ~$750/chip; CoWoS-L ~$1,100/chip.
+        </div>
+        <div class="ck-why">
+          <div class="ck-why-label">Why it's a durable chokepoint</div>
+          <div class="ck-why-text">Manufacturing concentration in Taiwan + 18-month facility lead time + substrate material dependencies (Ajinomoto ABF 95%+ monopoly) + AI rack consumes 10x more ABF than PCs. Capacity is expanding but demand is expanding faster.</div>
+        </div>
+      </div>
+
+      <div class="ck-card high">
+        <div class="ck-head">
+          <div class="ck-top">
+            <div>
+              <div class="ck-name">High-Bandwidth Memory (HBM)</div>
+              <div class="ck-layer">Memory layer · structural shortage</div>
+            </div>
+            <span class="badge b-amber">ALLOCATED 2026–27</span>
+          </div>
+        </div>
+        <div class="ck-stats">
+          <div class="ck-stat">
+            <div class="ck-stat-label">SK Hynix market share</div>
+            <div class="ck-stat-val">~53%</div>
+            <div class="ck-stat-note">Samsung 35% · Micron 11%</div>
+          </div>
+          <div class="ck-stat">
+            <div class="ck-stat-label">2026 supply status</div>
+            <div class="ck-stat-val">Sold out</div>
+            <div class="ck-stat-note">All three vendors · non-cancellable contracts</div>
+          </div>
+        </div>
+        <div class="ck-body">
+          HBM is the memory architecture required for AI training and inference at scale. The entire global HBM supply from all three producers is allocated under non-cancellable contracts through 2026; 2027 supply is also fully booked. Contract DRAM prices spiked +90–95% QoQ in Q1 2026 — the largest single-quarter spike on record. SK Hynix CEO Kwak Noh-Jung has stated that 2027 will represent the worst supply shortage in the memory industry's history. <strong>The chokepoint is not a single supplier monopoly but extreme three-player concentration with ~18-24 month capacity expansion timelines, co-qualification requirements with Nvidia/AMD/Google, and HBM4E yield risks (12-stack to 8-stack downgrade under evaluation for Rubin Ultra).</strong>
+        </div>
+        <div class="ck-why">
+          <div class="ck-why-label">Why it's a durable chokepoint</div>
+          <div class="ck-why-text">South Korea controls ~88% of HBM through SK Hynix + Samsung. Micron (US) holds 11%. China's CXMT is targeting HBM3 yields in 2026 — progress is real but still 2–3 generations behind at commercial scale.</div>
+        </div>
+      </div>
+
+      <div class="ck-card high">
+        <div class="ck-head">
+          <div class="ck-top">
+            <div>
+              <div class="ck-name">Leading-edge foundry</div>
+              <div class="ck-layer">Logic layer · TSMC concentration</div>
+            </div>
+            <span class="badge b-amber">HIGH</span>
+          </div>
+        </div>
+        <div class="ck-stats">
+          <div class="ck-stat">
+            <div class="ck-stat-label">TSMC adv. logic share</div>
+            <div class="ck-stat-val">~90%</div>
+            <div class="ck-stat-note">sub-7nm · foundry revenue 60%</div>
+          </div>
+          <div class="ck-stat">
+            <div class="ck-stat-label">2nm booking status</div>
+            <div class="ck-stat-val">Booked 2028</div>
+            <div class="ck-stat-note">New 3nm kickoffs suspended</div>
+          </div>
+        </div>
+        <div class="ck-body">
+          TSMC controls approximately 90% of advanced logic chip production below 7nm. Taiwan-based companies account for ~67% of total foundry output. TSMC's 2nm (N2) node is fully booked well into 2028; new 3nm project kickoffs have been suspended with customers steered toward 2nm. TSMC has committed $265B in total US manufacturing investment, with 2026 CapEx raised to $60–64B. <strong>TSMC's Arizona fab covers less than 5% of Taiwan capacity — reshoring is real but the timeline is 2027–2028 for meaningful advanced logic output, and packaging/yield ecosystems will lag further.</strong>
+        </div>
+        <div class="ck-why">
+          <div class="ck-why-label">Why it's a durable chokepoint</div>
+          <div class="ck-why-text">Taiwan geopolitical risk = systemic AI hardware risk. Arizona diversification is happening but insufficient before 2028. Samsung 2nm and Intel 18A are ramping with limited external capacity — real alternatives but at 12–18 month qualification cycles.</div>
+        </div>
+      </div>
+
+      <div class="ck-card moderate">
+        <div class="ck-head">
+          <div class="ck-top">
+            <div>
+              <div class="ck-name">EDA software & IP</div>
+              <div class="ck-layer">Design layer · ecosystem lock-in</div>
+            </div>
+            <span class="badge b-teal">ECOSYSTEM LOCK</span>
+          </div>
+        </div>
+        <div class="ck-stats">
+          <div class="ck-stat">
+            <div class="ck-stat-label">US EDA market share</div>
+            <div class="ck-stat-val">&gt;90%</div>
+            <div class="ck-stat-note">Synopsys · Cadence · Mentor</div>
+          </div>
+          <div class="ck-stat">
+            <div class="ck-stat-label">Arm CPU architecture</div>
+            <div class="ck-stat-val">UK/US</div>
+            <div class="ck-stat-note">Licenses to virtually all chip designers</div>
+          </div>
+        </div>
+        <div class="ck-body">
+          Electronic Design Automation software — the tools required to design chips — is dominated by US firms (Synopsys, Cadence, Mentor/Siemens EDA). <strong>This creates a different form of chokepoint: not physical scarcity but ecosystem lock-in.</strong> Switching EDA tools requires redesigning entire chip development flows, retooling verification and simulation, and rebuilding process design kit integrations — measured in years, not months. BIS export controls now cover EDA for advanced node chip design in China. Arm's architecture license underpins nearly all mobile and many data center chips globally, with Arm itself subject to US jurisdiction.
+        </div>
+        <div class="ck-why">
+          <div class="ck-why-label">Why it's different from physical chokepoints</div>
+          <div class="ck-why-text">Not scarcity but switching cost. China is building domestic EDA (Primarius, Empyrean) and RISC-V alternatives to Arm — making progress at mature nodes but not yet at advanced nodes.</div>
+        </div>
+      </div>
+
+      <div class="ck-card moderate">
+        <div class="ck-head">
+          <div class="ck-top">
+            <div>
+              <div class="ck-name">Power & grid infrastructure</div>
+              <div class="ck-layer">Infrastructure layer · emerging constraint</div>
+            </div>
+            <span class="badge b-navy">EMERGING</span>
+          </div>
+        </div>
+        <div class="ck-stats">
+          <div class="ck-stat">
+            <div class="ck-stat-label">US data center share of electricity</div>
+            <div class="ck-stat-val">9.5–15%</div>
+            <div class="ck-stat-note">projected 2030 · Berkeley Lab</div>
+          </div>
+          <div class="ck-stat">
+            <div class="ck-stat-label">Grid transformer lead time</div>
+            <div class="ck-stat-val">1–2+ yrs</div>
+            <div class="ck-stat-note">critical constraint for new data centers</div>
+          </div>
+        </div>
+        <div class="ck-body">
+          CSIS has explicitly identified electricity supply as a binding constraint on AI expansion. <strong>The bottleneck is not total generation capacity but grid interconnection, transformer procurement, and permitting timelines — infrastructure constraints that do not respond to capital the way chip fabs do.</strong> Berkeley Lab estimates US data centers could reach 9.5–15.3% of US electricity use by 2030. This creates a geographic dimension: AI compute gravitates toward electricity-abundant regions, shifting relative advantages in ways that are decoupled from semiconductor geography. Nuclear power restarts, long-duration storage, and grid interconnection reform are now AI policy issues.
+        </div>
+        <div class="ck-why">
+          <div class="ck-why-label">Why this matters for the next 3 years</div>
+          <div class="ck-why-text">If chip supply expands (as CoWoS and HBM capacity ramps), the bottleneck migrates to power. The constraint that limits frontier AI training in 2028 may not be silicon — it may be megawatts.</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="src-line">Silicon Analysts June 2026 · TSMC investor reports · ASML Q1 2026 earnings · Epoch AI 2026 · Santiago & Company June 2026 · Berkeley Lab 2025 · SIA June 2026 · CSIS Wadhwani Center 2026</div>
+  </div>
+
+  <!-- CHOKEPOINT MATRIX -->
+  <div class="sec">
+    <div class="sec-label">Analytical framework</div>
+    <div class="sec-title">Chokepoint matrix — what makes concentration durable</div>
+    <div class="body">
+      <p>A market-share figure does not equal a chokepoint. This matrix tracks the variables that determine whether concentration creates durable geopolitical leverage. Question marks indicate gaps in available evidence — not absences of constraint.</p>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Node</th>
+            <th>Concentration</th>
+            <th>Substitution time</th>
+            <th>Expansion lead time</th>
+            <th>Switching cost</th>
+            <th>Geographic exposure</th>
+            <th>Policy control</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EUV lithography</td>
+            <td class="m-mono dot-5">Very high (100%)</td>
+            <td class="m-mono dot-5">Very long (&gt;10yr)</td>
+            <td class="m-mono dot-4">Long (3–5yr)</td>
+            <td class="m-mono dot-5">Very high</td>
+            <td class="m-mono">Netherlands / DE</td>
+            <td class="m-mono dot-5">Dutch + US allied</td>
+          </tr>
+          <tr>
+            <td>Advanced packaging (CoWoS)</td>
+            <td class="m-mono dot-5">Very high (~85% TW)</td>
+            <td class="m-mono dot-4">Long (2–3yr)</td>
+            <td class="m-mono dot-4">Long (18mo facility)</td>
+            <td class="m-mono dot-4">High</td>
+            <td class="m-mono">Taiwan</td>
+            <td class="m-mono dot-3">Mixed (Taiwan risk)</td>
+          </tr>
+          <tr>
+            <td>HBM memory</td>
+            <td class="m-mono dot-4">High (SK+Samsung 88%)</td>
+            <td class="m-mono dot-4">Long (18–24mo)</td>
+            <td class="m-mono dot-4">Long (fab + yield ramp)</td>
+            <td class="m-mono dot-5">Very high (co-qual)</td>
+            <td class="m-mono">South Korea / US</td>
+            <td class="m-mono dot-3">Mixed (US-ally)</td>
+          </tr>
+          <tr>
+            <td>Leading-edge foundry</td>
+            <td class="m-mono dot-5">Very high (90% TSMC)</td>
+            <td class="m-mono dot-4">Long (12–18mo qual)</td>
+            <td class="m-mono dot-4">Long (2027–28)</td>
+            <td class="m-mono dot-4">High</td>
+            <td class="m-mono">Taiwan</td>
+            <td class="m-mono dot-3">Mixed (Taiwan risk)</td>
+          </tr>
+          <tr>
+            <td>EDA software</td>
+            <td class="m-mono dot-5">Very high (&gt;90% US)</td>
+            <td class="m-mono dot-5">Very long (years)</td>
+            <td class="m-mono dot-1">N/A (software)</td>
+            <td class="m-mono dot-5">Very high (flow rebuild)</td>
+            <td class="m-mono">United States</td>
+            <td class="m-mono dot-5">High (BIS jurisdiction)</td>
+          </tr>
+          <tr>
+            <td>Power / grid</td>
+            <td class="m-mono dot-1">Low globally</td>
+            <td class="m-mono dot-3">Moderate (local)</td>
+            <td class="m-mono dot-5">Very long (permitting)</td>
+            <td class="m-mono dot-1">Low</td>
+            <td class="m-mono">Local / distributed</td>
+            <td class="m-mono dot-1">Low</td>
+          </tr>
+          <tr>
+            <td>Japan materials (photoresists, wafers)</td>
+            <td class="m-mono dot-5">Very high (&gt;90% EUV PR)</td>
+            <td class="m-mono dot-4">Long (supplier qual)</td>
+            <td class="m-mono dot-3">Moderate</td>
+            <td class="m-mono dot-4">High (process integration)</td>
+            <td class="m-mono">Japan</td>
+            <td class="m-mono dot-4">High (JP export controls)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="src-line">Silicon Analysts supply chain map March 2026 · BIS Federal Register · ASML annual report · Epoch AI · Santiago & Company</div>
+  </div>
+
+  <!-- LEVERAGE TYPES -->
+  <div class="sec">
+    <div class="sec-label">Four forms of leverage</div>
+    <div class="sec-title">Not all chokepoints are the same kind of power</div>
+    <div class="body">
+      <p>A market-share chokepoint and a legal-jurisdictional chokepoint work through completely different mechanisms. Conflating them leads to policy errors — controlling the wrong node, or expecting market leverage to function like legal leverage.</p>
+    </div>
+    <div class="lev-grid">
+      <div class="lev-card">
+        <div class="lev-type tech">Technology monopoly</div>
+        <div class="lev-name">ASML · EUV</div>
+        <div class="lev-holder">Sole commercial EUV supplier · Netherlands</div>
+        <div class="lev-body">No country can manufacture frontier AI chips without EUV lithography equipment, and only ASML makes it commercially. The leverage is exercised through <strong>Dutch and EU export licensing policy</strong> — ASML cannot independently deny or grant access; the Dutch state controls that decision. This is the cleanest monopoly in the stack, but the coercive instrument is the state, not the firm.</div>
+      </div>
+      <div class="lev-card">
+        <div class="lev-type mfg">Manufacturing concentration</div>
+        <div class="lev-name">TSMC · leading-edge foundry</div>
+        <div class="lev-holder">~90% advanced logic · Taiwan</div>
+        <div class="lev-body">TSMC has market power — not geopolitical leverage it can independently deploy. Taiwan does not use TSMC as a coercive foreign policy instrument. The strategic importance of TSMC is primarily about <strong>Taiwan's vulnerability</strong> rather than Taiwan's leverage: a military contingency that disrupts TSMC disrupts every AI hardware program in the world simultaneously.</div>
+      </div>
+      <div class="lev-card">
+        <div class="lev-type supplier">Supplier concentration</div>
+        <div class="lev-name">SK Hynix · Samsung · HBM</div>
+        <div class="lev-holder">South Korea 88% HBM · US 11% (Micron)</div>
+        <div class="lev-body">South Korea's HBM concentration creates strategic relevance for US-Korea alliance dynamics — not direct coercive power. If Korean HBM producers were subject to export restrictions (as China-facing HBM controls demonstrate is possible), AI hardware supply would be severely disrupted. <strong>The leverage is structural, not actively wielded.</strong> South Korea's position is closer to a potential target of leverage than a source of it.</div>
+      </div>
+      <div class="lev-card">
+        <div class="lev-type legal">Jurisdictional leverage</div>
+        <div class="lev-name">US BIS · export controls</div>
+        <div class="lev-holder">Bureau of Industry and Security · Commerce Dept</div>
+        <div class="lev-body">BIS possesses actual legal coercive capacity through the Export Administration Regulations and the <strong>foreign-produced direct product rule</strong>, which extends US jurisdiction to any chip made anywhere using US technology, software, or equipment — which is nearly all of them. This is categorically different from market concentration. It is jurisdictional reach that does not require the US to hold manufacturing capacity itself.</div>
+      </div>
+    </div>
+    <div class="src-line">BIS Federal Register · EAR 15 CFR 730–774 · CSIS analysis of export control architecture</div>
+  </div>
+
+  <!-- EXPORT CONTROL TIMELINE -->
+  <div class="sec">
+    <div class="sec-label">Export control timeline · 2022–2026</div>
+    <div class="sec-title">How controls moved from chips to the production stack</div>
+    <div class="body">
+      <p>The trajectory of US semiconductor export controls shows a deliberate shift: from restricting access to specific chips toward restricting China's ability to produce advanced chips domestically. Each rule change expanded the control perimeter further upstream in the stack.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-date">Oct 2022</div>
+        <div>
+          <span class="tl-tag tag-critical">PERIMETER SHIFT</span>
+          <div class="tl-hl"><strong>BIS imposes sweeping chip and equipment controls on China</strong> — largest restriction in a generation</div>
+          <div class="tl-what">What changed: from controlling specific exports → constraining China's ability to produce advanced chips domestically. Controls covered advanced computing chips, semiconductor manufacturing equipment, and US-person support for advanced PRC fabs. The foreign-produced direct product rule was substantially expanded.</div>
+          <div class="tl-src">BIS Federal Register · October 7 2022</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Oct 2023</div>
+        <div>
+          <span class="tl-tag tag-critical">LOOPHOLE CLOSED</span>
+          <div class="tl-hl"><strong>Updated rules close performance threshold loopholes</strong> — anti-circumvention provisions strengthened</div>
+          <div class="tl-what">What changed: chip-performance thresholds revised to prevent near-controlled chips from serving as substitutes. Country-level controls expanded. Third-country enforcement of FDPR strengthened to prevent circumvention through intermediaries.</div>
+          <div class="tl-src">BIS Federal Register · October 17 2023</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jan 2025</div>
+        <div>
+          <span class="tl-tag tag-critical">GLOBAL SCOPE</span>
+          <div class="tl-hl"><strong>AI Diffusion Rule</strong> — first attempt to regulate global access to advanced AI chips and model weights</div>
+          <div class="tl-what">What changed: controls attempted to tier global access to AI compute across three country categories. Covered advanced AI chips and certain model weights. Represented a significant conceptual shift: from bilateral US-China controls toward multilateral global AI governance through export control architecture.</div>
+          <div class="tl-src">BIS Federal Register · January 13 2025 · CSIS Wadhwani analysis</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jan 2026</div>
+        <div>
+          <span class="tl-tag tag-china">PARTIAL REOPENING</span>
+          <div class="tl-hl"><strong>H200 licensing framework</strong> — case-by-case review for approved Chinese customers introduced</div>
+          <div class="tl-what">What changed: BIS moved from blanket H200 restriction to a licensed-export regime for approved Chinese entities. Conditions attached; policy certainty limited to 12-month windows. Created a managed restriction rather than hard decoupling — preserving limited revenue channels for US firms while maintaining strategic control.</div>
+          <div class="tl-src">BIS · Commerce Dept · January 2026</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Mar 2026</div>
+        <div>
+          <span class="tl-tag tag-expand">CAPACITY REDIRECT</span>
+          <div class="tl-hl"><strong>Nvidia redirects TSMC CoWoS capacity</strong> from H200 to Vera Rubin — export uncertainty reshapes production planning</div>
+          <div class="tl-what">What changed: regulatory uncertainty over H200 China sales caused Nvidia to reallocate constrained CoWoS packaging capacity toward next-generation Vera Rubin chips with confirmed US/allied orders. Illustrates how export control uncertainty, not just enforcement, shapes supply allocation decisions. Vera Rubin entered full production May 2026.</div>
+          <div class="tl-src">Financial Times · March 2026 · Nvidia Newsroom May 2026 · CNAS May 2026</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026 ongoing</div>
+        <div>
+          <span class="tl-tag tag-china">CHINA COUNTER</span>
+          <div class="tl-hl"><strong>China accelerates domestic stack</strong> — Huawei Ascend, CXMT HBM, SMIC 7nm, domestic EDA</div>
+          <div class="tl-what">What changed: China's substitution strategy is producing real progress at mature nodes while remaining constrained at the frontier. The policy question is not whether China can substitute everything — it is which specific nodes remain durable chokepoints as substitution improves, and what the economic penalty of substitution is relative to the frontier.</div>
+          <div class="tl-src">DOJ indictment · SMIC earnings · Huawei technical documentation · SemiAnalysis</div>
+        </div>
+      </div>
+    </div>
+    <div class="src-line">BIS Federal Register · CSIS Wadhwani Center AI Diffusion Rule analysis · CNAS May 2026 · Financial Times March 2026 · Nvidia Newsroom</div>
+  </div>
+
+  <!-- CHINA SUBSTITUTION -->
+  <div class="sec">
+    <div class="sec-label">China substitution map · August 2026</div>
+    <div class="sec-title">Where Beijing can substitute — and at what cost</div>
+    <div class="body">
+      <p>The right question is not whether China is "catching up" as a single score. It is: which specific nodes remain genuine chokepoints, which are closing, and what is the economic penalty of substitution relative to the frontier? A technically viable substitute that costs 3× more and yields 40% less is not a commercially viable substitute at scale.</p>
+    </div>
+    <div class="china-grid">
+      <div class="china-card">
+        <div class="china-card-name">Logic foundry (SMIC)</div>
+        <div class="china-rows">
+          <div class="china-row"><span class="china-key">Current capability</span><span class="china-val partial">7nm via DUV multi-patterning</span></div>
+          <div class="china-row"><span class="china-key">Remaining gap</span><span class="china-val gap">3–4 generations at frontier</span></div>
+          <div class="china-row"><span class="china-key">Economic penalty</span><span class="china-val gap">Higher cost · lower yield vs EUV</span></div>
+          <div class="china-row"><span class="china-key">EUV access</span><span class="china-val gap">None · controls holding</span></div>
+        </div>
+        <div class="china-note">DUV multi-patterning is technically viable but cannot replicate EUV economics at frontier nodes. Reduces but does not eliminate the leverage created by lithography controls.</div>
+      </div>
+      <div class="china-card">
+        <div class="china-card-name">HBM memory (CXMT)</div>
+        <div class="china-rows">
+          <div class="china-row"><span class="china-key">Current capability</span><span class="china-val partial">Targeting HBM3 yields 2026</span></div>
+          <div class="china-row"><span class="china-key">SK Hynix current</span><span class="china-val gap">HBM4 at ~80% yield</span></div>
+          <div class="china-row"><span class="china-key">Generation gap</span><span class="china-val gap">2–3 generations behind</span></div>
+          <div class="china-row"><span class="china-key">Commercial viability</span><span class="china-val partial">Progress · not yet at scale</span></div>
+        </div>
+        <div class="china-note">Real progress but still behind on HBM bandwidth and yields at commercial scale. HBM4E is the current frontier; CXMT is targeting HBM3.</div>
+      </div>
+      <div class="china-card">
+        <div class="china-card-name">AI accelerator (Huawei Ascend)</div>
+        <div class="china-rows">
+          <div class="china-row"><span class="china-key">Current capability</span><span class="china-val partial">Viable for many workloads</span></div>
+          <div class="china-row"><span class="china-key">vs Nvidia B200</span><span class="china-val gap">Performance gap unclear at scale</span></div>
+          <div class="china-row"><span class="china-key">Software ecosystem</span><span class="china-val gap">CUDA moat is largest barrier</span></div>
+          <div class="china-row"><span class="china-key">Supply constraint</span><span class="china-val gap">SMIC yield limits volume</span></div>
+        </div>
+        <div class="china-note">Ascend is a credible alternative for inference workloads. Frontier training remains constrained by software ecosystem maturity and accelerator-memory bandwidth.</div>
+      </div>
+      <div class="china-card">
+        <div class="china-card-name">EDA & design tools</div>
+        <div class="china-rows">
+          <div class="china-row"><span class="china-key">Current capability</span><span class="china-val partial">Primarius · Empyrean (mature nodes)</span></div>
+          <div class="china-row"><span class="china-key">Advanced node EDA</span><span class="china-val gap">Not yet commercially viable</span></div>
+          <div class="china-row"><span class="china-key">RISC-V progress</span><span class="china-val progressing">Active ecosystem building</span></div>
+          <div class="china-row"><span class="china-key">Timeline</span><span class="china-val gap">5+ years at frontier</span></div>
+        </div>
+        <div class="china-note">Most significant long-run substitution effort. RISC-V reduces Arm dependency. Advanced-node EDA remains a genuine gap that cannot be bridged quickly.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">The substitution cost question</div>
+      <div class="callout-body">China's substitution strategy does not need to match the frontier to be strategically significant — it needs to be good enough to sustain AI development at sufficient scale and acceptable cost. The policy question is: <strong>at what point does the economic penalty of substitution become tolerable for China's AI development goals, and which specific chokepoints remain constraining after that threshold is crossed?</strong> That question has a different answer for every node in the stack.</div>
+    </div>
+    <div class="src-line">SMIC earnings · Huawei technical documentation · SemiAnalysis · DOJ indictment 2026 · CXMT reports · US China chip war analysis 2026</div>
+  </div>
+
+  <!-- NEXT BOTTLENECK -->
+  <div class="sec">
+    <div class="sec-label">Where the constraint migrates next</div>
+    <div class="sec-title">The bottleneck is not fixed</div>
+    <div class="body">
+      <p>The most important analytical question in AI compute is not which node is constrained today — it is where the constraint migrates as investment responds. CoWoS was not the bottleneck in 2022. It became the bottleneck in 2025 when chip supply expanded and packaging could not keep up. The same dynamic is already visible in power and grid infrastructure.</p>
+      <p><strong>Training vs inference distinction matters here.</strong> Frontier model training and large-scale inference have different hardware, memory, power, and geographic requirements. A chokepoint critical for training a 1-trillion-parameter model may matter much less for serving 500 million inference requests daily — and vice versa. "AI compute" is not one market.</p>
+      <p>Current signals suggest the next migration: as TSMC, SK Hynix, and Micron expand CoWoS and HBM capacity through 2027–2028, and as the AI hardware market fragments between frontier training, inference, and edge deployment, the binding constraint may shift toward <strong>power availability, grid interconnection lead times, and cooling infrastructure</strong> — constraints that do not respond to capital the way chip fabs do, and that are geographically distributed rather than concentrated in a few countries.</p>
+      <p>If that migration occurs, the policy implications are significant: the most important AI industrial policy decisions in 2028 may be about permitting reform, transmission infrastructure, and nuclear power — not chip export controls.</p>
+    </div>
+    <div class="src-line">Berkeley Lab 2025 US data center energy report · CSIS Wadhwani Center · Epoch AI compute trends · Santiago & Company June 2026</div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+  <div class="sc">
+    <div class="sc-head">
+      <span class="sc-title">Key data points</span>
+      <span class="sc-meta">Aug 2026</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">TSMC adv. logic share</span><span class="sc-v red">~90%</span></div>
+      <div class="sc-row"><span class="sc-l">CoWoS lead time</span><span class="sc-v red">50–78 weeks</span></div>
+      <div class="sc-row"><span class="sc-l">HBM 2026 supply</span><span class="sc-v red">Sold out</span></div>
+      <div class="sc-row"><span class="sc-l">SK Hynix HBM share</span><span class="sc-v red">~53%</span></div>
+      <div class="sc-row"><span class="sc-l">EUV supplier</span><span class="sc-v red">ASML only</span></div>
+      <div class="sc-row"><span class="sc-l">ASML 2026 guidance</span><span class="sc-v">€43–45B</span></div>
+      <div class="sc-row"><span class="sc-l">Nvidia CoWoS share</span><span class="sc-v amber">~60%</span></div>
+      <div class="sc-row"><span class="sc-l">TSMC US commitment</span><span class="sc-v teal">$265B total</span></div>
+      <div class="sc-row"><span class="sc-l">US data centers by 2030</span><span class="sc-v amber">9.5–15% of US power</span></div>
+      <div class="sc-row"><span class="sc-l">SIA: semis share of AI rack</span><span class="sc-v">95% of value</span></div>
+    </div>
+  </div>
+
+  <div class="sc">
+    <div class="sc-head">
+      <span class="sc-title">Chokepoint durability</span>
+      <span class="sc-meta">ranked</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">EUV lithography</span><span class="sc-v red">Very high</span></div>
+      <div class="sc-row"><span class="sc-l">EDA software</span><span class="sc-v red">Very high</span></div>
+      <div class="sc-row"><span class="sc-l">Advanced packaging</span><span class="sc-v amber">High</span></div>
+      <div class="sc-row"><span class="sc-l">HBM memory</span><span class="sc-v amber">High</span></div>
+      <div class="sc-row"><span class="sc-l">Leading-edge foundry</span><span class="sc-v amber">High</span></div>
+      <div class="sc-row"><span class="sc-l">Japan materials</span><span class="sc-v amber">High</span></div>
+      <div class="sc-row"><span class="sc-l">Power / grid</span><span class="sc-v teal">Growing</span></div>
+      <div class="sc-note">Durability = substitution difficulty × expansion lead time × policy controllability. Not market share alone.</div>
+    </div>
+  </div>
+
+  <div class="sc">
+    <div class="sc-head">
+      <span class="sc-title">Key sources</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><a href="https://www.csis.org/programs/wadhwani-center-ai-and-advanced-technologies" style="color:var(--navy);font-size:11px">CSIS Wadhwani Center ↗</a></div>
+      <div class="sc-row"><a href="https://epoch.ai/trends" style="color:var(--navy);font-size:11px">Epoch AI trends ↗</a></div>
+      <div class="sc-row"><a href="https://www.semiconductors.org" style="color:var(--navy);font-size:11px">SIA ↗</a></div>
+      <div class="sc-row"><a href="https://eta.lbl.gov/publications/united-states-data-center-energy-2025" style="color:var(--navy);font-size:11px">Berkeley Lab data center ↗</a></div>
+      <div class="sc-row"><a href="https://siliconanalysts.com" style="color:var(--navy);font-size:11px">Silicon Analysts ↗</a></div>
+      <div class="sc-row"><a href="https://www.bis.gov/regulations/export-administration-regulations" style="color:var(--navy);font-size:11px">BIS / EAR ↗</a></div>
+    </div>
+  </div>
+
+  <div class="sc">
+    <div class="sc-head">
+      <span class="sc-title">Related pages</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><a href="commodities.html" style="color:var(--navy);font-size:11px">Commodities (helium) →</a></div>
+      <div class="sc-row"><a href="natural-gas.html" style="color:var(--navy);font-size:11px">Natural gas (power) →</a></div>
+      <div class="sc-row"><a href="buyer-exposure.html" style="color:var(--navy);font-size:11px">Buyer exposure →</a></div>
+      <div class="sc-row"><a href="index.html" style="color:var(--navy);font-size:11px">Overview →</a></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <span>Contango Energy · AI compute intelligence · August 2026 · Not financial advice · Sources named throughout</span>
+  <div class="footer-links">
+    <a href="methodology.html">Methodology</a>
+    <a href="https://github.com/pacho064/Contango">GitHub ↗</a>
+    <a href="https://www.csis.org/programs/wadhwani-center-ai-and-advanced-technologies">CSIS Wadhwani ↗</a>
+  </div>
+</footer>
+
+<script>
+let dark=localStorage.getItem('theme')==='dark';
+function initTheme(){if(dark){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='Light';}}
+function toggleTheme(){dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'');document.getElementById('theme-btn').textContent=dark?'Light':'Dark';localStorage.setItem('theme',dark?'dark':'light');}
+initTheme();
+</script>
+</body>
+</html>
