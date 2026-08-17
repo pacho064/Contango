@@ -219,9 +219,9 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   <div class="hero-inner">
     <div class="hero-label">AI compute intelligence · August 2026 · A Contango research project</div>
     <h1 class="hero-title">AI compute<br>chokepoints</h1>
-    <p class="hero-sub">AI compute does not have a fixed chokepoint. As investment expands one layer of the stack, constraints can migrate — to packaging, memory, power, or grid infrastructure. The same analytical method that maps oil supply chains applies here: identify where concentration sits, judge how durable it is, and track when relief is likely to arrive.</p>
+    <p class="hero-sub">The same analytical method that maps oil supply chains applies to AI compute: identify where concentration sits, judge how durable it is, and track when announced capacity expansions produce usable relief. Capital announcements and actual constraint relief are different things.</p>
     <div class="hero-thesis">
-      <strong>The central argument:</strong> Export controls on AI accelerators target the most visible layer of the compute stack. But the marginal constraint has been migrating — from chip supply toward advanced packaging, then toward HBM memory, and potentially toward power and grid infrastructure. Policy that tracks the wrong node creates false confidence while the actual bottleneck shifts underneath it. The more interesting question is not which node is constrained today, but <strong>which constraints are durable enough to base policy on, and when each bottleneck is likely to cease to bind.</strong>
+      <strong>The central argument:</strong> Export controls on AI accelerators focus on the most visible layer of the compute stack — but the binding constraint is not fixed. As capacity expands at one node, scarcity can migrate to packaging, memory, power, or grid infrastructure. Policy therefore depends on identifying not only where concentration exists, but <strong>how durable each constraint is, and when announced capacity expansions are likely to produce usable relief.</strong> This page tracks concentration, substitution difficulty, and time-to-relief across the AI compute stack.
     </div>
     <div class="hero-src">This page is a live research project. Sources are named inline throughout. Quantitative claims carry confidence notes where sourcing is imprecise. Last updated August 2026. · Silicon Analysts · SIA June 2026 · TSMC investor reports · ASML Q1 2026 earnings · BIS Federal Register · CSIS Wadhwani Center · Epoch AI · Berkeley Lab · Santiago & Company · SemiAnalysis</div>
   </div>
@@ -377,7 +377,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card very-high">
         <div class="ck-head">
           <div class="ck-name">EUV Lithography — ASML</div>
-          <div class="ck-layer">Equipment layer · technology monopoly</div>
+          <div class="ck-layer">Equipment layer · technology monopoly · <span style="color:var(--red)">Constraint: binding · Durability: very high</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -403,7 +403,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card very-high">
         <div class="ck-head">
           <div class="ck-name">Semiconductor Equipment — US-NL-JP</div>
-          <div class="ck-layer">Equipment layer · allied coalition chokepoint</div>
+          <div class="ck-layer">Equipment layer · allied coalition · <span style="color:var(--red)">Constraint: binding · Durability: very high</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -429,7 +429,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card very-high">
         <div class="ck-head">
           <div class="ck-name">Advanced Packaging — CoWoS</div>
-          <div class="ck-layer">Assembly layer · current binding constraint</div>
+          <div class="ck-layer">Assembly layer · <span style="color:var(--red)">Constraint: binding · Durability: high</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -455,7 +455,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card high">
         <div class="ck-head">
           <div class="ck-name">High-Bandwidth Memory — HBM</div>
-          <div class="ck-layer">Memory layer · structural shortage through 2027</div>
+          <div class="ck-layer">Memory layer · <span style="color:var(--amber)">Constraint: tight · Durability: high</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -481,7 +481,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card high">
         <div class="ck-head">
           <div class="ck-name">Leading-edge foundry — TSMC</div>
-          <div class="ck-layer">Logic layer · ~90% concentration · Taiwan risk</div>
+          <div class="ck-layer">Logic layer · <span style="color:var(--amber)">Constraint: tight · Durability: high</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -507,7 +507,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card ecosystem">
         <div class="ck-head">
           <div class="ck-name">EDA software & IP — Synopsys, Cadence, Arm</div>
-          <div class="ck-layer">Design layer · ecosystem lock-in · different from physical scarcity</div>
+          <div class="ck-layer">Design layer · <span style="color:var(--red)">Constraint: binding (for China) · Durability: very high</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -533,7 +533,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card growing">
         <div class="ck-head">
           <div class="ck-name">Power, grid & data-center infrastructure</div>
-          <div class="ck-layer">Infrastructure layer · not scarce today · emerging constraint</div>
+          <div class="ck-layer">Infrastructure layer · <span style="color:var(--teal)">Constraint: non-binding today · Durability: growing</span></div>
         </div>
         <div class="ck-stats">
           <div class="ck-stat">
@@ -680,7 +680,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
         <div class="lev-type legal">Jurisdictional leverage</div>
         <div class="lev-name">US Bureau of Industry and Security</div>
         <div class="lev-holder">Export Administration Regulations · foreign-produced direct product rule</div>
-        <div class="lev-body">BIS possesses actual legal coercive capacity through the EAR and the foreign-produced direct product (FPDP) rules, which extend US export control jurisdiction to certain foreign-made products when they incorporate US-origin technology, software, or equipment. <strong>FPDP coverage is powerful but conditional — it applies to defined product categories, end-users, and technology/equipment inputs, not universally to all foreign-made chips.</strong> The breadth of effective coverage depends on how much US technology underlies a given production process — which is why the equipment coalition with the Netherlands and Japan is essential to coverage depth.</div>
+        <div class="lev-body">BIS can extend US export-control jurisdiction to certain foreign-produced semiconductor items made with specified US technology or equipment when defined destination or end-user conditions are met. <strong>Because US tools and software sit deep in the semiconductor production stack, that jurisdiction can reach well beyond goods manufactured inside the United States — but FPDP is not a blanket rule covering every foreign chip containing US technology.</strong> It applies through defined product, technology, destination, and end-user conditions. This is why the equipment coalition with the Netherlands and Japan is essential: it extends the coverage perimeter by bringing Dutch EUV and Japanese materials and equipment into a coordinated allied control architecture.</div>
       </div>
     </div>
     <div class="src-line">BIS Federal Register · EAR 15 CFR 730–774 · CSIS Wadhwani Center export control analysis · Congressional Research Service R48642</div>
@@ -813,7 +813,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     <div class="sec-label">Where the constraint migrates</div>
     <div class="sec-title">The bottleneck is not fixed — and training ≠ inference</div>
     <div class="body">
-      <p>The most important analytical question in AI compute is not which node is constrained today — it is where the constraint migrates as investment responds. CoWoS was not the binding constraint in 2022. It became one in 2025 when chip supply expanded and packaging could not keep up. The same dynamic is now visible in power infrastructure.</p>
+      <p>The most important analytical question in AI compute is not which node is constrained today — it is where the constraint migrates as investment responds. CoWoS was not a significant constraint in 2022. It emerged as a major bottleneck by 2025 as chip supply expanded and packaging capacity could not keep pace. The same dynamic is now visible in power infrastructure.</p>
       <p><strong>Training vs inference is a critical distinction that most chokepoint analyses collapse.</strong> Frontier model training and large-scale inference have different hardware, latency, memory, power, and geographic requirements. A chokepoint critical for training a 1-trillion-parameter model may matter much less for serving 500 million inference requests daily — the hardware, memory bandwidth, and geographic distribution requirements are fundamentally different. "AI compute" is not one market, and treating it as one leads to misidentified policy targets.</p>
       <p>Current signals suggest the next constraint migration: as TSMC, SK Hynix, and Micron expand CoWoS and HBM capacity through 2027–2029, and as the AI hardware market fragments across frontier training, inference, and edge deployment, the binding constraint may increasingly be <strong>power availability, grid interconnection timelines, transformer procurement, and cooling infrastructure</strong> — none of which respond to capital the way chip fabs do, and none of which are concentrated in a small number of countries.</p>
       <p>If that migration occurs, the most important AI industrial policy decisions in 2028–2030 may involve permitting reform, transmission infrastructure, nuclear power restarts, and data-center siting — not chip export controls. That reorientation would represent a significant shift in where geopolitical leverage over AI compute actually resides.</p>
@@ -870,13 +870,40 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <span class="sc-title">Key sources</span>
     </div>
     <div class="sc-body">
+      <div class="sc-row"><a href="https://www.csis.org/programs/wadhwani-center-ai-and-advanced-technologies" style="color:var(--navy);font-size:11px">CSIS Wadhwani Center ↗</a></div>
       <div class="sc-row"><a href="https://epoch.ai/trends" style="color:var(--navy);font-size:11px">Epoch AI ↗</a></div>
       <div class="sc-row"><a href="https://www.semiconductors.org" style="color:var(--navy);font-size:11px">SIA ↗</a></div>
       <div class="sc-row"><a href="https://eta.lbl.gov/publications/united-states-data-center-energy-2025" style="color:var(--navy);font-size:11px">Berkeley Lab data centers ↗</a></div>
       <div class="sc-row"><a href="https://siliconanalysts.com" style="color:var(--navy);font-size:11px">Silicon Analysts ↗</a></div>
       <div class="sc-row"><a href="https://www.bis.gov/regulations/export-administration-regulations" style="color:var(--navy);font-size:11px">BIS / EAR ↗</a></div>
       <div class="sc-row"><a href="https://www.cnas.org/publications/reports/american-ai-companies-cant-get-enough-chips" style="color:var(--navy);font-size:11px">CNAS May 2026 ↗</a></div>
-      <div class="sc-row"><a href="https://www.csis.org/programs/wadhwani-center-ai-and-advanced-technologies" style="color:var(--navy);font-size:11px">CSIS Wadhwani Center ↗</a></div>
+    </div>
+  </div>
+
+  <div class="sc">
+    <div class="sc-head">
+      <span class="sc-title">What I am watching</span>
+      <span class="sc-meta">live signals</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><span class="sc-l">HBM 2027–28 availability</span></div>
+      <div class="sc-row"><span class="sc-l">CoWoS-L capacity additions</span></div>
+      <div class="sc-row"><span class="sc-l">Transformer delivery times</span></div>
+      <div class="sc-row"><span class="sc-l">TSMC Arizona qual/yields</span></div>
+      <div class="sc-row"><span class="sc-l">CXMT domestic HBM qual</span></div>
+      <div class="sc-row"><span class="sc-l">BIS/Dutch/JP equipment controls</span></div>
+      <div class="sc-row"><span class="sc-l">Grid interconnection timelines</span></div>
+      <div class="sc-note">These are the signals that would update the constraint status and durability ratings above.</div>
+    </div>
+  </div>
+
+  <div class="sc" style="border-top:2px solid var(--purple)">
+    <div class="sc-head">
+      <span class="sc-title">What would falsify this</span>
+    </div>
+    <div class="sc-body" style="padding:10px 13px">
+      <div style="font-size:11.5px;color:var(--ink2);line-height:1.7">The constraint-migration thesis would weaken if announced CoWoS and HBM capacity ramps faster than demand while power availability also expands sufficiently to prevent infrastructure scarcity from binding compute growth. It would also weaken if China achieves commercial HBM3 yields at scale before 2027 and demonstrates credible EDA progress at advanced nodes — shifting the question from "can controls hold" to "at what economic penalty."</div>
+      <div style="font-family:var(--ss);font-style:italic;font-size:9.5px;color:var(--ink4);margin-top:8px">This box exists because research frameworks should be falsifiable. If the evidence changes, the analysis should change.</div>
     </div>
   </div>
 
@@ -900,6 +927,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   <div class="footer-links">
     <a href="methodology.html">Methodology</a>
     <a href="https://github.com/pacho064/Contango">GitHub ↗</a>
+    <a href="https://www.csis.org/programs/wadhwani-center-ai-and-advanced-technologies">CSIS Wadhwani ↗</a>
   </div>
 </footer>
 
