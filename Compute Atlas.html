@@ -16,229 +16,236 @@
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.5.0/dist/maplibre-gl.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'Source Serif 4',serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+html,body{height:100%;overflow:hidden;font-family:"Source Serif 4",serif;-webkit-font-smoothing:antialiased}
 :root{
-  --cg:'Cormorant Garamond',serif;--ss:'Source Serif 4',serif;--mono:'IBM Plex Mono',monospace;
+  --cg:"Cormorant Garamond",serif;--ss:"Source Serif 4",serif;--mono:"IBM Plex Mono",monospace;
   --bg:#f7f7f5;--card:#fff;--card-alt:#f3f0eb;--border:#e8e5e0;
-  --ink:#0f0f0e;--ink2:#3a3830;--ink3:#9a9590;--ink4:#b0b0a8;
+  --ink:#0f0f0e;--ink2:#3a3830;--ink3:#6a6660;--ink4:#9a9590;
   --navy:#1d4480;--red:#b33000;--teal:#4a7c6f;--amber:#8a5a00;--purple:#5a3a8a;
-  --l-logic:#1d4480;--l-memory:#6a1a6a;--l-packaging:#1a6a4a;
-  --l-equipment:#7a5a20;--l-lithography:#b33000;--l-data:#1a4a6a;--l-power:#4a4a1a;
+  --lc-logic:#1d4480;--lc-memory:#6a1a6a;--lc-packaging:#1a6a4a;
+  --lc-equipment:#7a5a20;--lc-lithography:#b33000;--lc-data:#1a4a6a;--lc-power:#4a4a1a;
 }
 [data-theme=dark]{
   --bg:#111110;--card:#1a1a19;--card-alt:#161614;--border:#272726;
-  --ink:#ddd6c8;--ink2:#cec8bc;--ink3:#909090;--ink4:#6a6a68;
+  --ink:#ddd6c8;--ink2:#beb8ac;--ink3:#909090;--ink4:#6a6a68;
   --red:#c84000;--teal:#4a9c8a;--amber:#c89040;
 }
-body{background:var(--bg);color:var(--ink);display:flex;flex-direction:column;animation:fadeIn .2s ease;min-height:100vh}
+body{background:var(--bg);color:var(--ink);display:flex;flex-direction:column;animation:fadeIn .2s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;background:none;border:none;color:inherit;font-family:inherit}
 
 /* ── NAV ── */
-.nav{background:var(--bg);border-bottom:1px solid var(--border);height:46px;display:flex;align-items:center;flex-shrink:0;z-index:400}
-.nav-inner{padding:0 18px;width:100%;display:flex;align-items:center;gap:0}
-.brand{font-family:var(--cg);font-size:18px;font-weight:600;color:var(--ink);margin-right:6px}
-.brand-sep{font-family:var(--mono);font-size:10px;color:var(--ink4);margin-right:6px}
-.brand-sub{font-family:var(--mono);font-size:10px;color:var(--purple);margin-right:16px}
-.nav-links{display:flex;height:46px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav{background:var(--bg);border-bottom:1px solid var(--border);height:44px;display:flex;align-items:center;flex-shrink:0;z-index:400;position:relative}
+.nav-inner{padding:0 16px;width:100%;display:flex;align-items:center;gap:0}
+.brand{font-family:var(--cg);font-size:17px;font-weight:600;color:var(--ink);margin-right:5px}
+.brand-sep{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-right:5px}
+.brand-sub{font-family:var(--mono);font-size:9px;color:var(--purple);margin-right:14px;letter-spacing:.04em}
+.nav-links{display:flex;height:44px;overflow-x:auto;scrollbar-width:none;flex:1}
 .nav-links::-webkit-scrollbar{display:none}
-.nav-a{display:flex;align-items:center;padding:0 9px;font-size:12px;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap}
-.nav-a:hover,.nav-a.on{color:var(--ink);border-bottom-color:var(--purple)}
+.nav-a{display:flex;align-items:center;padding:0 9px;font-size:12px;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap;transition:color .1s}
+.nav-a:hover,.nav-a.on{color:var(--ink);border-bottom-color:var(--navy)}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0}
 .nav-stats{font-family:var(--mono);font-size:8.5px;color:var(--ink4);white-space:nowrap}
 .nav-btn{font-family:var(--mono);font-size:9px;color:var(--ink3);border:1px solid var(--border);border-radius:3px;padding:3px 8px}
 
-/* ── HEADER ── */
-.atlas-head{background:var(--card);border-bottom:3px solid var(--purple);padding:12px 18px;flex-shrink:0}
-.atlas-head-inner{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.atlas-title{font-family:var(--cg);font-size:24px;font-weight:600;color:var(--ink)}
-.atlas-sub{font-size:12px;color:var(--ink3);max-width:520px;line-height:1.5;margin-top:2px}
-.atlas-meta{font-family:var(--mono);font-size:8.5px;color:var(--ink4);text-align:right;line-height:1.7;flex-shrink:0}
+/* ── HEADER STRIP ── */
+.head-strip{background:var(--card);border-bottom:2px solid var(--purple);padding:10px 16px;flex-shrink:0;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.head-left{display:flex;align-items:baseline;gap:14px}
+.head-title{font-family:var(--cg);font-size:22px;font-weight:600;color:var(--ink)}
+.head-meta{font-family:var(--mono);font-size:8.5px;color:var(--ink4)}
+.head-badge{font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:2px;background:rgba(90,58,138,.1);color:var(--purple);border:1px solid rgba(90,58,138,.2)}
+.head-right{display:flex;align-items:center;gap:10px}
 
 /* ── TABS ── */
-.tabs{background:var(--card-alt);border-bottom:1px solid var(--border);display:flex;align-items:center;flex-shrink:0;padding:0 18px;gap:0}
-.tab{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;color:var(--ink3);border-bottom:2px solid transparent;cursor:pointer;transition:color .12s;white-space:nowrap}
+.tabs{background:var(--card-alt);border-bottom:1px solid var(--border);display:flex;align-items:center;flex-shrink:0;padding:0 0 0 16px}
+.tab{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;color:var(--ink4);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .1s}
 .tab:hover{color:var(--ink)}
-.tab.active{color:var(--purple);border-bottom-color:var(--purple)}
-.tab-sep{margin-left:auto;font-family:var(--mono);font-size:8px;color:var(--ink4);padding:0 8px}
+.tab.active{color:var(--purple);border-bottom-color:var(--purple);font-weight:500}
+.tab-right{margin-left:auto;font-family:var(--mono);font-size:8px;color:var(--ink4);padding:0 16px;font-style:italic}
 
-/* ── CONTROLS BAR ── */
-.controls{background:var(--bg);border-bottom:1px solid var(--border);padding:8px 18px;flex-shrink:0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.ctrl-label{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);white-space:nowrap}
-.ctrl-pills{display:flex;gap:3px;flex-wrap:wrap}
-.pill{font-family:var(--mono);font-size:8.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--border);color:var(--ink3);cursor:pointer;background:var(--card);transition:all .1s;white-space:nowrap}
-.pill:hover{border-color:var(--ink3);color:var(--ink)}
-.pill.active{color:#fff;border-color:transparent}
-.pill[data-layer="all"].active,.pill[data-status="all"].active{background:var(--navy)}
-.pill[data-layer="logic"].active{background:var(--l-logic)}
-.pill[data-layer="memory"].active{background:var(--l-memory)}
-.pill[data-layer="packaging"].active{background:var(--l-packaging)}
-.pill[data-layer="equipment"].active{background:var(--l-equipment)}
-.pill[data-layer="lithography"].active{background:var(--l-lithography)}
-.pill[data-layer="data_center"].active{background:var(--l-data)}
-.pill[data-layer="power"].active{background:var(--l-power)}
-.pill[data-status].active:not([data-status="all"]){background:var(--navy)}
-.ctrl-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+/* ── WORKSPACE ── */
+.workspace{flex:1;display:flex;position:relative;min-height:0;overflow:hidden}
 
-/* ── TIME SLIDER ── */
-.time-slider-wrap{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.time-slider{-webkit-appearance:none;appearance:none;width:180px;height:4px;border-radius:2px;background:var(--border);outline:none;cursor:pointer}
-.time-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--purple);cursor:pointer;border:2px solid var(--card)}
-.time-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--purple);cursor:pointer;border:2px solid var(--card)}
-.time-label{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--purple);min-width:36px}
-.time-note{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink4)}
+/* ── LEFT RAIL (filters) ── */
+.filter-rail{width:180px;flex-shrink:0;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;z-index:10}
+.fr-section{padding:12px 14px;border-bottom:1px solid var(--border)}
+.fr-label{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px}
+.fr-pills{display:flex;flex-direction:column;gap:3px}
+.fpill{font-family:var(--mono);font-size:9px;padding:4px 8px;border-radius:2px;border:1px solid var(--border);color:var(--ink3);cursor:pointer;background:var(--card);transition:all .1s;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.fpill:hover{border-color:var(--ink3);color:var(--ink)}
+.fpill.active{color:#fff;border-color:transparent;background:var(--navy)}
+.fpill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.fpill[data-layer="logic"].active{background:var(--lc-logic)}
+.fpill[data-layer="memory"].active{background:var(--lc-memory)}
+.fpill[data-layer="packaging"].active{background:var(--lc-packaging)}
+.fpill[data-layer="equipment"].active{background:var(--lc-equipment)}
+.fpill[data-layer="lithography"].active{background:var(--lc-lithography)}
+.fpill[data-layer="data_center"].active{background:var(--lc-data)}
+.fpill[data-layer="power"].active{background:var(--lc-power)}
+.fpill-status.active{background:var(--navy)}
+/* time slider */
+.fr-slider{padding:12px 14px;border-bottom:1px solid var(--border)}
+.time-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;margin:8px 0 4px}
+.time-slider::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--purple);cursor:pointer;border:2px solid var(--card)}
+.time-slider::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--purple);cursor:pointer;border:2px solid var(--card)}
+.time-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--purple);text-align:center}
+.time-hint{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink4);text-align:center;line-height:1.4}
+/* constraint monitor in rail */
+.fr-monitor{padding:10px 14px;flex:1}
+.monitor-title{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px}
+.monitor-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);gap:4px}
+.monitor-row:last-child{border-bottom:none}
+.monitor-node{font-family:var(--ss);font-size:10px;color:var(--ink2);flex:1;line-height:1.3}
+.monitor-badge{font-family:var(--mono);font-size:7px;padding:1px 4px;border-radius:2px;border:1px solid;white-space:nowrap;flex-shrink:0}
+.mb-bind{color:var(--red);border-color:rgba(179,48,0,.3);background:rgba(179,48,0,.07)}
+.mb-tight{color:var(--amber);border-color:rgba(138,90,0,.3);background:rgba(138,90,0,.07)}
+.mb-nb{color:var(--ink4);border-color:var(--border)}
+.monitor-dir{font-family:var(--mono);font-size:9px;color:var(--ink4);flex-shrink:0;width:14px;text-align:center}
 
-/* ── MAIN CONTENT AREA ── */
-.view-area{flex:1;display:flex;position:relative;min-height:0}
-
-/* ── MAP VIEW ── */
-#map-view{flex:1;display:flex;position:relative}
-#map{flex:1}
-
-/* ── PIPELINE VIEW ── */
-#pipeline-view{flex:1;overflow:auto;padding:24px 24px 48px;display:none;height:100%}
-.pipeline-head{margin-bottom:14px}
-.pipeline-title{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:5px}
-.pipeline-sub{font-size:13px;color:var(--ink3);line-height:1.6;max-width:680px}
-.pipeline-key{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;margin-top:8px}
-.pk-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8.5px;color:var(--ink3)}
-.pk-swatch{width:14px;height:8px;border-radius:1px}
-.pipeline-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:4px}
-.pipeline-table{min-width:860px;width:100%;border-collapse:collapse}
-.pt-row{display:flex;border-bottom:1px solid var(--border);min-height:42px}
-.pt-row:last-child{border-bottom:none}
-.pt-row:hover{background:var(--card-alt)}
-.pt-label{width:200px;min-width:200px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);position:sticky;left:0;background:var(--card);z-index:10}
-.pt-row:hover .pt-label{background:var(--card-alt)}
-.pt-name{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.3}
-.pt-sub{font-family:var(--mono);font-size:7.5px;color:var(--ink4);margin-top:1px}
-.pt-timeline{position:relative;flex:1;padding:4px 0}
-.pt-year-grid{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;pointer-events:none}
-.pt-year-col{flex:1;border-left:1px solid var(--border);opacity:.25}
-.pt-bars{position:relative;height:100%;display:flex;align-items:center}
-.pt-bar{position:absolute;height:12px;border-radius:2px;opacity:.9;min-width:4px}
-.pt-phase-label{position:absolute;font-family:var(--mono);font-size:6.5px;color:rgba(255,255,255,.9);top:50%;transform:translateY(-50%);left:4px;white-space:nowrap;overflow:hidden;pointer-events:none}
-.year-header{display:flex;border-bottom:2px solid var(--border);background:var(--card-alt)}
-.yh-label{width:200px;min-width:200px;padding:6px 12px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);border-right:1px solid var(--border);flex-shrink:0}
-.yh-years{flex:1;display:flex}
-.yh-year{flex:1;font-family:var(--mono);font-size:8.5px;color:var(--ink4);border-left:1px solid var(--border);padding:6px 0 6px 4px}
-.pipeline-callout{background:rgba(90,58,138,.06);border:1px solid rgba(90,58,138,.2);border-radius:3px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--ink2);line-height:1.65}
-.pipeline-callout strong{color:var(--ink)}
-
-/* ── DEPENDENCY VIEW ── */
-#dependency-view{flex:1;overflow:auto;padding:24px 28px 48px;display:none;height:100%}
-.dep-title{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:5px}
-.dep-sub{font-size:13px;color:var(--ink3);margin-bottom:16px;max-width:600px;line-height:1.6}
-.dep-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
-.dep-btn{font-family:var(--mono);font-size:9px;padding:5px 14px;border:1px solid var(--border);border-radius:2px;color:var(--ink3);cursor:pointer;background:var(--card);white-space:nowrap;line-height:1.4;display:inline-flex;align-items:center;height:28px}
-.dep-btn:hover,.dep-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.dep-graph{display:flex;flex-direction:column;gap:0;margin-top:16px;max-width:680px}
-.dep-layer{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;border-top:2px solid}
-.dep-layer-head{padding:10px 14px;border-bottom:1px solid var(--border);border-left:3px solid}
-.dep-layer-title{font-family:var(--cg);font-size:14px;font-weight:600;color:var(--ink)}
-.dep-layer-sub{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:1px}
-.dep-asset{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
-.dep-asset:last-child{border-bottom:none}
-.dep-asset:hover{background:var(--card-alt)}
-.dep-asset-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
-.dep-asset-meta{font-family:var(--mono);font-size:8px;color:var(--ink3)}
-.dep-arrow-row{display:flex;align-items:center;gap:8px;padding:6px 14px;color:var(--ink4);background:var(--card-alt);border-left:1px solid var(--border);border-right:1px solid var(--border)}
-.dep-arrow{font-family:var(--mono);font-size:13px;color:var(--ink4)}
-.dep-highlight{background:rgba(90,58,138,.06);border-color:var(--purple)}
-[data-theme=dark] .dep-highlight{background:rgba(90,58,138,.12)}
-
-/* ── COUNTRY VIEW ── */
-#country-view{flex:1;overflow:auto;padding:24px 28px 48px;display:none;height:100%}
-.cty-title{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:5px}
-.cty-sub{font-size:13px;color:var(--ink3);margin-bottom:18px;max-width:680px;line-height:1.6}
-.cty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;align-items:start}
-.cty-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;height:auto;display:flex;flex-direction:column}
-.cty-card-head{padding:12px 16px;border-bottom:1px solid var(--border);border-left:4px solid}
-.cty-flag{font-size:1.4rem;margin-bottom:4px}
-.cty-name{font-family:var(--cg);font-size:17px;font-weight:600;color:var(--ink)}
-.cty-body{padding:12px 16px}
-.cty-section{margin-bottom:10px}
-.cty-section:last-child{margin-bottom:0}
-.cty-section-label{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px}
-.cty-items{display:flex;flex-direction:column;gap:3px}
-.cty-item{font-size:12px;color:var(--ink2);line-height:1.5;padding-left:10px;position:relative}
-.cty-item::before{content:"·";position:absolute;left:0;color:var(--ink4)}
-.cty-dep-item{font-size:12px;color:var(--red);line-height:1.5;padding-left:10px;position:relative}
-.cty-dep-item::before{content:"→";position:absolute;left:0;color:var(--red);font-size:9px}
+/* ── MAP AREA ── */
+.map-area{flex:1;position:relative;min-width:0}
+#map{position:absolute;inset:0}
 
 /* ── SIDE PANEL ── */
-.side-panel{width:320px;flex-shrink:0;background:var(--card);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;transition:width .15s}
-.side-panel.collapsed{width:0;border:none}
-.sp-head{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;gap:8px}
-.sp-close{font-family:var(--mono);font-size:10px;color:var(--ink3);flex-shrink:0;padding:2px}
-.sp-asset-name{font-family:var(--cg);font-size:16px;font-weight:600;color:var(--ink);line-height:1.2}
-.sp-asset-meta{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:2px}
-.sp-body{flex:1;overflow-y:auto}
-.sp-intro{padding:14px;color:var(--ink3);font-size:12px;line-height:1.6}
+.side-panel{width:280px;flex-shrink:0;background:var(--card);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;transition:width .15s}
+.side-panel.collapsed{width:0;border-left:none}
+.sp-head{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-shrink:0}
+.sp-close{font-family:var(--mono);font-size:11px;color:var(--ink3);padding:1px;flex-shrink:0}
+.sp-close:hover{color:var(--red)}
+.sp-name{font-family:var(--cg);font-size:16px;font-weight:600;color:var(--ink);line-height:1.2}
+.sp-meta{font-family:var(--mono);font-size:7.5px;color:var(--ink4);margin-top:3px}
+.sp-body{flex:1;overflow-y:auto;padding:0}
+.sp-intro{padding:14px;color:var(--ink3);font-size:12px;line-height:1.65}
 .sp-sec{padding:9px 14px;border-bottom:1px solid var(--border)}
-.sp-sec-label{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
-.sp-row{display:flex;justify-content:space-between;align-items:baseline;gap:6px;padding:2px 0;border-bottom:1px solid var(--border)}
+.sp-sec:last-child{border-bottom:none}
+.sp-sec-label{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px}
+.sp-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid var(--border);gap:6px}
 .sp-row:last-child{border-bottom:none}
-.sp-rl{font-family:var(--ss);font-size:10.5px;color:var(--ink3)}
-.sp-rv{font-family:var(--mono);font-size:10px;color:var(--ink);text-align:right}
-.sp-text{font-size:11.5px;line-height:1.65;color:var(--ink2)}
+.sp-rl{font-size:11px;color:var(--ink3)}
+.sp-rv{font-family:var(--mono);font-size:10px;color:var(--ink);text-align:right;max-width:140px}
+.sp-text{font-size:12px;line-height:1.65;color:var(--ink2)}
 .sp-text strong{color:var(--ink)}
 .sp-list-item{font-size:11px;color:var(--ink2);padding-left:9px;position:relative;line-height:1.5;margin-bottom:2px}
 .sp-list-item::before{content:"·";position:absolute;left:0;color:var(--ink4)}
-.sp-src-btn{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:8.5px;color:var(--navy);border:1px solid rgba(29,68,128,.2);border-radius:2px;padding:2px 7px;margin-top:5px}
-.badge{font-family:var(--mono);font-size:7.5px;padding:1px 5px;border-radius:2px;border:1px solid}
+.sp-src-btn{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:8px;color:var(--navy);border:1px solid rgba(29,68,128,.2);border-radius:2px;padding:2px 7px;margin-top:5px}
+/* confidence dots */
+.conf-high::before{content:"●";color:var(--teal);margin-right:3px}
+.conf-moderate::before{content:"◐";color:var(--amber);margin-right:3px}
+.conf-directional::before{content:"○";color:var(--red);margin-right:3px}
+/* badges */
+.badge{font-family:var(--mono);font-size:7px;padding:1px 5px;border-radius:2px;border:1px solid}
 .b-bind{color:var(--red);border-color:rgba(179,48,0,.3);background:rgba(179,48,0,.07)}
 .b-tight{color:var(--amber);border-color:rgba(138,90,0,.3);background:rgba(138,90,0,.07)}
 .b-op{color:var(--teal);border-color:rgba(74,124,111,.3);background:rgba(74,124,111,.07)}
 .b-ramp{color:var(--teal);border-color:rgba(74,124,111,.3);background:rgba(74,124,111,.07)}
 .b-con{color:var(--navy);border-color:rgba(29,68,128,.3);background:rgba(29,68,128,.07)}
-.b-nb{color:var(--ink3);border-color:var(--border);background:var(--card-alt)}
-.b-h{color:var(--teal)}.b-m{color:var(--amber)}.b-d{color:var(--red)}
+.b-nb{color:var(--ink4);border-color:var(--border);background:var(--card-alt)}
 
-/* ── CONSTRAINT MONITOR ── */
-.monitor{background:var(--card);border-top:1px solid var(--border);flex-shrink:0}
-.monitor-toggle{padding:7px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)}
-.monitor-toggle:hover{color:var(--ink)}
-.monitor-body{display:none;padding:0 18px 10px;overflow-x:auto}
-.monitor-body.open{display:block}
-.mt{width:100%;border-collapse:collapse;min-width:680px;font-size:11px}
-.mt th{font-family:var(--mono);font-size:7px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink4);padding:5px 9px;border-bottom:2px solid var(--border);text-align:left;background:var(--card-alt);white-space:nowrap}
-.mt td{padding:6px 9px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.5}
-.mt tr:last-child td{border-bottom:none}
-.mt td:first-child{font-family:var(--ss);font-weight:600;color:var(--ink);white-space:nowrap;font-size:11.5px}
+/* ── MAP LEGEND ── */
+.map-legend{position:absolute;bottom:18px;left:14px;background:var(--card);border:1px solid var(--border);border-radius:3px;padding:8px 12px;z-index:50;pointer-events:none}
+.ml-title{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px}
+.ml-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8px;color:var(--ink2);margin-bottom:3px}
+.ml-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ml-sep{border-top:1px solid var(--border);margin:5px 0}
+.ml-ring{width:8px;height:8px;border-radius:50%;border:2px solid;flex-shrink:0}
 
-/* ── LEGEND ── */
-.legend{position:absolute;bottom:20px;left:16px;background:var(--card);border:1px solid var(--border);border-radius:3px;padding:9px 12px;z-index:100}
-.legend-title{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
-.legend-item{display:flex;align-items:center;gap:6px;margin-bottom:3px;font-family:var(--mono);font-size:8.5px;color:var(--ink2)}
-.ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.legend-sep{border-top:1px solid var(--border);margin:5px 0}
-.lr{width:9px;height:9px;border-radius:50%;border:2px solid;flex-shrink:0}
+/* ── EMPTY STATE ── */
+.empty-state{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.empty-state-title{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-bottom:4px}
+.empty-state-sub{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink4)}
+
+/* ── PIPELINE VIEW ── */
+#pipeline-view{position:absolute;inset:0;background:var(--bg);display:none;overflow:auto;z-index:20}
+.pv-inner{padding:20px 24px 48px;min-width:820px}
+.pv-title{font-family:var(--cg);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.pv-sub{font-size:12.5px;color:var(--ink3);max-width:640px;line-height:1.6;margin-bottom:14px}
+.pv-callout{background:rgba(90,58,138,.06);border:1px solid rgba(90,58,138,.2);border-radius:3px;padding:9px 13px;margin-bottom:14px;font-size:11.5px;color:var(--ink2);line-height:1.65}
+.pv-callout strong{color:var(--ink)}
+.pv-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.pvl-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8px;color:var(--ink3)}
+.pvl-sw{width:18px;height:9px;border-radius:2px}
+/* gantt */
+.gantt-wrap{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.gantt-head{display:flex;background:var(--card-alt);border-bottom:2px solid var(--border)}
+.gh-label{width:200px;min-width:200px;padding:6px 12px;font-family:var(--mono);font-size:7.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);border-right:1px solid var(--border);flex-shrink:0}
+.gh-years{flex:1;display:flex}
+.gh-year{flex:1;padding:6px 0 6px 6px;font-family:var(--mono);font-size:8.5px;color:var(--ink4);border-left:1px solid var(--border)}
+.gantt-row{display:flex;height:40px;border-bottom:1px solid var(--border)}
+.gantt-row:last-child{border-bottom:none}
+.gantt-row:hover{background:var(--card-alt)}
+.gantt-row:hover .gr-label{background:var(--card-alt)}
+.gr-label{width:200px;min-width:200px;padding:0 12px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);background:var(--card);position:sticky;left:0;z-index:5;flex-shrink:0}
+.gr-name{font-size:11px;font-weight:600;color:var(--ink);line-height:1.25}
+.gr-sub{font-family:var(--mono);font-size:7.5px;color:var(--ink4);margin-top:1px}
+.gr-bars{flex:1;position:relative;overflow:hidden}
+.gr-ygrid{position:absolute;inset:0;display:flex;pointer-events:none}
+.gr-ycol{flex:1;border-left:1px solid var(--border);opacity:.3}
+.gr-bar-wrap{position:absolute;inset:0;display:flex;align-items:center;padding:0 2px}
+.gr-bar{position:absolute;height:11px;border-radius:2px}
+.gr-diamond{position:absolute;width:10px;height:10px;transform:translateX(-50%) rotate(45deg);z-index:3}
+
+/* ── DEPENDENCY VIEW ── */
+#dependency-view{position:absolute;inset:0;background:var(--bg);display:none;overflow:auto;z-index:20}
+.dv-inner{padding:20px 24px 48px;max-width:700px}
+.dv-title{font-family:var(--cg);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.dv-sub{font-size:12.5px;color:var(--ink3);margin-bottom:14px;line-height:1.6}
+.dv-selector{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px}
+.dv-btn{font-family:var(--mono);font-size:8.5px;padding:4px 11px;border:1px solid var(--border);border-radius:2px;color:var(--ink3);cursor:pointer;background:var(--card);white-space:nowrap;height:26px;display:inline-flex;align-items:center}
+.dv-btn:hover,.dv-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.dep-chain{border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.dep-layer{border-top:3px solid var(--border)}
+.dep-layer-head{padding:9px 14px;border-bottom:1px solid var(--border);background:var(--card)}
+.dep-layer-title{font-family:var(--cg);font-size:14px;font-weight:600;color:var(--ink)}
+.dep-layer-sub{font-family:var(--mono);font-size:7.5px;color:var(--ink4);margin-top:1px}
+.dep-asset{padding:9px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;background:var(--card)}
+.dep-asset:last-child{border-bottom:none}
+.dep-asset:hover{background:var(--card-alt)}
+.dep-asset-name{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.dep-asset-meta{font-family:var(--mono);font-size:8px;color:var(--ink3)}
+.dep-arrow-wrap{padding:5px 14px;background:var(--card-alt);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.dep-arrow{font-family:var(--mono);font-size:12px;color:var(--ink4)}
+.dep-arrow-label{font-family:var(--mono);font-size:7.5px;color:var(--ink4)}
+
+/* ── COUNTRY VIEW ── */
+#country-view{position:absolute;inset:0;background:var(--bg);display:none;overflow:auto;z-index:20}
+.cv-inner{padding:20px 24px 48px}
+.cv-title{font-family:var(--cg);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.cv-sub{font-size:12.5px;color:var(--ink3);margin-bottom:16px;line-height:1.6;max-width:620px}
+.cv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cv-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.cv-card-head{padding:12px 14px;border-bottom:1px solid var(--border);border-left:4px solid}
+.cv-flag{font-size:1.3rem;line-height:1;margin-bottom:4px}
+.cv-name{font-family:var(--cg);font-size:16px;font-weight:600;color:var(--ink)}
+.cv-body{padding:12px 14px}
+.cv-sec{margin-bottom:12px}
+.cv-sec:last-child{margin-bottom:0}
+.cv-sec-label{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.cv-sec-label.controls{color:var(--teal)}
+.cv-sec-label.depends{color:var(--red)}
+.cv-item{font-size:11.5px;color:var(--ink2);padding-left:9px;position:relative;line-height:1.5;margin-bottom:2px}
+.cv-item::before{content:"·";position:absolute;left:0;color:var(--ink4)}
+.cv-dep-item{font-size:11.5px;color:var(--ink2);padding-left:12px;position:relative;line-height:1.5;margin-bottom:2px}
+.cv-dep-item::before{content:"→";position:absolute;left:0;color:var(--red);font-size:9px;top:2px}
+.cv-critical{font-family:var(--mono);font-size:8px;color:var(--red);padding:3px 7px;border:1px solid rgba(179,48,0,.25);border-radius:2px;background:rgba(179,48,0,.05);margin-top:8px;display:inline-block}
 
 /* MAPLIBRE */
-.maplibregl-popup-content{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:10px 12px;box-shadow:0 4px 12px rgba(0,0,0,.12);max-width:200px;font-family:var(--ss)}
+.maplibregl-popup-content{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:9px 12px;box-shadow:0 4px 12px rgba(0,0,0,.1);max-width:190px;font-family:"Source Serif 4",serif}
 .maplibregl-ctrl-attrib{display:none}
 .maplibregl-popup-tip{border-top-color:var(--border)!important}
-.pu-name{font-family:var(--cg);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:1px}
-.pu-meta{font-family:var(--mono);font-size:8px;color:var(--ink4)}
-.pu-status{font-family:var(--mono);font-size:8.5px;margin-top:3px}
+.pu-name{font-family:"Cormorant Garamond",serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.pu-meta{font-family:"IBM Plex Mono",monospace;font-size:8px;color:var(--ink4);margin-bottom:2px}
+.pu-status{font-family:"IBM Plex Mono",monospace;font-size:8px}
 
-/* TIME INDICATOR */
-.time-indicator{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--purple);border-radius:3px;padding:4px 12px;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--purple);z-index:100;pointer-events:none;display:none}
-.time-indicator.visible{display:block}
-
-@media(max-width:768px){
-  body{overflow:auto}
-  .view-area{flex-direction:column;overflow:auto}
-  .side-panel{width:100%;border-left:none;border-top:1px solid var(--border)}
-  .side-panel.collapsed{width:100%;height:0;overflow:hidden}
-  .legend{display:none}
+@media(max-width:900px){
+  .cv-grid{grid-template-columns:1fr}
+  .filter-rail{display:none}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="brand">Contango</a>
@@ -252,22 +259,21 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:inhe
       <a class="nav-a" href="natural-gas.html">Natural gas</a>
     </div>
     <div class="nav-right">
-      <span class="nav-stats" id="nav-stats">— assets · 7 layers</span>
+      <span class="nav-stats" id="nav-stats">Loading…</span>
       <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
     </div>
   </div>
 </nav>
 
-<div class="atlas-head">
-  <div class="atlas-head-inner">
-    <div>
-      <div class="atlas-title">Compute Atlas</div>
-      <div class="atlas-sub">The industrial geography of AI compute — physical assets, capacity status, supply-chain dependencies, and time to usable production.</div>
-    </div>
-    <div class="atlas-meta">
-      <span id="meta-count">—</span> assets · 7 layers · 7 economies<br>
-      Beta v2 · August 2026 · <a href="ai-compute.html" style="color:var(--purple)">Read the framework →</a>
-    </div>
+<!-- HEADER STRIP -->
+<div class="head-strip">
+  <div class="head-left">
+    <span class="head-title">Compute Atlas</span>
+    <span class="head-meta" id="head-meta">Loading dataset…</span>
+  </div>
+  <div class="head-right">
+    <span class="head-badge">BETA · August 2026</span>
+    <a href="ai-compute.html" style="font-family:var(--mono);font-size:8.5px;color:var(--purple)">Read the framework →</a>
   </div>
 </div>
 
@@ -277,605 +283,471 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:inhe
   <div class="tab" data-view="pipeline" onclick="switchView('pipeline')">Capacity pipeline</div>
   <div class="tab" data-view="dependency" onclick="switchView('dependency')">Supply chain</div>
   <div class="tab" data-view="country" onclick="switchView('country')">By country</div>
-  <span class="tab-sep">Capital announcement ≠ usable capacity</span>
+  <span class="tab-right">Capital announcement ≠ usable capacity</span>
 </div>
 
-<!-- CONTROLS -->
-<div class="controls">
-  <span class="ctrl-label">Layer</span>
-  <div class="ctrl-pills" id="layer-pills">
-    <span class="pill active" data-layer="all">All</span>
-    <span class="pill" data-layer="logic">Logic</span>
-    <span class="pill" data-layer="memory">Memory</span>
-    <span class="pill" data-layer="packaging">Packaging</span>
-    <span class="pill" data-layer="equipment">Equipment</span>
-    <span class="pill" data-layer="lithography">Lithography</span>
-    <span class="pill" data-layer="data_center">Data Centers</span>
-    <span class="pill" data-layer="power">Power</span>
-  </div>
-  <div class="ctrl-sep"></div>
-  <span class="ctrl-label">Status</span>
-  <div class="ctrl-pills" id="status-pills">
-    <span class="pill active" data-status="all">All</span>
-    <span class="pill" data-status="operational">Operational</span>
-    <span class="pill" data-status="ramp">Ramp</span>
-    <span class="pill" data-status="construction">Construction</span>
-  </div>
-  <div class="ctrl-sep"></div>
-  <div class="time-slider-wrap">
-    <span class="ctrl-label">Year</span>
-    <input type="range" class="time-slider" id="time-slider" min="2024" max="2030" step="0.5" value="2026">
-    <span class="time-label" id="time-label">2026</span>
-    <span class="time-note">Shows what is usable — not just announced</span>
-  </div>
-</div>
+<!-- WORKSPACE -->
+<div class="workspace">
 
-<!-- MAIN VIEW AREA -->
-<div class="view-area">
-
-  <!-- MAP VIEW -->
-  <div id="map-view" style="flex:1;display:flex;position:relative">
-    <div id="map" style="flex:1"></div>
-    <div class="legend" id="map-legend">
-      <div class="legend-title">Layer</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-logic)"></div>Logic / Foundry</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-memory)"></div>HBM / Memory</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-packaging)"></div>Packaging</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-equipment)"></div>Equipment</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-lithography)"></div>Lithography</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-data)"></div>Data Centers</div>
-      <div class="legend-item"><div class="ld" style="background:var(--l-power)"></div>Power / Grid</div>
-      <div class="legend-sep"></div>
-      <div class="legend-title">Status</div>
-      <div class="legend-item"><div class="lr" style="border-color:var(--teal);background:var(--teal)"></div>Operational</div>
-      <div class="legend-item"><div class="lr" style="border-color:var(--amber);background:rgba(138,90,0,.25)"></div>Ramp / Qual</div>
-      <div class="legend-item"><div class="lr" style="border-color:var(--navy);background:rgba(29,68,128,.15)"></div>Construction</div>
-    </div>
-    <div class="time-indicator" id="time-indicator">Showing: <span id="ti-year">2026</span></div>
-  </div>
-
-  <!-- PIPELINE VIEW -->
-  <div id="pipeline-view">
-    <div class="pipeline-head">
-      <div class="pipeline-title">Capacity pipeline — announcement to usable production</div>
-      <div class="pipeline-sub">Each bar shows a distinct phase. Assets appear as usable only when qualified volume production begins — not at announcement or construction start. Move the year slider above to see what's operational at each point in time.</div>
-    </div>
-    <div class="pipeline-callout">
-      <strong>Methodology:</strong> Bar start = earliest documented phase milestone. Bar end = expected usable production based on announcement → construction → equipment → qualification → yield ramp sequence. Where dates are uncertain, bars show directional estimates. Confidence level shown per asset.
-    </div>
-    <div class="pipeline-key">
-      <div class="pk-item"><div class="pk-swatch" style="background:#9090b0"></div>Announced</div>
-      <div class="pk-item"><div class="pk-swatch" style="background:#1d4480"></div>Construction</div>
-      <div class="pk-item"><div class="pk-swatch" style="background:#8a5a00"></div>Equipment / Qual</div>
-      <div class="pk-item"><div class="pk-swatch" style="background:#4a7c6f"></div>Volume production</div>
-      <div class="pk-item"><div class="pk-swatch" style="background:rgba(179,48,0,.4);border:1px dashed var(--red)"></div>Constraint relief</div>
-    </div>
-    <div class="pipeline-scroll">
-      <div class="pipeline-table">
-        <div class="year-header">
-          <div class="yh-label">Asset</div>
-          <div class="yh-years" id="yh-years"></div>
-        </div>
-        <div id="pipeline-rows"></div>
+  <!-- FILTER RAIL -->
+  <div class="filter-rail" id="filter-rail">
+    <div class="fr-section">
+      <div class="fr-label">Layer</div>
+      <div class="fr-pills" id="layer-pills">
+        <span class="fpill active" data-layer="all">All layers</span>
+        <span class="fpill" data-layer="logic"><span class="fpill-dot" style="background:var(--lc-logic)"></span>Logic</span>
+        <span class="fpill" data-layer="memory"><span class="fpill-dot" style="background:var(--lc-memory)"></span>HBM / Memory</span>
+        <span class="fpill" data-layer="packaging"><span class="fpill-dot" style="background:var(--lc-packaging)"></span>Packaging</span>
+        <span class="fpill" data-layer="equipment"><span class="fpill-dot" style="background:var(--lc-equipment)"></span>Equipment</span>
+        <span class="fpill" data-layer="lithography"><span class="fpill-dot" style="background:var(--lc-lithography)"></span>Lithography</span>
+        <span class="fpill" data-layer="data_center"><span class="fpill-dot" style="background:var(--lc-data)"></span>Data Centers</span>
+        <span class="fpill" data-layer="power"><span class="fpill-dot" style="background:var(--lc-power)"></span>Power / Grid</span>
       </div>
     </div>
-  </div>
-
-  <!-- DEPENDENCY VIEW -->
-  <div id="dependency-view">
-    <div class="dep-title">Supply chain structure</div>
-    <div class="dep-sub">Select a product or layer to see upstream dependencies and downstream customers. Click any asset card to view full details.</div>
-    <div class="dep-selector" id="dep-selector">
-      <button class="dep-btn active" data-dep="nvidia-blackwell" onclick="showDep(this)">Nvidia Blackwell / Vera Rubin</button>
-      <button class="dep-btn" data-dep="hbm" onclick="showDep(this)">HBM supply chain</button>
-      <button class="dep-btn" data-dep="euv" onclick="showDep(this)">EUV stack</button>
-      <button class="dep-btn" data-dep="china" onclick="showDep(this)">China domestic stack</button>
-      <button class="dep-btn" data-dep="datacenter" onclick="showDep(this)">AI data center</button>
+    <div class="fr-section">
+      <div class="fr-label">Status</div>
+      <div class="fr-pills">
+        <span class="fpill fpill-status active" data-status="all">All status</span>
+        <span class="fpill fpill-status" data-status="operational">Operational</span>
+        <span class="fpill fpill-status" data-status="ramp">Ramp / Qual</span>
+        <span class="fpill fpill-status" data-status="construction">Construction</span>
+      </div>
     </div>
-    <div id="dep-graph"></div>
+    <div class="fr-slider">
+      <div class="fr-label">Year view</div>
+      <div class="time-val" id="time-val">2026</div>
+      <input type="range" class="time-slider" id="time-slider" min="2024" max="2030" step="0.5" value="2026">
+      <div class="time-hint">Shows usable capacity<br>not just announced</div>
+    </div>
+    <div class="fr-monitor">
+      <div class="monitor-title">Constraint monitor</div>
+      <div class="monitor-row"><span class="monitor-node">EUV</span><span class="monitor-badge mb-bind">Binding</span><span class="monitor-dir">→</span></div>
+      <div class="monitor-row"><span class="monitor-node">CoWoS</span><span class="monitor-badge mb-bind">Binding</span><span class="monitor-dir">↓</span></div>
+      <div class="monitor-row"><span class="monitor-node">HBM</span><span class="monitor-badge mb-tight">Tight</span><span class="monitor-dir">↓</span></div>
+      <div class="monitor-row"><span class="monitor-node">Foundry</span><span class="monitor-badge mb-tight">Tight</span><span class="monitor-dir">→</span></div>
+      <div class="monitor-row"><span class="monitor-node">Equipment</span><span class="monitor-badge mb-nb">Non-binding</span><span class="monitor-dir">→</span></div>
+      <div class="monitor-row"><span class="monitor-node">EDA</span><span class="monitor-badge mb-nb">Non-binding</span><span class="monitor-dir">→</span></div>
+      <div class="monitor-row"><span class="monitor-node">Transformers</span><span class="monitor-badge mb-tight">Tight</span><span class="monitor-dir">↑</span></div>
+      <div class="monitor-row"><span class="monitor-node">Grid</span><span class="monitor-badge mb-tight">Tight</span><span class="monitor-dir">↑</span></div>
+    </div>
   </div>
 
-  <!-- COUNTRY VIEW -->
-  <div id="country-view">
-    <div class="cty-title">Industrial geography by country</div>
-    <div class="cty-sub">What each major economy controls in the AI compute stack — and what it depends on from others. Dependencies in red show exposure to foreign chokepoints.</div>
-    <div class="cty-grid" id="country-grid"></div>
+  <!-- MAP AREA -->
+  <div class="map-area" id="map-area">
+    <div id="map"></div>
+
+    <!-- PIPELINE VIEW overlay -->
+    <div id="pipeline-view">
+      <div class="pv-inner">
+        <div class="pv-title">Capacity pipeline — announcement to usable production</div>
+        <div class="pv-sub">Each bar shows a distinct phase. Assets appear as usable only when qualified volume production begins — not at announcement or construction start.</div>
+        <div class="pv-callout"><strong>Methodology:</strong> Bar start = earliest documented phase milestone. Bar end = expected usable production. Announcement → construction → equipment → qualification → yield ramp → volume production. Red diamond marks expected constraint relief. Confidence level per asset.</div>
+        <div class="pv-legend">
+          <div class="pvl-item"><div class="pvl-sw" style="background:#9090b0"></div>Announced</div>
+          <div class="pvl-item"><div class="pvl-sw" style="background:rgba(29,68,128,.5)"></div>Construction</div>
+          <div class="pvl-item"><div class="pvl-sw" style="background:rgba(138,90,0,.7)"></div>Equipment / Qual</div>
+          <div class="pvl-item"><div class="pvl-sw" style="background:var(--teal)"></div>Volume production</div>
+          <div class="pvl-item"><div class="pvl-sw" style="width:10px;height:10px;border-radius:0;transform:rotate(45deg);background:var(--red)"></div>Constraint relief</div>
+        </div>
+        <div class="gantt-wrap" id="gantt-wrap"></div>
+      </div>
+    </div>
+
+    <!-- DEPENDENCY VIEW overlay -->
+    <div id="dependency-view">
+      <div class="dv-inner">
+        <div class="dv-title">Supply chain structure</div>
+        <div class="dv-sub">Select a product or focus area to see its dependency chain. Click any asset card to view full details on the map.</div>
+        <div class="dv-selector">
+          <button class="dv-btn active" data-dep="nvidia-blackwell" onclick="showDep(this)">Nvidia Blackwell / Vera Rubin</button>
+          <button class="dv-btn" data-dep="hbm" onclick="showDep(this)">HBM supply chain</button>
+          <button class="dv-btn" data-dep="euv" onclick="showDep(this)">EUV stack</button>
+          <button class="dv-btn" data-dep="china" onclick="showDep(this)">China domestic</button>
+          <button class="dv-btn" data-dep="datacenter" onclick="showDep(this)">AI data center</button>
+        </div>
+        <div id="dep-graph"></div>
+      </div>
+    </div>
+
+    <!-- COUNTRY VIEW overlay -->
+    <div id="country-view">
+      <div class="cv-inner">
+        <div class="cv-title">Industrial geography by country</div>
+        <div class="cv-sub">What each major economy controls in the AI compute stack — and what it depends on from others. Red arrows show exposure to foreign chokepoints.</div>
+        <div class="cv-grid" id="cv-grid"></div>
+      </div>
+    </div>
+
+    <!-- MAP LEGEND -->
+    <div class="map-legend" id="map-legend">
+      <div class="ml-title">Layer (color)</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-logic)"></div>Logic</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-memory)"></div>Memory</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-packaging)"></div>Packaging</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-equipment)"></div>Equipment</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-lithography)"></div>Lithography</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-data)"></div>Data Centers</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--lc-power)"></div>Power</div>
+      <div class="ml-sep"></div>
+      <div class="ml-title">Status (fill)</div>
+      <div class="ml-item"><div class="ml-dot" style="background:var(--teal)"></div>Operational</div>
+      <div class="ml-item"><div class="ml-ring" style="border-color:var(--amber);background:rgba(138,90,0,.25)"></div>Ramp</div>
+      <div class="ml-item"><div class="ml-ring" style="border-color:var(--navy);background:rgba(29,68,128,.1)"></div>Construction</div>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="empty-state" style="display:none">
+      <div class="empty-state-title">No assets match these filters</div>
+      <div class="empty-state-sub">Try clearing a filter or changing the year</div>
+    </div>
   </div>
 
-  <!-- SIDE PANEL -->
+  <!-- ASSET SIDE PANEL -->
   <div class="side-panel collapsed" id="side-panel">
     <div class="sp-head">
-      <div>
-        <div class="sp-asset-name" id="sp-name">—</div>
-        <div class="sp-asset-meta" id="sp-meta"></div>
+      <div style="min-width:0">
+        <div class="sp-name" id="sp-name">—</div>
+        <div class="sp-meta" id="sp-meta"></div>
       </div>
       <button class="sp-close" onclick="closePanel()">✕</button>
     </div>
     <div class="sp-body" id="sp-body">
-      <div class="sp-intro">Click any marker to view asset details.</div>
+      <div class="sp-intro">Click any map marker to view asset details including capacity, status, timeline, dependencies, and sources.</div>
     </div>
   </div>
 
 </div>
 
-<!-- CONSTRAINT MONITOR -->
-<div class="monitor">
-  <div class="monitor-toggle" onclick="toggleMonitor()">
-    <span>Constraint monitor</span>
-    <span id="mon-arrow">▲</span>
-  </div>
-  <div class="monitor-body open" id="monitor-body">
-    <table class="mt">
-      <thead><tr><th>Node</th><th>Constraint</th><th>Direction</th><th>Expected relief</th><th>Durability</th></tr></thead>
-      <tbody>
-        <tr><td>EUV lithography</td><td><span class="badge b-bind">Binding</span></td><td>→ Stable</td><td>No substitute · controls holding</td><td>Very high</td></tr>
-        <tr><td>Advanced packaging (CoWoS)</td><td><span class="badge b-bind">Binding</span></td><td>↓ Easing</td><td>Marginal 2026 · meaningful 2027–28</td><td>High</td></tr>
-        <tr><td>HBM memory</td><td><span class="badge b-tight">Tight</span></td><td>↓ Easing slowly</td><td>2026–27 sold out · scale relief 2028–29</td><td>High</td></tr>
-        <tr><td>Leading-edge foundry</td><td><span class="badge b-tight">Tight</span></td><td>→ Stable</td><td>2nm booked into 2028</td><td>High</td></tr>
-        <tr><td>Semicon. equipment</td><td><span class="badge b-nb">Non-binding</span></td><td>→ Stable</td><td>Expanding · China substitution slow</td><td>Very high</td></tr>
-        <tr><td>EDA software</td><td><span class="badge b-nb">Non-binding</span></td><td>→ Stable</td><td>Ecosystem lock-in · 5+ yr China gap</td><td>Very high</td></tr>
-        <tr><td>Grid transformers (US)</td><td><span class="badge b-tight">Tight (regional)</span></td><td>↑ Tightening</td><td>1–2+ yr lead times</td><td>Growing</td></tr>
-        <tr><td>Grid interconnection</td><td><span class="badge b-tight">Tight (regional)</span></td><td>↑ Tightening</td><td>3–7+ yr queues</td><td>Growing</td></tr>
-      </tbody>
-    </table>
-    <div style="font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink4);margin-top:6px"><a href="ai-compute.html" style="color:var(--navy)">Full analytical framework →</a> · Sources: Silicon Analysts · TSMC investor briefings · SK Hynix earnings · CSIS Wadhwani 2026</div>
-  </div>
-</div>
-
 <script>
-// ──────────────────────────────────────────────────────────
-// THEME
-// ──────────────────────────────────────────────────────────
-let dark = localStorage.getItem('theme') === 'dark';
-function initTheme(){ if(dark){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='Light';} }
-function toggleTheme(){ dark=!dark; document.documentElement.setAttribute('data-theme',dark?'dark':''); document.getElementById('theme-btn').textContent=dark?'Light':'Dark'; localStorage.setItem('theme',dark?'dark':'light'); if(window._map) window._map.setStyle(getMapStyle()); }
+// ── THEME ──
+let dark=localStorage.getItem('theme')==='dark';
+function initTheme(){if(dark){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='Light';}}
+function toggleTheme(){dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'');document.getElementById('theme-btn').textContent=dark?'Light':'Dark';localStorage.setItem('theme',dark?'dark':'light');if(window._map)window._map.setStyle(getMapStyle());}
 initTheme();
 
-// ──────────────────────────────────────────────────────────
-// CONSTANTS
-// ──────────────────────────────────────────────────────────
-const LC = { logic:'#1d4480', memory:'#6a1a6a', packaging:'#1a6a4a', equipment:'#7a5a20', lithography:'#b33000', data_center:'#1a4a6a', power:'#4a4a1a' };
-const LL = { logic:'Logic / Foundry', memory:'HBM / Memory', packaging:'Packaging', equipment:'Equipment', lithography:'Lithography', data_center:'Data Centers', power:'Power / Grid' };
-const SL = { operational:'Operational', ramp:'Ramp / Qual', construction:'Under Construction', announced:'Announced', delayed:'Delayed' };
+// ── CONSTANTS ──
+const LC={logic:'#1d4480',memory:'#6a1a6a',packaging:'#1a6a4a',equipment:'#7a5a20',lithography:'#b33000',data_center:'#1a4a6a',power:'#4a4a1a'};
+const LL={logic:'Logic / Foundry',memory:'HBM / Memory',packaging:'Packaging',equipment:'Equipment',lithography:'Lithography',data_center:'Data Centers',power:'Power / Grid'};
+const SL={operational:'Operational',ramp:'Ramp / Qual',construction:'Under Construction',announced:'Announced'};
+const Y_START=2024,Y_END=2031,YEARS=[2024,2025,2026,2027,2028,2029,2030];
 
-// ──────────────────────────────────────────────────────────
-// STATE
-// ──────────────────────────────────────────────────────────
-let activeLayer='all', activeStatus='all', activeYear=2026, markers=[], allAssets=[], currentView='map';
+// ── STATE ──
+let allAssets=[],markers=[],activeLayer='all',activeStatus='all',activeYear=2026,currentView='map';
+let sliderTimer=null;
 
-// ──────────────────────────────────────────────────────────
-// MAP STYLE
-// ──────────────────────────────────────────────────────────
-function getMapStyle(){ return (document.documentElement.getAttribute('data-theme')==='dark') ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json' : 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'; }
+// ── MAP ──
+function getMapStyle(){return document.documentElement.getAttribute('data-theme')==='dark'?'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json':'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';}
 
-// ──────────────────────────────────────────────────────────
-// ASSET STATUS AT YEAR (time slider logic)
-// ──────────────────────────────────────────────────────────
-function getStatusAtYear(asset, year) {
-  const t = asset.timeline || {};
-  if (t.operational_since && year >= t.operational_since) return 'operational';
-  if (t.volume_production && year >= t.volume_production) return 'operational';
-  if (t.qualification && year >= t.qualification) return 'ramp';
-  if (t.equipment && year >= t.equipment) return 'ramp';
-  if (t.construction && year >= t.construction) return 'construction';
-  if (t.announced && year >= t.announced) return 'announced';
-  // fallback to base status if no timeline
-  return asset.status || 'operational';
+function getStatusAtYear(a,yr){
+  const t=a.timeline||{};
+  if(t.operational_since&&yr>=t.operational_since)return'operational';
+  if(t.volume_production&&yr>=t.volume_production)return'operational';
+  if(t.qualification&&yr>=t.qualification)return'ramp';
+  if(t.equipment&&yr>=t.equipment)return'ramp';
+  if(t.construction&&yr>=t.construction)return'construction';
+  if(t.announced&&yr>=t.announced)return'announced';
+  return a.status||'operational';
 }
 
-function isVisibleAtYear(asset, year, layerFilter, statusFilter) {
-  if (layerFilter !== 'all' && asset.layer !== layerFilter) return false;
-  const statusAtYear = getStatusAtYear(asset, year);
-  if (statusFilter !== 'all' && statusAtYear !== statusFilter) return false;
-  // hide future assets that haven't been announced yet
-  const t = asset.timeline || {};
-  const firstMilestone = t.announced || t.construction || t.operational_since || t.volume_production;
-  if (firstMilestone && year < firstMilestone) return false;
+function isVisible(a,yr,layer,status){
+  if(layer!=='all'&&a.layer!==layer)return false;
+  const s=getStatusAtYear(a,yr);
+  if(status!=='all'&&s!==status)return false;
+  const t=a.timeline||{};
+  const first=t.announced||t.construction||t.operational_since||t.volume_production;
+  if(first&&yr<first)return false;
   return true;
 }
 
-// ──────────────────────────────────────────────────────────
-// MARKERS
-// ──────────────────────────────────────────────────────────
-function renderMarkers() {
-  markers.forEach(m => m.remove());
-  markers = [];
-  if (!window._map) return;
-
-  allAssets.forEach(asset => {
-    if (!isVisibleAtYear(asset, activeYear, activeLayer, activeStatus)) return;
-
-    const color = LC[asset.layer] || '#666';
-    const statusNow = getStatusAtYear(asset, activeYear);
-    const isOp = statusNow === 'operational';
-    const isRamp = statusNow === 'ramp';
-    const isCon = statusNow === 'construction';
-
-    const el = document.createElement('div');
-    const size = asset.layer === 'data_center' ? 11 : 13;
-    el.style.cssText = `width:${size}px;height:${size}px;border-radius:50%;cursor:pointer;transition:transform .1s;
-      background:${isOp ? color : isRamp ? color+'99' : isCon ? color+'44' : 'transparent'};
-      border:2px solid ${color};`;
-
-    el.addEventListener('mouseenter', () => el.style.transform = 'scale(1.5)');
-    el.addEventListener('mouseleave', () => el.style.transform = 'scale(1)');
-    el.addEventListener('click', () => showPanel(asset));
-
-    const popup = new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:12})
-      .setHTML(`<div class="pu-name">${asset.name}</div><div class="pu-meta">${asset.company} · ${asset.country}</div><div class="pu-status">${LL[asset.layer]||asset.layer} · <span style="color:${color}">${SL[statusNow]||statusNow}</span></div>`);
-
-    el.addEventListener('mouseenter', () => popup.setLngLat([asset.lon, asset.lat]).addTo(window._map));
-    el.addEventListener('mouseleave', () => popup.remove());
-
-    markers.push(new maplibregl.Marker({element:el}).setLngLat([asset.lon, asset.lat]).addTo(window._map));
+function renderMarkers(){
+  markers.forEach(m=>m.remove());
+  markers=[];
+  if(!window._map)return;
+  const visible=allAssets.filter(a=>isVisible(a,activeYear,activeLayer,activeStatus));
+  document.getElementById('empty-state').style.display=visible.length===0?'block':'none';
+  visible.forEach(a=>{
+    const color=LC[a.layer]||'#666';
+    const s=getStatusAtYear(a,activeYear);
+    const isOp=s==='operational',isRamp=s==='ramp',isCon=s==='construction';
+    const el=document.createElement('div');
+    el.style.cssText=`width:13px;height:13px;border-radius:50%;cursor:pointer;
+      background:${isOp?color:isRamp?color+'99':isCon?color+'33':'transparent'};
+      border:2px solid ${color};transition:transform .1s;`;
+    el.addEventListener('mouseenter',()=>el.style.transform='scale(1.5)');
+    el.addEventListener('mouseleave',()=>el.style.transform='scale(1)');
+    el.addEventListener('click',()=>showPanel(a));
+    const popup=new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:12})
+      .setHTML(`<div class="pu-name">${a.name}</div><div class="pu-meta">${a.company} · ${a.country}</div><div class="pu-status" style="color:${color}">${LL[a.layer]||a.layer} · ${SL[s]||s}</div>`);
+    el.addEventListener('mouseenter',()=>popup.setLngLat([a.lon,a.lat]).addTo(window._map));
+    el.addEventListener('mouseleave',()=>popup.remove());
+    markers.push(new maplibregl.Marker({element:el}).setLngLat([a.lon,a.lat]).addTo(window._map));
   });
 }
 
-// ──────────────────────────────────────────────────────────
-// SIDE PANEL
-// ──────────────────────────────────────────────────────────
-function showPanel(a) {
-  document.getElementById('side-panel').classList.remove('collapsed');
-  document.getElementById('sp-name').textContent = a.name;
-  document.getElementById('sp-meta').textContent = `${a.company} · ${a.city||''}, ${a.country} · ${LL[a.layer]||a.layer}`;
+function initMap(){
+  if(typeof maplibregl==='undefined'){
+    document.getElementById('map').innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--mono);font-size:11px;color:var(--ink3);flex-direction:column;gap:8px"><div>Map requires internet connection</div><div style="font-size:9px;opacity:.6">Deploy to GitHub Pages to view the interactive map</div></div>';
+    return;
+  }
+  const map=new maplibregl.Map({container:'map',style:getMapStyle(),center:[22,28],zoom:2.1,attributionControl:false});
+  window._map=map;
+  map.on('load',renderMarkers);
+  map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
+}
 
-  const color = LC[a.layer] || '#666';
-  const statusNow = getStatusAtYear(a, activeYear);
-  const bClass = s => ({'binding':'b-bind','tight':'b-tight','operational':'b-op','ramp':'b-ramp','construction':'b-con','non_binding':'b-nb','non-binding':'b-nb'}[s]||'b-nb');
-  const badge = (s,label) => `<span class="badge ${bClass(s)}">${label||s}</span>`;
-  const confClass = c => ({'high':'b-h','moderate':'b-m','directional':'b-d'}[c]||'b-m');
-
-  let h = '';
-  h += `<div class="sp-sec">
-    <div class="sp-sec-label">Status at ${activeYear <= 2026 ? 'present' : activeYear}</div>
-    <div class="sp-row"><span class="sp-rl">Project phase</span><span class="sp-rv">${badge(statusNow, SL[statusNow]||statusNow)}</span></div>
-    ${a.constraint_status ? `<div class="sp-row"><span class="sp-rl">Constraint</span><span class="sp-rv">${badge(a.constraint_status)}</span></div>` : ''}
-    ${a.durability ? `<div class="sp-row"><span class="sp-rl">Durability</span><span class="sp-rv" style="font-size:9.5px">${a.durability.replace('_',' ')}</span></div>` : ''}
-    ${a.confidence ? `<div class="sp-row"><span class="sp-rl">Confidence</span><span class="sp-rv" class="${confClass(a.confidence)}" style="color:${a.confidence==='high'?'var(--teal)':a.confidence==='directional'?'var(--red)':'var(--amber)'}">${a.confidence}</span></div>` : ''}
+// ── SIDE PANEL ──
+function showPanel(a){
+  const panel=document.getElementById('side-panel');
+  panel.classList.remove('collapsed');
+  document.getElementById('sp-name').textContent=a.name;
+  document.getElementById('sp-meta').textContent=`${a.company} · ${a.city||''}, ${a.country}`;
+  const color=LC[a.layer]||'#666';
+  const s=getStatusAtYear(a,activeYear);
+  const bCls={binding:'b-bind',tight:'b-tight',operational:'b-op',ramp:'b-ramp',construction:'b-con',non_binding:'b-nb','non-binding':'b-nb'};
+  const badge=(v,lbl)=>`<span class="badge ${bCls[v]||'b-nb'}">${lbl||v}</span>`;
+  const confDot=c=>c==='high'?'<span class="conf-high">High</span>':c==='moderate'?'<span class="conf-moderate">Moderate</span>':'<span class="conf-directional">Directional</span>';
+  let h='';
+  // Status block
+  h+=`<div class="sp-sec" style="border-left:3px solid ${color}">
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+      <span style="font-family:var(--mono);font-size:8px;font-weight:600;color:${color}">${(LL[a.layer]||a.layer).toUpperCase()}</span>
+      ${badge(s,SL[s]||s)}
+      ${a.constraint_status?badge(a.constraint_status):''}
+    </div>
+    ${a.confidence?`<div style="font-size:10px;color:var(--ink3)">Confidence: ${confDot(a.confidence)}</div>`:''}
   </div>`;
-
-  if(a.role) h += `<div class="sp-sec"><div class="sp-sec-label">Role in stack</div><div class="sp-text">${a.role}</div></div>`;
-  if(a.technology) h += `<div class="sp-sec"><div class="sp-sec-label">Technology</div><div class="sp-text">${a.technology}</div></div>`;
-
-  if(a.current_capacity||a.announced_capacity) {
-    h += `<div class="sp-sec"><div class="sp-sec-label">Capacity</div>`;
-    if(a.current_capacity) h += `<div class="sp-row"><span class="sp-rl">Operational</span><span class="sp-rv" style="max-width:160px;font-size:9px">${a.current_capacity}</span></div>`;
-    if(a.announced_capacity) h += `<div class="sp-row"><span class="sp-rl">Announced</span><span class="sp-rv" style="max-width:160px;font-size:9px">${a.announced_capacity}</span></div>`;
-    h += `</div>`;
+  // Technology
+  if(a.technology)h+=`<div class="sp-sec"><div class="sp-sec-label">Technology</div><div class="sp-text">${a.technology}</div></div>`;
+  // Role
+  if(a.role)h+=`<div class="sp-sec"><div class="sp-sec-label">Role in stack</div><div class="sp-text">${a.role}</div></div>`;
+  // Capacity
+  if(a.current_capacity||a.announced_capacity){
+    h+=`<div class="sp-sec"><div class="sp-sec-label">Capacity</div>`;
+    if(a.current_capacity)h+=`<div class="sp-row"><span class="sp-rl">Current</span><span class="sp-rv" style="font-size:9px">${a.current_capacity}</span></div>`;
+    if(a.announced_capacity)h+=`<div class="sp-row"><span class="sp-rl">Announced</span><span class="sp-rv" style="font-size:9px">${a.announced_capacity}</span></div>`;
+    h+=`</div>`;
   }
-
-  if(a.time_to_relief||a.timeline?.constraint_relief) {
-    h += `<div class="sp-sec"><div class="sp-sec-label">Time to relief</div>`;
-    if(a.timeline?.constraint_relief) h += `<div class="sp-row"><span class="sp-rl">Relief expected</span><span class="sp-rv">${a.timeline.constraint_relief}</span></div>`;
-    if(a.time_to_relief) h += `<div class="sp-text" style="margin-top:5px">${a.time_to_relief}</div>`;
-    h += `</div>`;
+  // Timeline
+  const t=a.timeline||{};
+  if(Object.keys(t).length){
+    h+=`<div class="sp-sec"><div class="sp-sec-label">Timeline</div>`;
+    if(t.operational_since)h+=`<div class="sp-row"><span class="sp-rl">Operational since</span><span class="sp-rv">${t.operational_since}</span></div>`;
+    if(t.announced)h+=`<div class="sp-row"><span class="sp-rl">Announced</span><span class="sp-rv">${t.announced}</span></div>`;
+    if(t.construction)h+=`<div class="sp-row"><span class="sp-rl">Construction</span><span class="sp-rv">${t.construction}</span></div>`;
+    if(t.volume_production)h+=`<div class="sp-row"><span class="sp-rl">Volume production</span><span class="sp-rv">${t.volume_production}</span></div>`;
+    if(t.constraint_relief)h+=`<div class="sp-row"><span class="sp-rl" style="color:var(--red)">Constraint relief</span><span class="sp-rv" style="color:var(--red)">${t.constraint_relief}</span></div>`;
+    if(t.note)h+=`<div class="sp-text" style="margin-top:5px;font-size:11px">${t.note}</div>`;
+    h+=`</div>`;
   }
-
-  const deps = [...(a.dependencies_upstream||[]),...(a.dependencies_downstream||[])];
-  if(deps.length) {
-    h += `<div class="sp-sec"><div class="sp-sec-label">Dependencies</div>`;
-    if(a.dependencies_upstream?.length) {
-      h += `<div style="font-family:var(--mono);font-size:7px;color:var(--ink4);margin-bottom:3px;margin-top:2px">UPSTREAM</div>`;
-      h += a.dependencies_upstream.map(d=>`<div class="sp-list-item">${d}</div>`).join('');
-    }
-    if(a.dependencies_downstream?.length) {
-      h += `<div style="font-family:var(--mono);font-size:7px;color:var(--ink4);margin:5px 0 3px">DOWNSTREAM</div>`;
-      h += a.dependencies_downstream.map(d=>`<div class="sp-list-item">${d}</div>`).join('');
-    }
-    h += `</div>`;
+  // Time to relief
+  if(a.time_to_relief)h+=`<div class="sp-sec"><div class="sp-sec-label">Time to relief</div><div class="sp-text" style="font-size:11.5px">${a.time_to_relief}</div></div>`;
+  // Dependencies
+  const hasUp=(a.dependencies_upstream||[]).length>0,hasDown=(a.dependencies_downstream||[]).length>0;
+  if(hasUp||hasDown){
+    h+=`<div class="sp-sec"><div class="sp-sec-label">Dependencies</div>`;
+    if(hasUp){h+=`<div style="font-family:var(--mono);font-size:7px;color:var(--ink4);margin-bottom:3px;margin-top:2px">UPSTREAM</div>`;h+=a.dependencies_upstream.map(d=>`<div class="sp-list-item">${d}</div>`).join('');}
+    if(hasDown){h+=`<div style="font-family:var(--mono);font-size:7px;color:var(--ink4);margin:5px 0 3px">DOWNSTREAM</div>`;h+=a.dependencies_downstream.map(d=>`<div class="sp-list-item">${d}</div>`).join('');}
+    h+=`</div>`;
   }
-
-  if(a.policy_exposure) h += `<div class="sp-sec"><div class="sp-sec-label">Policy exposure</div><div class="sp-text">${a.policy_exposure}</div></div>`;
-
-  h += `<div class="sp-sec"><div class="sp-sec-label">Source</div><div class="sp-text" style="font-size:10.5px">${a.source_title||'—'}</div>`;
-  if(a.source_url) h += `<a href="${a.source_url}" target="_blank" class="sp-src-btn">Open source ↗</a>`;
-  h += `<div style="font-family:var(--mono);font-size:7.5px;color:var(--ink4);margin-top:5px">${a.id}</div></div>`;
-
-  document.getElementById('sp-body').innerHTML = h;
+  // Policy
+  if(a.policy_exposure)h+=`<div class="sp-sec"><div class="sp-sec-label">Policy exposure</div><div class="sp-text" style="font-size:11.5px">${a.policy_exposure}</div></div>`;
+  // Source
+  h+=`<div class="sp-sec"><div class="sp-sec-label">Source · ${confDot(a.confidence)}</div><div class="sp-text" style="font-size:10.5px">${a.source_title||'—'}</div>${a.source_url?`<a href="${a.source_url}" target="_blank" class="sp-src-btn">Open source ↗</a>`:''}<div style="font-family:var(--mono);font-size:7px;color:var(--ink4);margin-top:5px">${a.id||''}</div></div>`;
+  document.getElementById('sp-body').innerHTML=h;
 }
+function closePanel(){document.getElementById('side-panel').classList.add('collapsed');}
 
-function closePanel(){ document.getElementById('side-panel').classList.add('collapsed'); }
-
-// ──────────────────────────────────────────────────────────
-// VIEW SWITCHING
-// ──────────────────────────────────────────────────────────
-function switchView(view) {
-  currentView = view;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.view===view));
-  document.getElementById('map-view').style.display = view==='map' ? 'flex' : 'none';
-  document.getElementById('pipeline-view').style.display = view==='pipeline' ? 'flex' : 'none';
-  document.getElementById('dependency-view').style.display = view==='dependency' ? 'flex' : 'none';
-  document.getElementById('country-view').style.display = view==='country' ? 'flex' : 'none';
+// ── VIEW SWITCHING ──
+function switchView(view){
+  currentView=view;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===view));
+  const isMap=view==='map';
+  document.getElementById('map-legend').style.display=isMap?'block':'none';
+  document.getElementById('empty-state').style.display='none';
+  document.getElementById('pipeline-view').style.display=view==='pipeline'?'block':'none';
+  document.getElementById('dependency-view').style.display=view==='dependency'?'block':'none';
+  document.getElementById('country-view').style.display=view==='country'?'block':'none';
   document.getElementById('side-panel').classList.add('collapsed');
-  if(view==='pipeline') renderPipeline();
-  if(view==='dependency') showDep(document.querySelector('.dep-btn.active'));
-  if(view==='country') renderCountries();
+  if(view==='pipeline')renderPipeline();
+  if(view==='dependency')showDep(document.querySelector('.dv-btn.active'));
+  if(view==='country')renderCountries();
 }
 
-// ──────────────────────────────────────────────────────────
-// PIPELINE VIEW
-// ──────────────────────────────────────────────────────────
-const YEARS = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
-const Y_START = 2024, Y_END = 2031;
-
-function yearToPct(y) { return Math.max(0, Math.min(100, (y - Y_START) / (Y_END - Y_START) * 100)); }
-
-function renderPipeline() {
-  // Year headers
-  const yhYears = document.getElementById('yh-years');
-  yhYears.innerHTML = YEARS.map(y => `<div class="yh-year" style="flex:1;font-family:var(--mono);font-size:8px;color:var(--ink4);border-left:1px solid var(--border);padding:5px 0 5px 5px">${y}</div>`).join('');
-
-  // Filter assets that have timeline data
-  const pAssets = allAssets.filter(a => {
-    if (activeLayer !== 'all' && a.layer !== activeLayer) return false;
-    const t = a.timeline||{};
+// ── PIPELINE / GANTT ──
+function pct(y){return Math.max(0,Math.min(100,(y-Y_START)/(Y_END-Y_START)*100));}
+function renderPipeline(){
+  const assets=allAssets.filter(a=>{
+    if(activeLayer!=='all'&&a.layer!==activeLayer)return false;
+    const t=a.timeline||{};
     return t.announced||t.construction||t.volume_production||t.operational_since;
-  }).sort((a,b) => {
-    const ta = a.timeline||{}, tb = b.timeline||{};
-    const ya = ta.announced||ta.construction||ta.volume_production||ta.operational_since||2030;
-    const yb = tb.announced||tb.construction||tb.volume_production||tb.operational_since||2030;
-    return ya - yb;
+  }).sort((a,b)=>{
+    const ta=a.timeline||{},tb=b.timeline||{};
+    return (ta.announced||ta.construction||ta.volume_production||ta.operational_since||2030)-(tb.announced||tb.construction||tb.volume_production||tb.operational_since||2030);
   });
-
-  const rows = document.getElementById('pipeline-rows');
-  rows.innerHTML = pAssets.map(a => {
-    const t = a.timeline||{};
-    const color = LC[a.layer]||'#666';
-
-    let bars = '';
-
-    // Announced bar
-    const annEnd = t.construction||t.qualification||t.volume_production;
-    if(t.announced && annEnd) {
-      const l=yearToPct(t.announced), w=yearToPct(annEnd)-yearToPct(t.announced);
-      if(w>0) bars += `<div class="pt-bar" style="left:${l}%;width:${w}%;background:#9090b0"><span class="pt-phase-label">Announced</span></div>`;
-    }
-
-    // Construction bar
-    const conEnd = t.equipment||t.qualification||t.volume_production;
-    if(t.construction && conEnd) {
-      const l=yearToPct(t.construction), w=yearToPct(conEnd)-yearToPct(t.construction);
-      if(w>0) bars += `<div class="pt-bar" style="left:${l}%;width:${w}%;background:${color}88"><span class="pt-phase-label">Construction</span></div>`;
-    }
-
-    // Qualification/equipment bar
-    const qualEnd = t.volume_production||t.phase2_volume;
-    if((t.equipment||t.qualification) && qualEnd) {
-      const qStart = t.equipment||t.qualification;
-      const l=yearToPct(qStart), w=yearToPct(qualEnd)-yearToPct(qStart);
-      if(w>0) bars += `<div class="pt-bar" style="left:${l}%;width:${w}%;background:${color}bb"><span class="pt-phase-label">Qual</span></div>`;
-    }
-
-    // Volume production bar
-    const volStart = t.volume_production||t.operational_since;
-    const volEnd = t.constraint_relief||(volStart?volStart+2:null);
-    if(volStart) {
-      const l=yearToPct(volStart), w=Math.max(1.5, yearToPct(Math.min(volEnd||Y_END, Y_END))-yearToPct(volStart));
-      bars += `<div class="pt-bar" style="left:${l}%;width:${w}%;background:${color}"><span class="pt-phase-label">Volume</span></div>`;
-    }
-
-    // Constraint relief marker
-    if(t.constraint_relief) {
-      const l=yearToPct(t.constraint_relief);
-      bars += `<div style="position:absolute;left:${l}%;top:50%;transform:translateY(-50%);width:2px;height:16px;background:var(--red);z-index:10;border-radius:1px" title="Expected constraint relief"></div>`;
-    }
-
-    // Current year indicator
-    const curL = yearToPct(activeYear);
-    const yearLine = `<div style="position:absolute;left:${curL}%;top:0;bottom:0;width:1.5px;background:var(--purple);opacity:0.5;z-index:5;pointer-events:none"></div>`;
-
-    return `<div class="pt-row">
-      <div class="pt-label">
-        <div class="pt-name">${a.name.length>30?a.name.substring(0,28)+'…':a.name}</div>
-        <div class="pt-sub">${LL[a.layer]||a.layer} · ${a.country}</div>
-      </div>
-      <div class="pt-timeline" style="position:relative;flex:1;min-height:42px">
-        <div class="pt-year-grid">${YEARS.map(()=>`<div class="pt-year-col"></div>`).join('')}</div>
-        <div class="pt-bars" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center">${bars}${yearLine}</div>
-      </div>
-    </div>`;
+  const curPct=pct(activeYear);
+  const head=`<div class="gantt-head"><div class="gh-label">Asset</div><div class="gh-years">${YEARS.map(y=>`<div class="gh-year">${y}</div>`).join('')}</div></div>`;
+  const rows=assets.map(a=>{
+    const t=a.timeline||{},color=LC[a.layer]||'#666';
+    let bars='';
+    // Announced phase
+    const annEnd=t.construction||t.qualification||t.volume_production;
+    if(t.announced&&annEnd){const l=pct(t.announced),w=pct(annEnd)-l;if(w>0.5)bars+=`<div class="gr-bar" style="left:${l}%;width:${w}%;background:#9090b0;opacity:.7"></div>`;}
+    // Construction phase
+    const conEnd=t.equipment||t.qualification||t.volume_production;
+    if(t.construction&&conEnd){const l=pct(t.construction),w=pct(conEnd)-l;if(w>0.5)bars+=`<div class="gr-bar" style="left:${l}%;width:${w}%;background:${color};opacity:.45"></div>`;}
+    // Qual phase
+    const qStart=t.equipment||t.qualification,qEnd=t.volume_production||t.phase2_volume;
+    if(qStart&&qEnd){const l=pct(qStart),w=pct(qEnd)-l;if(w>0.5)bars+=`<div class="gr-bar" style="left:${l}%;width:${w}%;background:${color};opacity:.7"></div>`;}
+    // Volume production
+    const vStart=t.volume_production||t.operational_since;
+    if(vStart){const l=pct(vStart),w=Math.max(2,Math.min(pct(Math.min(t.constraint_relief||Y_END,Y_END))-l,100-l));bars+=`<div class="gr-bar" style="left:${l}%;width:${w}%;background:${color}"></div>`;}
+    // Constraint relief diamond
+    if(t.constraint_relief){const l=pct(t.constraint_relief);bars+=`<div class="gr-diamond" style="left:${l}%;top:50%;margin-top:-5px;background:var(--red)"></div>`;}
+    // Current year line
+    bars+=`<div style="position:absolute;left:${curPct}%;top:0;bottom:0;width:1.5px;background:var(--purple);opacity:.5;z-index:4"></div>`;
+    return `<div class="gantt-row"><div class="gr-label"><div class="gr-name">${a.name.length>27?a.name.substring(0,25)+'…':a.name}</div><div class="gr-sub">${LL[a.layer]||a.layer} · ${a.country}</div></div><div class="gr-bars"><div class="gr-ygrid">${YEARS.map(()=>`<div class="gr-ycol"></div>`).join('')}</div><div class="gr-bar-wrap">${bars}</div></div></div>`;
   }).join('');
+  document.getElementById('gantt-wrap').innerHTML=head+rows;
 }
 
-// ──────────────────────────────────────────────────────────
-// DEPENDENCY VIEW
-// ──────────────────────────────────────────────────────────
-const DEP_CHAINS = {
-  'nvidia-blackwell': {
-    label:'Nvidia Blackwell / Vera Rubin',
-    chain:[
-      {title:'AI Accelerator Design',color:'var(--l-logic)',assets:['NVIDIA-US-SANTACLARA','BROADCOM-US-PALOALTO']},
-      {title:'Leading-Edge Foundry (Logic)',color:'var(--l-logic)',assets:['TSMC-TW-FAB18','TSMC-US-FAB21','INTEL-US-OREGON']},
-      {title:'Advanced Packaging (CoWoS)',color:'var(--l-packaging)',assets:['TSMC-TW-COWOS','SKH-US-INDIANA']},
-      {title:'HBM Memory',color:'var(--l-memory)',assets:['SKH-KR-M15','SKH-KR-M15X','MICRON-US-BOISE','SAMSUNG-KR-P3']},
-      {title:'Lithography (for all above)',color:'var(--l-lithography)',assets:['ASML-NL-VELDHOVEN','ZEISS-DE-OBERKOCHEN']},
-      {title:'Data Center + Power',color:'var(--l-data)',assets:['MSFT-US-IOWA','AMAZON-US-DATACENTER','POWER-US-TRANSFORMER','POWER-US-NOVA']},
-    ]
-  },
-  'hbm': {
-    label:'HBM supply chain',
-    chain:[
-      {title:'HBM Design & Production',color:'var(--l-memory)',assets:['SKH-KR-M15','SKH-KR-M15X','SAMSUNG-KR-P3','MICRON-US-BOISE','CXMT-CN-HEFEI']},
-      {title:'US Advanced Packaging',color:'var(--l-packaging)',assets:['SKH-US-INDIANA']},
-      {title:'Lithography required',color:'var(--l-lithography)',assets:['ASML-NL-VELDHOVEN']},
-      {title:'Equipment (deposition/etch)',color:'var(--l-equipment)',assets:['AMAT-US-SANTACLARA','LAMRESEARCH-US-FREMONT','TEL-JP-TOKYO']},
-    ]
-  },
-  'euv': {
-    label:'EUV stack',
-    chain:[
-      {title:'EUV System (sole supplier)',color:'var(--l-lithography)',assets:['ASML-NL-VELDHOVEN']},
-      {title:'EUV Optics (sole supplier)',color:'var(--l-lithography)',assets:['ZEISS-DE-OBERKOCHEN']},
-      {title:'Materials (photoresists etc)',color:'var(--l-equipment)',assets:['JMFG-JP-PHOTORESIST']},
-      {title:'Fabs that need EUV',color:'var(--l-logic)',assets:['TSMC-TW-FAB18','TSMC-US-FAB21','SKH-KR-M15','SAMSUNG-KR-P3','INTEL-US-OREGON']},
-    ]
-  },
-  'china': {
-    label:'China domestic stack',
-    chain:[
-      {title:'Foundry (7nm via DUV)',color:'var(--l-logic)',assets:['SMIC-CN-SHANGHAI']},
-      {title:'HBM attempt',color:'var(--l-memory)',assets:['CXMT-CN-HEFEI']},
-      {title:'AI Accelerator',color:'var(--l-logic)',assets:['HUAWEI-CN-SHENZHEN']},
-      {title:'What China cannot access',color:'var(--l-lithography)',assets:['ASML-NL-VELDHOVEN','ZEISS-DE-OBERKOCHEN']},
-    ]
-  },
-  'datacenter': {
-    label:'AI data center',
-    chain:[
-      {title:'Hyperscaler / operator',color:'var(--l-data)',assets:['MSFT-US-IOWA','GOOGLE-US-DATACENTER','AMAZON-US-DATACENTER','ABUDHABI-UAE-MGXAI']},
-      {title:'AI accelerators required',color:'var(--l-logic)',assets:['NVIDIA-US-SANTACLARA','BROADCOM-US-PALOALTO']},
-      {title:'Power constraints',color:'var(--l-power)',assets:['POWER-US-TRANSFORMER','POWER-US-NOVA','POWER-NUCLEAR-US']},
-    ]
-  }
+// ── DEPENDENCY CHAINS ──
+const DEP_CHAINS={
+  'nvidia-blackwell':{label:'Nvidia Blackwell / Vera Rubin',chain:[
+    {title:'AI Accelerator Design',color:'var(--lc-logic)',assets:['NVIDIA-US-SANTACLARA','BROADCOM-US-PALOALTO']},
+    {title:'Leading-Edge Foundry',color:'var(--lc-logic)',assets:['TSMC-TW-FAB18','TSMC-US-FAB21','INTEL-US-OREGON']},
+    {title:'Advanced Packaging (CoWoS)',color:'var(--lc-packaging)',assets:['TSMC-TW-COWOS','SKH-US-INDIANA']},
+    {title:'HBM Memory',color:'var(--lc-memory)',assets:['SKH-KR-M15','MICRON-US-BOISE','SAMSUNG-KR-P3']},
+    {title:'EUV Lithography (required throughout)',color:'var(--lc-lithography)',assets:['ASML-NL-VELDHOVEN','ZEISS-DE-OBERKOCHEN']},
+    {title:'AI Data Center + Power',color:'var(--lc-data)',assets:['MSFT-US-IOWA','POWER-US-TRANSFORMER','POWER-US-NOVA']},
+  ]},
+  'hbm':{label:'HBM supply chain',chain:[
+    {title:'HBM Production',color:'var(--lc-memory)',assets:['SKH-KR-M15','SKH-KR-M15X','SAMSUNG-KR-P3','MICRON-US-BOISE','CXMT-CN-HEFEI']},
+    {title:'US Packaging',color:'var(--lc-packaging)',assets:['SKH-US-INDIANA']},
+    {title:'EUV Required',color:'var(--lc-lithography)',assets:['ASML-NL-VELDHOVEN']},
+    {title:'Equipment Stack',color:'var(--lc-equipment)',assets:['AMAT-US-SANTACLARA','LAMRESEARCH-US-FREMONT','TEL-JP-TOKYO']},
+  ]},
+  'euv':{label:'EUV stack',chain:[
+    {title:'EUV System — sole supplier',color:'var(--lc-lithography)',assets:['ASML-NL-VELDHOVEN']},
+    {title:'EUV Optics — sole supplier',color:'var(--lc-lithography)',assets:['ZEISS-DE-OBERKOCHEN']},
+    {title:'Japanese Materials',color:'var(--lc-equipment)',assets:['JMFG-JP-PHOTORESIST']},
+    {title:'Fabs requiring EUV',color:'var(--lc-logic)',assets:['TSMC-TW-FAB18','TSMC-US-FAB21','SKH-KR-M15','INTEL-US-OREGON']},
+  ]},
+  'china':{label:'China domestic stack',chain:[
+    {title:'Foundry (7nm via DUV)',color:'var(--lc-logic)',assets:['SMIC-CN-SHANGHAI']},
+    {title:'HBM attempt',color:'var(--lc-memory)',assets:['CXMT-CN-HEFEI']},
+    {title:'AI Accelerator',color:'var(--lc-logic)',assets:['HUAWEI-CN-SHENZHEN']},
+    {title:'What China cannot access',color:'var(--lc-lithography)',assets:['ASML-NL-VELDHOVEN','ZEISS-DE-OBERKOCHEN']},
+  ]},
+  'datacenter':{label:'AI data center',chain:[
+    {title:'Hyperscaler / operator',color:'var(--lc-data)',assets:['MSFT-US-IOWA','GOOGLE-US-DATACENTER','AMAZON-US-DATACENTER']},
+    {title:'Accelerators required',color:'var(--lc-logic)',assets:['NVIDIA-US-SANTACLARA']},
+    {title:'Power constraints',color:'var(--lc-power)',assets:['POWER-US-TRANSFORMER','POWER-US-NOVA','POWER-NUCLEAR-US']},
+  ]}
 };
 
-function showDep(btn) {
-  document.querySelectorAll('.dep-btn').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  const key = btn?.dataset?.dep || 'nvidia-blackwell';
-  const chain = DEP_CHAINS[key];
-  if(!chain) return;
-
-  const assetMap = {};
-  allAssets.forEach(a => assetMap[a.id]=a);
-
-  const html = chain.chain.map((layer,i) => {
-    const assets = layer.assets.map(id=>assetMap[id]).filter(Boolean);
-    const arrow = i < chain.chain.length-1 ? `<div class="dep-arrow-row"><span class="dep-arrow">↓</span><span style="font-family:var(--mono);font-size:8px;color:var(--ink4)">depends on</span></div>` : '';
-    return `<div class="dep-layer" style="border-top-color:${layer.color};border-top-width:3px">
-      <div class="dep-layer-head" style="border-left-color:${layer.color};border-left-width:4px">
+function showDep(btn){
+  document.querySelectorAll('.dv-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const key=btn?.dataset?.dep||'nvidia-blackwell';
+  const chain=DEP_CHAINS[key];
+  if(!chain)return;
+  const aMap={};allAssets.forEach(a=>aMap[a.id]=a);
+  const html=chain.chain.map((layer,i)=>{
+    const assets=layer.assets.map(id=>aMap[id]).filter(Boolean);
+    const arrow=i<chain.chain.length-1?`<div class="dep-arrow-wrap"><span class="dep-arrow">↓</span><span class="dep-arrow-label">depends on</span></div>`:'';
+    return `<div class="dep-layer" style="border-top-color:${layer.color}">
+      <div class="dep-layer-head" style="border-left:3px solid ${layer.color}">
         <div class="dep-layer-title">${layer.title}</div>
         <div class="dep-layer-sub">${assets.length} asset${assets.length!==1?'s':''} mapped</div>
       </div>
-      ${assets.map(a=>`
-        <div class="dep-asset" onclick='showPanel(${JSON.stringify(a).replace(/'/g,"&#39;")});switchView("map")'>
-          <div class="dep-asset-name">${a.name}</div>
-          <div class="dep-asset-meta">${a.company} · ${a.country} · <span style="color:${LC[a.layer]||'#666'}">${LL[a.layer]||a.layer}</span> · <span style="color:var(--ink4)">Click for details →</span></div>
-        </div>
-      `).join('')}
+      ${assets.map(a=>`<div class="dep-asset" onclick="switchView('map');showPanel(${JSON.stringify(a).replace(/\/g,'\\').replace(/`/g,'\`').replace(/\${/g,'\${')})">
+        <div class="dep-asset-name">${a.name}</div>
+        <div class="dep-asset-meta">${a.company} · ${a.country} · <span style="color:${LC[a.layer]||'#666'}">${LL[a.layer]||a.layer}</span></div>
+      </div>`).join('')}
     </div>${arrow}`;
   }).join('');
-
-  document.getElementById('dep-graph').innerHTML = `<div style="max-width:640px;border:1px solid var(--border);border-radius:4px;overflow:hidden">${html}</div>`;
+  document.getElementById('dep-graph').innerHTML=`<div class="dep-chain">${html}</div>`;
 }
 
-// ──────────────────────────────────────────────────────────
-// COUNTRY VIEW
-// ──────────────────────────────────────────────────────────
-const COUNTRIES = [
-  { flag:'🇺🇸', name:'United States', color:'#1d4480',
-    controls:['EDA software (>90% — Synopsys, Cadence)','Semiconductor equipment (Applied, Lam, KLA)','AI accelerator design (Nvidia, Broadcom, Google)','HBM — Micron (~11%)','Jurisdictional reach via BIS/EAR export controls','Hyperscaler AI infrastructure'],
-    depends:['TSMC Taiwan (leading-edge foundry)','TSMC CoWoS packaging (Taiwan)','SK Hynix / Samsung HBM (South Korea)','ASML EUV lithography (Netherlands)','Japanese materials (photoresists, wafers)'] },
-  { flag:'🇹🇼', name:'Taiwan', color:'#2a8a5a',
-    controls:['TSMC — ~70% pure-play foundry revenue','~90% advanced logic sub-7nm (foundry)','Advanced packaging CoWoS (~85%)','Most advanced chip production at 3nm/2nm'],
-    depends:['ASML EUV (Netherlands — cannot produce frontier chips without it)','US EDA software (BIS jurisdiction)','US/Japanese semiconductor equipment','Japanese photoresists and materials'] },
-  { flag:'🇰🇷', name:'South Korea', color:'#8a2a4a',
-    controls:['SK Hynix — ~53% HBM','Samsung — ~35% HBM + DRAM + foundry','Combined ~88% of global HBM supply','DRAM and NAND flash concentration'],
-    depends:['ASML EUV (for HBM production — $7B+ order placed)','US semiconductor equipment','TSMC/Samsung packaging for some products','Co-qualification with Nvidia/AMD (US companies)'] },
-  { flag:'🇯🇵', name:'Japan', color:'#c84000',
-    controls:['>90% EUV photoresists (TOK, JSR, Shin-Etsu)','~51% silicon wafers (Shin-Etsu, SUMCO)','93% EUV mask blanks (AGC, Hoya)','Tokyo Electron — major equipment supplier','8 of 16 major semiconductor material categories'],
-    depends:['ASML EUV systems (Netherlands — Japan supplies key subsystems but not the whole)','US EDA for advanced chip design','Global fab customers for material sales'] },
-  { flag:'🇳🇱🇩🇪', name:'Netherlands / Germany', color:'#b33000',
-    controls:['ASML — 100% commercial EUV lithography','Carl Zeiss SMT — 100% EUV optics','TRUMPF — sole EUV laser supplier','The clearest technology monopoly in the AI stack'],
-    depends:['Distributed supply network across EU','US laser subcomponents','Global fab customers (TSMC, Samsung, SK Hynix, Intel, Micron)'] },
-  { flag:'🇨🇳', name:'China', color:'#606060',
-    controls:['SMIC — 7nm foundry via DUV multi-patterning','Huawei Ascend AI accelerators','CXMT — targeting HBM3 development','Domestic EDA (Primarius, Empyrean) at mature nodes','Largest AI compute demand base globally'],
-    depends:['EUV lithography (blocked — ASML cannot export to China)','Advanced semiconductor equipment (controlled)','HBM from SK Hynix / Samsung (controlled)','US EDA for advanced nodes (controlled)','Everything above the frontier it cannot access'] },
+// ── COUNTRIES ──
+const COUNTRIES=[
+  {flag:'🇺🇸',name:'United States',color:'#1d4480',critical:'Leading-edge fabrication',
+   controls:['EDA software (>90% — Synopsys, Cadence)','Semiconductor equipment (Applied, Lam, KLA)','AI accelerator design (Nvidia, Broadcom, Google TPU)','HBM — Micron (~11%)','Jurisdictional leverage via BIS/EAR export controls','Hyperscaler AI infrastructure ($100B+ annual capex)'],
+   depends:['Taiwan → leading-edge foundry and packaging (~90% sub-7nm)','South Korea → HBM (SK Hynix + Samsung ~88%)','Netherlands → EUV lithography (ASML sole supplier)','Japan → photoresists, wafers, equipment (TEL)']},
+  {flag:'🇹🇼',name:'Taiwan',color:'#2a8a5a',critical:'EUV lithography access',
+   controls:['TSMC ~70% pure-play foundry revenue','~90% advanced foundry sub-7nm (external customers)','Advanced packaging CoWoS (~85%)','3nm/2nm volume production capacity'],
+   depends:['Netherlands → ASML EUV (cannot make frontier chips without it)','United States → EDA software (BIS jurisdiction)','US/Japan → semiconductor equipment','Japan → photoresists and specialty materials']},
+  {flag:'🇰🇷',name:'South Korea',color:'#8a2a4a',critical:'EUV access for HBM expansion',
+   controls:['SK Hynix ~53% global HBM','Samsung ~35% HBM + DRAM + foundry','Combined ~88% global HBM supply','~71% global DRAM capacity'],
+   depends:['Netherlands → ASML EUV (for HBM production — $7B+ order placed)','United States → equipment, EDA','Co-qualification with Nvidia/AMD (US-headquartered)']},
+  {flag:'🇯🇵',name:'Japan',color:'#c84000',critical:'Export control alignment with US/NL',
+   controls:['>90% EUV photoresists (TOK, JSR, Shin-Etsu)','~51% silicon wafers (Shin-Etsu, SUMCO)','93% EUV mask blanks (AGC, Hoya)','Tokyo Electron — major coater/developer/etch supplier','8 of 16 major semiconductor material categories'],
+   depends:['ASML EUV systems (Japan supplies subsystems but not the whole)','Global fab customers for material exports','US equipment ecosystem for advanced fabs']},
+  {flag:'🇳🇱🇩🇪',name:'Netherlands / Germany',color:'#b33000',critical:'None — controls the key upstream node',
+   controls:['ASML — 100% commercial EUV lithography','Carl Zeiss SMT — 100% EUV optics','TRUMPF — sole EUV laser supplier','The clearest technology monopoly in the AI stack'],
+   depends:['Distributed EU supply network for ASML subcomponents','US laser subcomponents','Global fab customers for revenue']},
+  {flag:'🇨🇳',name:'China',color:'#606060',critical:'EUV lithography (blocked)',
+   controls:['SMIC 7nm via DUV multi-patterning','Huawei Ascend AI accelerators (inference-viable)','CXMT targeting HBM3 yields','Domestic EDA at mature nodes','Largest AI compute demand base globally'],
+   depends:['EUV (blocked — ASML cannot export to China)','Advanced equipment (controlled — Applied, Lam, KLA, TEL)','HBM from SK Hynix/Samsung (controlled)','US EDA for advanced nodes (controlled)']},
 ];
 
-function renderCountries() {
-  document.getElementById('country-grid').innerHTML = COUNTRIES.map(c => `
-    <div class="cty-card" style="border-top:3px solid ${c.color}">
-      <div class="cty-card-head" style="border-left-color:${c.color}">
-        <div class="cty-flag">${c.flag}</div>
-        <div class="cty-name">${c.name}</div>
+function renderCountries(){
+  document.getElementById('cv-grid').innerHTML=COUNTRIES.map(c=>`
+    <div class="cv-card" style="border-top:3px solid ${c.color}">
+      <div class="cv-card-head" style="border-left-color:${c.color}">
+        <div class="cv-flag">${c.flag}</div>
+        <div class="cv-name">${c.name}</div>
       </div>
-      <div class="cty-body">
-        <div class="cty-section">
-          <div class="cty-section-label">Controls / produces</div>
-          <div class="cty-items">${c.controls.map(x=>`<div class="cty-item">${x}</div>`).join('')}</div>
-        </div>
-        <div class="cty-section">
-          <div class="cty-section-label">Depends on (foreign chokepoints)</div>
-          <div class="cty-items">${c.depends.map(x=>`<div class="cty-dep-item">${x}</div>`).join('')}</div>
-        </div>
+      <div class="cv-body">
+        <div class="cv-sec"><div class="cv-sec-label controls">Controls / produces</div>${c.controls.map(x=>`<div class="cv-item">${x}</div>`).join('')}</div>
+        <div class="cv-sec"><div class="cv-sec-label depends">Depends on (foreign)</div>${c.depends.map(x=>`<div class="cv-dep-item">${x}</div>`).join('')}</div>
+        <div class="cv-critical">Critical dependency: ${c.critical}</div>
       </div>
     </div>`).join('');
 }
 
-// ──────────────────────────────────────────────────────────
-// MONITOR TOGGLE
-// ──────────────────────────────────────────────────────────
-function toggleMonitor() {
-  const b=document.getElementById('monitor-body');
-  const a=document.getElementById('mon-arrow');
-  b.classList.toggle('open');
-  a.textContent=b.classList.contains('open')?'▲':'▼';
-}
-
-// ──────────────────────────────────────────────────────────
-// FILTERS & SLIDER
-// ──────────────────────────────────────────────────────────
+// ── FILTERS ──
 document.getElementById('layer-pills').addEventListener('click',e=>{
-  const p=e.target.closest('.pill[data-layer]');
-  if(!p) return;
-  document.querySelectorAll('.pill[data-layer]').forEach(x=>x.classList.remove('active'));
-  p.classList.add('active');
-  activeLayer=p.dataset.layer;
-  renderMarkers();
-  if(currentView==='pipeline') renderPipeline();
+  const p=e.target.closest('.fpill[data-layer]');if(!p)return;
+  document.querySelectorAll('.fpill[data-layer]').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');activeLayer=p.dataset.layer;
+  renderMarkers();if(currentView==='pipeline')renderPipeline();
 });
+document.querySelectorAll('.fpill-status').forEach(p=>p.addEventListener('click',()=>{
+  document.querySelectorAll('.fpill-status').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');activeStatus=p.dataset.status;renderMarkers();
+}));
 
-document.getElementById('status-pills').addEventListener('click',e=>{
-  const p=e.target.closest('.pill[data-status]');
-  if(!p) return;
-  document.querySelectorAll('.pill[data-status]').forEach(x=>x.classList.remove('active'));
-  p.classList.add('active');
-  activeStatus=p.dataset.status;
-  renderMarkers();
-});
-
-const slider = document.getElementById('time-slider');
-const timeLabel = document.getElementById('time-label');
-const timeIndicator = document.getElementById('time-indicator');
-const tiYear = document.getElementById('ti-year');
-
+// Debounced slider
+const slider=document.getElementById('time-slider');
+const timeVal=document.getElementById('time-val');
 slider.addEventListener('input',()=>{
-  activeYear = parseFloat(slider.value);
-  const yr = activeYear % 1 === 0 ? activeYear : activeYear.toFixed(1);
-  timeLabel.textContent = yr;
-  tiYear.textContent = yr;
-  timeIndicator.classList.add('visible');
-  renderMarkers();
-  if(currentView==='pipeline') renderPipeline();
+  activeYear=parseFloat(slider.value);
+  timeVal.textContent=activeYear%1===0?activeYear:activeYear.toFixed(1);
+  clearTimeout(sliderTimer);
+  sliderTimer=setTimeout(()=>{renderMarkers();if(currentView==='pipeline')renderPipeline();},80);
 });
-slider.addEventListener('mouseup',()=>setTimeout(()=>timeIndicator.classList.remove('visible'),1500));
 
-// ──────────────────────────────────────────────────────────
-// MAP INIT
-// ──────────────────────────────────────────────────────────
-function initMap() {
-  if (typeof maplibregl === 'undefined') {
-    document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--mono);font-size:11px;color:var(--ink3);flex-direction:column;gap:8px"><div>Map requires internet connection to load MapLibre GL</div><div style="font-size:9px;opacity:.6">Deploy to GitHub Pages to view the full interactive map</div></div>';
-    return;
-  }
-  const map = new maplibregl.Map({
-    container:'map', style:getMapStyle(), center:[22,28], zoom:2.1,
-    attributionControl:false
-  });
-  window._map = map;
-  map.on('load', renderMarkers);
-  map.addControl(new maplibregl.NavigationControl({showCompass:false}), 'top-right');
+// ── STATS ──
+function renderStats(assets){
+  const layers=new Set(assets.map(a=>a.layer)).size;
+  const economies=new Set(assets.map(a=>a.country)).size;
+  document.getElementById('nav-stats').textContent=`${assets.length} assets · ${layers} layers`;
+  document.getElementById('head-meta').textContent=`${assets.length} assets · ${layers} layers · ${economies} economies · Updated August 2026`;
 }
 
-// ──────────────────────────────────────────────────────────
-// BOOT
-// ──────────────────────────────────────────────────────────
-allAssets = [{"id":"ASML-NL-VELDHOVEN","name":"ASML EUV Production \u2014 Veldhoven","company":"ASML","country":"Netherlands","city":"Veldhoven","lat":51.418,"lon":5.458,"layer":"lithography","technology":"EUV lithography systems (NXE, NXE:3800E, High-NA EUV)","role":"Sole commercial producer of EUV lithography systems required for sub-3nm chip manufacturing. No commercial alternative exists.","status":"operational","current_capacity":"60+ EUV systems/year (guidance: raising 30% annually for 2 years)","capacity_unit":"systems/year","policy_exposure":"Dutch export licensing controls EUV exports. Zero EUV systems shipped to China. US-Dutch allied control alignment. High-NA EUV ($400M/unit) not yet in volume production.","dependencies_upstream":["Carl Zeiss SMT (EUV optics \u2014 100% concentration)","TRUMPF (EUV laser \u2014 sole supplier)","Cymer/ASML San Diego (light source)","300+ specialist suppliers across EU"],"dependencies_downstream":["TSMC","Samsung","SK Hynix (HBM EUV)","Intel","Micron"],"time_to_relief":"No substitution visible. ASML itself is supply-constrained, raising capacity 30%/yr to meet demand.","constraint_status":"binding","durability":"very_high","confidence":"high","source_url":"https://www.asml.com/en/investors/annual-report","source_title":"ASML Annual Report 2025 + Q1 2026 earnings","source_type":"primary","timeline":{"operational_since":2010,"constraint_relief":null,"note":"Ongoing production. Capacity raising 30%/yr."}},{"id":"ZEISS-DE-OBERKOCHEN","name":"Carl Zeiss SMT \u2014 EUV Optics","company":"Carl Zeiss SMT","country":"Germany","city":"Oberkochen","lat":48.783,"lon":10.101,"layer":"lithography","technology":"EUV optics and optical systems for ASML EUV machines","role":"Sole supplier of EUV optical systems integrated into every ASML EUV machine. The optics chokepoint within the chokepoint.","status":"operational","policy_exposure":"German export control jurisdiction. Key node in US-NL-DE allied equipment coalition.","dependencies_upstream":["Specialty glass and optical materials"],"dependencies_downstream":["ASML Veldhoven"],"constraint_status":"binding","durability":"very_high","confidence":"high","source_url":"https://www.zeiss.com/semiconductor-manufacturing-technology/en/home.html","source_title":"Carl Zeiss SMT corporate","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":null,"note":"Long-operational. Sole EUV optics supplier."}},{"id":"TSMC-TW-FAB18","name":"TSMC Fab 18 \u2014 Tainan","company":"TSMC","country":"Taiwan","city":"Tainan","lat":22.938,"lon":120.203,"layer":"logic","technology":"3nm (N3E/N3P), 2nm (N2) \u2014 leading-edge logic","role":"TSMC's primary advanced-node logic fab complex. Produces majority of frontier AI accelerators including Nvidia Blackwell/Vera Rubin, Apple M-series, AMD Zen 5. 3nm hit 28% of TSMC wafer revenue in Q4 2025.","status":"operational","current_capacity":"~90,000\u2013100,000 wafers/month at 2nm across Taiwan facilities (early 2026 estimate)","capacity_unit":"wafers/month","policy_exposure":"Taiwan contingency risk. No direct export control jurisdiction over TSMC \u2014 but TSMC relies on ASML EUV (Dutch controls), US EDA software (BIS jurisdiction), and US semiconductor equipment (BIS).","dependencies_upstream":["ASML EUV","Applied Materials","Lam Research","KLA","Synopsys/Cadence EDA","Japanese photoresists (TOK, JSR)","Air Liquide/specialty gases","Shin-Etsu silicon wafers"],"dependencies_downstream":["Nvidia","Apple","AMD","Google (TPUs)","Qualcomm","TSMC CoWoS packaging"],"time_to_relief":"2nm fully booked into 2028 per TSMC investor briefings. No near-term capacity relief for new customers.","constraint_status":"tight","durability":"high","confidence":"high","source_url":"https://investor.tsmc.com/en/quarterly-results","source_title":"TSMC Q4 2025 earnings + investor briefings 2026","source_type":"primary","timeline":{"operational_since":2022,"volume_production":2022,"constraint_relief":null,"note":"3nm operational 2022, 2nm Q4 2025. Booked into 2028."}},{"id":"TSMC-TW-COWOS","name":"TSMC CoWoS Advanced Packaging \u2014 Taiwan","company":"TSMC","country":"Taiwan","city":"Hsinchu / Taichung","lat":24.802,"lon":120.972,"layer":"packaging","technology":"CoWoS-S, CoWoS-L (advanced AI chip packaging integrating GPU + HBM)","role":"Primary advanced packaging for AI accelerators. Integrates GPU die with HBM stack. Currently the binding constraint in AI hardware supply per Epoch AI and industry analysts. Nvidia holds estimated ~60% of CoWoS-S/L capacity.","status":"operational","current_capacity":"~1M wafers demand in 2026 (Silicon Analysts June 2026, sell-side estimate \u2014 treat as directional); CoWoS-S $750/chip, CoWoS-L $1,100/chip","capacity_unit":"wafer-equivalents/year","policy_exposure":"Taiwan concentration risk. CoWoS expansion partly in US (Arizona) but minimal volume before 2028.","dependencies_upstream":["Ajinomoto ABF substrate film (dominant market position)","TSMC leading-edge foundry","SK Hynix/Samsung HBM","Specialty interconnect materials"],"dependencies_downstream":["Nvidia","Google","AMD","Microsoft (Azure AI)"],"time_to_relief":"Lead time 50\u201378 weeks (Silicon Analysts June 2026, directional). TSMC expanding: marginal relief late 2026, meaningful 2027\u201328 as new CoWoS lines qualify. Demand also expanding.","constraint_status":"binding","durability":"high","confidence":"moderate","source_url":"https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/cowos.htm","source_title":"TSMC 3DFabric CoWoS + Silicon Analysts June 2026","source_type":"primary+specialist","timeline":{"operational_since":2023,"constraint_relief":2027.5,"note":"Binding now. Meaningful relief 2027-28 as new lines qualify."}},{"id":"TSMC-US-FAB21","name":"TSMC Fab 21 \u2014 Phoenix, Arizona","company":"TSMC","country":"United States","city":"Phoenix, Arizona","lat":33.678,"lon":-112.101,"layer":"logic","technology":"4nm (Phase 1, in production), 3nm/2nm (Phase 2, targeted H2 2027)","role":"TSMC's first US advanced-logic fab. Phase 1 (4nm) in volume production since 2025. Phase 2 (3nm/2nm) is primary US reshoring of leading-edge foundry capacity. Total US commitment $265B.","status":"operational","announced_capacity":"Phase 2: 3nm/2nm targeted H2 2027","policy_exposure":"Primary beneficiary of CHIPS Act funding. US domestic supply chain initiative. Advanced-node qualification with major customers still required for Phase 2.","dependencies_upstream":["ASML EUV (must be imported)","US and global equipment suppliers","Workforce (ongoing challenge)","Power supply (Phoenix water/power constraints)"],"dependencies_downstream":["Apple (confirmed Phase 1 customer)","Nvidia, AMD, other Phase 2 customers (qualification ongoing)"],"time_to_relief":"Phase 1 (4nm): operational. Phase 2 (3nm/2nm): H2 2027 earliest, full qualification 12\u201318 months after. Arizona estimated <5% of Taiwan advanced-node capacity before 2028 (denominator: advanced-node wafer starts \u2014 exact figure not publicly disclosed).","constraint_status":"ramp","durability":"high","confidence":"high","source_url":"https://investor.tsmc.com/en/quarterly-results","source_title":"TSMC investor briefings 2026 + CHIPS Act filings","source_type":"primary","timeline":{"announced":2021.0,"construction":2022.5,"equipment":2024.0,"qualification":2024.5,"volume_production":2025.0,"phase2_volume":2027.5,"constraint_relief":2028.0,"note":"Phase 1 (4nm) operational 2025. Phase 2 (2nm) H2 2027, full qual 2028."}},{"id":"SKH-KR-M15","name":"SK Hynix M15 \u2014 Cheongju (HBM)","company":"SK Hynix","country":"South Korea","city":"Cheongju","lat":36.641,"lon":127.489,"layer":"memory","technology":"HBM3E, HBM4 \u2014 high-bandwidth memory for AI accelerators","role":"SK Hynix's primary HBM production facility. SK Hynix holds estimated ~53% of global HBM market and supplies approximately two-thirds of Nvidia's HBM4. Entire 2026 HBM output allocated under non-cancellable contracts.","status":"operational","current_capacity":"HBM4 yield: ~80% as of August 2026 (Silicon Analysts; directional estimate)","policy_exposure":"South Korea export control alignment with US/allies. BIS controls on HBM exports to China are a critical part of export control architecture \u2014 Korean cooperation essential.","dependencies_upstream":["ASML EUV (for HBM production \u2014 $7B+ order placed)","Samsung/SMIC alternative packaging (none credible at scale)","TSV processing equipment"],"dependencies_downstream":["Nvidia (two-thirds of HBM4)","AMD","Google"],"time_to_relief":"2026 sold out. 2027 already booked. SK Hynix CEO: 2027 will be worst supply shortage in memory industry history. Meaningful new capacity: 2028+ from M15X/Y2 expansion.","constraint_status":"binding","durability":"high","confidence":"moderate","source_url":"https://www.skhynix.com/eng/ir/quarterlyEarnings.do","source_title":"SK Hynix Q1 2026 earnings + CEO public statement","source_type":"primary","timeline":{"operational_since":2020,"constraint_relief":null,"note":"Operational. 2026 fully allocated. Relief only from M15X expansion."}},{"id":"SKH-KR-M15X","name":"SK Hynix M15X \u2014 Cheongju (New HBM)","company":"SK Hynix","country":"South Korea","city":"Cheongju","lat":36.638,"lon":127.492,"layer":"memory","technology":"HBM4, HBM4E \u2014 next-generation HBM expansion","role":"Major capacity expansion for HBM. Part of SK Hynix's +54 trillion KRW (~$39B) investment across Y2 and M17 fabs. Primary future relief for HBM supply constraint.","status":"construction","timeline_volume_production":"Initial production February 2027 (Y1 phase); full ramp 12\u201318 months after","policy_exposure":"Same as M15. BIS HBM export control cooperation essential.","dependencies_upstream":["ASML EUV","Memory-grade silicon wafers","TSV/packaging equipment"],"time_to_relief":"Initial production Feb 2027 \u2192 full ramp 2028. M17 expansion: Dec 2028. Y2: Jun 2029. Constraint material relief: 2028\u20132029.","constraint_status":"construction","confidence":"high","source_url":"https://www.skhynix.com/eng/ir/quarterlyEarnings.do","source_title":"SK Hynix Q1 2026 earnings + capex announcements","source_type":"primary","timeline":{"announced":2024.0,"construction":2025.0,"equipment":2025.5,"qualification":2026.5,"volume_production":2027.17,"constraint_relief":2028.0,"note":"Initial production Feb 2027. Full ramp 2028. M17: Dec 2028. Y2: Jun 2029."}},{"id":"SAMSUNG-KR-P3","name":"Samsung Semiconductor \u2014 Pyeongtaek P3 (HBM/Logic)","company":"Samsung","country":"South Korea","city":"Pyeongtaek","lat":36.998,"lon":127.053,"layer":"memory","technology":"HBM3E, HBM4 (memory); SF2/SF3 (logic foundry)","role":"Samsung's flagship fab complex. HBM4 yield improved from <60% at Feb 2026 launch to ~80% by August 2026 (Silicon Analysts; directional). Priced ~30% below SK Hynix to win H20 and B200 supply slots.","status":"operational","policy_exposure":"South Korea \u2014 allied with US. Foundry arm competes with TSMC for AI chip customers.","dependencies_upstream":["ASML EUV","Process equipment","Specialty chemicals"],"dependencies_downstream":["Nvidia","AMD","Google","Various foundry customers"],"time_to_relief":"HBM: ramping through 2026\u201327. Foundry: 2nm (SF2) qualification ongoing; limited external capacity.","constraint_status":"ramp","confidence":"moderate","source_url":"https://semiconductor.samsung.com/us/consumer-storage/internal-ssd/","source_title":"Samsung semiconductor investor relations + Silicon Analysts August 2026","source_type":"primary+specialist","timeline":{"operational_since":2023,"constraint_relief":2027.0,"note":"HBM4 ramping. Yield improved to ~80% by Aug 2026. Meaningful volume 2027."}},{"id":"MICRON-US-BOISE","name":"Micron Technology \u2014 Boise, Idaho (HBM)","company":"Micron","country":"United States","city":"Boise, Idaho","lat":43.615,"lon":-116.202,"layer":"memory","technology":"HBM3E, HBM4 \u2014 AI memory","role":"US-based HBM producer. Grown from 2% HBM market share (2023) to approximately 11% (2025\u201326). Began shipping HBM4 for Nvidia Vera Rubin in early 2026. Provides US domestic HBM supply \u2014 strategically significant for export control architecture.","status":"operational","announced_capacity":"$3.87B advanced packaging plant announced in Indiana (SK Hynix partnership noted separately)","policy_exposure":"US company \u2014 directly subject to BIS export controls. Provides US domestic alternative to Korean HBM. CHIPS Act recipient.","dependencies_upstream":["ASML EUV","Semiconductor equipment","Silicon wafers"],"dependencies_downstream":["Nvidia (Vera Rubin HBM4 supplier)","Microsoft","Others"],"time_to_relief":"Ramping. Meaningful additional capacity from new Idaho fabs: 2027\u20132028.","constraint_status":"ramp","confidence":"high","source_url":"https://investors.micron.com/","source_title":"Micron investor relations + Q2 FY2026 earnings","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":2027.5,"note":"HBM4 shipping for Vera Rubin early 2026. New Idaho capacity 2027-28."}},{"id":"AMAT-US-SANTACLARA","name":"Applied Materials \u2014 Santa Clara (Equipment)","company":"Applied Materials","country":"United States","city":"Santa Clara, California","lat":37.387,"lon":-121.973,"layer":"equipment","technology":"CVD, PVD, ALD deposition; CMP; epitaxy; metrology","role":"World's largest semiconductor equipment company by revenue. Deposition and materials engineering equipment is required at every leading-edge node. Subject to BIS export controls \u2014 Applied Materials sales to China require licenses for advanced-node equipment.","status":"operational","policy_exposure":"US company. BIS export controls apply to advanced-node equipment. US-origin technology triggers FPDP jurisdiction. Critical node in US-NL-JP allied equipment control coalition.","dependencies_downstream":["TSMC","Samsung","SK Hynix","Intel","Micron","SMIC (limited/licensed)"],"constraint_status":"non-binding","confidence":"high","source_url":"https://ir.appliedmaterials.com/","source_title":"Applied Materials investor relations","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational equipment company."}},{"id":"LAMRESEARCH-US-FREMONT","name":"Lam Research \u2014 Fremont, California (Equipment)","company":"Lam Research","country":"United States","city":"Fremont, California","lat":37.548,"lon":-121.989,"layer":"equipment","technology":"Etch (plasma, DRIE); thin film deposition (ALD, CVD); cleaning","role":"Dominant etch and deposition equipment supplier. Etch steps multiply at advanced nodes \u2014 Lam's equipment is required at every leading-edge fab. BIS export controls cover Lam equipment for advanced-node applications in China.","status":"operational","policy_exposure":"US company. BIS jurisdiction. Advanced packaging revenue outlook raised from >40% to >70% YoY growth (current fiscal year).","constraint_status":"non-binding","confidence":"high","source_url":"https://investor.lamresearch.com/","source_title":"Lam Research investor relations + FY2026 guidance","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational equipment company."}},{"id":"KLA-US-MILPITAS","name":"KLA Corporation \u2014 Milpitas, California (Inspection)","company":"KLA","country":"United States","city":"Milpitas, California","lat":37.432,"lon":-121.907,"layer":"equipment","technology":"Process control, inspection, and metrology for semiconductor manufacturing","role":"Dominant inspection and metrology equipment supplier. Detects defects at atomic scales \u2014 required at every advanced-node fab. No chip production at leading-edge nodes is viable without process control at KLA's capability level.","status":"operational","policy_exposure":"US company. BIS export controls apply. US-origin equipment triggering FPDP reach.","constraint_status":"non-binding","confidence":"high","source_url":"https://ir.kla.com/","source_title":"KLA investor relations","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational equipment company."}},{"id":"TEL-JP-TOKYO","name":"Tokyo Electron \u2014 Tokyo (Equipment)","company":"Tokyo Electron (TEL)","country":"Japan","city":"Tokyo / Nirasaki","lat":35.689,"lon":139.692,"layer":"equipment","technology":"Coater/developer, CVD, etch, cleaning equipment for semiconductor fabs","role":"Japan's largest semiconductor equipment company and globally essential supplier. TEL's coater/developer systems are required for lithography process steps at every advanced fab. Part of the US-NL-JP equipment coalition \u2014 Japan's October 2023 export controls covering 23 equipment categories were essential to closing circumvention gaps.","status":"operational","policy_exposure":"Japanese export control jurisdiction (October 2023 \u2014 23 equipment categories). Essential node in allied control coalition. US-Japan coordination extends effective BIS reach through Japanese equipment controls.","dependencies_downstream":["TSMC","Samsung","SK Hynix","Intel","SMIC (controlled)"],"constraint_status":"non-binding","confidence":"high","source_url":"https://www.tel.com/ir/","source_title":"Tokyo Electron investor relations + Japan METI export controls October 2023","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational. Japan export controls Oct 2023."}},{"id":"JMFG-JP-PHOTORESIST","name":"Japan Materials \u2014 EUV Photoresists (TOK, JSR, Shin-Etsu)","company":"Multiple (TOK / JSR / Shin-Etsu Chemical)","country":"Japan","city":"Kawasaki / Tokyo / Chiyoda","lat":35.53,"lon":139.703,"layer":"equipment","technology":"EUV photoresists, silicon wafers, EUV mask blanks (AGC/Hoya), specialty chemicals","role":"Japan controls >90% of EUV photoresists (TOK, JSR, Shin-Etsu) and ~51% of global silicon wafers (Shin-Etsu, SUMCO). AGC and Hoya hold a 93% duopoly on EUV mask blanks. These materials cannot be substituted on short timelines \u2014 they are as much a chokepoint as the equipment itself, but receive less policy attention.","status":"operational","policy_exposure":"Japanese export control jurisdiction. Japan's materials controls complement Dutch/US equipment controls. China's domestic photoresist industry is making progress at mature nodes but not yet at EUV-grade.","constraint_status":"non-binding","durability":"high","confidence":"high","source_url":"https://www.meti.go.jp/english/press/2023/0123_002.html","source_title":"Japan METI + individual company reports","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational materials cluster."}},{"id":"SYNOPSYS-US-SUNNYVALE","name":"Synopsys \u2014 Sunnyvale (EDA Software)","company":"Synopsys","country":"United States","city":"Sunnyvale, California","lat":37.368,"lon":-122.036,"layer":"logic","technology":"EDA software \u2014 chip design tools, verification, process design kits","role":"One of two dominant EDA software companies (with Cadence). US EDA firms control >90% of the market for advanced chip design software. Switching EDA tools requires years of re-tooling \u2014 the switching cost is itself a chokepoint. BIS export controls on EDA for advanced-node chip design in China are in effect.","status":"operational","policy_exposure":"US company. BIS EDA export controls. US jurisdiction over EDA software provides a non-physical chokepoint that applies wherever EDA is used \u2014 including by chip designers outside the US who design chips later manufactured at controlled foundries.","constraint_status":"non-binding","durability":"very_high","confidence":"high","source_url":"https://investor.synopsys.com/","source_title":"Synopsys investor relations + BIS Federal Register","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Software \u2014 no physical timeline."}},{"id":"NVIDIA-US-SANTACLARA","name":"Nvidia \u2014 Santa Clara (Accelerator Design)","company":"Nvidia","country":"United States","city":"Santa Clara, California","lat":37.371,"lon":-121.961,"layer":"logic","technology":"AI accelerator design \u2014 Blackwell (B200), Vera Rubin (2026), Rubin Ultra (2027)","role":"Dominant AI GPU designer. Nvidia designs but does not manufacture chips \u2014 manufacturing at TSMC, packaging at TSMC CoWoS, memory from SK Hynix/Micron/Samsung. Holds estimated ~60% of TSMC CoWoS capacity in 2026. Vera Rubin entered full production May 2026.","status":"operational","policy_exposure":"H200 exports to China subject to BIS case-by-case licensing (Jan 2026). H20 previously approved for China. Vera Rubin (more advanced) not approved for China. $500B announced US AI infrastructure investment.","dependencies_upstream":["TSMC logic (sole foundry for leading AI GPUs)","TSMC CoWoS packaging","SK Hynix/Samsung/Micron HBM"],"constraint_status":"non-binding","confidence":"high","source_url":"https://investor.nvidia.com/","source_title":"Nvidia Q1 FY2027 earnings + Nvidia Newsroom May 2026","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":null,"note":"Design company. Vera Rubin in production May 2026."}},{"id":"CXMT-CN-HEFEI","name":"ChangXin Memory (CXMT) \u2014 Hefei","company":"ChangXin Memory Technologies","country":"China","city":"Hefei, Anhui","lat":31.861,"lon":117.226,"layer":"memory","technology":"DRAM; targeting HBM3 commercial yields 2026","role":"China's primary domestic DRAM and HBM development effort. Targeting HBM3 commercial yields in 2026. Currently 2\u20133 generations behind SK Hynix frontier (HBM4/4E at ~80% yield). Progress is real but not yet demonstrated at commercial scale.","status":"ramp","policy_exposure":"Subject to US export controls on HBM and advanced DRAM. BIS entity-list status restricts equipment supply. China domestic memory effort \u2014 strategic priority for Beijing.","dependencies_upstream":["DUV lithography (EUV unavailable)","Domestic and restricted foreign equipment","Memory packaging"],"time_to_relief":"HBM3 yields by end-2026 possible but unconfirmed at commercial scale. 2\u20133 generation gap to current SK Hynix frontier (HBM4). Commercial supply of China-domestic HBM at meaningful scale: 2027\u20132028 at earliest.","constraint_status":"ramp","confidence":"directional","source_url":"https://www.cxmt.com/","source_title":"CXMT corporate + SemiAnalysis reporting","source_type":"specialist","timeline":{"announced":2023.0,"construction":2024.0,"equipment":2025.0,"qualification":2026.0,"volume_production":2027.0,"constraint_relief":2028.0,"note":"HBM3 yields targeted end-2026. Commercial scale uncertain. 2-3 gen behind frontier."}},{"id":"SMIC-CN-SHANGHAI","name":"SMIC \u2014 Shanghai (Advanced Foundry)","company":"Semiconductor Manufacturing International Corporation","country":"China","city":"Shanghai","lat":31.199,"lon":121.397,"layer":"logic","technology":"7nm via DUV multi-patterning; older nodes at scale","role":"China's most advanced chip foundry. Produces 7nm chips using DUV multi-patterning \u2014 technically viable but at higher cost and likely lower yield than EUV-based production. Manufactures Huawei Ascend AI accelerators. Cannot access EUV lithography (Dutch/US controls holding).","status":"operational","policy_exposure":"On BIS Entity List. Restricted access to advanced equipment and EUV. DUV multi-patterning is SMIC's workaround \u2014 produces 7nm but cannot economically reach sub-3nm without EUV.","dependencies_upstream":["DUV lithography (ASML NXT:2000, controlled)","Restricted equipment supply","Domestic equipment alternatives (NAURA, AMEC \u2014 progress at mature nodes)"],"dependencies_downstream":["Huawei (primary customer for advanced nodes)","Domestic chip designers"],"time_to_relief":"For China: SMIC represents domestic partial substitution. Cannot match TSMC economics at frontier nodes without EUV access.","constraint_status":"operational","confidence":"high","source_url":"https://www.smics.com/en/site/company_ir","source_title":"SMIC investor relations + BIS Entity List","source_type":"primary","timeline":{"operational_since":2004,"constraint_relief":null,"note":"7nm via DUV operational. No EUV access. Not a near-term relief for China."}},{"id":"INTEL-US-OREGON","name":"Intel Fab \u2014 Hillsboro, Oregon (18A)","company":"Intel","country":"United States","city":"Hillsboro, Oregon","lat":45.523,"lon":-122.99,"layer":"logic","technology":"Intel 18A (1.8nm-class) \u2014 backside power, RibbonFET gate-all-around","role":"Intel's leading-edge process for external foundry customers. Intel 18A is in risk production 2026. Represents the most credible alternative to TSMC for advanced-node external foundry work \u2014 but not yet in high-volume manufacturing for AI accelerators. AMD announced split of some 2nm orders to Samsung, not Intel, in May 2026.","status":"ramp","policy_exposure":"CHIPS Act primary recipient. US domestic advanced foundry \u2014 strategic objective. Key question: can Intel achieve competitive yields at 18A for external AI accelerator customers?","dependencies_upstream":["ASML EUV","Applied Materials, Lam, KLA","Synopsys/Cadence EDA"],"time_to_relief":"High-volume manufacturing at 18A for external customers: 2027+ depending on yield progress. Intel foundry previously missed multiple node timelines \u2014 confidence is moderate.","constraint_status":"ramp","confidence":"moderate","source_url":"https://www.intel.com/content/www/us/en/foundry/overview.html","source_title":"Intel Foundry investor day 2026 + earnings","source_type":"primary","timeline":{"operational_since":1990,"volume_production":2026.5,"constraint_relief":2027.5,"note":"18A risk production 2026. HVM for external customers 2027+. Yield progress uncertain."}},{"id":"MSFT-US-IOWA","name":"Microsoft Data Center \u2014 Ames, Iowa","company":"Microsoft","country":"United States","city":"Ames, Iowa","lat":42.034,"lon":-93.62,"layer":"data_center","technology":"Large-scale AI training and inference cluster","role":"Representative of US hyperscaler AI data center expansion. Microsoft has committed $80B+ in data center investment in FY2025 alone. Iowa and other Midwest locations chosen partly for power availability and land cost.","status":"operational","policy_exposure":"US infrastructure. Power availability is primary constraint \u2014 grid interconnection timelines and transformer procurement.","dependencies_upstream":["Nvidia accelerators (CoWoS + HBM dependent)","Power supply / grid interconnection","Cooling infrastructure"],"constraint_status":"operational","confidence":"high","source_url":"https://news.microsoft.com/source/features/ai/microsoft-build-2025-ai-infrastructure/","source_title":"Microsoft data center announcements 2025\u20132026","source_type":"tier4","timeline":{"operational_since":2023,"constraint_relief":null,"note":"Operational data center cluster."}},{"id":"GOOGLE-US-DATACENTER","name":"Google / DeepMind AI Infrastructure \u2014 US (Multiple)","company":"Google / Alphabet","country":"United States","city":"Multiple (Mayes County OK, Lenoir NC, etc.)","lat":36.3,"lon":-95.618,"layer":"data_center","technology":"TPU v5/v6 clusters, AI training infrastructure","role":"Google operates some of the largest AI training clusters globally using custom TPUs (manufactured at TSMC). $75B+ data center capex committed for 2025. Google designs its own AI accelerators \u2014 reducing dependence on Nvidia but not on TSMC foundry or HBM supply.","status":"operational","policy_exposure":"US infrastructure. Google's TPU design capability is a strategic asset but foundry dependence on TSMC remains.","dependencies_upstream":["TSMC logic (TPU manufacturing)","TSMC/Samsung HBM","Power supply"],"constraint_status":"operational","confidence":"high","source_url":"https://abc.xyz/investor/","source_title":"Alphabet Q4 2025 earnings","source_type":"primary","timeline":{"operational_since":2010,"constraint_relief":null,"note":"Operational. $75B+ capex 2025."}},{"id":"ABUDHABI-UAE-MGXAI","name":"MGX / G42 AI Infrastructure \u2014 Abu Dhabi","company":"MGX / G42","country":"United Arab Emirates","city":"Abu Dhabi","lat":24.453,"lon":54.377,"layer":"data_center","technology":"Large-scale AI data center and compute infrastructure","role":"UAE sovereign wealth-backed AI compute buildout. Microsoft partnership with G42 for AI infrastructure. UAE becoming a significant AI compute geography \u2014 partly enabled by energy availability and government investment. Geopolitically significant: US scrutiny of UAE AI chip access due to China ties.","status":"operational","policy_exposure":"US export controls on Nvidia chips to UAE subject to end-use monitoring. UAE-China technology ties are a US policy concern. UAE's AI ambitions require sustained access to advanced chips.","dependencies_upstream":["Nvidia accelerators (US export control conditions)","Power supply (gas-fired, abundant)"],"constraint_status":"operational","confidence":"moderate","source_url":"https://news.microsoft.com/2024/04/15/microsoft-announces-expansion-of-ai-and-cloud-initiative-in-the-uae/","source_title":"Microsoft G42 partnership announcement + Reuters","source_type":"tier4","timeline":{"operational_since":2024,"constraint_relief":null,"note":"Operational. US export control conditions apply."}},{"id":"POWER-US-TRANSFORMER","name":"US Grid Transformer Constraint","company":"Multiple (Siemens, ABB, Hitachi Energy, SPX Transformer)","country":"United States","city":"Distributed","lat":38.895,"lon":-97.0,"layer":"power","technology":"High-voltage power transformers for data center grid interconnection","role":"Grid transformers are the binding infrastructure constraint for new US data center connections. Lead times of 1\u20132+ years have become a primary bottleneck for new AI data center capacity. Unlike chip fabs, transformer capacity does not respond to capital on short timelines. CSIS has explicitly identified grid infrastructure as a binding AI deployment constraint.","status":"operational","policy_exposure":"US domestic infrastructure. Limited by manufacturing capacity (primarily US plants of Siemens, ABB, Hitachi Energy), steel supply, and skilled labor \u2014 not export controls.","dependencies_upstream":["Silicon steel (grain-oriented electrical steel \u2014 GOES)","Copper windings","Skilled labor"],"dependencies_downstream":["All new large-scale AI data center construction in US"],"time_to_relief":"Lead times 1\u20132+ years. New manufacturing capacity: multi-year permitting and construction. Policy-responsive but not on short timelines.","constraint_status":"tight","durability":"growing","confidence":"high","source_url":"https://www.csis.org/analysis/powering-innovation-data-centers-compute-and-us-competitiveness","source_title":"CSIS Wadhwani Center 'Powering Innovation' 2026","source_type":"institutional","timeline":{"operational_since":1990,"constraint_relief":2028.0,"note":"Lead times 1-2+ years. New capacity multi-year. Policy-dependent."}},{"id":"POWER-US-NOVA","name":"Northern Virginia Data Center Corridor \u2014 Power Constraint","company":"Multiple (AWS, Microsoft, Google, Equinix)","country":"United States","city":"Northern Virginia (Ashburn / Loudoun County)","lat":39.043,"lon":-77.487,"layer":"power","technology":"Grid interconnection constraints for world's largest data center cluster","role":"Northern Virginia hosts the world's largest concentration of data centers. Grid interconnection queues have become multi-year \u2014 new data center projects face 3\u20137 year waits for grid connections in some cases. This is the clearest current example of power becoming a binding AI deployment constraint. Not a chip problem \u2014 a grid problem.","status":"operational","policy_exposure":"US regulatory/permitting constraints. Dominion Energy territory. State-level permitting reform underway. Not responsive to federal chip policy.","time_to_relief":"Interconnection queue reform: policy-dependent, 2\u20135 year timeline. New transmission: 5\u201310 years. Nuclear/gas behind-the-meter: 2\u20135 years depending on project.","constraint_status":"tight","durability":"growing","confidence":"high","source_url":"https://www.csis.org/analysis/powering-innovation-data-centers-compute-and-us-competitiveness","source_title":"CSIS Wadhwani Center 'Powering Innovation' 2026 + Dominion Energy filings","source_type":"institutional","timeline":{"operational_since":2000,"constraint_relief":2030.0,"note":"Interconnection queue 3-7+ years. Reform underway but slow."}},{"id":"AMAZON-US-DATACENTER","name":"Amazon Web Services \u2014 AI Infrastructure (US)","company":"Amazon / AWS","country":"United States","city":"Multiple (Virginia, Oregon, Ohio)","lat":39.103,"lon":-77.567,"layer":"data_center","technology":"Trainium/Inferentia custom AI chips + Nvidia clusters","role":"AWS operates the largest cloud AI infrastructure globally. Amazon committed $100B+ in data center capex for 2025. AWS Trainium is a custom AI chip (TSMC-manufactured) reducing Nvidia dependence \u2014 but still HBM and CoWoS dependent.","status":"operational","policy_exposure":"US infrastructure. Government cloud contracts (GovCloud). Power constraint is primary deployment bottleneck.","dependencies_upstream":["TSMC logic (Trainium)","Nvidia accelerators","HBM supply","Grid power"],"constraint_status":"operational","confidence":"high","source_url":"https://ir.aboutamazon.com/","source_title":"Amazon Q4 2025 earnings","source_type":"primary","timeline":{"operational_since":2010,"constraint_relief":null,"note":"Operational. $100B+ capex 2025."}},{"id":"ARM-GB-CAMBRIDGE","name":"Arm Holdings \u2014 Cambridge (CPU/AI Architecture)","company":"Arm Holdings","country":"United Kingdom","city":"Cambridge","lat":52.205,"lon":0.119,"layer":"logic","technology":"CPU/NPU architecture IP licensed to virtually all chip designers","role":"Arm's architecture underpins virtually all mobile chips and an increasing share of data-center processors (AWS Graviton, Apple M-series, Nvidia Grace CPU). Not a physical manufacturing chokepoint \u2014 an IP licensing chokepoint. Arm is subject to US jurisdiction (listed on Nasdaq; SoftBank-controlled). BIS controls could theoretically extend to Arm architecture licenses to Chinese companies.","status":"operational","policy_exposure":"UK company, Nasdaq-listed, SoftBank-controlled. US jurisdiction through listing and customer relationships. RISC-V is the primary alternative architecture being adopted in China to reduce Arm dependence.","constraint_status":"non-binding","durability":"high","confidence":"high","source_url":"https://investor.arm.com/","source_title":"Arm Holdings investor relations","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"IP licensing \u2014 no physical capacity timeline."}},{"id":"SKH-US-INDIANA","name":"SK Hynix Advanced Packaging \u2014 West Lafayette, Indiana","company":"SK Hynix","country":"United States","city":"West Lafayette, Indiana","lat":40.425,"lon":-86.91,"layer":"packaging","technology":"HBM advanced packaging for AI accelerators","role":"SK Hynix's US advanced packaging facility \u2014 $3.87B investment. Represents US reshoring of HBM packaging capacity. In proximity to Purdue University semiconductor research cluster.","status":"construction","timeline_volume_production":"Production targeted 2028","policy_exposure":"CHIPS Act incentive. US-Korea cooperation on strategic semiconductor manufacturing.","time_to_relief":"2028 production, yield ramp through 2028\u201329.","constraint_status":"construction","confidence":"high","source_url":"https://www.skhynix.com/eng/ir/quarterlyEarnings.do","source_title":"SK Hynix announcement + Purdue partnership","source_type":"primary","timeline":{"announced":2023.0,"construction":2024.5,"equipment":2026.0,"qualification":2027.0,"volume_production":2028.0,"constraint_relief":2028.5,"note":"Production targeted 2028. CHIPS Act recipient."}},{"id":"TSMC-JP-KUMAMOTO","name":"TSMC Fab \u2014 Kumamoto, Japan (JASM)","company":"TSMC (JASM joint venture with Sony, Denso, Toyota)","country":"Japan","city":"Kumamoto","lat":32.789,"lon":130.741,"layer":"logic","technology":"12/16nm, 22/28nm \u2014 not leading-edge but strategically important for automotive/IoT","role":"TSMC's Japan joint venture. Phase 1 (12nm) in production 2024. Phase 2 (6nm) construction underway. Not advanced enough for frontier AI accelerators \u2014 relevant for automotive, IoT, and supporting Japan's semiconductor ecosystem rebuilding. Sony, Denso, Toyota as JV partners.","status":"operational","policy_exposure":"Japanese government subsidy. Part of Japan's semiconductor independence strategy. JASM strengthens US-Japan-Taiwan semiconductor cooperation.","time_to_relief":"Operational. Phase 2 (6nm): 2027.","constraint_status":"operational","confidence":"high","source_url":"https://www.jasm.co.jp/en/","source_title":"JASM corporate + TSMC investor briefings","source_type":"primary","timeline":{"announced":2021.5,"construction":2022.5,"equipment":2023.0,"qualification":2023.5,"volume_production":2024.0,"constraint_relief":2024.5,"note":"Phase 1 (12nm) operational 2024. Phase 2 (6nm) 2027."}},{"id":"BROADCOM-US-PALOALTO","name":"Broadcom \u2014 Palo Alto (AI ASIC Design)","company":"Broadcom","country":"United States","city":"Palo Alto, California","lat":37.441,"lon":-122.143,"layer":"logic","technology":"Custom AI ASICs (Google TPU, Meta MTIA, others); networking silicon","role":"Broadcom is the leading custom AI ASIC designer \u2014 a significant and growing alternative to Nvidia GPUs for hyperscaler inference. Broadcom AI ASIC revenue exceeded $20B in FY2025. Custom ASICs reduce per-unit GPU dependence but still require TSMC CoWoS and HBM.","status":"operational","policy_exposure":"US company. ASICs produced at TSMC \u2014 CoWoS and HBM dependent. Less export-control exposure than Nvidia (ASICs are customer-specific, not off-the-shelf).","dependencies_upstream":["TSMC advanced logic","TSMC CoWoS","HBM (SK Hynix / Micron)"],"dependencies_downstream":["Google (primary)","Meta","ByteDance","Others"],"constraint_status":"non-binding","confidence":"high","source_url":"https://investors.broadcom.com/","source_title":"Broadcom FY2025 earnings","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":null,"note":"Design company. ASIC revenue $20B+ FY2025."}},{"id":"TSMC-DE-DRESDEN","name":"TSMC Fab \u2014 Dresden, Germany (ESMC)","company":"TSMC (ESMC joint venture with Infineon, NXP, Bosch)","country":"Germany","city":"Dresden","lat":51.052,"lon":13.738,"layer":"logic","technology":"28/22nm \u2014 mature nodes for automotive and industrial","role":"European semiconductor manufacturing initiative. Mature nodes (28/22nm) \u2014 not relevant for frontier AI accelerators but important for European automotive and industrial chip supply independence. EU Chips Act strategic investment.","status":"construction","timeline_volume_production":"Production targeted 2027","policy_exposure":"EU Chips Act funding. European semiconductor sovereignty initiative. Germany strategic industrial policy.","constraint_status":"construction","confidence":"high","source_url":"https://www.esmc.eu/","source_title":"ESMC corporate + EU Chips Act filings","source_type":"primary","timeline":{"announced":2023.0,"construction":2024.0,"equipment":2025.5,"qualification":2026.5,"volume_production":2027.0,"constraint_relief":2027.5,"note":"28/22nm. Production targeted 2027. Not relevant for frontier AI."}},{"id":"SAMSUNG-KR-TAYLOR","name":"Samsung Semiconductor \u2014 Taylor, Texas","company":"Samsung","country":"United States","city":"Taylor, Texas","lat":30.569,"lon":-97.408,"layer":"logic","technology":"4nm / 2nm \u2014 advanced foundry for external customers","role":"Samsung's US advanced foundry expansion. Phase 1 (4nm) construction; timeline has slipped. Intended to provide a TSMC alternative for US-based chip designers. Primary target: advanced AI and mobile chips. Samsung Foundry has lost customers in recent years due to yield challenges.","status":"construction","policy_exposure":"CHIPS Act recipient. US domestic foundry alternative to TSMC. Progress slower than announced \u2014 confidence moderate.","time_to_relief":"Delayed. Production timeline uncertain \u2014 Samsung Foundry has faced yield and customer-retention challenges. Conservative estimate: 2027 at earliest for meaningful volume.","constraint_status":"construction","confidence":"moderate","source_url":"https://semiconductor.samsung.com/us/foundry/","source_title":"Samsung Foundry + CHIPS Act filings","source_type":"primary","timeline":{"announced":2021.0,"construction":2023.0,"equipment":2025.0,"qualification":2026.5,"volume_production":2027.5,"constraint_relief":2028.0,"note":"Delayed. 4nm construction. Timeline uncertain \u2014 moderate confidence."}},{"id":"HUAWEI-CN-SHENZHEN","name":"Huawei \u2014 Shenzhen (Ascend AI Accelerator)","company":"Huawei","country":"China","city":"Shenzhen","lat":22.543,"lon":114.058,"layer":"logic","technology":"Ascend 910B/910C AI accelerators; designed internally, manufactured at SMIC","role":"China's primary domestic AI accelerator. Manufactured at SMIC using DUV multi-patterning (7nm-class). Viable for many inference workloads. CUDA software moat remains the largest barrier to broad Ascend adoption. Volume is constrained by SMIC yield at advanced nodes.","status":"operational","policy_exposure":"Huawei on BIS Entity List. Primary target of US semiconductor export controls. Huawei's ability to access advanced chips from external foundries is blocked \u2014 reliant on SMIC for advanced nodes.","dependencies_upstream":["SMIC (sole advanced foundry)","Domestic HBM (CXMT \u2014 early stage)","Domestic packaging"],"constraint_status":"operational","confidence":"moderate","source_url":"https://www.huawei.com/en/facts/voices-of-huawei/ascend","source_title":"Huawei technical documentation + SemiAnalysis","source_type":"specialist","timeline":{"operational_since":2020,"constraint_relief":null,"note":"Ascend 910B/C in production. SMIC-dependent. Volume constrained."}},{"id":"POWER-NUCLEAR-US","name":"US Nuclear Restart / AI Power Supply","company":"Multiple (Constellation, Vistra, NuScale, X-energy)","country":"United States","city":"Multiple (Three Mile Island PA, Comanche Peak TX, etc.)","lat":40.153,"lon":-76.726,"layer":"power","technology":"Nuclear power for AI data center baseload supply","role":"Nuclear power restarts and new SMR projects are emerging as the preferred solution for AI data center baseload power \u2014 24/7 carbon-free supply without intermittency. Microsoft restarted Three Mile Island Unit 1 (contracted with Constellation). Amazon, Google, and others pursuing nuclear PPAs. This represents the energy-policy dimension of AI industrial policy.","status":"operational","policy_exposure":"NRC licensing jurisdiction. State-level permitting. IRA tax credits. Nuclear restart is faster than new build \u2014 but still 2\u20135 year process for new sites.","time_to_relief":"Constellation TMI restart: operational 2024. New SMRs: 2030+. Nuclear PPAs: 2026\u20132030 depending on project.","constraint_status":"operational","confidence":"high","source_url":"https://www.constellationenergy.com/newsroom/2024/Constellation-to-Launch-Crane-Clean-Energy-Center.html","source_title":"Constellation Energy + Microsoft PPA announcement","source_type":"primary","timeline":{"operational_since":2024,"constraint_relief":2026.0,"note":"TMI restart operational 2024. New SMRs 2030+. Nuclear PPAs 2026-2030."}}];
-window.addEventListener('load', function() {
-  document.getElementById('meta-count').textContent = allAssets.length;
-  document.getElementById('nav-stats').textContent = `${allAssets.length} assets · 7 layers`;
+// ── OPEN ASSET BY ID ──
+function openAssetById(id){
+  const a=allAssets.find(x=>x.id===id);
+  if(a)showPanel(a);
+}
+
+// ── BOOT ──
+window.addEventListener('load',function(){
+  allAssets = [{"id":"ASML-NL-VELDHOVEN","name":"ASML EUV Production \u2014 Veldhoven","company":"ASML","country":"Netherlands","city":"Veldhoven","lat":51.418,"lon":5.458,"layer":"lithography","technology":"EUV lithography systems (NXE, NXE:3800E, High-NA EUV)","role":"Sole commercial producer of EUV lithography systems required for sub-3nm chip manufacturing. No commercial alternative exists.","status":"operational","current_capacity":"60+ EUV systems/year (guidance: raising 30% annually for 2 years)","capacity_unit":"systems/year","policy_exposure":"Dutch export licensing controls EUV exports. Zero EUV systems shipped to China. US-Dutch allied control alignment. High-NA EUV ($400M/unit) not yet in volume production.","dependencies_upstream":["Carl Zeiss SMT (EUV optics \u2014 100% concentration)","TRUMPF (EUV laser \u2014 sole supplier)","Cymer/ASML San Diego (light source)","300+ specialist suppliers across EU"],"dependencies_downstream":["TSMC","Samsung","SK Hynix (HBM EUV)","Intel","Micron"],"time_to_relief":"No substitution visible. ASML itself is supply-constrained, raising capacity 30%/yr to meet demand.","constraint_status":"binding","durability":"very_high","confidence":"high","source_url":"https://www.asml.com/en/investors/annual-report","source_title":"ASML Annual Report 2025 + Q1 2026 earnings","source_type":"primary","timeline":{"operational_since":2010,"constraint_relief":null,"note":"Ongoing production. Capacity raising 30%/yr."}},{"id":"ZEISS-DE-OBERKOCHEN","name":"Carl Zeiss SMT \u2014 EUV Optics","company":"Carl Zeiss SMT","country":"Germany","city":"Oberkochen","lat":48.783,"lon":10.101,"layer":"lithography","technology":"EUV optics and optical systems for ASML EUV machines","role":"Sole supplier of EUV optical systems integrated into every ASML EUV machine. The optics chokepoint within the chokepoint.","status":"operational","policy_exposure":"German export control jurisdiction. Key node in US-NL-DE allied equipment coalition.","dependencies_upstream":["Specialty glass and optical materials"],"dependencies_downstream":["ASML Veldhoven"],"constraint_status":"binding","durability":"very_high","confidence":"high","source_url":"https://www.zeiss.com/semiconductor-manufacturing-technology/en/home.html","source_title":"Carl Zeiss SMT corporate","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":null,"note":"Long-operational. Sole EUV optics supplier."}},{"id":"TSMC-TW-FAB18","name":"TSMC Fab 18 \u2014 Tainan","company":"TSMC","country":"Taiwan","city":"Tainan","lat":22.938,"lon":120.203,"layer":"logic","technology":"3nm (N3E/N3P), 2nm (N2) \u2014 leading-edge logic","role":"TSMC's primary advanced-node logic fab complex. Produces majority of frontier AI accelerators including Nvidia Blackwell/Vera Rubin, Apple M-series, AMD Zen 5. 3nm hit 28% of TSMC wafer revenue in Q4 2025.","status":"operational","current_capacity":"~90,000\u2013100,000 wafers/month at 2nm across Taiwan facilities (early 2026 estimate)","capacity_unit":"wafers/month","policy_exposure":"Taiwan contingency risk. No direct export control jurisdiction over TSMC \u2014 but TSMC relies on ASML EUV (Dutch controls), US EDA software (BIS jurisdiction), and US semiconductor equipment (BIS).","dependencies_upstream":["ASML EUV","Applied Materials","Lam Research","KLA","Synopsys/Cadence EDA","Japanese photoresists (TOK, JSR)","Air Liquide/specialty gases","Shin-Etsu silicon wafers"],"dependencies_downstream":["Nvidia","Apple","AMD","Google (TPUs)","Qualcomm","TSMC CoWoS packaging"],"time_to_relief":"2nm fully booked into 2028 per TSMC investor briefings. No near-term capacity relief for new customers.","constraint_status":"tight","durability":"high","confidence":"high","source_url":"https://investor.tsmc.com/en/quarterly-results","source_title":"TSMC Q4 2025 earnings + investor briefings 2026","source_type":"primary","timeline":{"operational_since":2022,"volume_production":2022,"constraint_relief":null,"note":"3nm operational 2022, 2nm Q4 2025. Booked into 2028."}},{"id":"TSMC-TW-COWOS","name":"TSMC CoWoS Advanced Packaging \u2014 Taiwan","company":"TSMC","country":"Taiwan","city":"Hsinchu / Taichung","lat":24.802,"lon":120.972,"layer":"packaging","technology":"CoWoS-S, CoWoS-L (advanced AI chip packaging integrating GPU + HBM)","role":"Primary advanced packaging for AI accelerators. Integrates GPU die with HBM stack. Currently the binding constraint in AI hardware supply per Epoch AI and industry analysts. Nvidia holds estimated ~60% of CoWoS-S/L capacity.","status":"operational","current_capacity":"~1M wafers demand in 2026 (Silicon Analysts June 2026, sell-side estimate \u2014 treat as directional); CoWoS-S $750/chip, CoWoS-L $1,100/chip","capacity_unit":"wafer-equivalents/year","policy_exposure":"Taiwan concentration risk. CoWoS expansion partly in US (Arizona) but minimal volume before 2028.","dependencies_upstream":["Ajinomoto ABF substrate film (dominant market position)","TSMC leading-edge foundry","SK Hynix/Samsung HBM","Specialty interconnect materials"],"dependencies_downstream":["Nvidia","Google","AMD","Microsoft (Azure AI)"],"time_to_relief":"Lead time 50\u201378 weeks (Silicon Analysts June 2026, directional). TSMC expanding: marginal relief late 2026, meaningful 2027\u201328 as new CoWoS lines qualify. Demand also expanding.","constraint_status":"binding","durability":"high","confidence":"moderate","source_url":"https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/cowos.htm","source_title":"TSMC 3DFabric CoWoS + Silicon Analysts June 2026","source_type":"primary+specialist","timeline":{"operational_since":2023,"constraint_relief":2027.5,"note":"Binding now. Meaningful relief 2027-28 as new lines qualify."}},{"id":"TSMC-US-FAB21","name":"TSMC Fab 21 \u2014 Phoenix, Arizona","company":"TSMC","country":"United States","city":"Phoenix, Arizona","lat":33.678,"lon":-112.101,"layer":"logic","technology":"4nm (Phase 1, in production), 3nm/2nm (Phase 2, targeted H2 2027)","role":"TSMC's first US advanced-logic fab. Phase 1 (4nm) in volume production since 2025. Phase 2 (3nm/2nm) is primary US reshoring of leading-edge foundry capacity. Total US commitment $265B.","status":"operational","announced_capacity":"Phase 2: 3nm/2nm targeted H2 2027","policy_exposure":"Primary beneficiary of CHIPS Act funding. US domestic supply chain initiative. Advanced-node qualification with major customers still required for Phase 2.","dependencies_upstream":["ASML EUV (must be imported)","US and global equipment suppliers","Workforce (ongoing challenge)","Power supply (Phoenix water/power constraints)"],"dependencies_downstream":["Apple (confirmed Phase 1 customer)","Nvidia, AMD, other Phase 2 customers (qualification ongoing)"],"time_to_relief":"Phase 1 (4nm): operational. Phase 2 (3nm/2nm): H2 2027 earliest, full qualification 12\u201318 months after. Arizona estimated <5% of Taiwan advanced-node capacity before 2028 (denominator: advanced-node wafer starts \u2014 exact figure not publicly disclosed).","constraint_status":"ramp","durability":"high","confidence":"high","source_url":"https://investor.tsmc.com/en/quarterly-results","source_title":"TSMC investor briefings 2026 + CHIPS Act filings","source_type":"primary","timeline":{"announced":2021.0,"construction":2022.5,"equipment":2024.0,"qualification":2024.5,"volume_production":2025.0,"phase2_volume":2027.5,"constraint_relief":2028.0,"note":"Phase 1 (4nm) operational 2025. Phase 2 (2nm) H2 2027, full qual 2028."}},{"id":"SKH-KR-M15","name":"SK Hynix M15 \u2014 Cheongju (HBM)","company":"SK Hynix","country":"South Korea","city":"Cheongju","lat":36.641,"lon":127.489,"layer":"memory","technology":"HBM3E, HBM4 \u2014 high-bandwidth memory for AI accelerators","role":"SK Hynix's primary HBM production facility. SK Hynix holds estimated ~53% of global HBM market and supplies approximately two-thirds of Nvidia's HBM4. Entire 2026 HBM output allocated under non-cancellable contracts.","status":"operational","current_capacity":"HBM4 yield: ~80% as of August 2026 (Silicon Analysts; directional estimate)","policy_exposure":"South Korea export control alignment with US/allies. BIS controls on HBM exports to China are a critical part of export control architecture \u2014 Korean cooperation essential.","dependencies_upstream":["ASML EUV (for HBM production \u2014 $7B+ order placed)","Samsung/SMIC alternative packaging (none credible at scale)","TSV processing equipment"],"dependencies_downstream":["Nvidia (two-thirds of HBM4)","AMD","Google"],"time_to_relief":"2026 sold out. 2027 already booked. SK Hynix CEO: 2027 will be worst supply shortage in memory industry history. Meaningful new capacity: 2028+ from M15X/Y2 expansion.","constraint_status":"binding","durability":"high","confidence":"moderate","source_url":"https://www.skhynix.com/eng/ir/quarterlyEarnings.do","source_title":"SK Hynix Q1 2026 earnings + CEO public statement","source_type":"primary","timeline":{"operational_since":2020,"constraint_relief":null,"note":"Operational. 2026 fully allocated. Relief only from M15X expansion."}},{"id":"SKH-KR-M15X","name":"SK Hynix M15X \u2014 Cheongju (New HBM)","company":"SK Hynix","country":"South Korea","city":"Cheongju","lat":36.638,"lon":127.492,"layer":"memory","technology":"HBM4, HBM4E \u2014 next-generation HBM expansion","role":"Major capacity expansion for HBM. Part of SK Hynix's +54 trillion KRW (~$39B) investment across Y2 and M17 fabs. Primary future relief for HBM supply constraint.","status":"construction","timeline_volume_production":"Initial production February 2027 (Y1 phase); full ramp 12\u201318 months after","policy_exposure":"Same as M15. BIS HBM export control cooperation essential.","dependencies_upstream":["ASML EUV","Memory-grade silicon wafers","TSV/packaging equipment"],"time_to_relief":"Initial production Feb 2027 \u2192 full ramp 2028. M17 expansion: Dec 2028. Y2: Jun 2029. Constraint material relief: 2028\u20132029.","constraint_status":"construction","confidence":"high","source_url":"https://www.skhynix.com/eng/ir/quarterlyEarnings.do","source_title":"SK Hynix Q1 2026 earnings + capex announcements","source_type":"primary","timeline":{"announced":2024.0,"construction":2025.0,"equipment":2025.5,"qualification":2026.5,"volume_production":2027.17,"constraint_relief":2028.0,"note":"Initial production Feb 2027. Full ramp 2028. M17: Dec 2028. Y2: Jun 2029."}},{"id":"SAMSUNG-KR-P3","name":"Samsung Semiconductor \u2014 Pyeongtaek P3 (HBM/Logic)","company":"Samsung","country":"South Korea","city":"Pyeongtaek","lat":36.998,"lon":127.053,"layer":"memory","technology":"HBM3E, HBM4 (memory); SF2/SF3 (logic foundry)","role":"Samsung's flagship fab complex. HBM4 yield improved from <60% at Feb 2026 launch to ~80% by August 2026 (Silicon Analysts; directional). Priced ~30% below SK Hynix to win H20 and B200 supply slots.","status":"operational","policy_exposure":"South Korea \u2014 allied with US. Foundry arm competes with TSMC for AI chip customers.","dependencies_upstream":["ASML EUV","Process equipment","Specialty chemicals"],"dependencies_downstream":["Nvidia","AMD","Google","Various foundry customers"],"time_to_relief":"HBM: ramping through 2026\u201327. Foundry: 2nm (SF2) qualification ongoing; limited external capacity.","constraint_status":"ramp","confidence":"moderate","source_url":"https://semiconductor.samsung.com/us/consumer-storage/internal-ssd/","source_title":"Samsung semiconductor investor relations + Silicon Analysts August 2026","source_type":"primary+specialist","timeline":{"operational_since":2023,"constraint_relief":2027.0,"note":"HBM4 ramping. Yield improved to ~80% by Aug 2026. Meaningful volume 2027."}},{"id":"MICRON-US-BOISE","name":"Micron Technology \u2014 Boise, Idaho (HBM)","company":"Micron","country":"United States","city":"Boise, Idaho","lat":43.615,"lon":-116.202,"layer":"memory","technology":"HBM3E, HBM4 \u2014 AI memory","role":"US-based HBM producer. Grown from 2% HBM market share (2023) to approximately 11% (2025\u201326). Began shipping HBM4 for Nvidia Vera Rubin in early 2026. Provides US domestic HBM supply \u2014 strategically significant for export control architecture.","status":"operational","announced_capacity":"$3.87B advanced packaging plant announced in Indiana (SK Hynix partnership noted separately)","policy_exposure":"US company \u2014 directly subject to BIS export controls. Provides US domestic alternative to Korean HBM. CHIPS Act recipient.","dependencies_upstream":["ASML EUV","Semiconductor equipment","Silicon wafers"],"dependencies_downstream":["Nvidia (Vera Rubin HBM4 supplier)","Microsoft","Others"],"time_to_relief":"Ramping. Meaningful additional capacity from new Idaho fabs: 2027\u20132028.","constraint_status":"ramp","confidence":"high","source_url":"https://investors.micron.com/","source_title":"Micron investor relations + Q2 FY2026 earnings","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":2027.5,"note":"HBM4 shipping for Vera Rubin early 2026. New Idaho capacity 2027-28."}},{"id":"AMAT-US-SANTACLARA","name":"Applied Materials \u2014 Santa Clara (Equipment)","company":"Applied Materials","country":"United States","city":"Santa Clara, California","lat":37.387,"lon":-121.973,"layer":"equipment","technology":"CVD, PVD, ALD deposition; CMP; epitaxy; metrology","role":"World's largest semiconductor equipment company by revenue. Deposition and materials engineering equipment is required at every leading-edge node. Subject to BIS export controls \u2014 Applied Materials sales to China require licenses for advanced-node equipment.","status":"operational","policy_exposure":"US company. BIS export controls apply to advanced-node equipment. US-origin technology triggers FPDP jurisdiction. Critical node in US-NL-JP allied equipment control coalition.","dependencies_downstream":["TSMC","Samsung","SK Hynix","Intel","Micron","SMIC (limited/licensed)"],"constraint_status":"non-binding","confidence":"high","source_url":"https://ir.appliedmaterials.com/","source_title":"Applied Materials investor relations","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational equipment company."}},{"id":"LAMRESEARCH-US-FREMONT","name":"Lam Research \u2014 Fremont, California (Equipment)","company":"Lam Research","country":"United States","city":"Fremont, California","lat":37.548,"lon":-121.989,"layer":"equipment","technology":"Etch (plasma, DRIE); thin film deposition (ALD, CVD); cleaning","role":"Dominant etch and deposition equipment supplier. Etch steps multiply at advanced nodes \u2014 Lam's equipment is required at every leading-edge fab. BIS export controls cover Lam equipment for advanced-node applications in China.","status":"operational","policy_exposure":"US company. BIS jurisdiction. Advanced packaging revenue outlook raised from >40% to >70% YoY growth (current fiscal year).","constraint_status":"non-binding","confidence":"high","source_url":"https://investor.lamresearch.com/","source_title":"Lam Research investor relations + FY2026 guidance","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational equipment company."}},{"id":"KLA-US-MILPITAS","name":"KLA Corporation \u2014 Milpitas, California (Inspection)","company":"KLA","country":"United States","city":"Milpitas, California","lat":37.432,"lon":-121.907,"layer":"equipment","technology":"Process control, inspection, and metrology for semiconductor manufacturing","role":"Dominant inspection and metrology equipment supplier. Detects defects at atomic scales \u2014 required at every advanced-node fab. No chip production at leading-edge nodes is viable without process control at KLA's capability level.","status":"operational","policy_exposure":"US company. BIS export controls apply. US-origin equipment triggering FPDP reach.","constraint_status":"non-binding","confidence":"high","source_url":"https://ir.kla.com/","source_title":"KLA investor relations","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational equipment company."}},{"id":"TEL-JP-TOKYO","name":"Tokyo Electron \u2014 Tokyo (Equipment)","company":"Tokyo Electron (TEL)","country":"Japan","city":"Tokyo / Nirasaki","lat":35.689,"lon":139.692,"layer":"equipment","technology":"Coater/developer, CVD, etch, cleaning equipment for semiconductor fabs","role":"Japan's largest semiconductor equipment company and globally essential supplier. TEL's coater/developer systems are required for lithography process steps at every advanced fab. Part of the US-NL-JP equipment coalition \u2014 Japan's October 2023 export controls covering 23 equipment categories were essential to closing circumvention gaps.","status":"operational","policy_exposure":"Japanese export control jurisdiction (October 2023 \u2014 23 equipment categories). Essential node in allied control coalition. US-Japan coordination extends effective BIS reach through Japanese equipment controls.","dependencies_downstream":["TSMC","Samsung","SK Hynix","Intel","SMIC (controlled)"],"constraint_status":"non-binding","confidence":"high","source_url":"https://www.tel.com/ir/","source_title":"Tokyo Electron investor relations + Japan METI export controls October 2023","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational. Japan export controls Oct 2023."}},{"id":"JMFG-JP-PHOTORESIST","name":"Japan Materials \u2014 EUV Photoresists (TOK, JSR, Shin-Etsu)","company":"Multiple (TOK / JSR / Shin-Etsu Chemical)","country":"Japan","city":"Kawasaki / Tokyo / Chiyoda","lat":35.53,"lon":139.703,"layer":"equipment","technology":"EUV photoresists, silicon wafers, EUV mask blanks (AGC/Hoya), specialty chemicals","role":"Japan controls >90% of EUV photoresists (TOK, JSR, Shin-Etsu) and ~51% of global silicon wafers (Shin-Etsu, SUMCO). AGC and Hoya hold a 93% duopoly on EUV mask blanks. These materials cannot be substituted on short timelines \u2014 they are as much a chokepoint as the equipment itself, but receive less policy attention.","status":"operational","policy_exposure":"Japanese export control jurisdiction. Japan's materials controls complement Dutch/US equipment controls. China's domestic photoresist industry is making progress at mature nodes but not yet at EUV-grade.","constraint_status":"non-binding","durability":"high","confidence":"high","source_url":"https://www.meti.go.jp/english/press/2023/0123_002.html","source_title":"Japan METI + individual company reports","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Long-operational materials cluster."}},{"id":"SYNOPSYS-US-SUNNYVALE","name":"Synopsys \u2014 Sunnyvale (EDA Software)","company":"Synopsys","country":"United States","city":"Sunnyvale, California","lat":37.368,"lon":-122.036,"layer":"logic","technology":"EDA software \u2014 chip design tools, verification, process design kits","role":"One of two dominant EDA software companies (with Cadence). US EDA firms control >90% of the market for advanced chip design software. Switching EDA tools requires years of re-tooling \u2014 the switching cost is itself a chokepoint. BIS export controls on EDA for advanced-node chip design in China are in effect.","status":"operational","policy_exposure":"US company. BIS EDA export controls. US jurisdiction over EDA software provides a non-physical chokepoint that applies wherever EDA is used \u2014 including by chip designers outside the US who design chips later manufactured at controlled foundries.","constraint_status":"non-binding","durability":"very_high","confidence":"high","source_url":"https://investor.synopsys.com/","source_title":"Synopsys investor relations + BIS Federal Register","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"Software \u2014 no physical timeline."}},{"id":"NVIDIA-US-SANTACLARA","name":"Nvidia \u2014 Santa Clara (Accelerator Design)","company":"Nvidia","country":"United States","city":"Santa Clara, California","lat":37.371,"lon":-121.961,"layer":"logic","technology":"AI accelerator design \u2014 Blackwell (B200), Vera Rubin (2026), Rubin Ultra (2027)","role":"Dominant AI GPU designer. Nvidia designs but does not manufacture chips \u2014 manufacturing at TSMC, packaging at TSMC CoWoS, memory from SK Hynix/Micron/Samsung. Holds estimated ~60% of TSMC CoWoS capacity in 2026. Vera Rubin entered full production May 2026.","status":"operational","policy_exposure":"H200 exports to China subject to BIS case-by-case licensing (Jan 2026). H20 previously approved for China. Vera Rubin (more advanced) not approved for China. $500B announced US AI infrastructure investment.","dependencies_upstream":["TSMC logic (sole foundry for leading AI GPUs)","TSMC CoWoS packaging","SK Hynix/Samsung/Micron HBM"],"constraint_status":"non-binding","confidence":"high","source_url":"https://investor.nvidia.com/","source_title":"Nvidia Q1 FY2027 earnings + Nvidia Newsroom May 2026","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":null,"note":"Design company. Vera Rubin in production May 2026."}},{"id":"CXMT-CN-HEFEI","name":"ChangXin Memory (CXMT) \u2014 Hefei","company":"ChangXin Memory Technologies","country":"China","city":"Hefei, Anhui","lat":31.861,"lon":117.226,"layer":"memory","technology":"DRAM; targeting HBM3 commercial yields 2026","role":"China's primary domestic DRAM and HBM development effort. Targeting HBM3 commercial yields in 2026. Currently 2\u20133 generations behind SK Hynix frontier (HBM4/4E at ~80% yield). Progress is real but not yet demonstrated at commercial scale.","status":"ramp","policy_exposure":"Subject to US export controls on HBM and advanced DRAM. BIS entity-list status restricts equipment supply. China domestic memory effort \u2014 strategic priority for Beijing.","dependencies_upstream":["DUV lithography (EUV unavailable)","Domestic and restricted foreign equipment","Memory packaging"],"time_to_relief":"HBM3 yields by end-2026 possible but unconfirmed at commercial scale. 2\u20133 generation gap to current SK Hynix frontier (HBM4). Commercial supply of China-domestic HBM at meaningful scale: 2027\u20132028 at earliest.","constraint_status":"ramp","confidence":"directional","source_url":"https://www.cxmt.com/","source_title":"CXMT corporate + SemiAnalysis reporting","source_type":"specialist","timeline":{"announced":2023.0,"construction":2024.0,"equipment":2025.0,"qualification":2026.0,"volume_production":2027.0,"constraint_relief":2028.0,"note":"HBM3 yields targeted end-2026. Commercial scale uncertain. 2-3 gen behind frontier."}},{"id":"SMIC-CN-SHANGHAI","name":"SMIC \u2014 Shanghai (Advanced Foundry)","company":"Semiconductor Manufacturing International Corporation","country":"China","city":"Shanghai","lat":31.199,"lon":121.397,"layer":"logic","technology":"7nm via DUV multi-patterning; older nodes at scale","role":"China's most advanced chip foundry. Produces 7nm chips using DUV multi-patterning \u2014 technically viable but at higher cost and likely lower yield than EUV-based production. Manufactures Huawei Ascend AI accelerators. Cannot access EUV lithography (Dutch/US controls holding).","status":"operational","policy_exposure":"On BIS Entity List. Restricted access to advanced equipment and EUV. DUV multi-patterning is SMIC's workaround \u2014 produces 7nm but cannot economically reach sub-3nm without EUV.","dependencies_upstream":["DUV lithography (ASML NXT:2000, controlled)","Restricted equipment supply","Domestic equipment alternatives (NAURA, AMEC \u2014 progress at mature nodes)"],"dependencies_downstream":["Huawei (primary customer for advanced nodes)","Domestic chip designers"],"time_to_relief":"For China: SMIC represents domestic partial substitution. Cannot match TSMC economics at frontier nodes without EUV access.","constraint_status":"operational","confidence":"high","source_url":"https://www.smics.com/en/site/company_ir","source_title":"SMIC investor relations + BIS Entity List","source_type":"primary","timeline":{"operational_since":2004,"constraint_relief":null,"note":"7nm via DUV operational. No EUV access. Not a near-term relief for China."}},{"id":"INTEL-US-OREGON","name":"Intel Fab \u2014 Hillsboro, Oregon (18A)","company":"Intel","country":"United States","city":"Hillsboro, Oregon","lat":45.523,"lon":-122.99,"layer":"logic","technology":"Intel 18A (1.8nm-class) \u2014 backside power, RibbonFET gate-all-around","role":"Intel's leading-edge process for external foundry customers. Intel 18A is in risk production 2026. Represents the most credible alternative to TSMC for advanced-node external foundry work \u2014 but not yet in high-volume manufacturing for AI accelerators. AMD announced split of some 2nm orders to Samsung, not Intel, in May 2026.","status":"ramp","policy_exposure":"CHIPS Act primary recipient. US domestic advanced foundry \u2014 strategic objective. Key question: can Intel achieve competitive yields at 18A for external AI accelerator customers?","dependencies_upstream":["ASML EUV","Applied Materials, Lam, KLA","Synopsys/Cadence EDA"],"time_to_relief":"High-volume manufacturing at 18A for external customers: 2027+ depending on yield progress. Intel foundry previously missed multiple node timelines \u2014 confidence is moderate.","constraint_status":"ramp","confidence":"moderate","source_url":"https://www.intel.com/content/www/us/en/foundry/overview.html","source_title":"Intel Foundry investor day 2026 + earnings","source_type":"primary","timeline":{"operational_since":1990,"volume_production":2026.5,"constraint_relief":2027.5,"note":"18A risk production 2026. HVM for external customers 2027+. Yield progress uncertain."}},{"id":"MSFT-US-IOWA","name":"Microsoft Data Center \u2014 Ames, Iowa","company":"Microsoft","country":"United States","city":"Ames, Iowa","lat":42.034,"lon":-93.62,"layer":"data_center","technology":"Large-scale AI training and inference cluster","role":"Representative of US hyperscaler AI data center expansion. Microsoft has committed $80B+ in data center investment in FY2025 alone. Iowa and other Midwest locations chosen partly for power availability and land cost.","status":"operational","policy_exposure":"US infrastructure. Power availability is primary constraint \u2014 grid interconnection timelines and transformer procurement.","dependencies_upstream":["Nvidia accelerators (CoWoS + HBM dependent)","Power supply / grid interconnection","Cooling infrastructure"],"constraint_status":"operational","confidence":"high","source_url":"https://news.microsoft.com/source/features/ai/microsoft-build-2025-ai-infrastructure/","source_title":"Microsoft data center announcements 2025\u20132026","source_type":"tier4","timeline":{"operational_since":2023,"constraint_relief":null,"note":"Operational data center cluster."}},{"id":"GOOGLE-US-DATACENTER","name":"Google / DeepMind AI Infrastructure \u2014 US (Multiple)","company":"Google / Alphabet","country":"United States","city":"Multiple (Mayes County OK, Lenoir NC, etc.)","lat":36.3,"lon":-95.618,"layer":"data_center","technology":"TPU v5/v6 clusters, AI training infrastructure","role":"Google operates some of the largest AI training clusters globally using custom TPUs (manufactured at TSMC). $75B+ data center capex committed for 2025. Google designs its own AI accelerators \u2014 reducing dependence on Nvidia but not on TSMC foundry or HBM supply.","status":"operational","policy_exposure":"US infrastructure. Google's TPU design capability is a strategic asset but foundry dependence on TSMC remains.","dependencies_upstream":["TSMC logic (TPU manufacturing)","TSMC/Samsung HBM","Power supply"],"constraint_status":"operational","confidence":"high","source_url":"https://abc.xyz/investor/","source_title":"Alphabet Q4 2025 earnings","source_type":"primary","timeline":{"operational_since":2010,"constraint_relief":null,"note":"Operational. $75B+ capex 2025."}},{"id":"ABUDHABI-UAE-MGXAI","name":"MGX / G42 AI Infrastructure \u2014 Abu Dhabi","company":"MGX / G42","country":"United Arab Emirates","city":"Abu Dhabi","lat":24.453,"lon":54.377,"layer":"data_center","technology":"Large-scale AI data center and compute infrastructure","role":"UAE sovereign wealth-backed AI compute buildout. Microsoft partnership with G42 for AI infrastructure. UAE becoming a significant AI compute geography \u2014 partly enabled by energy availability and government investment. Geopolitically significant: US scrutiny of UAE AI chip access due to China ties.","status":"operational","policy_exposure":"US export controls on Nvidia chips to UAE subject to end-use monitoring. UAE-China technology ties are a US policy concern. UAE's AI ambitions require sustained access to advanced chips.","dependencies_upstream":["Nvidia accelerators (US export control conditions)","Power supply (gas-fired, abundant)"],"constraint_status":"operational","confidence":"moderate","source_url":"https://news.microsoft.com/2024/04/15/microsoft-announces-expansion-of-ai-and-cloud-initiative-in-the-uae/","source_title":"Microsoft G42 partnership announcement + Reuters","source_type":"tier4","timeline":{"operational_since":2024,"constraint_relief":null,"note":"Operational. US export control conditions apply."}},{"id":"POWER-US-TRANSFORMER","name":"US Grid Transformer Constraint","company":"Multiple (Siemens, ABB, Hitachi Energy, SPX Transformer)","country":"United States","city":"Distributed","lat":38.895,"lon":-97.0,"layer":"power","technology":"High-voltage power transformers for data center grid interconnection","role":"Grid transformers are the binding infrastructure constraint for new US data center connections. Lead times of 1\u20132+ years have become a primary bottleneck for new AI data center capacity. Unlike chip fabs, transformer capacity does not respond to capital on short timelines. CSIS has explicitly identified grid infrastructure as a binding AI deployment constraint.","status":"operational","policy_exposure":"US domestic infrastructure. Limited by manufacturing capacity (primarily US plants of Siemens, ABB, Hitachi Energy), steel supply, and skilled labor \u2014 not export controls.","dependencies_upstream":["Silicon steel (grain-oriented electrical steel \u2014 GOES)","Copper windings","Skilled labor"],"dependencies_downstream":["All new large-scale AI data center construction in US"],"time_to_relief":"Lead times 1\u20132+ years. New manufacturing capacity: multi-year permitting and construction. Policy-responsive but not on short timelines.","constraint_status":"tight","durability":"growing","confidence":"high","source_url":"https://www.csis.org/analysis/powering-innovation-data-centers-compute-and-us-competitiveness","source_title":"CSIS Wadhwani Center 'Powering Innovation' 2026","source_type":"institutional","timeline":{"operational_since":1990,"constraint_relief":2028.0,"note":"Lead times 1-2+ years. New capacity multi-year. Policy-dependent."}},{"id":"POWER-US-NOVA","name":"Northern Virginia Data Center Corridor \u2014 Power Constraint","company":"Multiple (AWS, Microsoft, Google, Equinix)","country":"United States","city":"Northern Virginia (Ashburn / Loudoun County)","lat":39.043,"lon":-77.487,"layer":"power","technology":"Grid interconnection constraints for world's largest data center cluster","role":"Northern Virginia hosts the world's largest concentration of data centers. Grid interconnection queues have become multi-year \u2014 new data center projects face 3\u20137 year waits for grid connections in some cases. This is the clearest current example of power becoming a binding AI deployment constraint. Not a chip problem \u2014 a grid problem.","status":"operational","policy_exposure":"US regulatory/permitting constraints. Dominion Energy territory. State-level permitting reform underway. Not responsive to federal chip policy.","time_to_relief":"Interconnection queue reform: policy-dependent, 2\u20135 year timeline. New transmission: 5\u201310 years. Nuclear/gas behind-the-meter: 2\u20135 years depending on project.","constraint_status":"tight","durability":"growing","confidence":"high","source_url":"https://www.csis.org/analysis/powering-innovation-data-centers-compute-and-us-competitiveness","source_title":"CSIS Wadhwani Center 'Powering Innovation' 2026 + Dominion Energy filings","source_type":"institutional","timeline":{"operational_since":2000,"constraint_relief":2030.0,"note":"Interconnection queue 3-7+ years. Reform underway but slow."}},{"id":"AMAZON-US-DATACENTER","name":"Amazon Web Services \u2014 AI Infrastructure (US)","company":"Amazon / AWS","country":"United States","city":"Multiple (Virginia, Oregon, Ohio)","lat":39.103,"lon":-77.567,"layer":"data_center","technology":"Trainium/Inferentia custom AI chips + Nvidia clusters","role":"AWS operates the largest cloud AI infrastructure globally. Amazon committed $100B+ in data center capex for 2025. AWS Trainium is a custom AI chip (TSMC-manufactured) reducing Nvidia dependence \u2014 but still HBM and CoWoS dependent.","status":"operational","policy_exposure":"US infrastructure. Government cloud contracts (GovCloud). Power constraint is primary deployment bottleneck.","dependencies_upstream":["TSMC logic (Trainium)","Nvidia accelerators","HBM supply","Grid power"],"constraint_status":"operational","confidence":"high","source_url":"https://ir.aboutamazon.com/","source_title":"Amazon Q4 2025 earnings","source_type":"primary","timeline":{"operational_since":2010,"constraint_relief":null,"note":"Operational. $100B+ capex 2025."}},{"id":"ARM-GB-CAMBRIDGE","name":"Arm Holdings \u2014 Cambridge (CPU/AI Architecture)","company":"Arm Holdings","country":"United Kingdom","city":"Cambridge","lat":52.205,"lon":0.119,"layer":"logic","technology":"CPU/NPU architecture IP licensed to virtually all chip designers","role":"Arm's architecture underpins virtually all mobile chips and an increasing share of data-center processors (AWS Graviton, Apple M-series, Nvidia Grace CPU). Not a physical manufacturing chokepoint \u2014 an IP licensing chokepoint. Arm is subject to US jurisdiction (listed on Nasdaq; SoftBank-controlled). BIS controls could theoretically extend to Arm architecture licenses to Chinese companies.","status":"operational","policy_exposure":"UK company, Nasdaq-listed, SoftBank-controlled. US jurisdiction through listing and customer relationships. RISC-V is the primary alternative architecture being adopted in China to reduce Arm dependence.","constraint_status":"non-binding","durability":"high","confidence":"high","source_url":"https://investor.arm.com/","source_title":"Arm Holdings investor relations","source_type":"primary","timeline":{"operational_since":1990,"constraint_relief":null,"note":"IP licensing \u2014 no physical capacity timeline."}},{"id":"SKH-US-INDIANA","name":"SK Hynix Advanced Packaging \u2014 West Lafayette, Indiana","company":"SK Hynix","country":"United States","city":"West Lafayette, Indiana","lat":40.425,"lon":-86.91,"layer":"packaging","technology":"HBM advanced packaging for AI accelerators","role":"SK Hynix's US advanced packaging facility \u2014 $3.87B investment. Represents US reshoring of HBM packaging capacity. In proximity to Purdue University semiconductor research cluster.","status":"construction","timeline_volume_production":"Production targeted 2028","policy_exposure":"CHIPS Act incentive. US-Korea cooperation on strategic semiconductor manufacturing.","time_to_relief":"2028 production, yield ramp through 2028\u201329.","constraint_status":"construction","confidence":"high","source_url":"https://www.skhynix.com/eng/ir/quarterlyEarnings.do","source_title":"SK Hynix announcement + Purdue partnership","source_type":"primary","timeline":{"announced":2023.0,"construction":2024.5,"equipment":2026.0,"qualification":2027.0,"volume_production":2028.0,"constraint_relief":2028.5,"note":"Production targeted 2028. CHIPS Act recipient."}},{"id":"TSMC-JP-KUMAMOTO","name":"TSMC Fab \u2014 Kumamoto, Japan (JASM)","company":"TSMC (JASM joint venture with Sony, Denso, Toyota)","country":"Japan","city":"Kumamoto","lat":32.789,"lon":130.741,"layer":"logic","technology":"12/16nm, 22/28nm \u2014 not leading-edge but strategically important for automotive/IoT","role":"TSMC's Japan joint venture. Phase 1 (12nm) in production 2024. Phase 2 (6nm) construction underway. Not advanced enough for frontier AI accelerators \u2014 relevant for automotive, IoT, and supporting Japan's semiconductor ecosystem rebuilding. Sony, Denso, Toyota as JV partners.","status":"operational","policy_exposure":"Japanese government subsidy. Part of Japan's semiconductor independence strategy. JASM strengthens US-Japan-Taiwan semiconductor cooperation.","time_to_relief":"Operational. Phase 2 (6nm): 2027.","constraint_status":"operational","confidence":"high","source_url":"https://www.jasm.co.jp/en/","source_title":"JASM corporate + TSMC investor briefings","source_type":"primary","timeline":{"announced":2021.5,"construction":2022.5,"equipment":2023.0,"qualification":2023.5,"volume_production":2024.0,"constraint_relief":2024.5,"note":"Phase 1 (12nm) operational 2024. Phase 2 (6nm) 2027."}},{"id":"BROADCOM-US-PALOALTO","name":"Broadcom \u2014 Palo Alto (AI ASIC Design)","company":"Broadcom","country":"United States","city":"Palo Alto, California","lat":37.441,"lon":-122.143,"layer":"logic","technology":"Custom AI ASICs (Google TPU, Meta MTIA, others); networking silicon","role":"Broadcom is the leading custom AI ASIC designer \u2014 a significant and growing alternative to Nvidia GPUs for hyperscaler inference. Broadcom AI ASIC revenue exceeded $20B in FY2025. Custom ASICs reduce per-unit GPU dependence but still require TSMC CoWoS and HBM.","status":"operational","policy_exposure":"US company. ASICs produced at TSMC \u2014 CoWoS and HBM dependent. Less export-control exposure than Nvidia (ASICs are customer-specific, not off-the-shelf).","dependencies_upstream":["TSMC advanced logic","TSMC CoWoS","HBM (SK Hynix / Micron)"],"dependencies_downstream":["Google (primary)","Meta","ByteDance","Others"],"constraint_status":"non-binding","confidence":"high","source_url":"https://investors.broadcom.com/","source_title":"Broadcom FY2025 earnings","source_type":"primary","timeline":{"operational_since":2000,"constraint_relief":null,"note":"Design company. ASIC revenue $20B+ FY2025."}},{"id":"TSMC-DE-DRESDEN","name":"TSMC Fab \u2014 Dresden, Germany (ESMC)","company":"TSMC (ESMC joint venture with Infineon, NXP, Bosch)","country":"Germany","city":"Dresden","lat":51.052,"lon":13.738,"layer":"logic","technology":"28/22nm \u2014 mature nodes for automotive and industrial","role":"European semiconductor manufacturing initiative. Mature nodes (28/22nm) \u2014 not relevant for frontier AI accelerators but important for European automotive and industrial chip supply independence. EU Chips Act strategic investment.","status":"construction","timeline_volume_production":"Production targeted 2027","policy_exposure":"EU Chips Act funding. European semiconductor sovereignty initiative. Germany strategic industrial policy.","constraint_status":"construction","confidence":"high","source_url":"https://www.esmc.eu/","source_title":"ESMC corporate + EU Chips Act filings","source_type":"primary","timeline":{"announced":2023.0,"construction":2024.0,"equipment":2025.5,"qualification":2026.5,"volume_production":2027.0,"constraint_relief":2027.5,"note":"28/22nm. Production targeted 2027. Not relevant for frontier AI."}},{"id":"SAMSUNG-KR-TAYLOR","name":"Samsung Semiconductor \u2014 Taylor, Texas","company":"Samsung","country":"United States","city":"Taylor, Texas","lat":30.569,"lon":-97.408,"layer":"logic","technology":"4nm / 2nm \u2014 advanced foundry for external customers","role":"Samsung's US advanced foundry expansion. Phase 1 (4nm) construction; timeline has slipped. Intended to provide a TSMC alternative for US-based chip designers. Primary target: advanced AI and mobile chips. Samsung Foundry has lost customers in recent years due to yield challenges.","status":"construction","policy_exposure":"CHIPS Act recipient. US domestic foundry alternative to TSMC. Progress slower than announced \u2014 confidence moderate.","time_to_relief":"Delayed. Production timeline uncertain \u2014 Samsung Foundry has faced yield and customer-retention challenges. Conservative estimate: 2027 at earliest for meaningful volume.","constraint_status":"construction","confidence":"moderate","source_url":"https://semiconductor.samsung.com/us/foundry/","source_title":"Samsung Foundry + CHIPS Act filings","source_type":"primary","timeline":{"announced":2021.0,"construction":2023.0,"equipment":2025.0,"qualification":2026.5,"volume_production":2027.5,"constraint_relief":2028.0,"note":"Delayed. 4nm construction. Timeline uncertain \u2014 moderate confidence."}},{"id":"HUAWEI-CN-SHENZHEN","name":"Huawei \u2014 Shenzhen (Ascend AI Accelerator)","company":"Huawei","country":"China","city":"Shenzhen","lat":22.543,"lon":114.058,"layer":"logic","technology":"Ascend 910B/910C AI accelerators; designed internally, manufactured at SMIC","role":"China's primary domestic AI accelerator. Manufactured at SMIC using DUV multi-patterning (7nm-class). Viable for many inference workloads. CUDA software moat remains the largest barrier to broad Ascend adoption. Volume is constrained by SMIC yield at advanced nodes.","status":"operational","policy_exposure":"Huawei on BIS Entity List. Primary target of US semiconductor export controls. Huawei's ability to access advanced chips from external foundries is blocked \u2014 reliant on SMIC for advanced nodes.","dependencies_upstream":["SMIC (sole advanced foundry)","Domestic HBM (CXMT \u2014 early stage)","Domestic packaging"],"constraint_status":"operational","confidence":"moderate","source_url":"https://www.huawei.com/en/facts/voices-of-huawei/ascend","source_title":"Huawei technical documentation + SemiAnalysis","source_type":"specialist","timeline":{"operational_since":2020,"constraint_relief":null,"note":"Ascend 910B/C in production. SMIC-dependent. Volume constrained."}},{"id":"POWER-NUCLEAR-US","name":"US Nuclear Restart / AI Power Supply","company":"Multiple (Constellation, Vistra, NuScale, X-energy)","country":"United States","city":"Multiple (Three Mile Island PA, Comanche Peak TX, etc.)","lat":40.153,"lon":-76.726,"layer":"power","technology":"Nuclear power for AI data center baseload supply","role":"Nuclear power restarts and new SMR projects are emerging as the preferred solution for AI data center baseload power \u2014 24/7 carbon-free supply without intermittency. Microsoft restarted Three Mile Island Unit 1 (contracted with Constellation). Amazon, Google, and others pursuing nuclear PPAs. This represents the energy-policy dimension of AI industrial policy.","status":"operational","policy_exposure":"NRC licensing jurisdiction. State-level permitting. IRA tax credits. Nuclear restart is faster than new build \u2014 but still 2\u20135 year process for new sites.","time_to_relief":"Constellation TMI restart: operational 2024. New SMRs: 2030+. Nuclear PPAs: 2026\u20132030 depending on project.","constraint_status":"operational","confidence":"high","source_url":"https://www.constellationenergy.com/newsroom/2024/Constellation-to-Launch-Crane-Clean-Energy-Center.html","source_title":"Constellation Energy + Microsoft PPA announcement","source_type":"primary","timeline":{"operational_since":2024,"constraint_relief":2026.0,"note":"TMI restart operational 2024. New SMRs 2030+. Nuclear PPAs 2026-2030."}}];
+  renderStats(allAssets);
   initMap();
-  setTimeout(()=>{ if(currentView==='dependency') showDep(document.querySelector('.dep-btn.active')); }, 100);
 });
 </script>
+</body>
+</html>
