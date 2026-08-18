@@ -30,7 +30,7 @@ html,body{height:100%;font-family:'Source Serif 4',serif;-webkit-font-smoothing:
   --ink:#ddd6c8;--ink2:#cec8bc;--ink3:#909090;--ink4:#6a6a68;
   --red:#c84000;--teal:#4a9c8a;--amber:#c89040;
 }
-body{background:var(--bg);color:var(--ink);display:flex;flex-direction:column;animation:fadeIn .2s ease}
+body{background:var(--bg);color:var(--ink);display:flex;flex-direction:column;animation:fadeIn .2s ease;min-height:100vh}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;background:none;border:none;color:inherit;font-family:inherit}
@@ -90,68 +90,70 @@ button{cursor:pointer;background:none;border:none;color:inherit;font-family:inhe
 .time-note{font-family:var(--ss);font-style:italic;font-size:9px;color:var(--ink4)}
 
 /* ── MAIN CONTENT AREA ── */
-.view-area{flex:1;display:flex;position:relative;min-height:0;overflow:hidden}
+.view-area{flex:1;display:flex;position:relative;min-height:0}
 
 /* ── MAP VIEW ── */
 #map-view{flex:1;display:flex;position:relative}
 #map{flex:1}
 
 /* ── PIPELINE VIEW ── */
-#pipeline-view{flex:1;overflow:auto;padding:20px 20px 40px;display:none}
-.pipeline-head{margin-bottom:16px}
-.pipeline-title{font-family:var(--cg);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
-.pipeline-sub{font-size:12.5px;color:var(--ink3);line-height:1.55}
+#pipeline-view{flex:1;overflow:auto;padding:24px 24px 48px;display:none;height:100%}
+.pipeline-head{margin-bottom:14px}
+.pipeline-title{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.pipeline-sub{font-size:13px;color:var(--ink3);line-height:1.6;max-width:680px}
 .pipeline-key{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;margin-top:8px}
 .pk-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8.5px;color:var(--ink3)}
 .pk-swatch{width:14px;height:8px;border-radius:1px}
-.pipeline-scroll{overflow-x:auto}
-.pipeline-table{min-width:900px;width:100%}
-.pt-row{display:grid;grid-template-columns:220px 1fr;gap:0;border-bottom:1px solid var(--border);min-height:38px}
+.pipeline-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:4px}
+.pipeline-table{min-width:860px;width:100%;border-collapse:collapse}
+.pt-row{display:flex;border-bottom:1px solid var(--border);min-height:42px}
+.pt-row:last-child{border-bottom:none}
+.pt-row:hover{background:var(--card-alt)}
+.pt-label{width:200px;min-width:200px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);position:sticky;left:0;background:var(--card);z-index:10}
 .pt-row:hover .pt-label{background:var(--card-alt)}
-.pt-label{padding:8px 12px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);background:var(--card);position:sticky;left:0;z-index:10}
 .pt-name{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.3}
-.pt-sub{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:1px}
-.pt-timeline{position:relative;padding:0 8px}
-.pt-years{display:flex;position:absolute;top:0;left:8px;right:8px;height:100%;pointer-events:none}
-.pt-year-col{flex:1;border-left:1px solid var(--border);opacity:.4}
+.pt-sub{font-family:var(--mono);font-size:7.5px;color:var(--ink4);margin-top:1px}
+.pt-timeline{position:relative;flex:1;padding:4px 0}
+.pt-year-grid{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;pointer-events:none}
+.pt-year-col{flex:1;border-left:1px solid var(--border);opacity:.25}
 .pt-bars{position:relative;height:100%;display:flex;align-items:center}
-.pt-bar{position:absolute;height:10px;border-radius:2px;opacity:.85}
-.pt-phase-label{position:absolute;font-family:var(--mono);font-size:7px;color:rgba(255,255,255,.85);top:50%;transform:translateY(-50%);left:4px;white-space:nowrap;overflow:hidden;pointer-events:none}
-.year-header{display:grid;grid-template-columns:220px 1fr;border-bottom:2px solid var(--border);margin-bottom:2px}
-.yh-label{padding:6px 12px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);border-right:1px solid var(--border)}
-.yh-years{display:flex;padding:0 8px}
-.yh-year{flex:1;font-family:var(--mono);font-size:8.5px;color:var(--ink4);border-left:1px solid var(--border);padding-left:4px;padding-top:6px;padding-bottom:6px}
-.pipeline-callout{background:var(--card-alt);border:1px solid var(--border);border-radius:3px;padding:10px 14px;margin-bottom:14px;font-size:11.5px;color:var(--ink2);line-height:1.6}
+.pt-bar{position:absolute;height:12px;border-radius:2px;opacity:.9;min-width:4px}
+.pt-phase-label{position:absolute;font-family:var(--mono);font-size:6.5px;color:rgba(255,255,255,.9);top:50%;transform:translateY(-50%);left:4px;white-space:nowrap;overflow:hidden;pointer-events:none}
+.year-header{display:flex;border-bottom:2px solid var(--border);background:var(--card-alt)}
+.yh-label{width:200px;min-width:200px;padding:6px 12px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);border-right:1px solid var(--border);flex-shrink:0}
+.yh-years{flex:1;display:flex}
+.yh-year{flex:1;font-family:var(--mono);font-size:8.5px;color:var(--ink4);border-left:1px solid var(--border);padding:6px 0 6px 4px}
+.pipeline-callout{background:rgba(90,58,138,.06);border:1px solid rgba(90,58,138,.2);border-radius:3px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--ink2);line-height:1.65}
 .pipeline-callout strong{color:var(--ink)}
 
 /* ── DEPENDENCY VIEW ── */
-#dependency-view{flex:1;overflow:auto;padding:20px;display:none}
-.dep-title{font-family:var(--cg);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
-.dep-sub{font-size:12.5px;color:var(--ink3);margin-bottom:18px}
-.dep-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.dep-btn{font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid var(--border);border-radius:2px;color:var(--ink3);cursor:pointer;background:var(--card)}
+#dependency-view{flex:1;overflow:auto;padding:24px 28px 48px;display:none;height:100%}
+.dep-title{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.dep-sub{font-size:13px;color:var(--ink3);margin-bottom:16px;max-width:600px;line-height:1.6}
+.dep-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.dep-btn{font-family:var(--mono);font-size:9px;padding:5px 14px;border:1px solid var(--border);border-radius:2px;color:var(--ink3);cursor:pointer;background:var(--card);white-space:nowrap;line-height:1.4;display:inline-flex;align-items:center;height:28px}
 .dep-btn:hover,.dep-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.dep-graph{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:16px}
-.dep-layer{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.dep-graph{display:flex;flex-direction:column;gap:0;margin-top:16px;max-width:680px}
+.dep-layer{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;border-top:2px solid}
 .dep-layer-head{padding:10px 14px;border-bottom:1px solid var(--border);border-left:3px solid}
 .dep-layer-title{font-family:var(--cg);font-size:14px;font-weight:600;color:var(--ink)}
 .dep-layer-sub{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:1px}
-.dep-asset{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer}
+.dep-asset{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
 .dep-asset:last-child{border-bottom:none}
 .dep-asset:hover{background:var(--card-alt)}
-.dep-asset-name{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:3px}
-.dep-asset-meta{font-family:var(--mono);font-size:8px;color:var(--ink4)}
-.dep-arrow-row{display:flex;align-items:center;gap:8px;padding:8px 14px;color:var(--ink4)}
-.dep-arrow{font-family:var(--mono);font-size:11px}
+.dep-asset-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.dep-asset-meta{font-family:var(--mono);font-size:8px;color:var(--ink3)}
+.dep-arrow-row{display:flex;align-items:center;gap:8px;padding:6px 14px;color:var(--ink4);background:var(--card-alt);border-left:1px solid var(--border);border-right:1px solid var(--border)}
+.dep-arrow{font-family:var(--mono);font-size:13px;color:var(--ink4)}
 .dep-highlight{background:rgba(90,58,138,.06);border-color:var(--purple)}
 [data-theme=dark] .dep-highlight{background:rgba(90,58,138,.12)}
 
 /* ── COUNTRY VIEW ── */
-#country-view{flex:1;overflow:auto;padding:20px;display:none}
-.cty-title{font-family:var(--cg);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:4px}
-.cty-sub{font-size:12.5px;color:var(--ink3);margin-bottom:16px}
-.cty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}
-.cty-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+#country-view{flex:1;overflow:auto;padding:24px 28px 48px;display:none;height:100%}
+.cty-title{font-family:var(--cg);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.cty-sub{font-size:13px;color:var(--ink3);margin-bottom:18px;max-width:680px;line-height:1.6}
+.cty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;align-items:start}
+.cty-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;height:auto;display:flex;flex-direction:column}
 .cty-card-head{padding:12px 16px;border-bottom:1px solid var(--border);border-left:4px solid}
 .cty-flag{font-size:1.4rem;margin-bottom:4px}
 .cty-name{font-family:var(--cg);font-size:17px;font-weight:600;color:var(--ink)}
@@ -601,7 +603,7 @@ function yearToPct(y) { return Math.max(0, Math.min(100, (y - Y_START) / (Y_END 
 function renderPipeline() {
   // Year headers
   const yhYears = document.getElementById('yh-years');
-  yhYears.innerHTML = YEARS.map(y => `<div class="yh-year">${y}</div>`).join('');
+  yhYears.innerHTML = YEARS.map(y => `<div class="yh-year" style="flex:1;font-family:var(--mono);font-size:8px;color:var(--ink4);border-left:1px solid var(--border);padding:5px 0 5px 5px">${y}</div>`).join('');
 
   // Filter assets that have timeline data
   const pAssets = allAssets.filter(a => {
@@ -664,12 +666,12 @@ function renderPipeline() {
 
     return `<div class="pt-row">
       <div class="pt-label">
-        <div class="pt-name">${a.name.length>28?a.name.substring(0,26)+'…':a.name}</div>
+        <div class="pt-name">${a.name.length>30?a.name.substring(0,28)+'…':a.name}</div>
         <div class="pt-sub">${LL[a.layer]||a.layer} · ${a.country}</div>
       </div>
-      <div class="pt-timeline">
-        <div class="pt-years">${YEARS.map(()=>`<div class="pt-year-col"></div>`).join('')}</div>
-        <div class="pt-bars">${bars}${yearLine}</div>
+      <div class="pt-timeline" style="position:relative;flex:1;min-height:42px">
+        <div class="pt-year-grid">${YEARS.map(()=>`<div class="pt-year-col"></div>`).join('')}</div>
+        <div class="pt-bars" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center">${bars}${yearLine}</div>
       </div>
     </div>`;
   }).join('');
@@ -740,21 +742,21 @@ function showDep(btn) {
   const html = chain.chain.map((layer,i) => {
     const assets = layer.assets.map(id=>assetMap[id]).filter(Boolean);
     const arrow = i < chain.chain.length-1 ? `<div class="dep-arrow-row"><span class="dep-arrow">↓</span><span style="font-family:var(--mono);font-size:8px;color:var(--ink4)">depends on</span></div>` : '';
-    return `<div class="dep-layer" style="border-top-color:${layer.color}">
-      <div class="dep-layer-head" style="border-left-color:${layer.color}">
+    return `<div class="dep-layer" style="border-top-color:${layer.color};border-top-width:3px">
+      <div class="dep-layer-head" style="border-left-color:${layer.color};border-left-width:4px">
         <div class="dep-layer-title">${layer.title}</div>
         <div class="dep-layer-sub">${assets.length} asset${assets.length!==1?'s':''} mapped</div>
       </div>
       ${assets.map(a=>`
         <div class="dep-asset" onclick='showPanel(${JSON.stringify(a).replace(/'/g,"&#39;")});switchView("map")'>
           <div class="dep-asset-name">${a.name}</div>
-          <div class="dep-asset-meta">${a.company} · ${a.country} · <span style="color:${LC[a.layer]||'#666'}">${LL[a.layer]||a.layer}</span></div>
+          <div class="dep-asset-meta">${a.company} · ${a.country} · <span style="color:${LC[a.layer]||'#666'}">${LL[a.layer]||a.layer}</span> · <span style="color:var(--ink4)">Click for details →</span></div>
         </div>
       `).join('')}
     </div>${arrow}`;
   }).join('');
 
-  document.getElementById('dep-graph').innerHTML = `<div style="max-width:600px">${html}</div>`;
+  document.getElementById('dep-graph').innerHTML = `<div style="max-width:640px;border:1px solid var(--border);border-radius:4px;overflow:hidden">${html}</div>`;
 }
 
 // ──────────────────────────────────────────────────────────
@@ -783,7 +785,7 @@ const COUNTRIES = [
 
 function renderCountries() {
   document.getElementById('country-grid').innerHTML = COUNTRIES.map(c => `
-    <div class="cty-card">
+    <div class="cty-card" style="border-top:3px solid ${c.color}">
       <div class="cty-card-head" style="border-left-color:${c.color}">
         <div class="cty-flag">${c.flag}</div>
         <div class="cty-name">${c.name}</div>
