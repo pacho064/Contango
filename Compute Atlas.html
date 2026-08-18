@@ -660,7 +660,7 @@ function showDep(btn){
         <div class="dep-layer-title">${layer.title}</div>
         <div class="dep-layer-sub">${assets.length} asset${assets.length!==1?'s':''} mapped</div>
       </div>
-      ${assets.map(a=>`<div class="dep-asset" onclick="switchView('map');showPanel(${JSON.stringify(a).replace(/\/g,'\\').replace(/`/g,'\`').replace(/\${/g,'\${')})">
+      ${assets.map(a=>`<div class="dep-asset" onclick="openAssetById('${a.id}')">
         <div class="dep-asset-name">${a.name}</div>
         <div class="dep-asset-meta">${a.company} · ${a.country} · <span style="color:${LC[a.layer]||'#666'}">${LL[a.layer]||a.layer}</span></div>
       </div>`).join('')}
