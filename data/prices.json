@@ -1,6 +1,6 @@
 {
   "_note": "Benchmarks auto-updated daily by updater.py via GitHub Actions. OSP differentials updated manually ~1st of each month via osp_update.py. Absolute OSP prices are computed: differential + oman_dubai spot.",
-  "_updated": "2026-09-24T21:16:48.625580Z",
+  "_updated": "2026-09-25T21:14:06.428024Z",
   "_osp_month": "March 2026",
   "_osp_updated": "2026-03-01",
   "benchmarks": {
