@@ -1,6 +1,6 @@
 {
   "_note": "Benchmarks auto-updated daily by updater.py via GitHub Actions. OSP differentials updated manually ~1st of each month via osp_update.py. Absolute OSP prices are computed: differential + oman_dubai spot.",
-  "_updated": "2026-10-01T22:28:11.549726Z",
+  "_updated": "2026-10-02T21:56:49.858442Z",
   "_osp_month": "March 2026",
   "_osp_updated": "2026-03-01",
   "benchmarks": {
@@ -268,16 +268,16 @@
   ],
   "production": {
     "saudi_arabia": {
-      "value": 6640.0,
+      "value": 7290.0,
       "unit": "thousand bbl/day",
-      "period": "2026-05",
+      "period": "2026-06",
       "grade": "crude incl. lease condensate",
       "source": "EIA (INTL.57-1-SAU)"
     },
     "iraq": {
-      "value": 1320.0,
+      "value": 1945.0,
       "unit": "thousand bbl/day",
-      "period": "2026-05",
+      "period": "2026-06",
       "grade": "crude incl. lease condensate",
       "source": "EIA (INTL.57-1-IRQ)"
     }
