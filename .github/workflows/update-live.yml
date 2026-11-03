@@ -31,7 +31,9 @@ jobs:
       - name: Fetch live prices
         env:
           OILPRICEAPI_KEY: ${{ secrets.OILPRICEAPI_KEY }}
-        run: python live_update.py
+        # Scheduled runs fetch regional grades every 4 hours by themselves;
+        # a manual run from the Actions tab forces them (--all) so you can test.
+        run: python live_update.py ${{ github.event_name == 'workflow_dispatch' && '--all' || '' }}
 
       - name: Commit and push if changed
         run: |

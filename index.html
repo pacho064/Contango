@@ -140,6 +140,13 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 .sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
 .sc-row:last-child{border-bottom:none}
 .sc-l{font-family:var(--ss);font-size:11px;color:var(--ink3)}
+.sc-d{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-left:4px;white-space:nowrap}
+.reg-tbl{width:100%;border-collapse:collapse;margin-top:4px}
+.reg-tbl th{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);text-align:left;font-weight:400;padding:6px 8px;border-bottom:1px solid var(--border)}
+.reg-tbl td{font-family:var(--ss);font-size:12px;color:var(--ink2);padding:8px;border-bottom:1px solid var(--border);vertical-align:baseline}
+.reg-tbl td.reg-p{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap}
+.reg-tbl td.reg-m{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.reg-tbl th.r,.reg-tbl td.reg-p{text-align:right}
 .sc-v{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink)}
 .sc-v.red{color:var(--red)}.sc-v.teal{color:var(--teal)}.sc-v.amber{color:var(--amber)}
 .sc-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink3);margin-top:6px;line-height:1.5}
@@ -261,6 +268,17 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 <div class="grid">
 <div class="main-col">
 
+  <!-- REGIONAL CRUDE REFERENCE PRICES (filled from data/live.json; hidden until data exists) -->
+  <div class="sec" id="regional-sec" style="display:none">
+    <div class="sec-label">Beyond Brent and WTI · reference prices</div>
+    <div class="sec-title">Regional crude grades</div>
+    <table class="reg-tbl">
+      <thead><tr><th>Grade</th><th class="r">$/bbl</th><th>As of (UTC)</th><th>Source</th></tr></thead>
+      <tbody id="regional-body"></tbody>
+    </table>
+    <div class="sc-note">Reference prices at business-day cadence, passed through from OilPriceAPI with its own timestamp and source label. They are not real-time, not Platts/Argus assessments, and not official selling prices. Brent and WTI above refresh about every 30 minutes; this page re-checks automatically every minute.</div>
+  </div>
+
   <!-- CRISIS IMPACT -->
   <div class="sec">
     <div class="sec-label">Crisis at a glance · July 2026</div>
@@ -351,15 +369,15 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   <div class="sc">
     <div class="sc-head">
       <span class="sc-title">Benchmark prices</span>
-      <span class="sc-meta" id="sb-updated">live</span>
+      <span class="sc-meta" id="sb-updated">as of date shown</span>
     </div>
     <div class="sc-body">
-      <div class="sc-row"><span class="sc-l">Brent (EIA)</span><span class="sc-v" id="sb-brent">—</span></div>
-      <div class="sc-row"><span class="sc-l">WTI (EIA)</span><span class="sc-v" id="sb-wti">—</span></div>
-      <div class="sc-row"><span class="sc-l">Arab Light OSP</span><span class="sc-v" id="sb-osp">—</span></div>
-      <div class="sc-row"><span class="sc-l">Murban (ADNOC)</span><span class="sc-v" id="sb-murban">—</span></div>
-      <div class="sc-row"><span class="sc-l">Basra Medium</span><span class="sc-v" id="sb-basra">—</span></div>
-      <div class="sc-row"><span class="sc-l">Urals (Russia)</span><span class="sc-v" id="sb-urals">—</span></div>
+      <div class="sc-row"><span class="sc-l">Brent (EIA) <span class="sc-d" id="sb-brent-d"></span></span><span class="sc-v" id="sb-brent">—</span></div>
+      <div class="sc-row"><span class="sc-l">WTI (EIA) <span class="sc-d" id="sb-wti-d"></span></span><span class="sc-v" id="sb-wti">—</span></div>
+      <div class="sc-row"><span class="sc-l">Arab Light OSP <span class="sc-d" id="sb-osp-d"></span></span><span class="sc-v" id="sb-osp">—</span></div>
+      <div class="sc-row"><span class="sc-l">Murban OSP (ADNOC) <span class="sc-d" id="sb-murban-d"></span></span><span class="sc-v" id="sb-murban">—</span></div>
+      <div class="sc-row"><span class="sc-l">Basra Medium OSP <span class="sc-d" id="sb-basra-d"></span></span><span class="sc-v" id="sb-basra">—</span></div>
+      <div class="sc-row"><span class="sc-l">Urals (Russia) <span class="sc-d" id="sb-urals-d"></span></span><span class="sc-v" id="sb-urals">—</span></div>
       <div class="src-ln" id="sb-src">Saudi Aramco · EIA · SOMO · Argus</div>
     </div>
   </div>
@@ -560,9 +578,16 @@ function renderPrices(p){
   set('sb-murban', fmt((osps.murban||{}).price));
   set('sb-basra', fmt((osps.basra_medium||{}).price));
   set('sb-urals', fmt((b.urals||{}).price));
+  // show the date behind every sidebar number (these are not all live)
+  set('sb-brent-d', brent.updated||'');
+  set('sb-wti-d', wti.updated||'');
+  set('sb-osp-d', osp.for_month||'');
+  set('sb-murban-d', (osps.murban||{}).for_month||'');
+  set('sb-basra-d', (osps.basra_medium||{}).for_month||'');
+  set('sb-urals-d', (b.urals||{}).updated||'');
   if(p._updated){
     const d = new Date(p._updated);
-    set('sb-updated', d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+    // (sidebar header deliberately NOT set to this date: rows carry different dates, shown per row)
     const du = document.getElementById('data-updated');
     if(du){ du.textContent='Updated '+d.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}); du.style.display=''; }
   }
@@ -706,17 +731,54 @@ function updateChart(){
 // ── LIVE QUOTES (data/live.json, written every 30 min by live_update.py) ──
 // Shown next to the EIA figure with the API's own timestamp and source.
 // Hidden if the file is missing, the value is flagged stale, or anything is malformed.
-function renderLive(l){
-  function when(iso){
-    const d=new Date(iso); if(isNaN(d.getTime())) return '';
-    return d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'UTC'})+' UTC';
+function liveWhen(iso){
+  if(!iso) return '';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(iso)){            // date-only value: don't invent a time of day
+    const d=new Date(iso+'T00:00:00Z'); if(isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
   }
+  const d=new Date(iso); if(isNaN(d.getTime())) return '';
+  return d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'UTC'})+' UTC';
+}
+function renderLive(l){
+  l=l||{};
   [['brent','m-brent-live'],['wti','m-wti-live']].forEach(([k,id])=>{
-    const e=(l||{})[k];
-    if(!e || e.stale || typeof e.price!=='number') return;
-    const t=when(e.as_of);
+    const e=l[k];
+    if(!e || e.stale || typeof e.price!=='number' || !isFinite(e.price)){ set(id,''); return; }
+    const t=liveWhen(e.as_of);
     set(id,'Live $'+e.price.toFixed(2)+(t?' · '+t:'')+' · '+(e.source||'OilPriceAPI'));
   });
+  renderRegional(l.regional);
+}
+// Regional grades table. Values come from an external API, so cells are filled with
+// textContent (never innerHTML). Rows that are stale or malformed are left out;
+// the whole section stays hidden until at least one row is usable.
+function renderRegional(list){
+  const sec=document.getElementById('regional-sec'), body=document.getElementById('regional-body');
+  if(!sec||!body) return;
+  const rows=(Array.isArray(list)?list:[]).filter(e=>e && !e.stale && typeof e.price==='number' && isFinite(e.price));
+  if(!rows.length){ sec.style.display='none'; return; }
+  body.textContent='';
+  rows.forEach(e=>{
+    const unit=(e.unit && !/barrel|bbl/i.test(e.unit)) ? ' /'+e.unit : '';
+    const cells=[
+      [String(e.label||e.code||'—'),''],
+      ['$'+e.price.toFixed(2)+unit,'reg-p'],
+      [liveWhen(e.as_of)||'—','reg-m'],
+      [String(e.source||'OilPriceAPI')+(e.data_status?' · '+e.data_status:''),'reg-m']
+    ];
+    const tr=document.createElement('tr');
+    cells.forEach(([txt,cls])=>{ const td=document.createElement('td'); if(cls) td.className=cls; td.textContent=txt; tr.appendChild(td); });
+    body.appendChild(tr);
+  });
+  sec.style.display='';
+}
+// Quiet re-check so the numbers update without reloading the page
+async function refreshLive(){
+  try{
+    const r=await fetch('data/live.json?_='+Date.now(),{cache:'no-store'});
+    if(r.ok) renderLive(await r.json());
+  }catch(e){}
 }
 
 // ── BOOT ──────────────────────────────────────────────────────────────
@@ -739,6 +801,12 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     if(ev) renderEvents(ev);
     if(lv) renderLive(lv);
   } catch(e){ console.warn('Live data fetch failed, using fallback',e); }
+
+  // Real-time feel: re-check live.json every minute while the tab is visible, and
+  // immediately when the visitor comes back to the tab. (The data itself is refreshed
+  // by the server about every 30 min; this just makes sure nobody sees an old copy.)
+  setInterval(()=>{ if(!document.hidden) refreshLive(); }, 60000);
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) refreshLive(); });
 });
 </script>
 </body>
