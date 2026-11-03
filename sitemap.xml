@@ -50,4 +50,28 @@
     <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://contango-energy.com/natural-gas.html</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://contango-energy.com/ai-compute.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://contango-energy.com/compute-atlas.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://contango-energy.com/about.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://contango-energy.com/sources.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://contango-energy.com/roadmap.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

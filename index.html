@@ -182,8 +182,6 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     <span class="brand">Contango</span>
     <div class="nav-links">
       <a class="nav-a on" href="index.html">Overview</a>
-      <a class="nav-a" href="Compute Atlas.html">Compute Atlas</a>
-      <a class="nav-a" href="ai-compute.html">AI Compute</a>
       <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
       <a class="nav-a" href="iraq.html">Iraq</a>
       <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
@@ -193,6 +191,8 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <a class="nav-a" href="grades.html">Grades</a>
       <a class="nav-a" href="commodities.html">Commodities</a>
       <a class="nav-a" href="natural-gas.html">Natural gas</a>
+      <a class="nav-a" href="ai-compute.html">AI compute</a>
+      <a class="nav-a" href="compute-atlas.html">Compute Atlas</a>
     </div>
     <div class="nav-right">
       <span class="nav-brent" id="nav-brent"></span>
@@ -388,7 +388,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     </div>
     <div class="sc-body">
       <div class="sc-row"><a href="ai-compute.html" class="sc-l" style="color:var(--navy)">AI Compute →</a></div>
-      <div class="sc-row"><a href="Compute Atlas.html" class="sc-l" style="color:var(--navy)">Compute Atlas →</a></div>
+      <div class="sc-row"><a href="compute-atlas.html" class="sc-l" style="color:var(--navy)">Compute Atlas →</a></div>
       <div class="sc-row"><a href="saudi-arabia.html" class="sc-l" style="color:var(--navy)">Saudi Arabia →</a></div>
       <div class="sc-row"><a href="iraq.html" class="sc-l" style="color:var(--navy)">Iraq →</a></div>
       <div class="sc-row"><a href="opec-compliance.html" class="sc-l" style="color:var(--navy)">OPEC+ compliance →</a></div>
@@ -703,7 +703,8 @@ function updateChart(){
 
 // ── BOOT ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async ()=>{
-  buildChart();
+  // Guarded: if the Chart.js CDN is slow or blocked, the price/event data must still render
+  try{ buildChart(); }catch(e){ console.warn('Chart unavailable, rendering data without it', e); }
 
   // Render fallbacks immediately so page is never blank
   renderPrices(getPrices());

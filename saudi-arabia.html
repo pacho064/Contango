@@ -143,6 +143,9 @@ body{animation:fadeIn .25s ease-in}
     <a class="nav-a" href="osp-decoder.html">OSP</a>
     <a class="nav-a" href="grades.html">Grades</a>
     <a class="nav-a" href="commodities.html">Commodities</a>
+    <a class="nav-a" href="natural-gas.html">Natural gas</a>
+    <a class="nav-a" href="ai-compute.html">AI compute</a>
+    <a class="nav-a" href="compute-atlas.html">Compute Atlas</a>
     <div class="nav-right">
       <button class="theme-btn" id="themeBtn">Dark</button>
     </div>
@@ -634,7 +637,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       window._sc.update();
     }},50);
   });
-  window._sc=buildChart();
+  // Guarded: if the Chart.js CDN is slow or blocked, the data must still load
+  try{ window._sc=buildChart(); }catch(e){ console.warn('Chart unavailable, loading data without it', e); }
   loadData();
 });
 </script>
