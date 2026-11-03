@@ -1,0 +1,3 @@
+# Python bytecode (created automatically when scripts run)
+__pycache__/
+*.pyc
