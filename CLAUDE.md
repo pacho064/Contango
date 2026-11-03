@@ -16,8 +16,10 @@ Verifiable facts only, with named sources and dates. No opinions or forecasts at
 - `data/prices.json` — written weekdays 18:00 UTC by `updater.py` (EIA: Brent, WTI, Saudi/Iraq production, SPR). Appends `data/history/crude-daily.jsonl`.
 - `data/events.json` — written daily 06:00 UTC by `news_update.py` (GDELT -> Claude Haiku extraction). Fields are `hl` and `src`; JS also accepts `text`/`headline` and `source`.
 - `data/compute-assets.json` — hand-maintained AI compute assets (33). `timeline` fields drive `getStatusAtYear()`.
+- `data/live.json` — Brent + WTI live quotes, written every 30 min on weekdays by `live_update.py` (workflow `update-live.yml`, OilPriceAPI free tier, one call per run). Shown on the homepage beside the EIA spot figure with the API's own timestamp and source label. Values flagged `synthetic` are never published; `stale` values are hidden. Test locally: `OILPRICEAPI_KEY=... python3 live_update.py`.
 - `osp_update.py` — run by hand monthly with OSP differentials.
-- Secrets: `EIA_API_KEY`, `ANTHROPIC_API_KEY`.
+- Secrets: `EIA_API_KEY`, `ANTHROPIC_API_KEY`, `OILPRICEAPI_KEY`.
+- Homepage tiles are labelled "(EIA spot)" because that is what they are (Europe Brent / Cushing WTI spot, lagged about a week). They were previously mislabelled "ICE Brent".
 
 ## Rendering pattern
 Render from fallback data first, then fetch live JSON silently and re-render. Never leave "Loading…" or "—" as a resting state. Guard any Chart.js call with try/catch so a blocked CDN cannot stop data from rendering (fixed on index and saudi-arabia; keep it that way).
@@ -35,7 +37,7 @@ Do NOT judge rendering by fetching the HTML as text: the values are filled in by
 ## Known open issues (verified Nov 2026)
 1. OSP spread mixes dates: `updater.py` recomputes `spread_vs_brent` from March 2026 OSP/Oman-Dubai vs current Brent (shows about -$40). Needs a rule: only compare same-month values, else show n/a.
 2. History rows are keyed by the day the script ran, not the EIA observation date, so one stale Brent value repeats across many days. Key by observation period instead.
-3. Stale manual values: Oman-Dubai, Urals, TTF, JKM (all 2026-03-21), OSP month (March 2026), chokepoint dates, "Crisis at a glance · July 2026" on the homepage. Automate where a free source exists (GIE AGSI+ for EU gas storage), otherwise show the as-of date prominently.
+3. Stale manual values: Oman-Dubai, Urals, TTF, JKM (all 2026-03-21), OSP month (March 2026), chokepoint dates, "Crisis at a glance · July 2026" on the homepage. Brent/WTI now have live quotes (see data/live.json); the rest still need a source. Automate where a free source exists (GIE AGSI+ for EU gas storage), otherwise show the as-of date prominently.
 4. News pipeline: `events.json` has no new timeline entries since 28 Jul 2026 and `_updated` is stale, though `_news_checked` advances daily. The script swallows API/fetch errors and still reports success. Check the Actions logs, then make it fail loudly (count errors, exit non-zero).
 5. `README.md` documents a `core5.json` workflow that no longer exists. Rewrite or delete.
 6. `news_update.py` user-agent still points at the old pacho064.github.io domain.

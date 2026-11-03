@@ -221,15 +221,17 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 <div class="metrics">
   <div class="metrics-inner">
     <div class="m-cell">
-      <div class="m-label">ICE Brent</div>
+      <div class="m-label">Brent (EIA spot)</div>
       <div class="m-val" id="m-brent">—</div>
       <div class="m-sub" id="m-brent-date">EIA</div>
+      <div class="m-sub" id="m-brent-live" style="color:var(--teal)"></div>
       <div class="m-chg" id="m-brent-chg"></div>
     </div>
     <div class="m-cell">
-      <div class="m-label">WTI</div>
+      <div class="m-label">WTI (EIA spot)</div>
       <div class="m-val" id="m-wti">—</div>
       <div class="m-sub" id="m-wti-date">EIA</div>
+      <div class="m-sub" id="m-wti-live" style="color:var(--teal)"></div>
       <div class="m-chg" id="m-wti-chg"></div>
     </div>
     <div class="m-cell">
@@ -701,6 +703,22 @@ function updateChart(){
   window._chart.update();
 }
 
+// ── LIVE QUOTES (data/live.json, written every 30 min by live_update.py) ──
+// Shown next to the EIA figure with the API's own timestamp and source.
+// Hidden if the file is missing, the value is flagged stale, or anything is malformed.
+function renderLive(l){
+  function when(iso){
+    const d=new Date(iso); if(isNaN(d.getTime())) return '';
+    return d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'UTC'})+' UTC';
+  }
+  [['brent','m-brent-live'],['wti','m-wti-live']].forEach(([k,id])=>{
+    const e=(l||{})[k];
+    if(!e || e.stale || typeof e.price!=='number') return;
+    const t=when(e.as_of);
+    set(id,'Live $'+e.price.toFixed(2)+(t?' · '+t:'')+' · '+(e.source||'OilPriceAPI'));
+  });
+}
+
 // ── BOOT ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async ()=>{
   // Guarded: if the Chart.js CDN is slow or blocked, the price/event data must still render
@@ -712,12 +730,14 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 
   // Then fetch live data
   try{
-    const [pr, ev] = await Promise.all([
+    const [pr, ev, lv] = await Promise.all([
       fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
-      fetch('data/events.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
+      fetch('data/events.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('data/live.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
     ]);
     if(pr) renderPrices(pr);
     if(ev) renderEvents(ev);
+    if(lv) renderLive(lv);
   } catch(e){ console.warn('Live data fetch failed, using fallback',e); }
 });
 </script>
