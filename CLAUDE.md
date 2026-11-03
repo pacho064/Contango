@@ -21,8 +21,11 @@ Verifiable facts only, with named sources and dates. No opinions or forecasts at
   - A code the API rejects (unknown or not on the plan) is remembered in `live.json` under `regional_unavailable` and skipped. `--retry-unavailable` re-tries them (e.g. after a plan change).
   - Commands: `OILPRICEAPI_KEY=... python3 live_update.py --all` (local test, forces regional), `--list-codes` (find codes for Urals, Bonny Light, Mars...), `EXTRA_CODES="CODE=Label,..."` to add grades without editing code.
   - Values from the API are put on the page with `textContent` only, never `innerHTML`. Keep it that way.
+- `data/chokepoints-live.json` — written daily by `portwatch_update.py` (workflow `update-portwatch.yml`, IMF PortWatch ArcGIS feature service, free, no key). Strait of Hormuz only (portid `chokepoint6`; the script refuses to publish if that id's name stops containing "Hormuz"). Latest day, 60-day series, plus a plain 7-day mean and the same 7 days a year earlier (null if any day is missing). PortWatch runs several days behind, so the page always shows the data date. Shown in the "Strait of Hormuz · vessel transits" section on the homepage (hidden until data exists). Counts are vessels, not barrels, and are a different series from the Lloyd's List item in the static chokepoint cards.
+- `data/gas-storage.json` — written daily by `gie_update.py` (workflow `update-gas.yml`, GIE AGSI, free personal key in `GIE_API_KEY`, sent as `x-key`). EU aggregate: fill %, TWh, injection/withdrawal, point difference vs same day last year and vs the mean of the prior five years (computed from GIE's own values, null if a day is missing). Shown at the top of the storage section on natural-gas.html; the July 2026 block under it is a dated snapshot.
+  - Both scripts were written from documented field names and tested against a fake server only (the build sandbox cannot reach either host). First real run: trigger each workflow from the Actions tab and read the log; if a field name differs, fix the parser, not the page.
 - `osp_update.py` — run by hand monthly with OSP differentials.
-- Secrets: `EIA_API_KEY`, `ANTHROPIC_API_KEY`, `OILPRICEAPI_KEY`.
+- Secrets: `EIA_API_KEY`, `ANTHROPIC_API_KEY`, `OILPRICEAPI_KEY`, `GIE_API_KEY`.
 - Homepage tiles are labelled "(EIA spot)" because that is what they are (Europe Brent / Cushing WTI spot, lagged about a week). They were previously mislabelled "ICE Brent".
 
 ## Rendering pattern
@@ -41,7 +44,7 @@ Do NOT judge rendering by fetching the HTML as text: the values are filled in by
 ## Known open issues (verified Nov 2026)
 1. OSP spread mixes dates: `updater.py` recomputes `spread_vs_brent` from March 2026 OSP/Oman-Dubai vs current Brent (shows about -$40). Needs a rule: only compare same-month values, else show n/a.
 2. History rows are keyed by the day the script ran, not the EIA observation date, so one stale Brent value repeats across many days. Key by observation period instead.
-3. Stale manual values: Oman-Dubai, Urals, TTF, JKM (all 2026-03-21), OSP month (March 2026), chokepoint dates, "Crisis at a glance · July 2026" on the homepage. Brent/WTI now have live quotes (see data/live.json); the rest still need a source. Automate where a free source exists (GIE AGSI+ for EU gas storage), otherwise show the as-of date prominently.
+3. Stale manual values: Oman-Dubai, Urals, TTF, JKM (all 2026-03-21), OSP month (March 2026), chokepoint dates, "Crisis at a glance · July 2026" on the homepage. Brent/WTI now have live quotes (see data/live.json); the rest still need a source. EU gas storage and Hormuz transits are now automated (see data/gas-storage.json, data/chokepoints-live.json); the static July storage block and static chokepoint cards remain dated snapshots. For the rest, show the as-of date prominently.
 4. News pipeline: `events.json` has no new timeline entries since 28 Jul 2026 and `_updated` is stale, though `_news_checked` advances daily. The script swallows API/fetch errors and still reports success. Check the Actions logs, then make it fail loudly (count errors, exit non-zero).
 5. `README.md` documents a `core5.json` workflow that no longer exists. Rewrite or delete.
 6. `news_update.py` user-agent still points at the old pacho064.github.io domain.

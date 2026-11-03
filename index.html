@@ -147,6 +147,10 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 .reg-tbl td.reg-p{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap}
 .reg-tbl td.reg-m{font-family:var(--mono);font-size:10px;color:var(--ink3)}
 .reg-tbl th.r,.reg-tbl td.reg-p{text-align:right}
+.hz-big{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--ink);margin:6px 0 2px}
+.hz-line{font-family:var(--ss);font-size:12px;color:var(--ink2);margin:2px 0}
+.hz-bars{display:block;width:100%;height:56px;margin-top:10px}
+.hz-bars rect{fill:var(--teal)}
 .sc-v{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink)}
 .sc-v.red{color:var(--red)}.sc-v.teal{color:var(--teal)}.sc-v.amber{color:var(--amber)}
 .sc-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink3);margin-top:6px;line-height:1.5}
@@ -325,6 +329,17 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <div class="ck-card high"><div class="ck-top"><div><div class="ck-name">Bab el-Mandeb</div><div class="ck-vol">9M bbl/d daily transit</div></div><span class="badge b-red">HIGH</span></div><div class="ck-status">Houthi naval blockade on Saudi Arabia declared July 20. Three Saudi tankers reversed course. Bab el-Mandeb crossings fell 22% in 6 days.</div><div class="ck-src">Reuters · Al-Monitor · Jul 22 2026</div></div>
       <div class="ck-card moderate"><div class="ck-top"><div><div class="ck-name">Suez Canal</div><div class="ck-vol">2.5M bbl/d daily transit</div></div><span class="badge b-amber">MODERATE</span></div><div class="ck-status">Elevated but operational. Rerouting Saudi crude around Africa becoming necessary as both Hormuz and Bab el-Mandeb contested.</div><div class="ck-src">US State Dept · Jul 2026</div></div>
     </div>
+  </div>
+
+  <!-- HORMUZ DAILY TRANSITS (filled from data/chokepoints-live.json; hidden until data exists) -->
+  <div class="sec" id="hz-sec" style="display:none">
+    <div class="sec-label">Strait of Hormuz · vessel transits</div>
+    <div class="sec-title">Daily transits, IMF PortWatch</div>
+    <div class="hz-big" id="hz-big"></div>
+    <div class="hz-line" id="hz-l1"></div>
+    <div class="hz-line" id="hz-l2"></div>
+    <svg class="hz-bars" id="hz-bars" viewBox="0 0 600 56" preserveAspectRatio="none" role="img" aria-label="Daily Hormuz transits, most recent 60 days of data"></svg>
+    <div class="sc-note" id="hz-note"></div>
   </div>
 
   <!-- PRICE CHART -->
@@ -773,6 +788,44 @@ function renderRegional(list){
   });
   sec.style.display='';
 }
+// Hormuz daily transits (IMF PortWatch via data/chokepoints-live.json). textContent only.
+// Shows PortWatch's own data date, which runs several days behind today.
+function fmtDay(iso){
+  const d=new Date(String(iso)+'T00:00:00Z'); if(isNaN(d.getTime())) return String(iso||'');
+  return d.toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
+}
+function renderHormuz(c){
+  const sec=document.getElementById('hz-sec'); if(!sec) return;
+  const h=c&&c.hormuz, L=h&&h.latest;
+  if(!L || typeof L.n_total!=='number' || !isFinite(L.n_total)){ sec.style.display='none'; return; }
+  const src=(c.source&&c.source.name)||'IMF PortWatch';
+  set('hz-big', L.n_total+' vessel'+(L.n_total===1?'':'s')+' · '+fmtDay(L.date));
+  const parts=[];
+  if(typeof L.n_tanker==='number') parts.push(L.n_tanker+' tanker'+(L.n_tanker===1?'':'s'));
+  if(typeof L.n_cargo==='number') parts.push(L.n_cargo+' cargo');
+  set('hz-l1', (parts.length?parts.join(', ')+' · ':'')+'latest day in the '+src+' dataset');
+  const a=h.avg7_computed, y=h.avg7_year_earlier_computed;
+  let l2='';
+  if(a&&typeof a.value==='number') l2='7-day average ('+fmtDay(a.from)+' – '+fmtDay(a.to)+'): '+a.value.toFixed(1)+' vessels/day (computed from the daily counts)';
+  if(y&&typeof y.value==='number') l2+=(l2?' · ':'')+'same 7 days a year earlier: '+y.value.toFixed(1);
+  set('hz-l2', l2);
+  const svg=document.getElementById('hz-bars');
+  if(svg){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    const ser=(Array.isArray(h.series)?h.series:[]).filter(r=>r&&typeof r.n_total==='number'&&isFinite(r.n_total));
+    const max=Math.max(1,...ser.map(r=>r.n_total)), n=ser.length||1, w=600/n;
+    ser.forEach((r,i)=>{
+      const bh=Math.max(1,(r.n_total/max)*54);
+      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      rect.setAttribute('x',(i*w+0.5).toFixed(2)); rect.setAttribute('y',(56-bh).toFixed(2));
+      rect.setAttribute('width',Math.max(0.5,w-1).toFixed(2)); rect.setAttribute('height',bh.toFixed(2));
+      const t=document.createElementNS('http://www.w3.org/2000/svg','title'); t.textContent=fmtDay(r.date)+': '+r.n_total; rect.appendChild(t);
+      svg.appendChild(rect);
+    });
+  }
+  set('hz-note','Source: '+src+' (AIS-derived daily vessel counts; tankers and cargo ships are counted separately). Counts are vessels, not barrels, and PortWatch publishes several days behind real time, so the date above is the latest data day, not today. Other pages on this site cite different sources and dates (for example Lloyd\'s List, 7 Jul 2026); the series are not interchangeable.');
+  sec.style.display='';
+}
 // Quiet re-check so the numbers update without reloading the page
 async function refreshLive(){
   try{
@@ -792,14 +845,16 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 
   // Then fetch live data
   try{
-    const [pr, ev, lv] = await Promise.all([
+    const [pr, ev, lv, ck] = await Promise.all([
       fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
       fetch('data/events.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
-      fetch('data/live.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
+      fetch('data/live.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('data/chokepoints-live.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
     ]);
     if(pr) renderPrices(pr);
     if(ev) renderEvents(ev);
     if(lv) renderLive(lv);
+    if(ck) renderHormuz(ck);
   } catch(e){ console.warn('Live data fetch failed, using fallback',e); }
 
   // Real-time feel: re-check live.json every minute while the tab is visible, and
