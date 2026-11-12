@@ -141,6 +141,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 .sc-v-teal{color:var(--teal)!important}
 .sc-v-amber{color:var(--amber)!important}
 .sc-note{font-family:var(--ss);font-style:italic;font-size:11px;color:var(--ink-3);line-height:1.55;margin-top:8px}
+.gl-line{font-family:var(--ss);font-size:12px;color:var(--ink-2);margin:3px 0}
 
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column}
@@ -178,7 +179,10 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <a class="nav-a" href="opec-compliance.html">OPEC+</a>
       <a class="nav-a" href="osp-decoder.html">OSP</a>
       <a class="nav-a" href="grades.html">Grades</a>
+      <a class="nav-a" href="commodities.html">Commodities</a>
       <a class="nav-a on" href="natural-gas.html">Natural gas</a>
+      <a class="nav-a" href="ai-compute.html">AI compute</a>
+      <a class="nav-a" href="compute-atlas.html">Compute Atlas</a>
     </div>
     <div class="nav-right">
       <button class="nav-btn" id="theme-btn" onclick="toggleTheme()">Dark</button>
@@ -268,12 +272,29 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <p>The Russian drone attack on Naftogaz gas production facilities on July 17 added another risk premium — pushing TTF to $19.2/MMBtu. Multiple supply risks are now compounding: Qatari LNG offline or unreliable, Norwegian maintenance, Russian attack on Ukrainian gas infrastructure. <strong>Europe is heading into the 2026–27 heating season with the thinnest storage buffer since the 2022 crisis.</strong></p>
     </div>
 
+    <!-- LIVE EU STORAGE (filled from data/gas-storage.json; hidden until data exists) -->
+    <div class="storage-wrap" id="gl-sec" style="display:none">
+      <div class="storage-title">EU gas storage · latest GIE AGSI data · % of capacity</div>
+      <div class="storage-row">
+        <div class="storage-top">
+          <span class="storage-name" id="gl-name"></span>
+          <div class="storage-nums">
+            <span class="storage-pct" id="gl-pct" style="color:var(--navy)"></span>
+          </div>
+        </div>
+        <div class="storage-track"><div class="storage-fill" id="gl-fill" style="width:0;background:var(--navy)"></div></div>
+      </div>
+      <div class="gl-line" id="gl-l1"></div>
+      <div class="gl-line" id="gl-l2"></div>
+      <div class="sc-note" id="gl-note"></div>
+    </div>
+
     <!-- Storage chart -->
     <div class="storage-wrap">
       <div class="storage-title">EU gas storage fill rate · 2026 vs targets · % of capacity</div>
       <div class="storage-row">
         <div class="storage-top">
-          <span class="storage-name">Current (Jul 10 2026)</span>
+          <span class="storage-name">Snapshot (Jul 10 2026)</span>
           <div class="storage-nums">
             <span class="storage-pct" style="color:var(--red)">53.4%</span>
             <span class="storage-vs">−22.4pts vs 5-yr avg</span>
@@ -568,6 +589,31 @@ document.addEventListener('DOMContentLoaded',function(){
     },50));
   }
 });
+</script>
+<script>
+// Live EU gas storage from data/gas-storage.json (GIE AGSI). textContent only; hidden until data exists.
+(function(){
+  function set(id,v){var e=document.getElementById(id); if(e) e.textContent=v;}
+  function day(iso){var d=new Date(String(iso)+'T00:00:00Z'); return isNaN(d.getTime())?String(iso||''):d.toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});}
+  function pts(v){var r=Math.round(v*10)/10; return (r>0?'+':r<0?'\u2212':'')+Math.abs(r).toFixed(1)+' pts';}
+  fetch('data/gas-storage.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    var e=d&&d.eu, sec=document.getElementById('gl-sec');
+    if(!e||!sec||typeof e.full_pct!=='number'||!isFinite(e.full_pct)) return;
+    set('gl-name','Latest (gas day '+day(e.gas_day)+')');
+    set('gl-pct',e.full_pct.toFixed(1)+'%');
+    var f=document.getElementById('gl-fill'); if(f) f.style.width=Math.max(0,Math.min(100,e.full_pct))+'%';
+    var l1=[];
+    if(typeof e.vs_year_earlier_pts_computed==='number') l1.push(pts(e.vs_year_earlier_pts_computed)+' vs same day last year ('+e.year_earlier.full_pct.toFixed(1)+'%)');
+    if(typeof e.vs_avg_prior_5y_pts_computed==='number') l1.push(pts(e.vs_avg_prior_5y_pts_computed)+' vs mean of the prior five years ('+e.avg_prior_5y_full_pct_computed.toFixed(1)+'%)');
+    set('gl-l1',l1.join(' \u00b7 '));
+    var l2=[];
+    if(typeof e.gas_in_storage_twh==='number') l2.push(e.gas_in_storage_twh.toFixed(0)+' TWh in storage');
+    if(typeof e.working_gas_volume_twh==='number') l2.push(e.working_gas_volume_twh.toFixed(0)+' TWh working capacity');
+    set('gl-l2',l2.join(' \u00b7 '));
+    set('gl-note','Source: GIE AGSI, EU aggregate, gas day '+day(e.gas_day)+'. GIE revises recent days after first publication. Point differences are computed here from GIE\u2019s own daily values for the same calendar day. The July figures below are a dated snapshot, not current.');
+    sec.style.display='';
+  }).catch(function(){});
+})();
 </script>
 <script>(function(){fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d||!d._updated)return;var t=new Date(d._updated);if(isNaN(t.getTime()))return;var box=document.getElementById('data-updated'),el=document.getElementById('data-updated-date');if(box&&el){el.textContent=t.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});box.style.display='';}}).catch(function(){});})();</script>
 </body>

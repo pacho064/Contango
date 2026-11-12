@@ -1,0 +1,36 @@
+name: Update latest headlines
+
+on:
+  schedule:
+    # Every 2 hours. Free feeds, no keys. Commits only when headlines changed.
+    - cron: '12 */2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: update-news
+  cancel-in-progress: false
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch headlines (Al Jazeera, NYT, Reuters, Tasnim, Al Mayadeen, ISW/CTP)
+        run: python news_feed.py
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Contango Bot"
+          git config user.email "bot@contango-energy.noreply"
+          git add data/news-feed.json
+          if git diff --staged --quiet; then
+            echo "No change to commit."
+          else
+            git commit -m "news: headlines $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase origin main
+            git push
+          fi

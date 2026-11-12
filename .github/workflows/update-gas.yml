@@ -1,0 +1,38 @@
+name: Update EU gas storage
+
+on:
+  schedule:
+    # Once a day, after GIE's evening publication of the previous gas day.
+    - cron: '40 7 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: update-gas
+  cancel-in-progress: false
+
+jobs:
+  update-gas:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch EU gas storage (GIE AGSI)
+        env:
+          GIE_API_KEY: ${{ secrets.GIE_API_KEY }}
+        run: python gie_update.py
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Contango Bot"
+          git config user.email "bot@contango-energy.noreply"
+          git add data/gas-storage.json
+          if git diff --staged --quiet; then
+            echo "No change to commit."
+          else
+            git commit -m "data: EU gas storage $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main
+            git push
+          fi
