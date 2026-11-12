@@ -140,6 +140,38 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 .sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
 .sc-row:last-child{border-bottom:none}
 .sc-l{font-family:var(--ss);font-size:11px;color:var(--ink3)}
+.sc-d{font-family:var(--mono);font-size:8px;color:var(--ink4);margin-left:4px;white-space:nowrap}
+.reg-tbl{width:100%;border-collapse:collapse;margin-top:4px}
+.reg-tbl th{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);text-align:left;font-weight:400;padding:6px 8px;border-bottom:1px solid var(--border)}
+.reg-tbl td{font-family:var(--ss);font-size:12px;color:var(--ink2);padding:8px;border-bottom:1px solid var(--border);vertical-align:baseline}
+.reg-tbl td.reg-p{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap}
+.reg-tbl td.reg-m{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.reg-tbl th.r,.reg-tbl td.reg-p{text-align:right}
+.reg-grp td{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);padding:16px 8px 4px;border-bottom:1px solid var(--border)}
+.reg-stale td{color:var(--ink4)}
+.reg-stale td.reg-p{color:var(--ink3)}
+.reg-stale td.reg-age{color:var(--red)}
+.news-daily{background:var(--card-alt);border:1px solid var(--border);border-radius:4px;padding:12px 14px;margin-bottom:14px}
+.news-dh{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
+.news-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.news-chip{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);background:transparent;border:1px solid var(--border);border-radius:12px;padding:4px 10px;cursor:pointer}
+.news-chip.on{color:var(--ink);border-color:var(--navy)}
+.news-row{padding:9px 0;border-bottom:1px solid var(--border)}
+.news-hl{font-family:var(--ss);font-size:14px;line-height:1.4;color:var(--ink)}
+.news-hl a{color:var(--ink);text-decoration:none}
+.news-hl a:hover{text-decoration:underline}
+.news-meta{font-family:var(--mono);font-size:9px;color:var(--ink4);margin-top:3px}
+.news-more{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);background:transparent;border:1px solid var(--border);border-radius:3px;padding:7px 14px;margin-top:10px;cursor:pointer}
+.ck2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ck2-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;min-width:0}
+.ck2-name{font-family:var(--cg);font-size:18px;font-weight:600;color:var(--ink)}
+.ck2-big{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--ink);margin:6px 0 2px}
+.ck2-line{font-family:var(--ss);font-size:12px;color:var(--ink2);margin:2px 0}
+.ck2-bars{display:block;width:100%;height:44px;margin:8px 0}
+.ck2-bars rect{fill:var(--teal)}
+.ck2-hl{border-top:1px solid var(--border);padding-top:8px;margin-top:8px}
+.ck2-hl a{font-family:var(--ss);font-size:12px;color:var(--ink);text-decoration:none}
+.ck2-hl a:hover{text-decoration:underline}
 .sc-v{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink)}
 .sc-v.red{color:var(--red)}.sc-v.teal{color:var(--teal)}.sc-v.amber{color:var(--amber)}
 .sc-note{font-family:var(--ss);font-style:italic;font-size:10px;color:var(--ink3);margin-top:6px;line-height:1.5}
@@ -182,8 +214,6 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     <span class="brand">Contango</span>
     <div class="nav-links">
       <a class="nav-a on" href="index.html">Overview</a>
-      <a class="nav-a" href="Compute Atlas.html">Compute Atlas</a>
-      <a class="nav-a" href="ai-compute.html">AI Compute</a>
       <a class="nav-a" href="saudi-arabia.html">Saudi Arabia</a>
       <a class="nav-a" href="iraq.html">Iraq</a>
       <a class="nav-a" href="buyer-exposure.html">Buyer exposure</a>
@@ -193,6 +223,8 @@ button{cursor:pointer;background:none;border:none;color:inherit}
       <a class="nav-a" href="grades.html">Grades</a>
       <a class="nav-a" href="commodities.html">Commodities</a>
       <a class="nav-a" href="natural-gas.html">Natural gas</a>
+      <a class="nav-a" href="ai-compute.html">AI compute</a>
+      <a class="nav-a" href="compute-atlas.html">Compute Atlas</a>
     </div>
     <div class="nav-right">
       <span class="nav-brent" id="nav-brent"></span>
@@ -204,15 +236,12 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-label">Middle East crude intelligence · Updated daily</div>
+    <div class="hero-label">Middle East crude intelligence · latest updates</div>
     <h1 class="hero-title">Hormuz crisis<br>intelligence</h1>
-    <p class="hero-sub">Real-time tracking of the 2026 Gulf crisis — production shut-ins, chokepoint status, OSP pricing, OPEC+ compliance, and supply chain cascades.</p>
+    <p class="hero-sub">Latest headlines, oil prices and chokepoint traffic for the 2026 Gulf crisis. Every figure shows its source and date. Headlines only, no analysis.</p>
     <div class="hero-badges">
-      <span class="badge b-red"><span class="dot"></span>Hormuz: contested</span>
-      <span class="badge b-red" id="hero-brent">Brent: loading…</span>
-      <span class="badge b-amber">Saudi Yanbu bypass active</span>
-      <span class="badge b-amber">Iraq force majeure</span>
-      <span class="badge b-navy">UAE departed OPEC+ May 1</span>
+      <span class="badge b-red" id="hero-brent" style="display:none"></span>
+      <span class="badge b-navy" id="hero-news" style="display:none"></span>
     </div>
   </div>
 </div>
@@ -221,15 +250,17 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 <div class="metrics">
   <div class="metrics-inner">
     <div class="m-cell">
-      <div class="m-label">ICE Brent</div>
+      <div class="m-label">Brent (EIA spot)</div>
       <div class="m-val" id="m-brent">—</div>
       <div class="m-sub" id="m-brent-date">EIA</div>
+      <div class="m-sub" id="m-brent-live" style="color:var(--teal)"></div>
       <div class="m-chg" id="m-brent-chg"></div>
     </div>
     <div class="m-cell">
-      <div class="m-label">WTI</div>
+      <div class="m-label">WTI (EIA spot)</div>
       <div class="m-val" id="m-wti">—</div>
       <div class="m-sub" id="m-wti-date">EIA</div>
+      <div class="m-sub" id="m-wti-live" style="color:var(--teal)"></div>
       <div class="m-chg" id="m-wti-chg"></div>
     </div>
     <div class="m-cell">
@@ -259,9 +290,39 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 <div class="grid">
 <div class="main-col">
 
+  <!-- LATEST UPDATES (data/news-feed.json; hidden until data exists) -->
+  <div class="sec" id="news-sec" style="display:none">
+    <div class="sec-label">Latest updates · headlines as published</div>
+    <div class="sec-title">What the outlets are reporting</div>
+    <div class="news-daily" id="news-daily"></div>
+    <div class="news-chips" id="news-chips"></div>
+    <div id="news-list"></div>
+    <button class="news-more" id="news-more" type="button" style="display:none">Show more</button>
+    <div class="sc-note" id="news-note"></div>
+  </div>
+
+  <!-- OIL PRICES (prices.json + live.json; every row carries its date) -->
+  <div class="sec" id="px-sec" style="display:none">
+    <div class="sec-label">Oil prices · international and regional · with dates</div>
+    <div class="sec-title">Benchmarks and local grades</div>
+    <table class="reg-tbl">
+      <thead><tr><th>Grade</th><th class="r">$/bbl</th><th>As of</th><th>Age</th><th>Source</th></tr></thead>
+      <tbody id="px-body"></tbody>
+    </table>
+    <div class="sc-note">Every row shows the date of its value. Rows marked "out of date" are the last value on file and are shown only so the gap is visible. EIA spot prices run about a week behind. Live quotes and regional reference prices come from OilPriceAPI with its own timestamp; they are not Platts/Argus assessments. Official selling prices are set monthly. Real-time Dubai, Oman, Murban and Basrah assessments are paid data and are not available here.</div>
+  </div>
+
+  <!-- CHOKEPOINTS (data/chokepoints-live.json + headlines tagged to each) -->
+  <div class="sec" id="ck-sec" style="display:none">
+    <div class="sec-label">Chokepoints · vessel transits and latest headlines</div>
+    <div class="sec-title">Hormuz, Bab el-Mandeb, Suez, Cape of Good Hope</div>
+    <div class="ck2-grid" id="ck-live"></div>
+    <div class="sc-note" id="ck-note"></div>
+  </div>
+
   <!-- CRISIS IMPACT -->
   <div class="sec">
-    <div class="sec-label">Crisis at a glance · July 2026</div>
+    <div class="sec-label">Reference snapshot · figures carry their own dates, not updated here</div>
     <div class="crisis-grid">
       <div class="c-card">
         <div class="c-label">Supply disrupted (peak)</div>
@@ -296,17 +357,6 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     </div>
   </div>
 
-  <!-- CHOKEPOINTS -->
-  <div class="sec">
-    <div class="sec-label">Chokepoints · live status</div>
-    <div class="ck-grid" id="ck-grid">
-      <!-- rendered by JS -->
-      <div class="ck-card high"><div class="ck-top"><div><div class="ck-name">Strait of Hormuz</div><div class="ck-vol">21M bbl/d daily transit</div></div><span class="badge b-red">HIGH</span></div><div class="ck-status">Ceasefire collapsed July 7. Fighting resumed. No large vessel transited after July 7 per Lloyd's List. Houthi blockade on Saudi shipping declared July 20.</div><div class="ck-src">Lloyd's List · Jul 7 2026</div></div>
-      <div class="ck-card high"><div class="ck-top"><div><div class="ck-name">Bab el-Mandeb</div><div class="ck-vol">9M bbl/d daily transit</div></div><span class="badge b-red">HIGH</span></div><div class="ck-status">Houthi naval blockade on Saudi Arabia declared July 20. Three Saudi tankers reversed course. Bab el-Mandeb crossings fell 22% in 6 days.</div><div class="ck-src">Reuters · Al-Monitor · Jul 22 2026</div></div>
-      <div class="ck-card moderate"><div class="ck-top"><div><div class="ck-name">Suez Canal</div><div class="ck-vol">2.5M bbl/d daily transit</div></div><span class="badge b-amber">MODERATE</span></div><div class="ck-status">Elevated but operational. Rerouting Saudi crude around Africa becoming necessary as both Hormuz and Bab el-Mandeb contested.</div><div class="ck-src">US State Dept · Jul 2026</div></div>
-    </div>
-  </div>
-
   <!-- PRICE CHART -->
   <div class="sec">
     <div class="sec-label">Brent crude · price history</div>
@@ -318,8 +368,8 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 
   <!-- TIMELINE -->
   <div class="sec">
-    <div class="sec-label">Intelligence timeline · most recent first</div>
-    <div class="sec-title">Latest developments</div>
+    <div class="sec-label" id="tl-label">Intelligence timeline · most recent first</div>
+    <div class="sec-title">Earlier developments</div>
     <div class="tl" id="tl-wrap">
       <!-- rendered by JS -->
     </div>
@@ -327,7 +377,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
 
   <!-- COUNTRY SIGNALS -->
   <div class="sec">
-    <div class="sec-label">Country signals · auto-updated daily</div>
+    <div class="sec-label">Country signals · each item dated</div>
     <div class="sec-title">Saudi Arabia &amp; Iraq</div>
     <div class="sig-cols">
       <div>
@@ -349,15 +399,15 @@ button{cursor:pointer;background:none;border:none;color:inherit}
   <div class="sc">
     <div class="sc-head">
       <span class="sc-title">Benchmark prices</span>
-      <span class="sc-meta" id="sb-updated">live</span>
+      <span class="sc-meta" id="sb-updated">as of date shown</span>
     </div>
     <div class="sc-body">
-      <div class="sc-row"><span class="sc-l">Brent (EIA)</span><span class="sc-v" id="sb-brent">—</span></div>
-      <div class="sc-row"><span class="sc-l">WTI (EIA)</span><span class="sc-v" id="sb-wti">—</span></div>
-      <div class="sc-row"><span class="sc-l">Arab Light OSP</span><span class="sc-v" id="sb-osp">—</span></div>
-      <div class="sc-row"><span class="sc-l">Murban (ADNOC)</span><span class="sc-v" id="sb-murban">—</span></div>
-      <div class="sc-row"><span class="sc-l">Basra Medium</span><span class="sc-v" id="sb-basra">—</span></div>
-      <div class="sc-row"><span class="sc-l">Urals (Russia)</span><span class="sc-v" id="sb-urals">—</span></div>
+      <div class="sc-row"><span class="sc-l">Brent (EIA) <span class="sc-d" id="sb-brent-d"></span></span><span class="sc-v" id="sb-brent">—</span></div>
+      <div class="sc-row"><span class="sc-l">WTI (EIA) <span class="sc-d" id="sb-wti-d"></span></span><span class="sc-v" id="sb-wti">—</span></div>
+      <div class="sc-row"><span class="sc-l">Arab Light OSP <span class="sc-d" id="sb-osp-d"></span></span><span class="sc-v" id="sb-osp">—</span></div>
+      <div class="sc-row"><span class="sc-l">Murban OSP (ADNOC) <span class="sc-d" id="sb-murban-d"></span></span><span class="sc-v" id="sb-murban">—</span></div>
+      <div class="sc-row"><span class="sc-l">Basra Medium OSP <span class="sc-d" id="sb-basra-d"></span></span><span class="sc-v" id="sb-basra">—</span></div>
+      <div class="sc-row"><span class="sc-l">Urals (Russia) <span class="sc-d" id="sb-urals-d"></span></span><span class="sc-v" id="sb-urals">—</span></div>
       <div class="src-ln" id="sb-src">Saudi Aramco · EIA · SOMO · Argus</div>
     </div>
   </div>
@@ -388,7 +438,7 @@ button{cursor:pointer;background:none;border:none;color:inherit}
     </div>
     <div class="sc-body">
       <div class="sc-row"><a href="ai-compute.html" class="sc-l" style="color:var(--navy)">AI Compute →</a></div>
-      <div class="sc-row"><a href="Compute Atlas.html" class="sc-l" style="color:var(--navy)">Compute Atlas →</a></div>
+      <div class="sc-row"><a href="compute-atlas.html" class="sc-l" style="color:var(--navy)">Compute Atlas →</a></div>
       <div class="sc-row"><a href="saudi-arabia.html" class="sc-l" style="color:var(--navy)">Saudi Arabia →</a></div>
       <div class="sc-row"><a href="iraq.html" class="sc-l" style="color:var(--navy)">Iraq →</a></div>
       <div class="sc-row"><a href="opec-compliance.html" class="sc-l" style="color:var(--navy)">OPEC+ compliance →</a></div>
@@ -431,40 +481,8 @@ initTheme();
 
 // ── FALLBACKS ─────────────────────────────────────────────────────────
 function getPrices(){
-  return {
-    _updated:"2026-07-30T19:35:09Z",
-    benchmarks:{
-      brent:{price:91.82,change_pct:-8.46,updated:"2026-07-27",source:"EIA (RBRTE)"},
-      wti:{price:84.25,change_pct:-8.16,updated:"2026-07-27",source:"EIA (RWTC)"},
-      oman_dubai:{price:80.75,updated:"2026-03-21"},
-      urals:{price:52.4,updated:"2026-03-21"}
-    },
-    osps:{
-      arab_light:{price:83.25,spread_vs_brent:-8.57,for_month:"Mar 2026",differential_vs_omd:2.5},
-      murban:{price:83.68,spread_vs_brent:-8.14,for_month:"Mar 2026"},
-      basra_medium:{price:81.4,spread_vs_brent:-10.42,for_month:"Mar 2026"},
-      arab_heavy:{price:79.8,spread_vs_brent:-12.02,for_month:"Mar 2026"}
-    },
-    production:{
-      saudi_arabia:{value:7500,period:"2026-03"},
-      iraq:{value:1600,period:"2026-03"}
-    },
-    spr:{value:394524,period:"2026-04"},
-    opec:[
-      {n:"Saudi Arabia",q:10.0,a:9.6},{n:"Russia",q:9.0,a:9.1},
-      {n:"Iraq",q:4.0,a:0.9},{n:"Kuwait",q:2.7,a:1.5},
-      {n:"Kazakhstan",q:1.7,a:2.0},{n:"Nigeria",q:1.5,a:1.4},
-      {n:"UAE",q:null,a:3.7}
-    ],
-    opec_updated:"April 2026",
-    ports:[
-      {n:"Ras Tanura",c:"Saudi Arabia",util:10,t:"export"},
-      {n:"Yanbu",c:"Saudi Arabia",util:80,t:"export"},
-      {n:"Basra SPM",c:"Iraq",util:2,t:"export"},
-      {n:"Fujairah",c:"UAE",util:99,t:"export"},
-      {n:"Ras Laffan",c:"Qatar",util:0,t:"conflict"}
-    ]
-  };
+  // first-paint snapshot of data/prices.json (every figure on screen shows its own date)
+  return {"_note":"Benchmarks auto-updated daily by updater.py via GitHub Actions. OSP differentials updated manually ~1st of each month via osp_update.py. Absolute OSP prices are computed: differential + oman_dubai spot.","_updated":"2026-11-12T00:12:51.835336Z","_osp_month":"March 2026","_osp_updated":"2026-03-01","benchmarks":{"brent":{"price":107.03,"change_pct":-0.34,"updated":"2026-11-03","source":"EIA (RBRTE)"},"wti":{"price":99.64,"change_pct":-0.42,"updated":"2026-11-03","source":"EIA (RWTC)"},"oman_dubai":{"price":80.75,"change_pct":-0.4,"updated":"2026-03-21","source":"OilPriceAPI / DME","source_url":"https://www.dme.ae/"},"urals":{"price":52.4,"change_pct":-0.6,"updated":"2026-03-21","source":"OilPriceAPI / Argus","source_url":"https://www.argusmedia.com/"},"ttf":{"price":48.3,"change_pct":0.4,"updated":"2026-03-21","source":"OilPriceAPI / ICE","source_url":"https://www.theice.com/"},"jkm":{"price":24.7,"change_pct":0.2,"updated":"2026-03-21","source":"OilPriceAPI / Platts","source_url":"https://www.spglobal.com/commodityinsights/"}},"osps":{"arab_light":{"grade":"Arab Light","country":"Saudi Arabia","operator":"Saudi Aramco","source":"Aramco OSP release","source_url":"https://www.argaam.com/en/article/articledetail/id/1741098","differential_vs_omd":2.5,"price":83.25,"spread_vs_brent":-23.78,"for_month":"March 2026","context":"Flagship grade. Sets regional pricing trend for Iraq, Kuwait, Qatar."},"murban":{"grade":"Murban","country":"UAE","operator":"ADNOC","source":"ADNOC OSP release","source_url":"https://adnoc.ae/en/adnoc-murban/documents-and-downloads","differential_vs_omd":2.93,"price":83.68,"spread_vs_brent":-23.35,"for_month":"March 2026","context":"ICE Murban futures contract. Competes directly with Arab Light for Asian refiners."},"basra_medium":{"grade":"Basra Medium","country":"Iraq","operator":"SOMO","source":"SOMO Iraq official OSP","source_url":"https://www.oil.gov.iq/","differential_vs_omd":0.65,"price":81.4,"spread_vs_brent":-25.63,"for_month":"March 2026","context":"Force majeure active March 2026. Exports halted."},"kuwait_export":{"grade":"Kuwait Export","country":"Kuwait","operator":"KPC","source":"Kuwait Petroleum Corp OSP","source_url":"https://www.kpc.com.kw/","differential_vs_omd":0.2,"price":80.95,"spread_vs_brent":-26.08,"for_month":"March 2026","context":null},"arab_heavy":{"grade":"Arab Heavy","country":"Saudi Arabia","operator":"Saudi Aramco","source":"Aramco OSP release","source_url":"https://www.argaam.com/en/article/articledetail/id/1741098","differential_vs_omd":-0.95,"price":79.8,"spread_vs_brent":-27.23,"for_month":"March 2026","context":"Widest discount to Arab Light in 18 months \u2014 complex refinery demand constrained."}},"chokepoints":[{"name":"Strait of Hormuz","risk":"high","volume":"21M bbl/d","source":"Lloyd's JWC \u00b7 IEA \u00b7 US State Dept L3","updated":"Mar 2026","lon":56.6,"lat":26.5},{"name":"Bab el-Mandeb","risk":"high","volume":"9M bbl/d","source":"ACLED \u00b7 Lloyd's JWC \u00b7 US State Dept L4","updated":"Mar 2026","lon":43.4,"lat":12.6},{"name":"Suez Canal","risk":"moderate","volume":"2.5M bbl/d","source":"US State Dept L2 (Egypt)","updated":"Jan 2026","lon":32.3,"lat":30.7}],"opec":[{"n":"Saudi Arabia","q":10.0,"a":10.2},{"n":"Russia","q":9.0,"a":9.2},{"n":"Iraq","q":4.0,"a":1.4},{"n":"UAE","q":3.2,"a":2.7},{"n":"Kuwait","q":2.7,"a":1.7},{"n":"Iran","q":null,"a":3.3},{"n":"Nigeria","q":1.5,"a":1.3},{"n":"Venezuela","q":0.9,"a":0.8},{"n":"Kazakhstan","q":1.7,"a":2.0}],"opec_src":"OPEC JMMC communiqu\u00e9 + IEA OMR March 2026 \u00b7 Crisis-adjusted actuals","opec_updated":"March 2026","ports":[{"n":"Ras Tanura","c":"Saudi Arabia","cap":6.5,"util":12,"type":"export"},{"n":"Yanbu","c":"Saudi Arabia","cap":1.8,"util":99,"type":"export"},{"n":"Basra SPM","c":"Iraq","cap":2.0,"util":0,"type":"export"},{"n":"Fujairah","c":"UAE","cap":1.8,"util":99,"type":"export"},{"n":"Jebel Ali","c":"UAE","cap":3.5,"util":8,"type":"export"},{"n":"Kuwait terminals","c":"Kuwait","cap":2.5,"util":5,"type":"export"}],"developments":[{"src":"IEA","alert":true,"region":"Hormuz","hl":"Hormuz transit severely disrupted. Gulf producers cut output by at least 10M bbl/d.","time":"12 March 2026"},{"src":"Reuters \u00b7 Iraq Oil Ministry","alert":true,"region":"Iraq","hl":"Iraq declares force majeure on all foreign-operated oilfields. Production at 1.4M bbl/d.","time":"17 March 2026"},{"src":"CFR \u00b7 Reuters","alert":false,"region":"Red Sea","hl":"~30 supertankers rerouted to Yanbu. Port approaching capacity at 1.8M bbl/d.","time":"Mid-March 2026"},{"src":"Business Standard","alert":false,"region":"India","hl":"Indian refiners approach Aramco to shift OSP benchmark from Oman/Dubai to ICE Brent.","time":"20 March 2026"},{"src":"MEES","alert":false,"region":"Saudi Arabia","hl":"East-West pipeline at 38% of 5M bbl/d capacity. Yanbu port is the binding constraint.","time":"March 2026"}],"production":{"saudi_arabia":{"value":7980.0,"unit":"thousand bbl/day","period":"2026-07","grade":"crude incl. lease condensate","source":"EIA (INTL.57-1-SAU)"},"iraq":{"value":2780.0,"unit":"thousand bbl/day","period":"2026-07","grade":"crude incl. lease condensate","source":"EIA (INTL.57-1-IRQ)"}},"spr":{"value":285570.0,"unit":"thousand barrels","period":"2026-08","description":"U.S. crude oil in Strategic Petroleum Reserve","source":"EIA (MCSSTUS1)"}};
 }
 
 function getEvents(){
@@ -521,7 +539,10 @@ function renderPrices(p){
   if(wti.change_pct!=null) setHtml('m-wti-chg', `<span class="${chgCls(wti.change_pct)}">${chgStr(wti.change_pct)} daily</span>`);
   set('m-osp', fmt(osp.price));
   set('m-osp-month', (osp.for_month||'')+'  ·  Aramco');
-  if(osp.spread_vs_brent!=null) setHtml('m-osp-spread', `<span class="dn">${osp.spread_vs_brent>0?'+':''}$${osp.spread_vs_brent.toFixed(2)} vs Brent</span>`);
+  // only compare an OSP with Brent when both are from the same month
+  const sameMonth = osp.for_month && brent.updated && monthKey(osp.for_month)===String(brent.updated).slice(0,7);
+  if(osp.spread_vs_brent!=null && sameMonth) setHtml('m-osp-spread', `<span class="dn">${osp.spread_vs_brent>0?'+':''}$${osp.spread_vs_brent.toFixed(2)} vs Brent</span>`);
+  else set('m-osp-spread', 'spread vs Brent not shown: different months');
 
   if(prod.saudi_arabia){
     const sa = prod.saudi_arabia;
@@ -547,7 +568,7 @@ function renderPrices(p){
   // hero badge
   if(brent.price){
     const hb = document.getElementById('hero-brent');
-    if(hb) hb.textContent = 'Brent: '+fmt(brent.price);
+    if(hb){ hb.textContent = 'Brent (EIA spot) '+fmt(brent.price)+' · '+liveWhen(brent.updated); hb.style.display=''; }
   }
 
   // sidebar
@@ -558,12 +579,21 @@ function renderPrices(p){
   set('sb-murban', fmt((osps.murban||{}).price));
   set('sb-basra', fmt((osps.basra_medium||{}).price));
   set('sb-urals', fmt((b.urals||{}).price));
+  // show the date behind every sidebar number (these are not all live)
+  set('sb-brent-d', brent.updated||'');
+  set('sb-wti-d', wti.updated||'');
+  set('sb-osp-d', osp.for_month||'');
+  set('sb-murban-d', (osps.murban||{}).for_month||'');
+  set('sb-basra-d', (osps.basra_medium||{}).for_month||'');
+  set('sb-urals-d', (b.urals||{}).updated||'');
   if(p._updated){
     const d = new Date(p._updated);
-    set('sb-updated', d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+    // (sidebar header deliberately NOT set to this date: rows carry different dates, shown per row)
     const du = document.getElementById('data-updated');
     if(du){ du.textContent='Updated '+d.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}); du.style.display=''; }
   }
+
+  STATE.prices = p; renderPriceTable();
 
   // OPEC
   const opec = p.opec||[];
@@ -610,6 +640,7 @@ function renderPrices(p){
 function renderEvents(ev){
   // Timeline
   const tl = (ev.timeline||[]).slice(0,7);
+  if(tl.length) set('tl-label','Intelligence timeline · newest entry '+(tl[0].date||'undated'));
   const tlEl = document.getElementById('tl-wrap');
   if(tlEl && tl.length){
     tlEl.innerHTML = tl.map(t=>{
@@ -701,23 +732,236 @@ function updateChart(){
   window._chart.update();
 }
 
+// ── LIVE QUOTES (data/live.json, written every 30 min by live_update.py) ──
+// Shown next to the EIA figure with the API's own timestamp and source.
+// Hidden if the file is missing, the value is flagged stale, or anything is malformed.
+const STATE={prices:null,live:null,ck:null,news:null};
+function el(tag,cls,text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+function safeUrl(u){ try{ const x=new URL(u); return (x.protocol==='https:'||x.protocol==='http:')?x.href:null; }catch(e){ return null; } }
+function ageDays(iso){
+  if(!iso) return null;
+  const d=new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso)?iso+'T00:00:00Z':iso); if(isNaN(d.getTime())) return null;
+  return Math.floor((Date.now()-d.getTime())/86400000);
+}
+function monthKey(s){ const d=new Date('1 '+s+' UTC'); return isNaN(d.getTime())?null:d.toISOString().slice(0,7); }
+function ago(iso){
+  const d=new Date(iso); if(isNaN(d.getTime())) return '';
+  const m=Math.max(0,Math.round((Date.now()-d.getTime())/60000));
+  if(m<60) return m+' min ago'; const h=Math.round(m/60); if(h<48) return h+' h ago'; return Math.round(h/24)+' d ago';
+}
+function liveWhen(iso){
+  if(!iso) return '';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(iso)){            // date-only value: don't invent a time of day
+    const d=new Date(iso+'T00:00:00Z'); if(isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
+  }
+  const d=new Date(iso); if(isNaN(d.getTime())) return '';
+  return d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'UTC'})+' UTC';
+}
+function fmtDay(iso){
+  const d=new Date(String(iso)+'T00:00:00Z'); if(isNaN(d.getTime())) return String(iso||'');
+  return d.toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
+}
+
+// ── LIVE TILES (data/live.json: OilPriceAPI) ──────────────────────────
+function renderLive(l){
+  l=l||{}; STATE.live=l;
+  [['brent','m-brent-live'],['wti','m-wti-live']].forEach(([k,id])=>{
+    const e=l[k];
+    if(!e || e.stale || typeof e.price!=='number' || !isFinite(e.price)){ set(id,''); return; }
+    const t=liveWhen(e.as_of);
+    set(id,'Live $'+e.price.toFixed(2)+(t?' · '+t:'')+' · '+(e.source||'OilPriceAPI'));
+  });
+  renderPriceTable();
+}
+
+// ── PRICE TABLE: every row shows its date and age ─────────────────────
+// External text goes in with textContent only. A row older than its threshold is
+// shown muted and marked "out of date" rather than hidden, so gaps are visible.
+function renderPriceTable(){
+  const sec=document.getElementById('px-sec'), body=document.getElementById('px-body'); if(!sec||!body) return;
+  const p=STATE.prices||{}, l=STATE.live||{}, b=p.benchmarks||{}, osps=p.osps||{};
+  const ok=v=>typeof v==='number'&&isFinite(v);
+  const intl=[], reg=[];
+  function add(arr,label,price,unit,when,iso,source,staleAfter){
+    if(!ok(price)) return;
+    arr.push({label,price,unit,when,age:ageDays(iso),source:source||'',staleAfter});
+  }
+  [['brent','Brent (live quote)'],['wti','WTI (live quote)']].forEach(([k,lab])=>{
+    const e=l[k]; if(e&&!e.stale&&ok(e.price)) add(intl,lab,e.price,e.unit,liveWhen(e.as_of),e.as_of,e.source||'OilPriceAPI',4);
+  });
+  [['brent','Brent (EIA spot)'],['wti','WTI (EIA spot)']].forEach(([k,lab])=>{
+    const e=b[k]||{}; add(intl,lab,e.price,null,liveWhen(e.updated),e.updated,e.source||'EIA',14);
+  });
+  (Array.isArray(l.regional)?l.regional:[]).filter(e=>e&&!e.stale).forEach(e=>
+    add(reg,String(e.label||e.code||'Grade'),e.price,e.unit,liveWhen(e.as_of),e.as_of,String(e.source||'OilPriceAPI')+(e.data_status?' · '+e.data_status:''),4));
+  [['oman_dubai','Oman-Dubai'],['urals','Urals (Russia)']].forEach(([k,lab])=>{
+    const e=b[k]||{}; add(reg,lab,e.price,null,liveWhen(e.updated),e.updated,e.source||'recorded value',14);
+  });
+  [['arab_light','Arab Light OSP (Aramco)'],['murban','Murban OSP (ADNOC)'],['basra_medium','Basrah Medium OSP (SOMO)']].forEach(([k,lab])=>{
+    const e=osps[k]||{}; const mk=e.for_month?monthKey(e.for_month):null;
+    add(reg,lab,e.price,null,e.for_month?('for '+e.for_month):'',mk?mk+'-01':null,e.source||'official selling price',45);
+  });
+  function group(title,rows){
+    if(!rows.length) return;
+    const gr=el('tr','reg-grp'); const gt=el('td',null,title); gt.colSpan=5; gr.appendChild(gt); body.appendChild(gr);
+    rows.forEach(r=>{
+      const stale=r.age!=null && r.age>r.staleAfter;
+      const tr=el('tr',stale?'reg-stale':null);
+      const unit=(r.unit && !/barrel|bbl/i.test(r.unit)) ? ' /'+r.unit : '';
+      tr.appendChild(el('td',null,r.label));
+      tr.appendChild(el('td','reg-p','$'+r.price.toFixed(2)+unit));
+      tr.appendChild(el('td','reg-m',r.when||'date not given'));
+      tr.appendChild(el('td','reg-m reg-age',r.age==null?'':(stale?r.age+' days old · out of date':(r.age<=0?'today':r.age+' d ago'))));
+      tr.appendChild(el('td','reg-m',r.source));
+      body.appendChild(tr);
+    });
+  }
+  body.textContent='';
+  group('International benchmarks',intl);
+  group('Regional and local grades',reg);
+  sec.style.display=(intl.length||reg.length)?'':'none';
+}
+
+// ── CHOKEPOINTS (data/chokepoints-live.json + tagged headlines) ───────
+const CK_ORDER=['hormuz','bab_el_mandeb','suez','cape'];
+const CK_LABELS={hormuz:'Strait of Hormuz',bab_el_mandeb:'Bab el-Mandeb',suez:'Suez Canal',cape:'Cape of Good Hope'};
+const CK_TAGS={hormuz:['hormuz'],bab_el_mandeb:['bab_el_mandeb','red_sea'],suez:['suez'],cape:[]};
+function barsSvg(series){
+  const NS='http://www.w3.org/2000/svg', svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('class','ck2-bars'); svg.setAttribute('viewBox','0 0 300 44'); svg.setAttribute('preserveAspectRatio','none');
+  svg.setAttribute('role','img'); svg.setAttribute('aria-label','Daily transits, most recent 60 days of data');
+  const ser=(Array.isArray(series)?series:[]).filter(r=>r&&typeof r.n_total==='number'&&isFinite(r.n_total));
+  const max=Math.max(1,...ser.map(r=>r.n_total)), n=ser.length||1, w=300/n;
+  ser.forEach((r,i)=>{
+    const bh=Math.max(1,(r.n_total/max)*42), rect=document.createElementNS(NS,'rect');
+    rect.setAttribute('x',(i*w+0.4).toFixed(2)); rect.setAttribute('y',(44-bh).toFixed(2));
+    rect.setAttribute('width',Math.max(0.4,w-0.8).toFixed(2)); rect.setAttribute('height',bh.toFixed(2));
+    const t=document.createElementNS(NS,'title'); t.textContent=fmtDay(r.date)+': '+r.n_total; rect.appendChild(t); svg.appendChild(rect);
+  });
+  return svg;
+}
+function headlineRow(i,cls){
+  const row=el('div',cls||'news-row'); const h=el('div','news-hl'); const a=el('a',null,i.title);
+  a.href=safeUrl(i.url); a.target='_blank'; a.rel='noopener noreferrer'; h.appendChild(a); row.appendChild(h);
+  const m=el('div','news-meta',(i.source_name||'')+(i.origin?' ('+i.origin+')':'')+' · '+ago(i.t)); m.title=liveWhen(i.t); row.appendChild(m);
+  return row;
+}
+function validNews(i){ return i && i.title && i.t && safeUrl(i.url); }
+function renderChokepoints(){
+  const sec=document.getElementById('ck-sec'), grid=document.getElementById('ck-live'); if(!sec||!grid) return;
+  const c=STATE.ck&&STATE.ck.chokepoints;
+  if(!c || !Object.keys(c).length){ sec.style.display='none'; return; }
+  grid.textContent='';
+  const news=(STATE.news&&Array.isArray(STATE.news.items))?STATE.news.items.filter(validNews):[];
+  CK_ORDER.forEach(key=>{
+    const d=c[key], card=el('div','ck2-card');
+    card.appendChild(el('div','ck2-name',(d&&d.label)||CK_LABELS[key]));
+    if(!d||!d.latest||typeof d.latest.n_total!=='number'){
+      card.appendChild(el('div','ck2-line','No transit data in the latest IMF PortWatch update.'));
+    } else {
+      const L=d.latest;
+      card.appendChild(el('div','ck2-big',L.n_total+' vessel'+(L.n_total===1?'':'s')));
+      card.appendChild(el('div','ck2-line','on '+fmtDay(L.date)+' (latest data day, IMF PortWatch)'));
+      const parts=[];
+      if(typeof L.n_tanker==='number') parts.push(L.n_tanker+' tanker'+(L.n_tanker===1?'':'s'));
+      if(typeof L.n_cargo==='number') parts.push(L.n_cargo+' cargo');
+      if(parts.length) card.appendChild(el('div','ck2-line',parts.join(', ')));
+      const a=d.avg7_computed, y=d.avg7_year_earlier_computed, pc=d.change_vs_year_earlier_pct_computed;
+      if(a&&typeof a.value==='number') card.appendChild(el('div','ck2-line','7-day average to '+fmtDay(a.to)+': '+a.value.toFixed(1)+' a day'
+        +((y&&typeof y.value==='number')?' · same 7 days a year earlier: '+y.value.toFixed(1):'')));
+      if(typeof pc==='number') card.appendChild(el('div','ck2-line',(pc>0?'+':pc<0?'−':'')+Math.abs(pc).toFixed(1)+'% vs a year earlier (computed from those two averages)'));
+      card.appendChild(barsSvg(d.series));
+    }
+    const tags=CK_TAGS[key];
+    if(tags.length){
+      const hits=news.filter(n=>Array.isArray(n.tags)&&n.tags.some(t=>tags.includes(t))).slice(0,3);
+      const box=el('div','ck2-hl');
+      if(hits.length) hits.forEach(h=>box.appendChild(headlineRow(h,'news-row')));
+      else box.appendChild(el('div','news-meta','No matching headlines in the last 7 days at last check.'));
+      card.appendChild(box);
+    }
+    grid.appendChild(card);
+  });
+  set('ck-note','Counts are vessels, not barrels, from IMF PortWatch (AIS-derived). PortWatch publishes several days behind real time, so each card shows its own latest data day. Averages and the year-earlier comparison are computed here from PortWatch’s daily totals. Headlines are the latest matching items from the outlets listed above. Other reports (for example the Lloyd’s List item in the reference snapshot below) use different methods and dates.');
+  sec.style.display='';
+}
+
+// ── LATEST HEADLINES (data/news-feed.json) ────────────────────────────
+const NEWS_TOPICS=[['all','All'],['hormuz','Hormuz'],['bab_el_mandeb','Bab el-Mandeb'],['red_sea','Red Sea / Houthis'],['suez','Suez'],['iran','Iran'],['gulf','Gulf'],['opec','OPEC']];
+let newsTag='all', newsShown=20;
+function renderNews(){
+  const sec=document.getElementById('news-sec'); if(!sec) return;
+  const n=STATE.news;
+  const items=(n&&Array.isArray(n.items))?n.items.filter(validNews):[];
+  const daily=(n&&Array.isArray(n.daily_updates))?n.daily_updates.filter(validNews):[];
+  if(!n || (!items.length && !daily.length)){ sec.style.display='none'; return; }
+
+  const db=document.getElementById('news-daily'); db.textContent='';
+  db.appendChild(el('div','news-dh','ISW / CTP · Iran Update (daily)'));
+  if(daily.length) daily.forEach(i=>db.appendChild(headlineRow(i,'news-row')));
+  else db.appendChild(el('div','news-meta','No ISW / CTP Iran Update found in the last 14 days at last check.'));
+
+  const chips=document.getElementById('news-chips'); chips.textContent='';
+  NEWS_TOPICS.forEach(([k,lab])=>{
+    const cnt=k==='all'?items.length:items.filter(i=>(i.tags||[]).includes(k)).length;
+    if(k!=='all' && !cnt) return;
+    const b=el('button','news-chip'+(newsTag===k?' on':''),lab+' '+cnt); b.type='button'; b.dataset.tag=k; chips.appendChild(b);
+  });
+
+  const shown=items.filter(i=>newsTag==='all'||(i.tags||[]).includes(newsTag));
+  const list=document.getElementById('news-list'); list.textContent='';
+  shown.slice(0,newsShown).forEach(i=>list.appendChild(headlineRow(i,'news-row')));
+  if(!shown.length) list.appendChild(el('div','news-meta','No headlines under this topic at last check.'));
+  const more=document.getElementById('news-more'); if(more) more.style.display=shown.length>newsShown?'':'none';
+
+  const failed=(Array.isArray(n.sources)?n.sources:[]).filter(s=>s&&s.status==='failed').map(s=>s.name);
+  set('news-note','Headlines are shown as each outlet published them, with a link to the original; Contango adds no analysis. Tasnim (Iran) and Al Mayadeen (Lebanon) are included for what they report, not as verification of it. Last checked '+liveWhen(n._updated)+'.'
+    +(failed.length?' Not reachable at last check: '+failed.join(', ')+'.':''));
+  if(items.length){ const hn=document.getElementById('hero-news'); if(hn){ hn.textContent='Newest headline '+ago(items[0].t); hn.style.display=''; } }
+  sec.style.display='';
+}
+
+// Quiet re-checks so numbers and headlines update without reloading the page
+const getJson=u=>fetch(u+'?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
+async function refreshLive(){ const l=await getJson('data/live.json'); if(l) renderLive(l); }
+async function refreshNews(){
+  const [nw,ck]=await Promise.all([getJson('data/news-feed.json'),getJson('data/chokepoints-live.json')]);
+  if(nw) STATE.news=nw; if(ck) STATE.ck=ck;
+  renderNews(); renderChokepoints();
+}
+
 // ── BOOT ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async ()=>{
-  buildChart();
+  // Guarded: if the Chart.js CDN is slow or blocked, the data must still render
+  try{ buildChart(); }catch(e){ console.warn('Chart unavailable, rendering data without it', e); }
 
-  // Render fallbacks immediately so page is never blank
+  // First paint from the built-in snapshots (every figure shows its own date), then fetch current files
   renderPrices(getPrices());
   renderEvents(getEvents());
 
-  // Then fetch live data
+  const chipsEl=document.getElementById('news-chips');
+  if(chipsEl) chipsEl.addEventListener('click',e=>{ const b=e.target.closest('button[data-tag]'); if(!b) return; newsTag=b.dataset.tag; newsShown=20; renderNews(); });
+  const moreEl=document.getElementById('news-more');
+  if(moreEl) moreEl.addEventListener('click',()=>{ newsShown+=20; renderNews(); });
+
   try{
-    const [pr, ev] = await Promise.all([
-      fetch('data/prices.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
-      fetch('data/events.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
+    const [pr, ev, lv, ck, nw] = await Promise.all([
+      getJson('data/prices.json'), getJson('data/events.json'), getJson('data/live.json'),
+      getJson('data/chokepoints-live.json'), getJson('data/news-feed.json')
     ]);
     if(pr) renderPrices(pr);
     if(ev) renderEvents(ev);
+    if(lv) renderLive(lv);
+    if(ck) STATE.ck=ck;
+    if(nw) STATE.news=nw;
+    renderChokepoints(); renderNews();
   } catch(e){ console.warn('Live data fetch failed, using fallback',e); }
+
+  // Real-time feel while the tab is visible: live quotes every minute, headlines every 5 minutes
+  setInterval(()=>{ if(!document.hidden) refreshLive(); }, 60000);
+  setInterval(()=>{ if(!document.hidden) refreshNews(); }, 300000);
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden){ refreshLive(); refreshNews(); } });
 });
 </script>
 </body>

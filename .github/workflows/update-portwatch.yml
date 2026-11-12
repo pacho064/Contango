@@ -1,0 +1,36 @@
+name: Update Hormuz transits
+
+on:
+  schedule:
+    # Once a day. PortWatch publishes with a lag of several days, so more often gains nothing.
+    - cron: '25 8 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: update-portwatch
+  cancel-in-progress: false
+
+jobs:
+  update-portwatch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch Hormuz transits (IMF PortWatch, no key needed)
+        run: python portwatch_update.py
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Contango Bot"
+          git config user.email "bot@contango-energy.noreply"
+          git add data/chokepoints-live.json
+          if git diff --staged --quiet; then
+            echo "No change to commit."
+          else
+            git commit -m "data: Hormuz transits $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main
+            git push
+          fi

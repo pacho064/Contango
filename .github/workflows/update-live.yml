@@ -1,0 +1,50 @@
+name: Update live prices
+
+on:
+  schedule:
+    # Every 30 minutes on weekdays, 05:00-21:30 UTC (about 34 runs/day).
+    # One API call per run, so this stays under the free tier's 50 requests/day.
+    # GitHub may delay scheduled runs by several minutes; that is normal.
+    - cron: '*/30 5-21 * * 1-5'
+  workflow_dispatch:  # Allow manual trigger from the GitHub Actions UI
+
+# Never run two at once, and don't cancel a run that is mid-push
+concurrency:
+  group: update-live
+  cancel-in-progress: false
+
+jobs:
+  update-live:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch live prices
+        env:
+          OILPRICEAPI_KEY: ${{ secrets.OILPRICEAPI_KEY }}
+        # Scheduled runs fetch regional grades every 4 hours by themselves;
+        # a manual run from the Actions tab forces them (--all) so you can test.
+        run: python live_update.py ${{ github.event_name == 'workflow_dispatch' && '--all' || '' }}
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Contango Bot"
+          git config user.email "bot@contango-energy.noreply"
+          git add data/live.json
+          if git diff --staged --quiet; then
+            echo "No change to commit."
+          else
+            git commit -m "live: prices $(date -u +%Y-%m-%dT%H:%MZ)"
+            # other workflows also push to main; rebase first so we never get rejected
+            git pull --rebase origin main
+            git push
+          fi
